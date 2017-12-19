@@ -1,0 +1,256 @@
+/*===========================
+  태그 모임
+============================ */
+nav#filter a {
+	background-color: #EEE;
+	color:#555;
+}
+nav#filter a:hover, nav#filter a.current {
+	background-color: #44BCDD;
+	color:#fff;
+}
+
+/* ------- */
+
+.isotopeWrapper article{
+    margin-bottom: 30px;
+}
+
+#portfolio img  {
+	width:100%;
+}
+
+#portfolio article p {
+	margin-bottom:1.45em;/*set next row on the baseline*/
+}
+nav#filter {
+	margin-bottom:1.5em;
+}
+
+nav#filter li {
+	display:inline-block;
+	margin:0 0 0 5px;
+}
+nav#filter a {
+	padding: 4px 12px;
+	line-height: 20px;
+	text-decoration: none;
+}
+
+
+.portfolio-items article img {width:100%;} 
+
+.portfolio-item {
+	display: block;
+	position: relative;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+}
+.portfolio-item img {
+	-webkit-transition: all 300ms linear;
+	-moz-transition: all 300ms linear;
+	-o-transition: all 300ms linear;
+	-ms-transition: all 300ms linear;
+	transition: all 300ms linear;
+
+}
+.portfolio-item .portfolio-desc {
+    display: block;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+	left: 0;
+	top: 0;
+	color: rgba(220, 220, 220);
+}
+
+
+.portfolio-item:hover .portfolio-desc {
+	padding-top: 20%;
+	height: 100%;
+    transition: all 200ms ease-in-out 0s;
+	opacity: 1;
+}
+
+.portfolio-item .portfolio-desc a {
+	color: #fff;
+}
+.portfolio-item .portfolio-desc a:hover {
+	/*text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.7);*/
+	text-decoration: none;
+}
+.portfolio-item .portfolio-desc .folio-info {
+	top:-20px;
+	padding: 30px;
+	height: 0;
+    opacity: 0;
+    position: relative;
+}
+
+.portfolio-item:hover .folio-info{
+	height: 100%;
+    opacity: 1;
+    transition: all 500ms ease-in-out 0s;
+	top:5px;
+}
+
+
+
+.portfolio-item .portfolio-desc .folio-info h5 {
+	text-transform: uppercase;
+}
+.portfolio-item .portfolio-desc .folio-info p {
+	color: #ffffff;
+	font-size: 12px;
+}
+
+
+
+
+/* stats */
+.stats .icon {
+	margin: 0 0 20px 0;
+}
+
+.stats strong.number {
+	font-size: 38px;
+}
+
+.stats span.text {
+	font-weight: 700;
+	font-size: 24px;
+}
+
+/* buttons */
+.btn {
+	border: 0;
+}
+
+.btn.bold {
+	font-weight: 600;
+}
+
+.btn-cta {
+	color: #ffffff;
+	border-bottom: 4px solid;
+}
+.btn-cta:hover {
+	color: #ffffff;
+}
+
+.btn-cta {
+	border-bottom: 2px solid;
+}
+.btn-cta.btn-lg {
+	border-bottom: 4px solid;
+}
+
+
+/*----------------------------------------*/
+ 
+ 
+/*노랑색 메뉴바  */
+.add_section{
+   color: #fff;
+   background-color: #fcbe03;
+   height:35px;
+}
+.section-li{
+   float:right; 
+   list-style:none;
+   display:block;
+}
+
+/*오임 로고/검색창 !  */
+.oim-logo{
+	margin:15%; margin-top:2%; margin-bottom:2%; 
+}
+
+/*오임 로고-이미지 */
+.oim-logo-img{
+	display:inline; float:left;
+	display:line-block;
+	width:180px; 
+}
+
+/* 검색창 */
+.oim-sc{
+	 float:left; 
+	 margin-left:5%
+}
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+}
+
+/* 네비바 회색선 */
+.oim-hr{
+	border:0.5px solid #eee;
+	margin:0px;
+
+}
+ /* 흰색 네비바  */
+.oim-nb {
+text-align: center;
+background-color:#ffffff ;
+width: 100%;
+z-index:20;
+margin:0px;
+padding:0px;
+}
+.oim-Content {
+height: 4400px;
+}
+.oim-Fixed {
+position: fixed;
+top: 0px;
+}
+
+
+/*******마감임박모임*********/
+.li_add{
+   float:left; 
+   list-style:none;
+   display:block;
+   margin-top:5px;
+   margin-bottom:5px;
+}
+.p_add{
+   font-size:15px;
+   font-weight:bold;
+   text-align:left;
+   
+}
+/***********************/
+
+
+/*******푸터*********/
