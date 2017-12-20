@@ -159,10 +159,10 @@
 <div class="jumbotron">
   <div class="container text-left">
   	<div class="row">  
-             <table class="table table-bordered ">
+             <table class="table table-bordered "> <!-- 체크박스 테이블 시작 -->
                  <tr>
                     <td class="col-sm-1" style="text-align:center; vertical-align: middle">
-                        <p style="font-size: 15px; margin:0; font-weight: bold">카테고리</p>
+                        <p style="font-size: 15px; margin:0; font-weight: bold">카테고리</p> <!--카테고리별 체크박스  -->
                     </td>
                      <td class="col-sm-11">
                           <span class="button-checkbox">
@@ -229,7 +229,7 @@
                  
                  <tr>
                     <td class="col-sm-1" style="text-align:center; vertical-align: middle">
-                        <p style="font-size: 15px; margin:0; font-weight: bold">지역</p>
+                        <p style="font-size: 15px; margin:0; font-weight: bold">지역</p> <!--지역별 체크박스  -->
                     </td>
                      <td class="col-sm-11">
                          <span class="button-checkbox">
@@ -274,7 +274,7 @@
                  
                  <tr>
                  <td class="col-sm-1" style="text-align:center; vertical-align: middle">
-                        <p style="font-size: 15px; margin:0; font-weight: bold">주중/주말</p>
+                        <p style="font-size: 15px; margin:0; font-weight: bold">주중/주말</p> <!--주중/주말 체크박스  -->
                     </td>
                      <td class="col-sm-11">
                             <span class="button-checkbox">
@@ -290,7 +290,7 @@
                  
                  <tr>
                       <td class="col-sm-1" style="text-align:center; vertical-align: middle">
-                        <p style="font-size: 15px; margin:0; font-weight: bold">참여비용</p>
+                        <p style="font-size: 15px; margin:0; font-weight: bold">참여비용</p> <!--참여비용 체크박스  -->
                     </td>
                      <td class="col-sm-11">
                           <span class="button-checkbox">
@@ -322,7 +322,7 @@
                  
                  <tr>
                     <td class="col-sm-1" style="text-align:center; vertical-align: middle">
-                        <p style="font-size: 15px; margin:0; font-weight: bold">모임시작일</p>
+                        <p style="font-size: 15px; margin:0; font-weight: bold">모임시작일</p> <!--모임시작일 DatePicker  -->
                     </td>
                      
                      <td>
@@ -333,7 +333,7 @@
                          </div>
                     </td>
                  </tr>
-             </table>
+             </table> <!-- 체크박스 테이블 끝 -->
              
 
         </div>
@@ -342,8 +342,8 @@
   
       <div class="container" style="padding-top:70px; padding-bottom:70px;">
       
-            <div class="col-lg-12 text-left">
-                  <ul class="thumbnails">
+            <div class="col-lg-12 text-left"> 
+                  <ul class="thumbnails"><!-- 모임뿌려주기 div 시작 -->
 
                   <h2>모임</h2>
 					
@@ -351,7 +351,7 @@
  				
                       <div class="col-sm-3">
                          <div class="thumbnail">
-                            <img src="${vo.meet_poster }">
+                         <a href="meeeting_detail.do?no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }"></a>
             
                              <div class="caption">
                                 <div class="col-sm-12" style="padding:0px;">
@@ -371,7 +371,7 @@
                                   </div>
                                   </div>
                                 
-                                  <p class="p_add">${vo.meet_subject }</p>
+                                  <a href="meeeting_detail.do?no=${vo.meet_no}&page=${curpage}"><p class="p_add">${vo.meet_subject }</p></a>
                                   <a href="#" class="btn btn-primary" style="width:20%;">♡</a> 
                                   <span class="likeNumber">${vo.meet_like }</span>
                                   <a href="#" class="btn btn-primary" style="float:right; width: 50%;">신청하기</a>
@@ -383,156 +383,9 @@
                       </div>
                 </c:forEach>
                       
-<!--                       <div class="col-sm-3">
-                         <div class="thumbnail">
-                                   <img src=https://onoffmix.com/images/event/120403/s>
-                             <div class="caption">
-                                 <div class="col-sm-12" style="padding:0; padding-bottom:10px">
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right; padding-top: 5px">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 [스타트업 트렌드 리뷰 '17-'18] : 서울창업허브, 스타트업 생태계를 말하다.</p>
-                                  <a href="#" class="btn btn-primary" style="width:20%;">♡</a>
-                                  <span class="likeNumber">0</span>
-                                  <a href="#" class="btn btn-primary" style="float:right; width: 50%">신청하기</a>
-                              </div>
-                               <div class="progress" style="margin-bottom:0; height:10px">
-                                  <div class="progress-bar progress-bar-success" role="progressbar"style="width:20%"></div>
-                            </div>
-                         </div>
-                      </div>
-                      
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                                   <img src=https://onoffmix.com/images/event/120403/s>
-                             <div class="caption">
-                                  <div class="col-sm-12" style="padding:0; padding-bottom:10px">
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right; padding-top: 5px">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 [스타트업 트렌드 리뷰 '17-'18] : 서울창업허브, 스타트업 생태계를 말하다.</p>
-                                  <a href="#" class="btn btn-primary" style="width:20%;">♡</a>
-                                  <span class="likeNumber">0</span>
-                                  <a href="#" class="btn btn-primary" style="float:right; width: 50%">신청하기</a>
-                              </div>
-                               <div class="progress" style="margin-bottom:0; height:10px">
-                                  <div class="progress-bar progress-bar-success" role="progressbar"style="width:20%"></div>
-                            </div>
-                         </div>
-                      </div>
-                      
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                                   <img src=https://onoffmix.com/images/event/120403/s>
-                             <div class="caption">
-                                  <div class="col-sm-12" style="padding:0; padding-bottom:10px">
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right; padding-top: 5px">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 [스타트업 트렌드 리뷰 '17-'18] : 서울창업허브, 스타트업 생태계를 말하다.</p>
-                                 <a href="#" class="btn btn-primary" style="width:20%;">♡</a>
-                                 <span class="likeNumber">0</span>
-                                  <a href="#" class="btn btn-primary" style="float:right; width: 50%">신청하기</a>
-                              </div>
-                               <div class="progress" style="margin-bottom:0; height:10px">
-                                  <div class="progress-bar progress-bar-success" role="progressbar"style="width:20%"></div>
-                            </div>
-                         </div>
-                      </div>
-                      
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                                   <img src=https://onoffmix.com/images/event/120403/s>
-                             <div class="caption">
-                               <div class="col-sm-12" style="padding:0; padding-bottom:10px">
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right; padding-top: 5px">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 [스타트업 트렌드 리뷰 '17-'18] : 서울창업허브, 스타트업 생태계를 말하다.</p>
-                                  <a href="#" class="btn btn-primary" style="width:20%;">♡</a>
-                                  <span class="likeNumber">0</span>
-                                  <a href="#" class="btn btn-primary" style="float:right; width: 50%">신청하기</a>
-                              </div>
-                               <div class="progress" style="margin-bottom:0; height:10px">
-                                  <div class="progress-bar progress-bar-success" role="progressbar"style="width:20%"></div>
-                            </div>
-                         </div>
-                      </div>
-                      
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                                   <img src=https://onoffmix.com/images/event/120403/s>
-                             <div class="caption">
-                               <div class="col-sm-12" style="padding:0; padding-bottom:10px">
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right; padding-top: 5px">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 [스타트업 트렌드 리뷰 '17-'18] : 서울창업허브, 스타트업 생태계를 말하다.</p>
-                                   <a href="#" class="btn btn-primary" style="width:20%;">♡</a>
-                                   <span class="likeNumber">0</span>
-                                  <a href="#" class="btn btn-primary" style="float:right; width: 50%">신청하기</a>
-                              </div>
-                               <div class="progress" style="margin-bottom:0; height:10px">
-                                  <div class="progress-bar progress-bar-success" role="progressbar"style="width:20%"></div>
-                            </div>
-                         </div>
-                      </div>
-                      
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                                   <img src=https://onoffmix.com/images/event/120403/s>
-                             <div class="caption">
-                               <div class="col-sm-12" style="padding:0; padding-bottom:10px">
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right; padding-top: 5px">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 [스타트업 트렌드 리뷰 '17-'18] : 서울창업허브, 스타트업 생태계를 말하다.</p>
-                                   <a href="#" class="btn btn-primary" style="width:20%;">♡</a>
-                                   <span class="likeNumber">0</span>
-                                  <a href="#" class="btn btn-primary" style="float:right; width: 50%">신청하기</a>
-                              </div>
-                               <div class="progress" style="margin-bottom:0; height:10px">
-                                  <div class="progress-bar progress-bar-success" role="progressbar"style="width:20%"></div>
-                            </div>
-                         </div>
-                      </div>
-                      
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                                   <img src=https://onoffmix.com/images/event/120403/s>
-                             <div class="caption">
-                                <div class="col-sm-12" style="padding:0; padding-bottom:10px">
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right; padding-top: 5px">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 [스타트업 트렌드 리뷰 '17-'18] : 서울창업허브, 스타트업 생태계를 말하다.</p>
-                                   <a href="#" class="btn btn-primary" style="width:20%;">♡</a>
-                                   <span class="likeNumber">0</span>
-                                  <a href="#" class="btn btn-primary" style="float:right; width: 50%">신청하기</a>
-                              </div>
-                               <div class="progress" style="margin-bottom:0; height:10px">
-                                  <div class="progress-bar progress-bar-success" role="progressbar"style="width:20%"></div>
-                            </div>
-                         </div>
-                      </div> -->
-                      
-                    </ul>   
+                    </ul>  <!-- 모임뿌려주기 div 끝 --> 
                     
-                    <%-- <div class="col-sm-12 text-center">
+                    <%-- <div class="col-sm-12 text-center"> 페이징 기법인데 아직 값 안받아와서 주석처리 함
 					  <ul class="pagination">
 					    <li ><a href="#">&lt;&lt;</a></li>
 					    <li ><a href="meeting_list.jsp?page=${curpage>1?curpage-1:curpage }">&lt;</a></li>
