@@ -7,7 +7,7 @@ public class FileConfig {
 	public List<String> componentScan(String pack){
 		List<String> list = new ArrayList<String>();
 		try {
-			String path="C:\\git\\OimWeb\\OimProject\\src\\";
+			String path="C:\\git\\OimWeb\\OimProject\\src\\\\";
 			path = path + pack.replace(".","\\"); 
 			// --> C:\\webDev\\OimWeb\\OimProject\\src\\com\\oim\\model\\MainModel.java
 			File dir = new File(path); // 각 파일 변수로 저장 : MainModel.java
