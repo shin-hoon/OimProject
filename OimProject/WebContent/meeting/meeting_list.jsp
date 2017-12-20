@@ -383,7 +383,7 @@
                       </div>
                 </c:forEach>
                       
-                    </ul>  <!-- 모임뿌려주기 div 끝 --> 
+                    </ul>  <!-- 모임뿌려주기 div 끝 ---> 
                     
                     <%-- <div class="col-sm-12 text-center"> 페이징 기법인데 아직 값 안받아와서 주석처리 함
 					  <ul class="pagination">
