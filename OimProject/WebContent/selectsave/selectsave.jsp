@@ -7,7 +7,7 @@
 <jsp:useBean id="model" class="com.sist.SelectSaveModel.SelectSaveModel" />
 <%
 	String id = "jeong"; session.setAttribute("id", id);
-	model.meetingList(request,session);	
+	model.meetingList(request,session);
 %>
 <!DOCTYPE html>
 <html>
