@@ -48,7 +48,6 @@
          $(this).next(".board").toggleClass(".board");
       });
    });
-   
    $(document).ready(function(){
         // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
         $(".boardmenu>a").click(function(){
@@ -75,7 +74,6 @@ $( document ).ready( function() {
         $( '.oim-nb' ).addClass( 'oim-Fixed' );
         $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');
        /*  $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');    왜안될까??*/
-        
       }
       else {
         $( '.oim-nb' ).removeClass( 'oim-Fixed' );
@@ -368,6 +366,8 @@ $( document ).ready( function() {
 			<!-- 메뉴 왼쪽으로 -->
 				<ul class="nav navbar-nav navbar-left">
 					<li>
+					
+					<!-- 왜안되냐 -->
 						<a href="main.do"><img src="img/home.png" alt="홈으로가기"></a>
 					</li>
 					<li>
