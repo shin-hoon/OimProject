@@ -170,14 +170,14 @@
             <div class="left col-xs-3" style="border-right: 1px solid #999;">
                 <div class="left-detail">
                     <img src="${vo.meet_poster }" style="height:50%; width:100%; border: 2px solid #999;">
-                    <img src="../meeting/image/facebook.png" style="height:25px; width:25px; margin: 3px;">
-                    <img src="../meeting/image/instagram.png" style="height:25px; width:25px; margin: 3px;">
-                    <img src="../meeting/image/twitter.png" style="height:25px; width:25px; margin: 3px;">
+                    <img src="meeting/image/facebook.png" style="height:25px; width:25px; margin: 3px;">
+                    <img src="meeting/image/instagram.png" style="height:25px; width:25px; margin: 3px;">
+                    <img src="meeting/image/twitter.png" style="height:25px; width:25px; margin: 3px;">
                     <h4 class="list-group-item">개설자 정보</h4>
-                    <b class="list-group-item"><img src="../meeting/image/man.png" style="height: 10px; width: 10px;">&emsp;장연식</b>
-                    <b class="list-group-item"><img src="../meeting/image/tel.png" style="height: 10px; width: 10px;">&emsp;010-9699-8645</b>
-                    <b class="list-group-item"><img src="../meeting/image/email.png" style="height: 10px; width: 10px;">&emsp;jang1234@daum.net</b>
-                    <b class="list-group-item"><img src="../meeting/image/company.png" style="height: 10px; width: 10px;">&emsp;쌍용강북교육센터</b>
+                    <b class="list-group-item"><img src="meeting/image/man.png" style="height: 10px; width: 10px;">&emsp;장연식</b>
+                    <b class="list-group-item"><img src="meeting/image/tel.png" style="height: 10px; width: 10px;">&emsp;010-9699-8645</b>
+                    <b class="list-group-item"><img src="meeting/image/email.png" style="height: 10px; width: 10px;">&emsp;jang1234@daum.net</b>
+                    <b class="list-group-item"><img src="meeting/image/company.png" style="height: 10px; width: 10px;">&emsp;쌍용강북교육센터</b>
             </div>
             </div>
             
@@ -185,14 +185,14 @@
                 <div class="right-detail">
                 <h2 class="title" id="title">${vo.meet_subject }</h2><hr>
                <p>
-                  <b class="start" id="start"><img src="../meeting/image/calender.png" style="height: 20px; width: 20px;">&emsp;모임 기간 : ${vo.meet_start }</b>~
+                  <b class="start" id="start"><img src="meeting/image/calender.png" style="height: 20px; width: 20px;">&emsp;모임 기간 : ${vo.meet_start }</b>~
                   <b class="end" id="end">${vo.meet_end }</b>
                </p>
                <p>
-                  <b class="place" id="place"><img src="../meeting/image/place.png" style="height: 20px; width: 20px;">&emsp;${vo.meet_loc }</b>
+                  <b class="place" id="place"><img src="meeting/image/place.png" style="height: 20px; width: 20px;">&emsp;${vo.meet_loc }</b>
                </p>
                <p>
-                  <b class="total" id="total"><img src="../meeting/image/people.png" style="height: 20px; width: 20px;">&emsp;신청인원 : ${vo.meet_total } </b> |
+                  <b class="total" id="total"><img src="meeting/image/people.png" style="height: 20px; width: 20px;">&emsp;신청인원 : ${vo.meet_total } </b> |
                   <b class="limit" id="limit">  ${vo.meet_limit } 명 신청가능</b>
                </p>
                <hr>
@@ -327,7 +327,7 @@
                             var map = new naver.maps.Map('map', mapOptions);
                             
                         </script>
-                        <h4 class="place" id="place"><img src="../meeting/image/place.png" style="height: 20px; width: 20px;">&emsp;모임 장소 : ${vo.meet_loc }</h4>
+                        <h4 class="place" id="place"><img src="meeting/image/place.png" style="height: 20px; width: 20px;">&emsp;모임 장소 : ${vo.meet_loc }</h4>
                 </div>
                 
                 <div class="detailcancle" id="detailcancle" style="margin-bottom: 100px">
