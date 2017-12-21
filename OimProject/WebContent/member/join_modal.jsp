@@ -16,6 +16,27 @@
 		<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
   		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> <!-- class="w3-table w3-hoverable" -->
 <title>Insert title here</title>
+
+
+<!-- 중복체크 버튼을 눌렀을때 -->
+<!-- <script type="text/javascript">
+Shadowbox.init({
+	players:["iframe"]
+});
+$(function(){
+	//아이디중복체크
+	$('#idcheck').click(function(){
+		Shadowbox.open({
+			content:'../member/idcheck.jsp',
+			player:'iframe',
+			title:'아이디중복체크',
+			width:330,
+			height:250
+		});
+	});
+	
+}); -->
+</script>
 </head>
 <style>
 .modal-body{
@@ -60,6 +81,8 @@
 						<input type="text" name=om_pwd size=30 required>
 						</td>
 					</tr>
+					
+					
 					<tr>
 						<td width=20% class="text-right">비밀번호 확인</td>
 						<td width=80% class="text-left">
