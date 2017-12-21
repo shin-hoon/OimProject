@@ -10,8 +10,8 @@
          WHERE num BETWEEN #{start} AND #{end}            	
 	</select>
 	<select id="meetingDetailData" resultType="MeetingVO" parameterType="int">
-      SELECT m.meet_cg,m.meet_poster,o.om_name,o.om_id,o.om_company,m.meet_subject,TO_CHAR(to_date(m.meet_start, 'YYYY-MM-DD HH24:MI'),'YY/MM/DD') as meet_start,
-      TO_CHAR(to_date(m.meet_end, 'YYYY-MM-DD HH24:MI'),'YY/MM/DD') as meet_end,
+      SELECT m.meet_cg,m.meet_poster,o.om_name,o.om_id,o.om_tel,o.om_company,m.meet_subject,TO_CHAR(to_date(m.meet_start, 'YYYY-MM-DD HH24:MI'),'YYYY"년"MM"월"DD"일"  HH24"시"MI"분"') as meet_start,
+      TO_CHAR(to_date(m.meet_end, 'YYYY-MM-DD HH24:MI'),'YYYY"년"MM"월"DD"일" HH24"시"MI"분"') as meet_end,
       m.meet_loc, m.meet_total, m.meet_limit, m.meet_info, m.meet_price, m.meet_like, m.meet_hit, m.meet_detail, m.meet_lat, m.meet_lng
       FROM meeting m , oim_member o
       WHERE o.om_id=m.om_id AND m.meet_no=#{meet_no}              

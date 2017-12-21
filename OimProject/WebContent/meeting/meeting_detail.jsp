@@ -11,8 +11,8 @@
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=zo4zP_T_AlgKWbxHbxzw&callback=CALLBACK_FUNCTION"></script>
 
 <!-- Box shadow -->
-<link rel="stylesheet" type = "text/css" href="shadow/css/shadowbox.css">
-<script type="text/javascript" src="shadow/js/shadowbox.js"></script>
+<link rel="stylesheet" type = "text/css" href="meeting/shadow/css/shadowbox.css">
+<script type="text/javascript" src="meeting/shadow/js/shadowbox.js"></script>
 
 <!--메뉴클릭시 화면 스크롤-->
 <script type="text/javascript">
@@ -67,7 +67,7 @@
     $(function(){
           $('#apply').click(function(){
              Shadowbox.open({
-                content:'meeting_payment.jsp',
+                content:"meeting_payment.do",
                 player:'iframe',
                 title:'신청내역확인',
                 width:1200,
@@ -79,9 +79,6 @@
 
 <!--meeting_detail/CSS-->
 <style type="text/css">
-    .container{
-        border: 1px solid #999;
-    }
     .row{
         border-bottom: 1px solid #999;
     }
@@ -90,12 +87,9 @@
         height: 30px;
         padding-top: 4px
    }
-    .top span{
-      border: 1px solid #999;
-   }
     .left, .right{
       margin-top: 20px;
-        margin-bottom: 20px;
+      margin-bottom: 20px;
    }
     .left-detail{
       width: 90%;
@@ -126,18 +120,9 @@
         cursor: pointer;
         font-size: 13px;
     }
-    .small li:hover, .nav li:hover {
+    .small li:hover, .scroll-link:hover {
         background-color: dodgerblue;
         color: white;
-    }
-    .nav li{
-        text-align: center;
-        width: 160px;
-        height: 50px;
-        line-height: 47px;
-        cursor: pointer;
-        font-size: 17px;
-        
     }
     #apply{
         margin-right: 10px;
@@ -153,8 +138,10 @@
     
     
     <div style="height: 50px"></div>
-   <div class="container">
+   <div class="container" style="border: 1px solid #999;">
+   	
         <div class="row">
+        <input type="hidden" name="meet_no" value="${vo.meet_no }"/>
             <div class="top col-xs-12">
                <c:if test="${vo.meet_price==0 }">
                   <span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>
@@ -165,7 +152,7 @@
             
             <!-- 무료일경우 -->
             <!--<span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>-->
-            <span class="label label-info" style="font-size:13px; margin-right:5px;">${vo.meet_cg }</span>
+            <span class="label label-primary" style="font-size:13px; margin-right:5px;" name="meet_cg">${vo.meet_cg }</span>
             </div>
             <div class="left col-xs-3" style="border-right: 1px solid #999;">
                 <div class="left-detail">
@@ -174,16 +161,16 @@
                     <img src="meeting/image/instagram.png" style="height:25px; width:25px; margin: 3px;">
                     <img src="meeting/image/twitter.png" style="height:25px; width:25px; margin: 3px;">
                     <h4 class="list-group-item">개설자 정보</h4>
-                    <b class="list-group-item"><img src="meeting/image/man.png" style="height: 10px; width: 10px;">&emsp;장연식</b>
-                    <b class="list-group-item"><img src="meeting/image/tel.png" style="height: 10px; width: 10px;">&emsp;010-9699-8645</b>
-                    <b class="list-group-item"><img src="meeting/image/email.png" style="height: 10px; width: 10px;">&emsp;jang1234@daum.net</b>
-                    <b class="list-group-item"><img src="meeting/image/company.png" style="height: 10px; width: 10px;">&emsp;쌍용강북교육센터</b>
+                    <b class="list-group-item" name="om_name"><img src="meeting/image/man.png" style="height: 10px; width: 10px;">&emsp;${vo.om_name }</b>
+                    <b class="list-group-item" name="om_tel"><img src="meeting/image/tel.png" style="height: 10px; width: 10px;">&emsp;${vo.om_tel }</b>
+                    <b class="list-group-item" name="om_id"><img src="meeting/image/email.png" style="height: 10px; width: 10px;">&emsp;${vo.om_id }</b>
+                    <b class="list-group-item" name="om_company"><img src="meeting/image/company.png" style="height: 10px; width: 10px;">&emsp;${vo.om_company }</b>
             </div>
             </div>
             
             <div class="right col-xs-9">
                 <div class="right-detail">
-                <h2 class="title" id="title">${vo.meet_subject }</h2><hr>
+                <h2 class="title" id="title" name="meet_subject">${vo.meet_subject }</h2><hr>
                <p>
                   <b class="start" id="start"><img src="meeting/image/calender.png" style="height: 20px; width: 20px;">&emsp;모임 기간 : ${vo.meet_start }</b>~
                   <b class="end" id="end">${vo.meet_end }</b>
@@ -196,17 +183,25 @@
                   <b class="limit" id="limit">  ${vo.meet_limit } 명 신청가능</b>
                </p>
                <hr>
+               <div style="overflow-x:hidden; overflow-y:auto; height: 130px;">
                <p>
                   <b class="info" id="info">
                      ${vo.meet_info }
                   </b>
-                    </p>
+                </p>
+                </div>
                 </div>
                 <hr>
                 <div class="right-pay">   
                <h2 class="price" id="price" style="text-align: right;">가격 : ${vo.meet_price } 원</h2>
                     <a href="#" class="btn btn-large btn-danger jjim" id="jjim" style="float: right; height: 50px;">♡<br>1</a>
-                    <a href="#" class="btn btn-large btn-primary apply" id="apply" style="float: right; height: 50px;">신청하기</a>
+                    <c:if test="${vo.meet_limit!=0 }">
+                    	<a href="#" class="btn btn-large btn-primary apply" id="apply" style="float: right; height: 50px;">신청하기</a>
+                    </c:if>
+                    <c:if test="${vo.meet_limit==0 }">
+                    	<a href="#" class="btn btn-default disabled" id="apply" style="float: right; height: 50px;">신청마감</a>
+                    </c:if>
+                    
             </div> 
             </div>
         </div>
@@ -214,10 +209,14 @@
             <nav class="navbar navbar-default" id="mainNav">
               <div class="collapse navbar-collapse" id="main-nav">
                 <ul class="nav navbar-nav">
-                    <li class="scroll-link" data-id="detailContent">모임상세 정보</li>
-                    <li class="scroll-link" data-id="detailMap">지도보기</li>
-                    <li class="scroll-link" data-id="detailcancle">참여신청/취소 안내</li>
-                    <li class="scroll-link" data-id="detailComment">댓글보기</li>
+                    <li class="scroll-link" data-id="detailContent" 
+                    style="text-align: center; width: 160px; height: 50px; line-height: 47px; cursor: pointer; font-size: 17px;">모임상세 정보</li>
+                    <li class="scroll-link" data-id="detailMap"
+                    style="text-align: center; width: 160px; height: 50px; line-height: 47px; cursor: pointer; font-size: 17px;">지도보기</li>
+                    <li class="scroll-link" data-id="detailcancle"
+                    style="text-align: center; width: 160px; height: 50px; line-height: 47px; cursor: pointer; font-size: 17px;">참여신청/취소 안내</li>
+                    <li class="scroll-link" data-id="detailComment"
+                    style="text-align: center; width: 160px; height: 50px; line-height: 47px; cursor: pointer; font-size: 17px;">댓글보기</li>
                 </ul>
               </div>
             </nav>
@@ -379,16 +378,17 @@
                 </div>
             </div>
         </div>
+        
     </div>
     
-        <!--<a id="MOVE_TOP_BTN" class="btn-primary" href="#">TOP</a>-->
+       <!--<a id="MOVE_TOP_BTN" class="btn-primary" href="#">TOP</a>-->
         <div class="smallnav" id="main-nav">
             <ul class="small" style="list-style: none">
                 <li class="scroll-link" data-id="detailContent">모임상세 정보</li>
                 <li class="scroll-link" data-id="detailMap">지도보기</li>
                 <li class="scroll-link" data-id="detailcancle">참여신청/취소 안내</li>
                 <li class="scroll-link" data-id="detailComment">댓글보기</li>
-                <li class="scroll-top" data-id="detailComment" style="font-size: 15px;"><img src="image/top.png" style="width: 20px; height: 20px"> Top</li>
+                <li class="scroll-top" data-id="detailComment" style="font-size: 15px;"><img src="meeting/image/top.png" style="width: 20px; height: 20px"> Top</li>
             </ul>
         </div>
     
