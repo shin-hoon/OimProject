@@ -54,61 +54,135 @@ public class MemberDAO {
       
       
       
-      //로그인 
-      public MemberVO Login(String id,String pwd)
-      {
-         MemberVO vo=new MemberVO();
-         try {
-            getConnection();
-            
-            //1. 아이디 있는지 확인
-            String sql="SELECT COUNT(*) FROM oim_member WHERE om_id=?";
-            ps=conn.prepareStatement(sql);
-            ps.setString(1, id);
-            ResultSet rs=ps.executeQuery();
-            rs.next();
-            int no=rs.getInt(1);
-            
-            if(no==0)  
-            {
-               vo.setCount(1);  //아이디가 존재하지 않는다면 count=1
-            }
-            else //아이디가 존재한다면
-            {
-               sql="SELECT om_id,om_pwd,om_name "
-                     +"FROM oim_member "
-                     +"WHERE om_id=?";
-               ps=conn.prepareStatement(sql);
-               ps.setString(1, id);
-               rs=ps.executeQuery();
-               rs.next();
-               vo.setOm_id(rs.getString(1));
-               vo.setOm_pwd(rs.getString(2));
-               vo.setOm_name(rs.getString(3));
-               rs.close();
-               ps.close();
-               
-               if(pwd.equals(vo.getOm_pwd())) //비밀번호까지 일치한다면
-               {
-                  vo.setCount(3);  //count=3
-               }
-               else  //비밀번호가 다르다면
-               {
-                  vo.setCount(2);  //count=2
-               }
-               
-            }
-            
-         }catch(Exception ex)
-         {
-            System.out.println(ex.getMessage());
-         }
-         finally
-         {
-            disConnection();
-         }
-         return vo;
-      }
+      		//로그인 
+    		public MemberVO Login(String id,String pwd)
+    		{
+    			MemberVO vo=new MemberVO();
+    			try {
+    				getConnection();
+    				
+    				//1. 아이디 있는지 확인
+    				String sql="SELECT COUNT(*) FROM oim_member WHERE om_id=?";
+    				ps=conn.prepareStatement(sql);
+    				ps.setString(1, id);
+    				ResultSet rs=ps.executeQuery();
+    				rs.next();
+    				int no=rs.getInt(1);
+    				
+    				if(no==0)  
+    				{
+    					vo.setCount(1);  //아이디가 존재하지 않는다면 count=1
+    				}
+    				else //아이디가 존재한다면
+    				{
+    					sql="SELECT om_id,om_pwd,om_name,om_birth,om_gender,om_tel,om_company,om_regdate "
+    							+"FROM oim_member "
+    							+"WHERE om_id=?";
+    					ps=conn.prepareStatement(sql);
+    					ps.setString(1, id);
+    					rs=ps.executeQuery();
+    					rs.next();
+    					vo.setOm_id(rs.getString(1));
+    					vo.setOm_pwd(rs.getString(2));
+    					vo.setOm_name(rs.getString(3));
+    					vo.setOm_birth(rs.getString(4));
+    					vo.setOm_gender(rs.getString(5));
+    					vo.setOm_tel(rs.getString(6));
+    					vo.setOm_company(rs.getString(7));
+    					vo.setOm_regdate(rs.getDate(8));
+    					rs.close();
+    					ps.close();
+    					
+    					if(pwd.equals(vo.getOm_pwd())) //비밀번호까지 일치한다면
+    					{
+    						vo.setCount(3);  //count=3
+    					}
+    					else  //비밀번호가 다르다면
+    					{
+    						vo.setCount(2);  //count=2
+    					}
+    					
+    				}
+    				
+    			}catch(Exception ex)
+    			{
+    				System.out.println(ex.getMessage());
+    			}
+    			finally
+    			{
+    				disConnection();
+    			}
+    			return vo;
+    		}
+    		
+    		
+    		//회원정보 수정
+    		public void Update(MemberVO vo)
+    		{
+    			
+    			try {
+    				getConnection();
+    				
+    				String sql="UPDATE oim_member SET "
+    							+"om_tel=?,om_pwd=? "
+    							+"WHERE om_id=?";
+    				ps=conn.prepareStatement(sql);
+    				ps.setString(1, vo.getOm_tel());
+    				ps.setString(2, vo.getOm_pwd());
+    				ps.setString(3, vo.getOm_id());
+    				ps.executeUpdate();
+    				
+    				
+    			}catch(Exception ex)
+    			{
+    				System.out.println(ex.getMessage());
+    			}
+    			finally
+    			{
+    				disConnection();
+    			}
+    		}
+    		
+    		//회원탈퇴 
+    		public boolean Delete(String id, String pwd)
+    		{
+    			boolean bcheck=false;
+    			
+    			try {
+    				getConnection();
+    				
+    				//비밀번호 확인
+    				String sql="SELECT om_pwd FROM oim_member "
+    							+"WHERE om_id=?";
+    				ps=conn.prepareStatement(sql);
+    				ps.setString(1, id);
+    				ResultSet rs=ps.executeQuery();
+    				rs.next();
+    				String db_pwd=rs.getString(1);
+    				
+    				if(db_pwd.equals(pwd))
+    				{
+    					bcheck=true;
+    					
+    					//회원삭제
+    					sql="DELETE FROM oim_member "
+    							+"WHERE om_id=?";
+    					ps=conn.prepareStatement(sql);
+    					ps.setString(1, id);
+    					ps.executeUpdate();
+    					
+    				}
+    				
+    			}catch(Exception ex)
+    			{
+    				System.out.println(ex.getMessage());
+    			}
+    			finally
+    			{
+    				disConnection();
+    			}
+    			return bcheck;
+    		}
       
       
       

@@ -94,25 +94,25 @@ body{
                   <td width=25% class="text-right">
                      <span class="oim-icon glyphicon glyphicon-envelope"></span>이메일
                   </td>
-                  <td width=75% class="text-center" id="email">${sessionScope.id }</td>
+                  <td width=75% class="text-center" id="email" name=om_id>${sessionScope.id }</td>
                </tr>
                <tr>
                   <td width=25% class="text-right">
                      <span class="oim-icon glyphicon glyphicon-earphone"></span>휴대전화
                   </td>
-                  <td width=75% class="text-center" id="tel">${sessionScope.tel }</td>                  
+                  <td width=75% class="text-center" id="tel" name=om_tel>${sessionScope.tel }</td>                  
                </tr>
                <tr>
                   <td width=25% class="text-right">
                      <span class="oim-icon glyphicon glyphicon-heart"></span>성별
                   </td>
-                  <td width=75% class="text-center" id="gender">${sessionScope.gender }</td>                  
+                  <td width=75% class="text-center" id="gender" name=om_gender>${sessionScope.gender }</td>                  
                </tr>
                <tr>
                   <td width=25% class="text-right">
-                     <span class="oim-icon glyphicon glyphicon-calendar"></span>가입일
+                     <span class="oim-icon glyphicon glyphicon-calendar" ></span>가입일
                   </td>
-                  <td width=75% class="text-center" id="regdate">${sessionScope.regdate }</td>                  
+                  <td width=75% class="text-center" id="regdate" name=om_regdate>${sessionScope.regdate }</td>                  
                </tr>
             </table>
           </div>
@@ -141,14 +141,14 @@ body{
                         <span class="oim-icon glyphicon glyphicon-envelope"></span>이메일
                      </td>
                      <!-- db들어와야함  -->
-                     <td width=70% class="text-center" name="id">${sessionScope.id }</td>
+                     <td width=70% class="text-center" name=om_id>${sessionScope.id }</td>
                   </tr>
                   <tr>
                      <td width=30% class="text-right">
                         <span class="oim-icon glyphicon glyphicon-earphone"></span>휴대전화
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=tel size=30 id="tel" value=${sessionScope.tel }>
+                        <input type=text name=om_tel size=30 id="tel" value=${sessionScope.tel }>
                      </td>                  
                   </tr>
                   <tr>
@@ -156,7 +156,7 @@ body{
                         <span class="oim-icon glyphicon glyphicon-lock"></span>새로운 비밀번호 입력 
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=pwd size=30 id="pwd"><br>
+                        <input type=text name=om_pwd size=30 id="pwd"><br>
                         <h6 style="color:#DF013A;">*비밀번호는 8~24글자 이내로 입력해 주세요.</h6>
                      </td>                  
                   </tr>
@@ -165,7 +165,7 @@ body{
                         <span class="oim-icon glyphicon glyphicon-lock"></span>비밀번호 재입력
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=pwd_ok size=30 id="pwd_ok">
+                        <input type=text name=om_pwd_ok size=30 id="pwd_ok">
                         <h6 style="color:#DF013A;">*새로운 비밀번호 변경확인을 위하여 다시 한번 입력해 주세요.</h6>
                      </td>                  
                   </tr>
@@ -318,7 +318,7 @@ body{
                   <td width=25% class="text-right">
                      <span class="glyphicon glyphicon-envelope"></span>&nbsp;탈퇴할 아이디(Email)
                   </td>
-                  <td width=75% class="text-center" id="email">${sessionScope.id }
+                  <td width=75% class="text-center" id="email" name=om_id>${sessionScope.id }
                   </td>
                </tr>
                <tr>
@@ -326,7 +326,7 @@ body{
                      <span class="glyphicon glyphicon-lock"></span>&nbsp;비밀번호 입력
                   </td>
                   <td width=70% class="text-center">
-                     <input type=text name=om_pwd size=30 id="new-pwd">
+                     <input type=text name=om_pwd_ok size=30 id="new-pwd">
                       <span class="help-block"><font name="check" size="2" color="#DF013A"></font>*본인 인증을 위해 비밀번호를 입력해 주세요 </span>
                       <!-- <h6 style="color:#DF013A;">*본인 인증을 위해 비밀번호를 입력해 주세요</h6> -->
                   </td>                  
