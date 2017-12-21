@@ -49,6 +49,7 @@ public class MeetingModel {
        req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
        return "main/main.jsp";
     }
+    //¸Û¹Ì
     @RequestMapping("meeting_payment.do")
     public void meeting_payment(HttpServletRequest req, HttpServletResponse res) {
     	String meet_no = req.getParameter("meet_no");
