@@ -54,6 +54,7 @@ public class MeetingDAO {
 		}
 		return list;
 	}
+	//dao
 	public static MeetingVO meetingDetailData(int meet_no){
 	      
 	      MeetingVO vo=new MeetingVO();
