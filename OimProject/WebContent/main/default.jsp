@@ -357,9 +357,9 @@
 		</div>
 	</section> 
 	  <!-- 추가  tab js -->
-	  <script src="../js/jquery.js"></script>
-	  <script src="../js/jquery.isotope.min.js"></script> 
-	  <script src="../js/main.js"> </script>
+	  <script src="js/jquery.js"></script>
+	  <script src="js/jquery.isotope.min.js"></script> 
+	  <script src="js/main.js"> </script>
 	
 <!-- ==========tag별 모임 끝==========--->
 

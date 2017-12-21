@@ -10,18 +10,18 @@
 		
 		
 		<!-- 기존 부트스트랩(항상가져오는 3줄)  -->
-  		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-   		<script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
-  		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+   		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+  		<script type="text/javascript" src="js/bootstrap.min.js"></script>
   		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<!-- 템플릿 css -->
-		<link href="../css/owl.carousel.css" rel="stylesheet">
-		<link href="../css/owl.theme.default.min.css"  rel="stylesheet">
-		<link href="../css/animate.css" rel="stylesheet">
-		<link href="../css/style.css" rel="stylesheet">
+		<link href="css/owl.carousel.css" rel="stylesheet">
+		<link href="css/owl.theme.default.min.css"  rel="stylesheet">
+		<link href="css/animate.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
 		<!-- 우리가 추가한 css -->     
-		<link href="../css/oim_style.css" rel="stylesheet">
+		<link href="css/oim_style.css" rel="stylesheet">
   		
   		<!-- 슬라이드에 필요한 스크립트  -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -29,8 +29,8 @@
 		<script src="js/bootstrap.min.js"></script>
 		
 		<!-- 태그모임 추가 tab css  -->
-	    <link rel="stylesheet" type="text/css" href="../css/isotope.css" media="screen" /> <!-- 느낌있게 사진배열 -->
-	    <link rel="stylesheet" href="../css/bootstrap.css">
+	    <link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" /> <!-- 느낌있게 사진배열 -->
+	    <link rel="stylesheet" href="css/bootstrap.css">
   		
   		<!-- 모달   -->
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -326,7 +326,7 @@ $( document ).ready( function() {
 	<div class="container oim-logo">
 		<div class="oim-logo-img">
 		<!-- 오임 로고 이미지 -->
-			<a href="main.do"><img alt="오늘의 모임" src="../img/oim.png" class="img-responsive"></a>
+			<a href="main.do"><img alt="오늘의 모임" src="img/oim.png" class="img-responsive"></a>
 		</div>
 		
 		<!-- 검색창 -->
