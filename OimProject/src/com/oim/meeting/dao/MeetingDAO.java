@@ -54,4 +54,21 @@ public class MeetingDAO {
 		}
 		return list;
 	}
+	public static MeetingVO meetingDetailData(int meet_no){
+	      
+	      MeetingVO vo=new MeetingVO();
+	      SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+	      try {
+	         vo=session.selectOne("meetingDetailData",meet_no);
+	         
+	      }catch(Exception ex) {
+	         System.out.println("meetingDetailData : "+ex.getMessage());
+	      }finally {
+	         if(session!=null)
+	            session.close(); //커넥션을 반환한다.
+	         
+	      }
+	      return vo;
+	   } 
 }
+
