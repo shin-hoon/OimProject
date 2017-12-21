@@ -1,22 +1,13 @@
-package com.sist.SelectSave;
+package com.oim.select;
 
 public class SelectSaveVO {
-/*
-String cst_no = request.getParameter("cst_no");
-	String aa = (String)session.getAttribute("id");
-	String subject = request.getParameter("cst_subject");
-	String cst_cg[] = request.getParameterValues("cst_cg");
-	String cst_loc[] = request.getParameterValues("cst_loc");
-	String cst_day[] = request.getParameterValues("cst_day");
-	String cst_price[] = request.getParameterValues("cst_price");	
-*/	
 	private int cst_no;  // 맞춤모임 번호1,2,3
 	private String id; // 회원아이디
 	private String subject; // 맞춤모임 제목
-	private String cst_cg; // 
-	private String cst_loc;
-	private String cst_day;
-	private String cst_price;
+	private String cst_cg; // 맞춤모임 카테고리
+	private String cst_loc; // 맞춤모임 지역
+	private String cst_day; // 맞춤모임 주중,주말
+	private String cst_price; // 맞춤모임 가격
 	
 	
 	public int getCst_no() {

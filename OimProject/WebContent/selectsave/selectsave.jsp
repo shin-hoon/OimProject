@@ -4,10 +4,10 @@
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="model" class="com.sist.SelectSaveModel.SelectSaveModel" />
+<jsp:useBean id="model" class="com.oim.model.SelectSaveModel" />
 <%
 	String id = "jeong"; session.setAttribute("id", id);
-	model.meetingList(request,session);
+	model.meetingList(request,session);	
 %>
 <!DOCTYPE html>
 <html>
