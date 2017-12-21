@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
  
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -352,7 +353,7 @@
                       <div class="col-sm-3">
                          <div class="thumbnail">
                          <a href="meeeting_detail.do?no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }"></a>
-            
+            			
                              <div class="caption">
                                 <div class="col-sm-12" style="padding:0px;">
                                 
@@ -384,18 +385,37 @@
                 </c:forEach>
                       
                     </ul>  <!-- 모임뿌려주기 div 끝 ---> 
-                    
-                    <%-- <div class="col-sm-12 text-center"> 페이징 기법인데 아직 값 안받아와서 주석처리 함
+                     <div class="col-sm-12 text-center">
 					  <ul class="pagination">
-					    <li ><a href="#">&lt;&lt;</a></li>
-					    <li ><a href="meeting_list.jsp?page=${curpage>1?curpage-1:curpage }">&lt;</a></li>
-						 	<c:forEach var="curpage" begin="1"  end="${total }">
-						    	<li ><a href="meeting_list.jsp?page=${curpage}">${curpage}</a></li>
-						    </c:forEach>
-					    <li ><a href="meeting_list.jsp?page=${curpage<1?curpage:curpage+1 }">&gt;</a></li>
-					    <li ><a href="#">&gt;&gt;</a></li>
+					    <li ><a href="meeting_list.do?page=${curpage<11?curpage:curpage-10 }">◀◀</a></li>
+					    <li ><a href="meeting_list.do?page=${curpage>1?curpage-1:curpage }">◀</a></li>
+					    
+ 					  <fmt:parseNumber var="num" value="${curpage/10}" integerOnly="true"/>
+ 					   <fmt:parseNumber var="num2" value="${curpage%10}" integerOnly="true"/>
+ 					   
+			       		<c:set var="num" value="${num<=0?1:(num2==0?(num-1)*10+1:num*10+1)}"/>  
+			       		
+			       		<c:forEach var="i"  begin="${num}" end="${num+9}">
+			       			<c:choose>
+			       				<c:when test="${i>totalpage }">
+			       				</c:when>
+			       				<c:when test="${i==curpage}">
+				    				<li class="active"><a href="meeting_list.do?page=${i}">${i}</a></li>
+			       				</c:when>
+			       				<c:when test="${i <= totalpage}">
+			       					<li><a href="meeting_list.do?page=${i}">${i}</a></li>
+			       				</c:when>
+			       			</c:choose>
+			       		</c:forEach>
+       		
+ 						 	<%-- <c:forEach var="curpage" begin="1"  end="${totalpage }">
+						    	<li ><a href="meeting_list.do?page=${curpage}">${curpage}</a></li>
+						    </c:forEach> --%>
+						    
+					    <li ><a href="meeting_list.do?page=${curpage<totalpage?curpage+1:curpage }">▶</a></li>
+					    <li ><a href="meeting_list.do?page=${curpage<=totalpage-10?curpage+10:curpage }">▶▶</a></li>
 					  </ul>
-					</div> --%>
+					</div>
                </div>
            </div>
 
