@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		
+		
+		
 		<!-- 기존 부트스트랩(항상가져오는 3줄)  -->
   		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
    		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
@@ -36,6 +38,8 @@
 		<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
 		<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> <!-- class="w3-table w3-hoverable" -->
+		
+		
 
 <title>Insert title here</title>
 <script>
@@ -44,7 +48,6 @@
          $(this).next(".board").toggleClass(".board");
       });
    });
-   
    $(document).ready(function(){
         // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
         $(".boardmenu>a").click(function(){
@@ -71,7 +74,6 @@ $( document ).ready( function() {
         $( '.oim-nb' ).addClass( 'oim-Fixed' );
         $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');
        /*  $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');    왜안될까??*/
-        
       }
       else {
         $( '.oim-nb' ).removeClass( 'oim-Fixed' );
@@ -107,6 +109,7 @@ $( document ).ready( function() {
 
 .oim-logo{
 	margin:15%; margin-top:2%; margin-bottom:1%; 
+	margin-left:28%
 }
 
 .oim-Content {
@@ -363,8 +366,9 @@ $( document ).ready( function() {
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<!-- 메뉴 왼쪽으로 -->
 				<ul class="nav navbar-nav navbar-left">
+
 					<li>
-						<a href="main.do"><img src="img/home.png" alt="홈으로가기"></a>
+						<a href="main.do"><span class="glyphicon glyphicon-home"></span></a>
 					</li>
 					<li>
 						<a href="meeting_list.do">모임</a>
