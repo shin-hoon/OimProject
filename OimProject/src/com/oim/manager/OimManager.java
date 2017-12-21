@@ -17,22 +17,20 @@ import com.oim.meeting.dao.MeetingVO;
 public class OimManager {
 	   
 	   public static void main(String[] args) {
-	      OimManager oim = new OimManager();
+	      
 	      List<MeetingVO> list = new ArrayList<MeetingVO>();
 	      MeetingDAO dao = new MeetingDAO();
+	      OimManager oim = new OimManager();
 	      
 	      list = oim.meetingTop100(); //모임데이터 파싱해서  list에 추가하기
 	      
 	      System.out.println("저장 시작!");
-	      
 	      for(MeetingVO vo:list) { //파싱한 데이터 DB에 insert하기
 	    	  
-//	    	  System.out.println("모임번호:" + vo.getNo());
-//	    	  System.out.println("--------------------");
+//	    	  dao.insertDetail(vo);
+	    	  System.out.println(vo.getMeet_no()+": 저장 성공!");
 	    	  
-	    	  //dao.meetingInsert(vo);
 	      }
-	      
 	      System.out.println("저장 완료!");
 	   }
 	   
@@ -44,8 +42,9 @@ public class OimManager {
  		         int count=0;
  		         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
- 		        	for(int i=119001; i<=122000; i++) {
- 		        		
+// 		        	for(int i=119001; i<=122000; i++) {
+// 		        for(int i=119001; i<=119010; i++) {
+ 		        		for(int i=119680; i<=122000; i++) {
  		            try {
  		                 Document doc=Jsoup.connect("https://onoffmix.com/event/"+String.valueOf(i)).get();
  		                 
@@ -293,7 +292,7 @@ public class OimManager {
  		                
  		                MeetingVO vo = new MeetingVO();
  		                
-// 		     			vo.setNo(i);
+ 		     			vo.setMeet_no(i);
 // 		    			vo.setCharge(charge.text());
 // 		    			vo.setCategory(category.text());
 // 		    			vo.setPoster(poster.attr("src"));
@@ -319,7 +318,7 @@ public class OimManager {
 // 		    			vo.setInfo(info.text());
 // 		    			vo.setPrice(price);
 // 		    			vo.setLike(Integer.parseInt(jjim));
-// 		    			vo.setDetail(detail.html());
+ 		    			vo.setMeet_detail(detail.html());
 // 		    			vo.setLat(lat);
 // 		    			vo.setLng(lng);
  		    			
