@@ -192,6 +192,8 @@ $(function(){
 
 		if(id.trim()=="") //아이디가 입력이 안되었을때
 
+		
+		
 		{
 			$('#id').focus();
 			return;
