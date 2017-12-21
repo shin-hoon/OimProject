@@ -16,6 +16,7 @@
       FROM meeting m , oim_member o
       WHERE o.om_id=m.om_id AND m.meet_no=#{meet_no}              
    	</select>
+   	<!-- 얍얍얍 -->
 	<select id="meetingTotalPage" resultType="int"> <!--총 페이지수 구하기  -->
 		SELECT CEIL(COUNT(*)/12) FROM meeting
 	</select>
