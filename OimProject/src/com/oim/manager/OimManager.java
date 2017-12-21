@@ -30,7 +30,7 @@ public class OimManager {
 //	    	  System.out.println("모임번호:" + vo.getNo());
 //	    	  System.out.println("--------------------");
 	    	  
-	    	  dao.meetingInsert(vo);
+	    	  //dao.meetingInsert(vo);
 	      }
 	      
 	      System.out.println("저장 완료!");
@@ -293,35 +293,35 @@ public class OimManager {
  		                
  		                MeetingVO vo = new MeetingVO();
  		                
- 		     			vo.setNo(i);
- 		    			vo.setCharge(charge.text());
- 		    			vo.setCategory(category.text());
- 		    			vo.setPoster(poster.attr("src"));
- 		    			if(count<15){
- 		    				vo.setId("lkk6201");
- 		    			}else if(count<30){
- 		    				vo.setId("jang");
- 		    			}else if(count<45){
- 		    				vo.setId("jeong");
- 		    			}else if(count<60){
- 		    				vo.setId("ko");
- 		    			}else if(count<75) {
- 		    				vo.setId("park");
- 		    			}else {
- 		    				vo.setId("yoo");
- 		    			}
- 		    			vo.setSubject(title.text());
- 		    			vo.setStartDate(startdate);
- 		    			vo.setEndDate(enddate);
- 		    			vo.setLocation(place.text());
- 		    			vo.setTotal(Integer.parseInt(tpeople));
- 		    			vo.setLimit(Integer.parseInt(lpeople));
- 		    			vo.setInfo(info.text());
- 		    			vo.setPrice(price);
- 		    			vo.setLike(Integer.parseInt(jjim));
- 		    			vo.setDetail(detail.html());
- 		    			vo.setLat(lat);
- 		    			vo.setLng(lng);
+// 		     			vo.setNo(i);
+// 		    			vo.setCharge(charge.text());
+// 		    			vo.setCategory(category.text());
+// 		    			vo.setPoster(poster.attr("src"));
+// 		    			if(count<15){
+// 		    				vo.setId("lkk6201");
+// 		    			}else if(count<30){
+// 		    				vo.setId("jang");
+// 		    			}else if(count<45){
+// 		    				vo.setId("jeong");
+// 		    			}else if(count<60){
+// 		    				vo.setId("ko");
+// 		    			}else if(count<75) {
+// 		    				vo.setId("park");
+// 		    			}else {
+// 		    				vo.setId("yoo");
+// 		    			}
+// 		    			vo.setSubject(title.text());
+// 		    			vo.setStartDate(startdate);
+// 		    			vo.setEndDate(enddate);
+// 		    			vo.setLocation(place.text());
+// 		    			vo.setTotal(Integer.parseInt(tpeople));
+// 		    			vo.setLimit(Integer.parseInt(lpeople));
+// 		    			vo.setInfo(info.text());
+// 		    			vo.setPrice(price);
+// 		    			vo.setLike(Integer.parseInt(jjim));
+// 		    			vo.setDetail(detail.html());
+// 		    			vo.setLat(lat);
+// 		    			vo.setLng(lng);
  		    			
  		    			list.add(vo);
  		    			count++;
