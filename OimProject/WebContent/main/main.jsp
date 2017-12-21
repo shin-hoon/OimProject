@@ -366,6 +366,7 @@ $( document ).ready( function() {
 				<ul class="nav navbar-nav navbar-left">
 					<li>
 						<a href="main.do"><span class="glyphicon glyphicon-home"></span></a>
+						<!-- 올라가라 제발  -->
 					</li>
 					<li>
 						<a href="meeting_list.do">모임</a>
