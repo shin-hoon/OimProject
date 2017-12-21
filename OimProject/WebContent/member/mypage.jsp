@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+    pageEncoding="EUC-KR" import="com.oim.member.dao.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +16,7 @@
 
 <style type="text/css">
 
-
+.tab-pane { color:black;}
 
 /*테이블스타일: 선지우기*/
 table td:last-child {border-right:none;}
@@ -47,6 +48,9 @@ ul li {
 	letter-spacing: 0.2px;
 	color: #444444;
 }
+body{
+	color: black;
+}
 </style>
 
 
@@ -55,18 +59,18 @@ ul li {
 <body>
 
 
-<!-- Mypage 검정 로고 네비 -->
-   <nav class="mypage" style="background-color:#2E2E2E; height:80px;">
-      <div class="container text-left">
-         <h2 style="color:#ffffff;"><b>Mypage</b></h2>
-      </div>
-   </nav>
-<!-- Mypage 검정 로고 네비  끝-->
+
    
-   
-   
+  
 <!-- 카테고리 탭 -->
    <div class="container">
+	   	<!-- Mypage 검정 로고 네비 -->
+	   <nav class="mypage" style="background-color:#2E2E2E; height:80px;">
+	      <div class="container text-left">
+	         <h2 style="color:#ffffff;"><b>Mypage</b></h2>
+	      </div>
+	   </nav>
+	<!-- Mypage 검정 로고 네비  끝-->
       <div class="tabtable" > 
         <ul class="nav nav-tabs" ><br>
           <li class="active"><a href="#tab1" data-toggle="tab">홈</a></li>
@@ -81,7 +85,7 @@ ul li {
 <!-- 마이페이지 홈 -->
            <div class="tab-pane active" id="tab1"> 
              <div class="oim-mypage home">
-                <span class="oim-icon glyphicon glyphicon-user"></span>박서리님의 마이페이지입니다
+                <span class="oim-icon glyphicon glyphicon-user"></span>${sessionScope.name }님의 마이페이지입니다
              </div>
          <!-- 회원정보 테이블 -->
              <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
@@ -89,25 +93,25 @@ ul li {
                   <td width=25% class="text-right">
                      <span class="oim-icon glyphicon glyphicon-envelope"></span>이메일
                   </td>
-                  <td width=75% class="text-center" id="email"></th>
+                  <td width=75% class="text-center" id="email" name=om_id>${sessionScope.id }</td>
                </tr>
                <tr>
                   <td width=25% class="text-right">
                      <span class="oim-icon glyphicon glyphicon-earphone"></span>휴대전화
                   </td>
-                  <td width=75% class="text-center" id="tel"></th>                  
+                  <td width=75% class="text-center" id="tel" name=om_tel>${sessionScope.tel }</td>                  
                </tr>
                <tr>
                   <td width=25% class="text-right">
                      <span class="oim-icon glyphicon glyphicon-heart"></span>성별
                   </td>
-                  <td width=75% class="text-center" id="gender"></th>                  
+                  <td width=75% class="text-center" id="gender" name=om_gender>${sessionScope.gender }</td>                  
                </tr>
                <tr>
                   <td width=25% class="text-right">
-                     <span class="oim-icon glyphicon glyphicon-calendar"></span>가입일
+                     <span class="oim-icon glyphicon glyphicon-calendar" ></span>가입일
                   </td>
-                  <td width=75% class="text-center" id="regdate"></th>                  
+                  <td width=75% class="text-center" id="regdate" name=om_regdate>${sessionScope.regdate }</td>                  
                </tr>
             </table>
           </div>
@@ -129,21 +133,21 @@ ul li {
             </div>
              
          <!-- 회원정보 테이블 -->
-            <form action="#" mehtod="post">
+            <form method="post" action="../member/update_ok.jsp">
                 <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                   <tr>
                      <td width=30% class="text-right">
                         <span class="oim-icon glyphicon glyphicon-envelope"></span>이메일
                      </td>
                      <!-- db들어와야함  -->
-                     <td width=70% class="text-center" id="email"></th>
+                     <td width=70% class="text-center" name=om_id>${sessionScope.id }</td>
                   </tr>
                   <tr>
                      <td width=30% class="text-right">
                         <span class="oim-icon glyphicon glyphicon-earphone"></span>휴대전화
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=name size=30 id="tel">
+                        <input type=text name=om_tel size=30 id="tel" value=${sessionScope.tel }>
                      </td>                  
                   </tr>
                   <tr>
@@ -151,7 +155,7 @@ ul li {
                         <span class="oim-icon glyphicon glyphicon-lock"></span>새로운 비밀번호 입력 
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=name size=30 id="pwd1"><br>
+                        <input type=text name=om_pwd size=30 id="pwd"><br>
                         <h6 style="color:#DF013A;">*비밀번호는 8~24글자 이내로 입력해 주세요.</h6>
                      </td>                  
                   </tr>
@@ -160,13 +164,13 @@ ul li {
                         <span class="oim-icon glyphicon glyphicon-lock"></span>비밀번호 재입력
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=name size=30 id="pwd2">
+                        <input type=text name=om_pwd_ok size=30 id="pwd_ok">
                         <h6 style="color:#DF013A;">*새로운 비밀번호 변경확인을 위하여 다시 한번 입력해 주세요.</h6>
                      </td>                  
                   </tr>
                   <tr>
                      <td colspan="2" class="text-center">
-                        <input type="submit" class="btn btn-info btn-sm" value="글쓰기">
+                        <input type="submit" class="btn btn-info btn-sm" value="수정하기">
                         <input type=button class="btn btn-danger btn-sm" value="취소" onclick="javascript:history.back()">
                      </td>
                     </tr>
@@ -307,39 +311,41 @@ ul li {
                   회원탈퇴를 신청하시면 됩니다.
                </h6>
             </div>
+            <form method="post" action="../member/delete_ok.jsp">
             <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                <tr>
                   <td width=25% class="text-right">
-                     <span class="oim-icon glyphicon glyphicon-envelope"></span>탈퇴할 이메일 아이디
+                     <span class="glyphicon glyphicon-envelope"></span>&nbsp;탈퇴할 아이디(Email)
                   </td>
-                  <td width=75% class="text-center" id="email">
-                  <!-- db로 가져올 부분 -->
-                     seori@gmail.com
+                  <td width=75% class="text-center" id="email" name=om_id>${sessionScope.id }
                   </td>
                </tr>
                <tr>
                   <td width=30% class="text-right">
-                     <span class="glyphicon glyphicon-lock"></span>비밀번호 입력
+                     <span class="glyphicon glyphicon-lock"></span>&nbsp;비밀번호 입력
                   </td>
                   <td width=70% class="text-center">
-                     <input type=text name=name size=30 id="new-pwd">
-                      <h6 style="color:#DF013A;">*본인 인증을 위해 비밀번호를 입력해 주세요</h6>
+                     <input type=text name=om_pwd_ok size=30 id="new-pwd">
+                      <span class="help-block"><font name="check" size="2" color="#DF013A"></font>*본인 인증을 위해 비밀번호를 입력해 주세요 </span>
+                      <!-- <h6 style="color:#DF013A;">*본인 인증을 위해 비밀번호를 입력해 주세요</h6> -->
                   </td>                  
                </tr>
                <tr>
                   <td colspan="2" class="text-center">
-                     <input type="submit" class="btn btn-info btn-sm" value="다시생각하기">
-                     <input type=button class="btn btn-danger btn-sm" value="회원탈퇴" onclick="javascript:history.back()">
+                  	 <input type="submit" class="btn btn-danger btn-sm" value="회원탈퇴" >
+                     <input type=button class="btn btn-info btn-sm" value="다시생각하기" onclick="javascript:history.back()">
                   </td>
                </tr>
             </table>
+            </form>
          </div>
          
          
        </div>
    </div>
 </div>
-
+  
+<!----------------- 커밋실험 -------------->  
 
 
 </body>
