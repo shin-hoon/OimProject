@@ -366,16 +366,9 @@ $( document ).ready( function() {
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<!-- 메뉴 왼쪽으로 -->
 				<ul class="nav navbar-nav navbar-left">
-<<<<<<< HEAD
+
 					<li>
 						<a href="main.do"><span class="glyphicon glyphicon-home"></span></a>
-						<!-- 올라가라나는왜!!!!  -->
-=======
-					<li>
-					
-					<!-- ========================================================================왜안되냐 -->
-						<a href="main.do"><img src="img/home.png" alt="홈으로가기"></a>
->>>>>>> branch 'master' of https://github.com/OimWebProject/OimWeb.git
 					</li>
 					<li>
 						<a href="meeting_list.do">모임</a>
