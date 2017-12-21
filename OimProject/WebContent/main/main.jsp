@@ -7,6 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		
+		
+		
 		<!-- 기존 부트스트랩(항상가져오는 3줄)  -->
   		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
    		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
@@ -36,6 +38,9 @@
 		<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
 		<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> <!-- class="w3-table w3-hoverable" -->
+		
+		<!-- 비밀번호 확인 스트립 -->
+		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <title>Insert title here</title>
 <script>
@@ -44,7 +49,6 @@
          $(this).next(".board").toggleClass(".board");
       });
    });
-   
    $(document).ready(function(){
         // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
         $(".boardmenu>a").click(function(){
@@ -71,7 +75,6 @@ $( document ).ready( function() {
         $( '.oim-nb' ).addClass( 'oim-Fixed' );
         $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');
        /*  $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');    왜안될까??*/
-        
       }
       else {
         $( '.oim-nb' ).removeClass( 'oim-Fixed' );
@@ -107,6 +110,7 @@ $( document ).ready( function() {
 
 .oim-logo{
 	margin:15%; margin-top:2%; margin-bottom:1%; 
+	margin-left:28%
 }
 
 .oim-Content {
@@ -179,6 +183,74 @@ $( document ).ready( function() {
       
 </script>
 
+<!-- 회원가입모달-> 아이디중복체크 스크립트 -->
+<script type="text/javascript">
+$(function(){
+	$('#checkBtn').click(function(){ /*#checkBtn 셀랙터  */
+
+		var id=$('#id').val();
+
+		if(id.trim()=="") //아이디가 입력이 안되었을때
+
+		
+		
+		{
+			$('#id').focus();
+			return;
+		}
+		$.ajax({   //*******
+			type:'POST', // type: 데이터를 무슨 방식으로 보낼꺼냐
+			url:'../member/idcheck_result.jsp', // 멤버.jsp에서 만들어짐
+
+			data:{"om_id":id}, // 값을 보냄 ','를 찍고 값을 여러개 보낼 수 있다.
+
+			success:function(response) //idcheck_result.jsp'여기서 실행된 결과값을 넣어준다
+
+			{
+				//성공했을때
+				var result=response.trim();
+				
+				if(result==0)    //중복된 아이디가  0이면(없으면)====> 사용가능한 아이디
+				{
+					$('#res').html("<font color=blue>"+id+"은(는) 사용 가능한 아이디입니다.</font>");
+					$('#res_ok').html("<input type=submit value=확인 onclick=ok('"+id+"')>"); 
+																//  ㄴ>매개변수 작은따음표를 꼭 써줘야 한다 , 안쓰면 숫자로 인식한다
+						// 확인 버튼이 눌리면 중복확인창이 사라진다
+						// ok 버튼을 눌렀을때 ===> 밑에 함수 처리
+				
+				}else
+				{
+					$('#res').html("<font color=red>"+id+"은(는) 이미 사용중인 아이디입니다.</font>");
+					$('#id').val("");
+					$('#id').focus();
+					$('#res_ok').html("");
+				}
+			}
+		});
+	});
+});
+function ok(om_id){
+	parent.frm.om_id.value=om_id;
+	parent.idcheck-modal.close();      // 중복체크하고 아이디를 사용할 수 있을때 사용한다는 확인 버튼을 누르면 쉐도우 박스가 자동으로 꺼지면서 입력한 아이디가 자동으로 아이디 창으로 입력된다
+}
+
+//비밀번호 일치 확인
+ $(function(){
+  $('#password').keyup(function(){
+   $('font[name=check]').text('');
+  }); //#password.keyup
+
+  $('#check_password').keyup(function(){
+   if($('#password').val()!=$('#check_password').val()){
+    $('font[name=check]').text('');
+    $('font[name=check]').html("<font color=red>"+"암호가 일치하지 않습니다.다시입력하세요.");
+   }else{
+    $('font[name=check]').text('');
+    $('font[name=check]').html("<font color=blue>"+"암호가 일치합니다.");
+   }
+  }); //#check_password.keyup
+ });
+</script>
 </head>
 <body>
 <!-- 노랭색 네비바 -->
@@ -240,55 +312,59 @@ $( document ).ready( function() {
 	    <div class="modal-content">
 	      <div class="modal-header oim_modal">
 		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		
 		<h3 class="modal-title" id="myModalLabel">회원가입</h3>
 	      </div>
 	      <div class="modal-body">
+	      <form method="post" action="../member/join_modal_ok.jsp" id="frm">   <!--name:키값  ic:클래스랑같은것 -->
 					<table class="w3-table w3-hoverable">
 					<tr>
 						<td width=20%>아이디<br><span>(E-mail)</span></td>
 						<td width=80%>
-						<input type="text" name="id" size=30>
-						<input type="button" value="중복체크" class="btn btn-sm btn-primary" id="idcheck">
+						<input type="text" name="om_id" size=30 required readonly>
+						
+						<input type="button" value="중복체크" class="btn btn-sm btn-primary" id="idcheck" data-toggle="modal" data-target="#idcheck-modal">
 						<span class="help-block">이메일을 입력하세요</span>
 						</td>
 					</tr>
 					<tr>
 						<td width=30% class="add_td">비밀번호</td>
 						<td width=70% >
-						<input type="text" name=pwd size=30 required>
+						<input id="password" type="password" name=om_pwd size=30 required>
 						</td>
 					</tr>
 					<tr>
 						<td width=20% class="text-right">비밀번호 확인</td>
 						<td width=80% class="text-left">
-						<input type="text" name=pwdcheck size=30 required>
-						<span class="help-block">비밀번호를 한번 더 입력해주세요</span>
+						<input id="check_password" type="password" name=om_pwd size=30 required>
+						
+						<span class="help-block"><font name="check" size="2" color="red"></font> </span>
 						</td>
 					</tr>
 					<tr>
 						<td width=20% class="text-right">이름</td>
 						<td width=80% class="text-left">
-						<input type="text" name=name size=15>
+						<input type="text" name=om_name size=15>
 						</td>
 					</tr>
 					<tr>
 						<td width=20% class="text-right">생년월일</td>
 						<td width=80% class="text-left">
-						<input type="date" name=birthday size=20>
+						<input type="date" name=om_birth size=20>
 						</td>
 					</tr>
 					<tr>
 						<td width=20% class="text-right">성별</td>
 						<td width=80% class="text-left">
-						<input type="radio" name=sex value="여자" checked>여자
+						<input type="radio" name=om_gender value="여자" checked>여자
 						&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" name=sex value="남자">남자
+						<input type="radio" name=om_gender value="남자">남자
 						</td>
 					</tr>
 					<tr>
 						<td width=20% class="text-right">전화번호</td>
 						<td width=80% class="text-left">
-						<select name=tell style="height:30px;">
+						<select name=tel1 style="height:30px;">
 							<option>010</option>
 							<option>011</option>
 							<option>017</option>
@@ -300,7 +376,7 @@ $( document ).ready( function() {
 					<tr>
 						<td width=20% class="text-right">소속명</td>
 						<td width=80% class="text-left">
-						<input type="text" name=sosok size=20>
+						<input type="text" name=om_company size=20>
 						</td>
 					</tr>
 					<tr>
@@ -313,11 +389,44 @@ $( document ).ready( function() {
 						</td>
 					</tr>
 					</table>
+					</form>
 				</div>
 			</div>
 	      </div>
 		</div>
 		<!----- 회원가입 모달 끝 ---->
+		
+		<!-- ----중복체크모달 -->
+		<!-- 모달 팝업 -->
+		<div class="modal fade" id="idcheck-modal" tabindex="10" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  		<div class="modal-dialog">
+	    		<div class="modal-content" style="width:60%;">
+	      			<div class="modal-header oim_modal">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		
+						<h3 class="modal-title">중복체크</h3>
+	      			</div>
+	      			<div class="modal-body">
+						<table class="table table-hover" id="res_table">
+							<tr>
+								<td class="text-left">
+									ID:<input type="text" name="id" size=12 id="id">
+									<input type=button value="중복체크" class="btn btn-info btn-sm" id="checkBtn">
+								</td>
+							</tr>
+							<tr>
+								<td class="text-center" id="res">
+									<!--위에서 확인버튼이 눌리면 사용가능한지 불가능한지 나타낸다  -->
+								</td>
+							</tr>
+							<tr>
+								<td class="text-center" id="res_ok">
+							</tr>
+						</table>
+					</div>
+				</div>
+	      	</div>
+		</div>
 	
 <!--===사이트 로고 ====-->
 	<div class="container oim-logo">
@@ -363,8 +472,9 @@ $( document ).ready( function() {
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<!-- 메뉴 왼쪽으로 -->
 				<ul class="nav navbar-nav navbar-left">
+
 					<li>
-						<a href="main.do"><img src="img/home.png" alt="홈으로가기"></a>
+						<a href="main.do"><span class="glyphicon glyphicon-home"></span></a>
 					</li>
 					<li>
 						<a href="meeting_list.do">모임</a>

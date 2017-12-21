@@ -24,6 +24,28 @@ public class MeetingVO {
 	private Date meet_regdate;
 	private int meet_hit;
 	private int rownum;
+	private String om_name;
+	private String om_tel;
+	
+	public String getOm_name() {
+		return om_name;
+	}
+	public void setOm_name(String om_name) {
+		this.om_name = om_name;
+	}
+	public String getOm_tel() {
+		return om_tel;
+	}
+	public void setOm_tel(String om_tel) {
+		this.om_tel = om_tel;
+	}
+	public String getOm_company() {
+		return om_company;
+	}
+	public void setOm_company(String om_company) {
+		this.om_company = om_company;
+	}
+	private String om_company;
 	
 	public int getMeet_no() {
 		return meet_no;

@@ -25,8 +25,9 @@ public class MemberVO {
    private String tel2;
    private String tel3;
    private String om_company;
-   private Date regdate;
+   private Date om_regdate;
    private int count;    //아이디 비번 체크할 숫자
+   
 public String getOm_id() {
 	return om_id;
 }
@@ -81,11 +82,12 @@ public String getOm_company() {
 public void setOm_company(String om_company) {
 	this.om_company = om_company;
 }
-public Date getRegdate() {
-	return regdate;
+
+public Date getOm_regdate() {
+	return om_regdate;
 }
-public void setRegdate(Date regdate) {
-	this.regdate = regdate;
+public void setOm_regdate(Date om_regdate) {
+	this.om_regdate = om_regdate;
 }
 public int getCount() {
 	return count;

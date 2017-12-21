@@ -180,14 +180,15 @@
 
 
 
-<!--====== 오늘의 모임====== -->
+<!--====== 초대이벤트====== -->
 		<section id="about" class="light-bg">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12 text-center">
 					<!-- 타이틀 -->
 						<div class="section-title">
-							<h2>오늘의 모임</h2>
+							<h2>이벤트에 초대합니다</h2>
+							<p>O!IM이 선택한 다양한 이벤트에 여러분을 초대합니다</p>
 						</div>
 					</div>
 				</div>
@@ -196,11 +197,10 @@
 					<div class="col-md-3 text-center">
 						<div class="mz-module">
 							<div class="mz-module-about">
-								<i class="fa fa-briefcase color1 ot-circle"></i>
-								<h3>오늘의 모임</h3>
-								<p>동해물과백두산이</p>
+								<img src="img/event.jpg" style="widht:100px; height:200px;">
+								<h6>[초대이벤트]뮤지컬 "루나틱"</h6>
 							</div>
-							<a href="#" class="mz-module-button">선택하기</a>
+							<a href="https://onoffmix.com/event/121695" class="mz-module-button">상세보기</a>
 						</div>
 					</div>
 					<!-- end about module -->
@@ -208,11 +208,10 @@
 					<div class="col-md-3 text-center">
 						<div class="mz-module">
 							<div class="mz-module-about">
-								<i class="fa fa-photo color2 ot-circle"></i>
-								<h3>오늘의 모임</h3>
-								<p>동해물과 백두산이</p>
+								<img src="img/event.jpg" style="widht:100px; height:200px;">
+								<h6>[초대이벤트]뮤지컬 "루나틱"</h6>
 							</div>
-							<a href="#" class="mz-module-button">선택하기</a>
+							<a href="https://onoffmix.com/event/121695" class="mz-module-button">상세보기</a>
 						</div>
 					</div>
 					<!-- end about module -->
@@ -220,11 +219,10 @@
 					<div class="col-md-3 text-center">
 						<div class="mz-module">
 							<div class="mz-module-about">
-								<i class="fa fa-camera-retro color3 ot-circle"></i>
-								<h3>오늘의 모임</h3>
-								<p>동해물과백두산이</p>
+								<img src="img/event.jpg" style="widht:100px; height:200px;">
+								<h6>[초대이벤트]뮤지컬 "루나틱"</h6>
 							</div>
-							<a href="#" class="mz-module-button">선택하기</a>
+							<a href="https://onoffmix.com/event/121695" class="mz-module-button">상세보기</a>
 						</div>
 					</div>
 					<!-- end about module -->
@@ -232,18 +230,18 @@
 					<div class="col-md-3 text-center">
 						<div class="mz-module">
 							<div class="mz-module-about">
-								<i class="fa fa-cube color4 ot-circle"></i>
-								<h3>오늘의 모임</h3>
-								<p>동해물과 백두산이</p>
+								<img src="img/event.jpg" style="widht:100px; height:200px;">
+								<h6>[초대이벤트]뮤지컬 "루나틱"</h6>
 							</div>
-							<a href="#" class="mz-module-button">선택하기</a>
+							<a href="https://onoffmix.com/event/121695" class="mz-module-button">상세보기</a>
 						</div>
 					</div>
-					<!-- end about module -->
 				</div>
 			</div>
-			<!-- /.container -->
 		</section>
+		
+
+
 
 
 <!-- ============ 태그모임 =========== -->
@@ -359,9 +357,9 @@
 		</div>
 	</section> 
 	  <!-- 추가  tab js -->
-	  <script src="../js/jquery.js"></script>
-	  <script src="../js/jquery.isotope.min.js"></script> 
-	  <script src="../js/main.js"> </script>
+	  <script src="js/jquery.js"></script>
+	  <script src="js/jquery.isotope.min.js"></script> 
+	  <script src="js/main.js"> </script>
 	
 <!-- ==========tag별 모임 끝==========--->
 

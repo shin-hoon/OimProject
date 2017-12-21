@@ -344,7 +344,7 @@
       <div class="container" style="padding-top:70px; padding-bottom:70px;">
       
             <div class="col-lg-12 text-left"> 
-                  <ul class="thumbnails"><!-- 모임뿌려주기 div 시작 -->
+                  <ul class="thumbnails"><!-- 모임뿌려주기 div 시작 11-->
 
                   <h2>모임</h2>
 					
@@ -352,7 +352,7 @@
  				
                       <div class="col-sm-3">
                          <div class="thumbnail">
-                         <a href="meeeting_detail.do?no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }"></a>
+                         <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }"></a>
             			
                              <div class="caption">
                                 <div class="col-sm-12" style="padding:0px;">

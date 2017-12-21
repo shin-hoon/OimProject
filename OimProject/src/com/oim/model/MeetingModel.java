@@ -26,7 +26,6 @@ public class MeetingModel {
 		int totalpage=0;
 		
 		Map map=new HashMap();
-		
 		map.put("start", start);
 		map.put("end", end);
 		
@@ -40,4 +39,23 @@ public class MeetingModel {
 		req.setAttribute("main_jsp", "../meeting/meeting_list.jsp");
 		return "main/main.jsp";
 	}
+    @RequestMapping("meeting_detail.do")
+    public String meeting_detail(HttpServletRequest req, HttpServletResponse res) {
+       String meet_no = req.getParameter("meet_no");
+       
+       MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
+       
+       req.setAttribute("vo", vo);
+       req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
+       return "main/main.jsp";
+    }
+    //¸Û¹Ì
+    @RequestMapping("meeting_payment.do")
+    public void meeting_payment(HttpServletRequest req, HttpServletResponse res) {
+    	String meet_no = req.getParameter("meet_no");
+    	MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
+        req.setAttribute("vo", vo);
+        req.setAttribute("meeting_payment.do", "meeting_payment.jsp");
+    	
+    }
 }
