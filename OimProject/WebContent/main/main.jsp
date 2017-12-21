@@ -323,7 +323,7 @@ $( document ).ready( function() {
 	<div class="container oim-logo">
 		<div class="oim-logo-img">
 		<!-- 오임 로고 이미지 -->
-			<img alt="오늘의 모임" src="img/oim.png" class="img-responsive">
+			<a href="main.do"><img alt="오늘의 모임" src="img/oim.png" class="img-responsive"></a>
 		</div>
 		
 		<!-- 검색창 -->
@@ -364,7 +364,7 @@ $( document ).ready( function() {
 			<!-- 메뉴 왼쪽으로 -->
 				<ul class="nav navbar-nav navbar-left">
 					<li>
-						<a href="main.jsp"><img src="img/home.png" alt="홈으로가기"></a>
+						<a href="main.do"><img src="img/home.png" alt="홈으로가기"></a>
 					</li>
 					<li>
 						<a href="meeting_list.do">모임</a>
