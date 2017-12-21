@@ -40,4 +40,14 @@ public class MeetingModel {
 		req.setAttribute("main_jsp", "../meeting/meeting_list.jsp");
 		return "main/main.jsp";
 	}
+    @RequestMapping("meeting_detail.do")
+    public String meeting_detail(HttpServletRequest req, HttpServletResponse res) {
+       String meet_no = req.getParameter("meet_no");
+       
+       MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
+       
+       req.setAttribute("vo", vo);
+       req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
+       return "main/main.jsp";
+    }
 }
