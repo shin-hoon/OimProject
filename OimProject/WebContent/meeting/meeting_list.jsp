@@ -344,7 +344,7 @@
       <div class="container" style="padding-top:70px; padding-bottom:70px;">
       
             <div class="col-lg-12 text-left"> 
-                  <ul class="thumbnails"><!-- 모임뿌려주기 div 시작 -->
+                  <ul class="thumbnails"><!-- 모임뿌려주기 div 시작 11-->
 
                   <h2>모임</h2>
 					
