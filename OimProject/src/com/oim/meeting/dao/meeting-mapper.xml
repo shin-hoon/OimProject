@@ -9,4 +9,8 @@
          FROM meeting ORDER BY meet_no ASC))
          WHERE num BETWEEN #{start} AND #{end}            	
 	</select>
+	
+	<select id="meetingTotalPage" resultType="int"> <!--총 페이지수 구하기  -->
+		SELECT CEIL(COUNT(*)/12) FROM meeting
+	</select>
 </mapper>
