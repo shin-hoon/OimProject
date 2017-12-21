@@ -1,4 +1,4 @@
-package com.sist.SelectSaveModel;
+package com.oim.model;
 import java.io.*;
 import java.util.*;
 
@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sist.SelectSave.*;
+import com.oim.select.*;
 public class SelectSaveModel {
 	
    public void meetingList(HttpServletRequest req,HttpSession sess) throws UnsupportedEncodingException{ 
@@ -14,26 +14,28 @@ public class SelectSaveModel {
 	   
 	   String id = (String)sess.getAttribute("id");
 	   String page=req.getParameter("page");
+	   String saveNum=req.getParameter("saveNum");
 	   
-	   if(page==null)	page="1";
+	   if(page==null)		page="1";
+	   if(saveNum==null)	saveNum="1";
 	   int curpage=Integer.parseInt(page);
+	   int num=Integer.parseInt(saveNum);
+	   
 	   
 	   int view = dao.saveNo(id);
+	   int totalpage=0;
 	   
 	   if(view == 0) {
 		   List<SelectListVO> list=dao.meetingList(curpage);
-		   
+		   totalpage = dao.TotalPage();
 		   req.setAttribute("list", list);
 	   }
 	   else {
 		   List<SelectListVO> list = dao.saveList(curpage,view);
 		   
+		   totalpage = dao.saveTotalPage(curpage,view);
 		   req.setAttribute("list", list);
 	   }
-	   
-	   
-	   
-	   int totalpage = dao.TotalPage();
 	   
 	   req.setAttribute("totalpage", totalpage);
 	   req.setAttribute("curpage", curpage);
@@ -91,106 +93,12 @@ public class SelectSaveModel {
 		   }
 		   
 		   SelectDAO dao = new SelectDAO();
-		   dao.selectSaveInsert(vo);
+		   dao.selectSaveInsert(vo,id,Integer.parseInt(cst_no));
 		   
 	   }catch(Exception e) {
 		   System.out.println(e.getMessage());
 	   }
    }
-   /*
-   public void selectSaveInsert(HttpServletRequest req, HttpServletResponse res)
-   {
-	   try {
-		   req.setCharacterEncoding("EUC-KR");
-		   
-		   
-		   String name = req.getParameter("name");
-		   String subject = req.getParameter("subject");
-		   String content = req.getParameter("content");
-		   String pwd = req.getParameter("pwd");
-		   
-		   SelectSaveVO vo = new SelectSaveVO();
-		   //필수
-		   vo.setName(name);
-		   vo.setSubject(subject);
-		   vo.setContent(content);
-		   vo.setPwd(pwd);
-		   
-		   
-		   // dao 연결
-		   SelectSaveDAO dao = new SelectSaveDAO();
-		   dao.databoardInsert(vo);
-		   
-		   res.sendRedirect("../music/main.jsp?mode=12");
-		   
-	   }catch(Exception e) {
-		   System.out.println(e.getMessage());
-	   }
-   }
-   */
-   /*
-   public void databoardInsert_ok(HttpServletRequest req, HttpServletResponse res) {
-	   try {
-		   req.setCharacterEncoding("EUC-KR");
-		   String path = "c:\\download";
-		   int size =1024*1024*100;
-		   String  enctype = "EUC-KR";
-		   
-		   MultipartRequest mr = new MultipartRequest(req, path, size, enctype, new DefaultFileRenamePolicy());
-		   // new DefaultFileRenamePolicy() => 파일명이 동일할때 파일명을 자동으로 변경
-		   
-		   String name = mr.getParameter("name");
-		   String subject = mr.getParameter("subject");
-		   String content = mr.getParameter("content");
-		   String pwd = mr.getParameter("pwd");
-		   String filename = mr.getOriginalFileName("upload");
-		   
-		   SelectSaveVO vo = new SelectSaveVO();
-		   //필수
-		   vo.setName(name);
-		   vo.setSubject(subject);
-		   vo.setContent(content);
-		   vo.setPwd(pwd);
-		   
-		   if(filename==null) {
-			   vo.setFilename("");
-			   vo.setFilesize(0);
-			   vo.setFilecount(0);
-			   
-		   }
-		   else {
-			   File f = new File("c:\\download\\"+filename);
-			   vo.setFilename(f.getName());
-			   vo.setFilesize((int)f.length());
-			   vo.setFilecount(1);
-		   }
-		   
-		   // dao 연결
-		   SelectSaveDAO dao = new SelectSaveDAO();
-		   dao.databoardInsert(vo);
-		   
-		   res.sendRedirect("../music/main.jsp?mode=12");
-		   
-		   
-	   }catch(Exception e) {
-		   System.out.println(e.getMessage());
-	   }
-   }
-*//*
-   public void databoardContentData(HttpServletRequest req) {
-	   String no = req.getParameter("no");
-	   // dao 연결
-	   SelectSaveDAO dao = new SelectSaveDAO();
-	   SelectSaveVO vo = dao.databoardCountData(Integer.parseInt(no));
-	   // java => jsp 처리결과값을 전송
-	   req.setAttribute("vo", vo);
-   }
-   */
-   /*
-   public void databoardDelete(HttpServletRequest req) {
-	   String no = req.getParameter("no");
-	   req.setAttribute("no", no);
-   }*/
 }
 
 
