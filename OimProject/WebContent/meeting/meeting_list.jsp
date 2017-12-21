@@ -352,7 +352,7 @@
  				
                       <div class="col-sm-3">
                          <div class="thumbnail">
-                         <a href="meeeting_detail.do?no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }"></a>
+                         <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }"></a>
             			
                              <div class="caption">
                                 <div class="col-sm-12" style="padding:0px;">
