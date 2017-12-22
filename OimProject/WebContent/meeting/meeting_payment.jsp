@@ -59,7 +59,7 @@
                             <tr>
                                 <td class="col-sm-2"></td>
                                 <td class="col-sm-12 text-right">
-                                    <h3 class="title" id="title">${meet_subject }</h3>
+                                    <h3 class="title" id="title">${vo.meet_subject }</h3>
                                 </td>
 				            </tr>
                             <tr>

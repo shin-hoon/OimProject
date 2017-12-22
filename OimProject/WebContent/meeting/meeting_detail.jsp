@@ -66,15 +66,19 @@
         }); 
     $(function(){
           $('#apply').click(function(){
+        	  var meet_no = $('#apply').attr("value");
+        	  alert(meet_no+"");
              Shadowbox.open({
-                content:"meeting_payment.do",
+                content:"meeting_payment.do?meet_no="+meet_no,
                 player:'iframe',
                 title:'신청내역확인',
                 width:1200,
                 height:700
-             });         
+             }); 
           });
+         
        });
+    
 </script>
 
 <!--meeting_detail/CSS-->
@@ -141,7 +145,7 @@
    <div class="container" style="border: 1px solid #999;">
    	
         <div class="row">
-        <input type="hidden" name="meet_no" value="${vo.meet_no }"/>
+        <%-- <input type="hidden" id="meet_no" name="meet_no" value="${vo.meet_no }"/> --%>
             <div class="top col-xs-12">
                <c:if test="${vo.meet_price==0 }">
                   <span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>
@@ -196,7 +200,7 @@
                <h2 class="price" id="price" style="text-align: right;">가격 : ${vo.meet_price } 원</h2>
                     <a href="#" class="btn btn-large btn-danger jjim" id="jjim" style="float: right; height: 50px;">♡<br>1</a>
                     <c:if test="${vo.meet_limit!=0 }">
-                    	<a href="#" class="btn btn-large btn-primary apply" id="apply" style="float: right; height: 50px;">신청하기</a>
+                    	<a href="#" class="btn btn-large btn-primary apply" id="apply" style="float: right; height: 50px;" value="${meet_no }">신청하기</a>
                     </c:if>
                     <c:if test="${vo.meet_limit==0 }">
                     	<a href="#" class="btn btn-default disabled" id="apply" style="float: right; height: 50px;">신청마감</a>

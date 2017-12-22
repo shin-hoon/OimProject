@@ -46,16 +46,18 @@ public class MeetingModel {
        MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
        
        req.setAttribute("vo", vo);
+       req	.setAttribute("meet_no", meet_no);
        req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
        return "main/main.jsp";
     }
     //¸Û¹Ì
     @RequestMapping("meeting_payment.do")
-    public void meeting_payment(HttpServletRequest req, HttpServletResponse res) {
+    public String meeting_payment(HttpServletRequest req, HttpServletResponse res) {
     	String meet_no = req.getParameter("meet_no");
+    	System.out.println("meet_no:"+meet_no);
     	MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
         req.setAttribute("vo", vo);
-        req.setAttribute("meeting_payment.do", "meeting_payment.jsp");
-    	
+        //req.setAttribute("meeting_payment.do", "meeting_payment.jsp");
+    	return "../meeting/meeting_payment.jsp";
     }
 }
