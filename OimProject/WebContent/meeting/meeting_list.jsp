@@ -10,13 +10,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>모임 리스트</title>
-        
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<!--<script type="text/javascript" src = "js/jquery-2.1.3.min.js"></script>--> <!--폴더에있는 제이쿼리버전 -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script> <!--제이쿼리 최신버전-->
-<script type="text/javascript" src = "js/bootstrap.min.js"></script>
-
+       
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	
    <!--DatePicker링크-->
     <link rel="stylesheet" href="css/datepicker3.css">
     <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
@@ -151,6 +147,10 @@
         font-weight: bold;
         margin: 3px;
         width: 13%;
+    }
+    
+    .locbtn{
+    	width:15%;
     }
     
 </style>
@@ -295,27 +295,27 @@
                     </td>
                      <td class="col-sm-11">
                           <span class="button-checkbox">
-                        <button type="button" class="btn checkbtn" data-color="primary">무료</button>
+                        <button type="button" class="btn checkbtn locbtn" data-color="primary">무료</button>
                         <input type="checkbox" name="loc" class="hidden" />
                     </span>
                     <span class="button-checkbox">
-                        <button type="button" class="btn checkbtn" data-color="primary">~ 10000원</button>
+                        <button type="button" class="btn checkbtn locbtn" data-color="primary"> 10000원</button>
                         <input type="checkbox" name="loc" class="hidden" />
                     </span>
                      <span class="button-checkbox">
-                        <button type="button" class="btn checkbtn" data-color="primary">10000원 ~ 25000원</button>
+                        <button type="button" class="btn checkbtn locbtn" data-color="primary">10000원 ~ 25000원</button>
                         <input type="checkbox" name="loc" class="hidden" />
                     </span>
                     <span class="button-checkbox">
-                        <button type="button" class="btn checkbtn" data-color="primary">25000원 ~ 40000원</button>
+                        <button type="button" class="btn checkbtn locbtn" data-color="primary">25000원 ~ 40000원</button>
                         <input type="checkbox" name="loc" class="hidden" />
                     </span>
                     <span class="button-checkbox">
-                        <button type="button" class="btn checkbtn" data-color="primary">40000원 ~ 99000원</button>
+                        <button type="button" class="btn checkbtn locbtn" data-color="primary">40000원 ~ 99000원</button>
                         <input type="checkbox" name="loc" class="hidden" />
                     </span>
                     <span class="button-checkbox">
-                        <button type="button" class="btn checkbtn" data-color="primary">99000원 ~</button>
+                        <button type="button" class="btn checkbtn locbtn" data-color="primary">99000원 ~</button>
                         <input type="checkbox" name="loc" class="hidden" />
                     </span>
                      </td>

@@ -5,16 +5,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script type="text/javascript" src = "../js/jquery-2.1.3.min.js"></script>
-    <script type="text/javascript" src = "../js/bootstrap.min.js"></script>
-    
+
     <!--DateTimePicker링크-->
-      <link rel="stylesheet" type="text/css" media="all" href="../css/daterangepicker.css" />
-      <script type="text/javascript" src="../js/moment.js"></script>
-      <script type="text/javascript" src="../js/daterangepicker.js"></script>
+      <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
+      <script type="text/javascript" src="js/moment.js"></script>
+      <script type="text/javascript" src="js/daterangepicker.js"></script>
       
     <!-- 네이버 지도 -->
    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=1e5PfwhPM359PFhc_Qqy&callback=CALLBACK_FUNCTION"></script>
@@ -28,7 +24,7 @@
     
 </head>
 <body>	
-<!--		<form method="post" action="../member/join_ok.jsp" name=frm>-->
+		<form method="post" action="../member/join_ok.jsp" name="frm">
          <div class="container" style="margin-bottom: 50px;">
          <h2 style="width: 1100px; margin:20px auto">개설하기</h2>
 		<div class="row meetingRow" style="border: 1px solid #ddd">
@@ -63,7 +59,7 @@
                    </script>
                    
                     <div class="btn-group" style="width:150px">
-                      <button class="btn btn-default btn-category" name="category" style="width:80%;">카테고리 선택</button>
+                      <button class="btn btn-default btn-category" name="meet_cg" style="width:80%;">카테고리 선택</button>
                       <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:20%; height:34px;">
                         <span class="caret"></span>
                       </button>
@@ -85,7 +81,7 @@
                       </ul>
                     </div>
                     
-                    	<input type="text" class="form-control" style="width: 460px; display:inline-block; " name="subject" placeholder="모임명을 입력해주세요.">
+                    	<input type="text" class="form-control" style="width: 460px; display:inline-block; " name="meet_subject" placeholder="모임명을 입력해주세요.">
 
                </td>  
            </tr>
@@ -106,11 +102,11 @@
                          </div>
 -->
 
-                    <input type="text" class="form-control" name="daterange"/>
+                    <input type="text" class="form-control meet_date" name="meet_date"/>
 
                     <script type="text/javascript">
                     $(function() {
-                        $('input[name="daterange"]').daterangepicker({
+                        $('.meet_date').daterangepicker({
                             timePicker: true,
                             timePicker24Hour: true,
                             timePickerIncrement: 1,
@@ -133,7 +129,7 @@
                        <input type="text" class="form-control" size="50">
                        <input type="button" class="btn btn-default" value="검색">
                         <label style="font-weight: normal">
-                          <input type="checkbox" name="notloc">장소없음/미정
+                          <input type="checkbox" name="meet_loc">장소없음/미정
                         </label>
                    </div>
                    
@@ -239,10 +235,10 @@
                            <div class="input-group-addon">
                             <span class="glyphicon glyphicon-map-marker"></span> 
                            </div>
-                           <input type="text" class="form-control" name="location" value="모임 장소 : [제로원디자인센터] 서울 종로구 동숭동 서울시 종로구 동숭길 122-6 국민대학교" readonly="readonly"/>
+                           <input type="text" class="form-control" name="meet_loc1" value="모임 장소 : [제로원디자인센터] 서울 종로구 동숭동 서울시 종로구 동숭길 122-6 국민대학교" readonly="readonly"/>
                           </div>
                           
-                          <input type="text" class="form-control" placeholder="나머지 주소를 입력해 주세요.">
+                          <input type="text" class="form-control" name="meet_loc2" placeholder="나머지 주소를 입력해 주세요.">
                 </div>      
                </td>  
            </tr>
@@ -256,11 +252,11 @@
                      <h4>유/무료 선택</h4>
                 </td>
                 <td class="col-sm-10" style="vertical-align: middle">
-                    <label class="radio-inline">
-                          <input type="radio" name="inlineRadioOptions" value="유료"> 유료
+                   		 <label class="radio-inline">
+                          <input type="radio" name="meet_gender" value="유료"> 유료
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="inlineRadioOptions" value="무료"> 무료
+                          <input type="radio" name="meet_gender" value="무료"> 무료
                         </label>
                 </td>
             </tr>
@@ -279,9 +275,9 @@
                        </tr>
                        
                        <tr>
-                           <td><input type="text" class="form-control"></td>
-                           <td><input type="text" class="form-control"></td>
-                           <td><input type="text" class="form-control"></td>
+                           <td><input type="text" class="form-control" name=""></td>
+                           <td><input type="text" class="form-control" name="meet_total"></td>
+                           <td><input type="text" class="form-control" name=""></td>
                            <td> 
                                <select class="form-control" name=tel1>
                                 <option>없음</option>
@@ -346,7 +342,7 @@
           
       </div>
 			
-<!--		</form>-->
+		</form>
 	</div>
   </div>
 </body>

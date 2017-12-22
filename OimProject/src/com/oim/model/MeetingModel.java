@@ -14,7 +14,7 @@ import com.oim.meeting.dao.MeetingVO;
 
 @Controller
 public class MeetingModel {
-	@RequestMapping("meeting_list.do")
+	@RequestMapping("meeting_list.do") //모임목록
 	public String meeting_list(HttpServletRequest req, HttpServletResponse res) {
 		String page=req.getParameter("page");
 		if(page==null)
@@ -56,6 +56,16 @@ public class MeetingModel {
     	MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
         req.setAttribute("vo", vo);
         req.setAttribute("meeting_payment.do", "meeting_payment.jsp");
-    	
     }
+    
+    
+    @RequestMapping("meeting_insert.do")//모임개설
+    public String meeting_insert(HttpServletRequest req, HttpServletResponse res) {
+    	
+    	
+    	
+    	req.setAttribute("main_jsp", "../meeting/meeting_insert.jsp");
+    	return "main/main.jsp";
+    }
+    
 }
