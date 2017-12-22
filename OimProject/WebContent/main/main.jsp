@@ -162,27 +162,6 @@ $( document ).ready( function() {
 
 </style>
 
-
-<!-- 스크롤 내렸을때 흰색 메뉴바 상단 고정하는 스트립트 -->
-<script type="text/javascript">
-$( document ).ready( function() {
-    var jbOffset = $( '.oim-nb' ).offset();
-    $( window ).scroll( function() {
-      if ( $( document ).scrollTop() > jbOffset.top ) {
-        $( '.oim-nb' ).addClass( 'oim-Fixed' );
-        $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');
-       /*  $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');    왜안될까??*/
-        
-      }
-      else {
-        $( '.oim-nb' ).removeClass( 'oim-Fixed' );
-        $('.oim-nb').css('background-color', 'white');
-      }
-    });
-  } );
-      
-</script>
-
 <!-- 회원가입모달-> 아이디중복체크 스크립트 -->
 <script type="text/javascript">
 $(function(){
@@ -200,7 +179,7 @@ $(function(){
 		}
 		$.ajax({   //*******
 			type:'POST', // type: 데이터를 무슨 방식으로 보낼꺼냐
-			url:'../member/idcheck_result.jsp', // 멤버.jsp에서 만들어짐
+			url:'main.do', // 멤버.jsp에서 만들어짐
 
 			data:{"om_id":id}, // 값을 보냄 ','를 찍고 값을 여러개 보낼 수 있다.
 

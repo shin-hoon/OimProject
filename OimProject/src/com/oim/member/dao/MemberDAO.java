@@ -1,61 +1,67 @@
 package com.oim.member.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.io.Reader;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MemberDAO {
-   
-   //연결객체 
-      private Connection conn;
-      
-      //SQL 전송 객체
-      private PreparedStatement ps;
-      
-      //Oracle URL
-      private final String URL="jdbc:oracle:thin:@211.238.142.231:1521:ORCL";
-      
-      //드라이버 등록
-      public MemberDAO() {
-         try {
-            
-            Class.forName("oracle.jdbc.driver.OracleDriver");    //new를 쓰지 않아도 클래스를 가져와서 메모리할당을 한다.
-            
-            
-         }catch(Exception ex) {
-            System.out.println(ex.getMessage());
-         }
-      }
-      
-      //오라클 연결
-      public void getConnection()
-      {
-         try
-         {
-            // conn scott/1234
-            conn = DriverManager.getConnection(URL,"scott","1234");
-         }catch(Exception ex) {
-            System.out.println(ex.getMessage());
-         }
-      }
-      
-      //오라클 해제
-      public void disConnection()
-      {
-         try {
-            //통신을 먼저 닫고(SQL 전송 객체)
-            if(ps!=null) ps.close();
-            
-            //기계 연결 해제 (연결객체)
-            if(conn!=null)conn.close();
-         }catch(Exception ex) {}
-      }
-      
-      
-      
-      		//로그인 
-    		public MemberVO Login(String id,String pwd)
+	private static SqlSessionFactory ssf;
+	//XML 파싱내용을 전송
+	static { //초기화, 자동실행 블록
+		try {
+			//XML 읽기
+			Reader reader=Resources.getResourceAsReader("Config.xml");
+			//XML 파싱
+			ssf=new SqlSessionFactoryBuilder().build(reader); //reader는 한글까지 읽기때문에 reader를 사용한다.
+		}catch(Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+	
+	//=========회원가입
+    //아이디중복체크
+  	public int OimIdcheck(String id) {
+  		int count=0;
+  		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+  		try {
+  			count=session.selectOne("memberIdcheck");
+  					
+  		}catch(Exception ex) {
+  			System.out.println("memberIdcheck: "+ex.getMessage());
+  		}finally {
+  			if(session!=null)
+  				session.close();
+  		}
+  		return count;
+  	}
+  	
+  	
+  	//회원가입
+  	public void OimJoin(MemberVO vo) {
+  		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+  		
+  		
+  		try
+  		{
+  			session.insert("oim_member_Join",vo);
+  		}
+  		catch(Exception ex) {
+  			System.out.println(ex.getMessage());
+  		}finally {
+  			if(session!=null)
+  				session.close();
+  			
+  		}
+  	}
+
+	/*//로그인 
+    		public MemberVO OimLogin(String id,String pwd)
     		{
     			MemberVO vo=new MemberVO();
     			try {
@@ -117,7 +123,7 @@ public class MemberDAO {
     		
     		
     		//회원정보 수정
-    		public void Update(MemberVO vo)
+    		public void OimUpdate(MemberVO vo)
     		{
     			
     			try {
@@ -144,7 +150,7 @@ public class MemberDAO {
     		}
     		
     		//회원탈퇴 
-    		public boolean Delete(String id, String pwd)
+    		public boolean OimDelete(String id, String pwd)
     		{
     			boolean bcheck=false;
     			
@@ -182,63 +188,14 @@ public class MemberDAO {
     				disConnection();
     			}
     			return bcheck;
-    		}
-      
-      
-      
-//=========회원가입
-    //아이디중복체크
-  	public int memberIdcheck(String id) {
-  		int count=0;
-  		try {
-  			getConnection();
-  			String sql="SELECT COUNT(*) "
-  					+"FROM oim_member "
-  					+"WHERE om_id=?";
-  			ps=conn.prepareStatement(sql);
-  			ps.setString(1, id);
-  			ResultSet rs=ps.executeQuery();
-  			rs.next();
-  			count=rs.getInt(1);
-  			rs.close();
-  					
-  		}catch(Exception ex) {
-  			System.out.println(ex.getMessage());
-  		}finally {
-  			disConnection();
-  		}
-  		return count;
-  	}
-  	
-  	
-  	//회원가입
-  	public void oim_member_Join(MemberVO vo) {
-  		try
-  		{
-  			getConnection();
-  			String sql="INSERT INTO oim_member "
-  					+ "VALUES(?,?,?,?,?,?,?,SYSDATE)";
-  			
-  	  		ps=conn.prepareStatement(sql);
-  	  		
-  	  		ps.setString(1, vo.getOm_id());
-  	  		ps.setString(2, vo.getOm_pwd());
-  	  		ps.setString(3, vo.getOm_name());
-  	  		ps.setString(5, vo.getOm_birth());
-  	  		ps.setString(4, vo.getOm_gender());
-  	  		ps.setString(6, vo.getOm_tel());
-  	  		ps.setString(7, vo.getOm_company());
-  	  		ps.executeUpdate();
-  		}
-  		catch(Exception ex) {
-  			System.out.println(ex.getMessage());
-  		}finally {
-  			disConnection();
-  		}
-  	}
-  	
+    		}*/
 
-  	
+    		
+    		
+    		
+    		
+    		
+    		
   }
       
       
