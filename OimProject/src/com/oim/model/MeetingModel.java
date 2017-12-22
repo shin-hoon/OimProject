@@ -46,7 +46,7 @@ public class MeetingModel {
        MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
        
        req.setAttribute("vo", vo);
-       req	.setAttribute("meet_no", meet_no);
+       
        req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
        return "main/main.jsp";
     }
@@ -57,7 +57,6 @@ public class MeetingModel {
     	System.out.println("meet_no:"+meet_no);
     	MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
         req.setAttribute("vo", vo);
-        //req.setAttribute("meeting_payment.do", "meeting_payment.jsp");
-    	return "../meeting/meeting_payment.jsp";
+    	return "meeting/meeting_payment.jsp";
     }
 }

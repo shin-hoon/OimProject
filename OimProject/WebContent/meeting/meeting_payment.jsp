@@ -4,17 +4,17 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<% 
+<%-- <% 
 	String meet_subject = request.getParameter("meet_subject");
 
-%>
+%> --%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
-<script type="text/javascript" src="../js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!-- shadow 닫힘기능 -->
 <script type="text/javascript">
 //	function ok(id) {
@@ -63,23 +63,25 @@
                                 </td>
 				            </tr>
                             <tr>
-                                <td class="col-sm-2 success"><img src="image/calender.png" style="height: 20px; width: 20px;">&emsp;모임 기간</td>
+                                <td class="col-sm-2 success"><img src="meeting/image/calender.png" style="height: 20px; width: 20px;">&emsp;모임 기간</td>
                                 <td class="col-sm-10 text-right">
-                                    <b class="start" id="start"> 12월 16일 (토) 10시 00분</b>~
-                                    <b class="end" id="end">2018년 1월 13일 (토) 17시 00분</b>
+                                    <b class="start" id="start"> ${vo.meet_start }</b>~
+                                    <b class="end" id="end">${vo.meet_end }</b>
                                 </td>
 				            </tr>
                             <tr>
-                                <td class="col-sm-2 success"><img src="image/place.png" style="height: 20px; width: 20px;">&emsp;모임 장소</td>
+                                <td class="col-sm-2 success"><img src="meeting/image/place.png" style="height: 20px; width: 20px;">&emsp;모임 장소</td>
                                 <td class="col-sm-10 text-right">
-                                    <b class="place" id="place">[제로원디자인센터] 서울 종로구 동숭동 서울시 종로구 동숭길 122-6 국민대학교</b>
+                                    <b class="place" id="place">${vo.meet_loc }</b>
                                 </td>
 				            </tr>
                             <tr>
-                                <td class="col-sm-2 success"><img src="image/people.png" style="height: 20px; width: 20px;">&emsp;신청인원</td>
+                                <td class="col-sm-2 success">
+                                	<img src="meeting/image/people.png" style="height: 20px; width: 20px;">&emsp;신청인원
+                                </td>
                                 <td class="col-sm-10 text-right">
-                                    <b class="total" id="total">  총 20 명 </b> |
-						            <b class="limit" id="limit">  중 11 명 신청가능</b>
+                                    <b class="total" id="total">  총  ${vo.meet_total } 명 </b>&emsp;|&emsp;
+						            <b class="limit" id="limit">  ${vo.meet_limit } 명 신청가능</b>
                                 </td>
 				            </tr>
                         </table>
@@ -105,7 +107,7 @@
             <table class="table">
 				<tr>
 					<td class="success text-center" width="20%">총결제금액</td>
-					<td class="text-left price" width="80%" id="price">10000원</td>
+					<td class="text-left price" width="80%" id="price">${vo.meet_price } 원</td>
 				</tr>
 				<tr>
 					<td class="success text-center" width="20%">결제방식</td>

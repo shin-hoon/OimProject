@@ -66,21 +66,17 @@
         }); 
     $(function(){
           $('#apply').click(function(){
-        	  var meet_no = $('#apply').attr("value");
-        	  alert(meet_no+"");
+        	 var meet_no = $('#meet_no').attr("value");
              Shadowbox.open({
-                content:"meeting_payment.do?meet_no="+meet_no,
-                player:'iframe',
-                title:'신청내역확인',
-                width:1200,
-                height:700
+               content:"meeting_payment.do?meet_no="+meet_no,		
+               player:'iframe',
+               title:'신청내역확인',
+               width:1200,
+               height:700
              }); 
           });
-         
        });
-    
 </script>
-
 <!--meeting_detail/CSS-->
 <style type="text/css">
     .row{
@@ -134,19 +130,15 @@
         font-size: 20px;
         line-height: 35px
     }
-        
-    
 </style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-    
-    
-    <div style="height: 50px"></div>
+   <div style="height: 50px"></div>
    <div class="container" style="border: 1px solid #999;">
    	
         <div class="row">
-        <%-- <input type="hidden" id="meet_no" name="meet_no" value="${vo.meet_no }"/> --%>
-            <div class="top col-xs-12">
+        <input type="hidden" id="meet_no" name="meet_no" value="${vo.meet_no }"/>
+            <div class="top col-xs-12" style="vertical-align: middle;">
                <c:if test="${vo.meet_price==0 }">
                   <span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>
                </c:if>
@@ -183,7 +175,7 @@
                   <b class="place" id="place"><img src="meeting/image/place.png" style="height: 20px; width: 20px;">&emsp;${vo.meet_loc }</b>
                </p>
                <p>
-                  <b class="total" id="total"><img src="meeting/image/people.png" style="height: 20px; width: 20px;">&emsp;신청인원 : ${vo.meet_total } </b> |
+                  <b class="total" id="total"><img src="meeting/image/people.png" style="height: 20px; width: 20px;">&emsp;신청인원 :&emsp;총  ${vo.meet_total } 명  </b>&emsp;|&emsp;
                   <b class="limit" id="limit">  ${vo.meet_limit } 명 신청가능</b>
                </p>
                <hr>
@@ -200,7 +192,7 @@
                <h2 class="price" id="price" style="text-align: right;">가격 : ${vo.meet_price } 원</h2>
                     <a href="#" class="btn btn-large btn-danger jjim" id="jjim" style="float: right; height: 50px;">♡<br>1</a>
                     <c:if test="${vo.meet_limit!=0 }">
-                    	<a href="#" class="btn btn-large btn-primary apply" id="apply" style="float: right; height: 50px;" value="${meet_no }">신청하기</a>
+                    	<a href="#" class="btn btn-large btn-primary apply" id="apply" style="float: right; height: 50px;">신청하기</a>
                     </c:if>
                     <c:if test="${vo.meet_limit==0 }">
                     	<a href="#" class="btn btn-default disabled" id="apply" style="float: right; height: 50px;">신청마감</a>
