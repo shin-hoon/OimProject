@@ -1,9 +1,10 @@
-<%@ page language="java" 
+<%@ page language="java"
 	contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"
 %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="model" class="com.oim.model.SelectSaveModel" />
 <%
 	String id = "jeong"; session.setAttribute("id", id);
@@ -17,6 +18,11 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+	
+	
+	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 	
 	<link href="../css/oim_style.css" rel="stylesheet">
 	<link rel="stylesheet" href="../css/bootstrap.css">
@@ -72,7 +78,6 @@
         $checkbox.on('change', function () {
             updateDisplay();
         });
-
         /*Actions*/
         function updateDisplay() {
             var isChecked = $checkbox.is(':checked');
@@ -99,7 +104,7 @@
         }
 
         // Initialization
-        function init() {
+        function init() { 
 
             updateDisplay();
 
@@ -112,13 +117,16 @@
     });
 });
     </script>
+    
 </head>
 <body>
+	<c:forEach var="vo" items="${checkBox}">
 	<div class="container">
+		<c:set var="cst_cg" value="${fn:split(vo.cst_cg,',')}"/>
 		<form method="post" action="../selectsave/selectsave_ok.jsp">
 		<div class="col-sm-12">
 			<input type="hidden" name="cst_no" value="1" />
-			<input type="text" name="cst_subject" size="90" maxlength="50" value="맞춤알바 이름을 입력해주세요.(최대15글자)" /><br/>
+			<input type="text" name="cst_subject" size="90" maxlength="15" value="${view==0?'맞춤모임 이름을 입력해주세요.(최대15글자)':vo.subject}" />
 		</div>
 		<div>
 			<div class="col-sm-1">
@@ -127,117 +135,221 @@
 				<div class="col-sm-11">
 				<span class="button-checkbox">
 	                <button type="button" class="btn checkbtn" data-color="primary">교육</button>
-                	<input type="checkbox" name="cst_cg" value="교육" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="교육" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='교육'?'checked':'' }			
+						</c:forEach>
+					/>
             	</span>
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">강연</button>
-                	<input type="checkbox" name="cst_cg" value="강연" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="강연" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='강연'?'checked':'' }			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">세미나/컨퍼런스</button>
-                	<input type="checkbox" name="cst_cg" value="세미나,컨퍼런스" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="세미나,컨퍼런스" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='세미나' or check=='컨퍼런스'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">문화/예술</button>
-                	<input type="checkbox" name="cst_cg" value="문화,예술" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="문화,예술" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='문화' or check=='예술'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">방송/연예</button>
-                	<input type="checkbox" name="cst_cg" value="방송,연예" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="방송,연예" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='방송' or check=='연예'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">취미활동</button>
-                	<input type="checkbox" name="cst_cg" value="취미활동" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="취미활동" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='취미활동'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">소모임/친목행사</button>
-                	<input type="checkbox" name="cst_cg" value="소모임,친목행사" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="소모임,친목행사" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='소모임' or check=='친목행사'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">공모전</button>
-                	<input type="checkbox" name="cst_cg" value="공모전" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="공모전" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='공모전'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">전시/박람회</button>
-                	<input type="checkbox" name="cst_cg" value="전시,박람회" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="전시,박람회" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='전시' or check=='박람회'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">패션/뷰티</button>
-                	<input type="checkbox" name="cst_cg" value="패션,뷰티" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="패션,뷰티" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='패션' or check=='뷰티'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">이벤트/파티</button>
-                	<input type="checkbox" name="cst_cg" value="이벤트,파티" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="이벤트,파티" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='이벤트' or check=='파티'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">여행</button>
-                	<input type="checkbox" name="cst_cg" value="여행" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="여행" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='여행'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">후원금 모금</button>
-                	<input type="checkbox" name="cst_cg" value="후원금 모금" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="후원금 모금" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='후원금 모금'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">기타</button>
-                	<input type="checkbox" name="cst_cg" value="기타" class="hidden" />
+                	<input type="checkbox" name="cst_cg" value="기타" class="hidden"
+                		<c:forEach var="check" items="${cst_cg}">
+							${check=='기타'?'checked':''}			
+						</c:forEach>
+					/>
             	</span>
             	</div>
+				
 			</div>
 			<div>
 				<div class="col-sm-1">
 				<span>모임지역</span>
 				</div>
+				<c:set var="cst_loc" value="${fn:split(vo.cst_loc,',')}"/>
 				<div class="col-sm-11">
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">서울</button>
-                	<input type="checkbox" name="cst_loc" value="서울" class="hidden" />
+                	<input type="checkbox" name="cst_loc" value="서울" class="hidden"
+	                	<c:forEach var="check" items="${cst_loc}">
+							${check=='서울'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">부산/울산/경남</button>
-                	<input type="checkbox" name="cst_loc" value="부산,울산,경남" class="hidden" />
+                	<input type="checkbox" name="cst_loc" value="부산,울산,경남" class="hidden"
+	                	<c:forEach var="check" items="${cst_loc}">
+							${check=='부산' or check=='울산' or check=='경남'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	<span class="button-checkbox">
 		           	<button type="button" class="btn checkbtn" data-color="primary">인천/경기</button>
-                	<input type="checkbox" name="cst_loc" value="인천,경기" class="hidden" />
+                	<input type="checkbox" name="cst_loc" value="인천,경기" class="hidden"
+	                	<c:forEach var="check" items="${cst_loc}">
+							${check=='인천' or check=='경기'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">대전/충청/세종</button>
-                	<input type="checkbox" name="cst_loc" value="대전,충청,세종" class="hidden" />
+                	<input type="checkbox" name="cst_loc" value="대전,충청,세종" class="hidden"
+	                	<c:forEach var="check" items="${cst_loc}">
+							${check=='대전' or check=='충청' or check=='세종'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">광주/전라</button>
-                	<input type="checkbox" name="cst_loc" value="광주,전라" class="hidden" />
+                	<input type="checkbox" name="cst_loc" value="광주,전라" class="hidden"
+	                	<c:forEach var="check" items="${cst_loc}">
+							${check=='광주' or check=='전라'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">강원</button>
-                	<input type="checkbox" name="cst_loc" value="강원" class="hidden" />
+                	<input type="checkbox" name="cst_loc" value="강원" class="hidden"
+	                	<c:forEach var="check" items="${cst_loc}">
+							${check=='강원'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">대구/경북</button>
-                	<input type="checkbox" name="cst_loc" value="대구,경북" class="hidden" />
+                	<input type="checkbox" name="cst_loc" value="대구,경북" class="hidden"
+	                	<c:forEach var="check" items="${cst_loc}">
+							${check=='대구' or check=='경북'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">제주</button>
-                	<input type="checkbox" name="cst_loc" value="제주" class="hidden" />
+                	<input type="checkbox" name="cst_loc" value="제주" class="hidden"
+	                	<c:forEach var="check" items="${cst_loc}">
+							${check=='제주'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">기타지역</button>
-                	<input type="checkbox" name="cst_loc" value="기타지역" class="hidden" />
+                	<input type="checkbox" name="cst_loc" value="기타지역" class="hidden"
+	                	<c:forEach var="check" items="${cst_loc}">
+							${check=='기타지역'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	</div>
+            	
 			</div>
 			<div>
 				<div class="col-sm-1">
 				<span>모임요일</span>
 				</div>
+				<c:set var="cst_day" value="${fn:split(vo.cst_day,',')}"/>
 				<div class="col-sm-11">
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">주중</button>
-                	<input type="checkbox" name="cst_day" value="주중" class="hidden" />
+                	<input type="checkbox" name="cst_day" value="주중" class="hidden"
+	                	<c:forEach var="check" items="${cst_day}">
+							${check=='주중'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">주말</button>
-                	<input type="checkbox" name="cst_day" value="주말" class="hidden" />
+                	<input type="checkbox" name="cst_day" value="주말" class="hidden"
+	                	<c:forEach var="check" items="${cst_day}">
+							${check=='주말'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	</div>
 			</div>
@@ -245,37 +357,62 @@
 				<div class="col-sm-1">
 				<span>모임가격</span>
 				</div>
+				<c:set var="cst_price" value="${fn:split(vo.cst_price,',')}"/>
 				<div class="col-sm-11">
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">무료</button>
-                	<input type="checkbox" name="cst_price" value="0" class="hidden" />
+                	<input type="checkbox" name="cst_price" value="0" class="hidden"
+	                	<c:forEach var="check" items="${cst_price}">
+							${check=='0'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">~ 10,000원</button>
-                	<input type="checkbox" name="cst_price" value="10000" class="hidden" />
+                	<input type="checkbox" name="cst_price" value="10000" class="hidden"
+	                	<c:forEach var="check" items="${cst_price}">
+							${check=='10000'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
 				<span class="button-checkbox">
 	            	<button type="button" style="padding-right:13.5%" class="btn checkbtn" data-color="primary">10,000원~25,000원</button>
-                	<input type="checkbox" name="cst_price" value="25000" class="hidden" />
+                	<input type="checkbox" name="cst_price" value="25000" class="hidden"
+	                	<c:forEach var="check" items="${cst_price}">
+							${check=='25000'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
 				<span class="button-checkbox">
 	            	<button type="button" style="padding-right:13.5%" class="btn checkbtn" data-color="primary">25,000원~40,000원</button>
-                	<input type="checkbox" name="cst_price" value="40000" class="hidden" />
+                	<input type="checkbox" name="cst_price" value="40000" class="hidden"
+	                	<c:forEach var="check" items="${cst_price}">
+							${check=='40000'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
 				<span class="button-checkbox">
 	            	<button type="button" style="padding-right:13.5%" class="btn checkbtn" data-color="primary">40,000원~99,000원</button>
-                	<input type="checkbox" name="cst_price" value="99000" class="hidden" />
+                	<input type="checkbox" name="cst_price" value="99000" class="hidden"
+	                	<c:forEach var="check" items="${cst_price}">
+							${check=='99000'?'checked':''}
+						</c:forEach>   
+                	/>
             	</span>
             	<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">99,000원 ~</button>
-                	<input type="checkbox" name="cst_price" value="99001" class="hidden" />
+                	<input type="checkbox" name="cst_price" value="99001" class="hidden"
+	                	<c:forEach var="check" items="${cst_price}">
+							${check=='99001'?'checked':''}
+						</c:forEach>   
+                	/>
 				</span>
 				</div>
 			</div>
 			<div><input type="submit" value="검색저장"/></div>
 			</form>
 		</div>
-	
+		</c:forEach>	
 	
 		<div class="container" style="margin-top:5%">
 			<div class="col-lg-12 text-center">
@@ -304,7 +441,7 @@
 										</span>
 									</li>
 								</div>
-								<p style="text-align:left;clear:both;">${vo.meet_start } ~ 1/5</p>
+								<p style="text-align:left;clear:both;">${vo.meet_start} ~ ${vo.meet_end}</p>
 								<p class="p_add" style="height:22px;overflow:hidden;">
 									${vo.meet_subject }
 								</p>

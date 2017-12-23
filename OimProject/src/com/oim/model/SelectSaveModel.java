@@ -22,7 +22,7 @@ public class SelectSaveModel {
 	   int num=Integer.parseInt(saveNum);
 	   
 	   
-	   int view = dao.saveNo(id);
+	   int view = dao.saveNo(id,num);
 	   int totalpage=0;
 	   
 	   if(view == 0) {
@@ -32,9 +32,11 @@ public class SelectSaveModel {
 	   }
 	   else {
 		   List<SelectListVO> list = dao.saveList(curpage,view);
+		   List<SelectSaveVO> checkBox = dao.saveCheckBox(id,num);
 		   
 		   totalpage = dao.saveTotalPage(curpage,view);
 		   req.setAttribute("list", list);
+		   req.setAttribute("checkBox", checkBox);
 	   }
 	   
 	   req.setAttribute("totalpage", totalpage);
