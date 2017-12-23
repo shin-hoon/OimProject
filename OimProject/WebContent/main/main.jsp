@@ -459,7 +459,7 @@ function ok(om_id){
 						<a href="meeting_list.do">모임</a>
 					</li>
 					<li>
-						<a href="#">맞춤모임</a>
+						<a href="../OimProject/selectsave/selectsave.jsp">맞춤모임</a>
 					</li>
 					<li class="boardmenu">
 		                  <a href="#" >커뮤니티</a>

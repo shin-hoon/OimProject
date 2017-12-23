@@ -461,10 +461,11 @@
 			</div>
 		</div>
 
+	
 	<div class="container text-center">
-		<span>
-       		<a href="../selectsave/selectsave.jsp?page=${curpage<11?curpage:curpage-10 }" class="btn btn-warning btn-sm">¢¸¢¸</a>&nbsp;&nbsp;&nbsp;
-       		<a href="../selectsave/selectsave.jsp?page=${curpage<2?curpage:curpage-1 }" class="btn btn-warning btn-sm">¢¸</a>&nbsp;&nbsp;&nbsp;
+		<ul class="pagination">
+       		<li><a href="../selectsave/selectsave.jsp?page=${curpage<11?curpage:curpage-10 }">¢¸¢¸</a></li>
+       		<li><a href="../selectsave/selectsave.jsp?page=${curpage<2?curpage:curpage-1 }">¢¸</a></li>
        				
        		<fmt:parseNumber var="num" value="${curpage/10}" integerOnly="true"/>
        		<c:set var="num" value="${num<=0?1:num*10}"/>  
@@ -472,21 +473,20 @@
        			<c:choose>
        				<c:when test="${i > totalpage }"></c:when>
        				<c:when test="${i==curpage}">
-	    				<a href="selectsave.jsp?page=${i}">
-    						<b style="color:black;font-size:40px">${i}</b>
-       					</a>
+	    				<li class="active">
+	    					<a href="selectsave.jsp?page=${i}">	${i} </a>
+	    				</li>
        				</c:when>
        				<c:when test="${i <= totalpage}">
-       					<a href="selectsave.jsp?page=${i }">
-    	   					<b style="color:gray;font-size:25px">${i}</b>
-       					</a>
+       					<li>
+       						<a href="selectsave.jsp?page=${i }"> ${i} </a>
+       					</li>
        				</c:when>
        			</c:choose>
        		</c:forEach>
-       		&nbsp; &nbsp;
-       		<a href="../selectsave/selectsave.jsp?page=${curpage<totalpage?curpage+1:curpage}" class="btn btn-warning btn-sm">¢º</a> &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="../selectsave/selectsave.jsp?page=${curpage<=totalpage-10?curpage+10:curpage}" class="btn btn-warning btn-sm">¢º¢º</a>&nbsp;
-		</span>
+       		<li><a href="../selectsave/selectsave.jsp?page=${curpage<totalpage?curpage+1:curpage}">¢º</a></li>
+            <li><a href="../selectsave/selectsave.jsp?page=${curpage<=totalpage-10?curpage+10:curpage}">¢º¢º</a></li>
+		</ul>
 	</div>
 	<div class="container" style="height:300px;"></div>
 </body>
