@@ -133,7 +133,6 @@
 </style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-   <div style="height: 50px"></div>
    <div class="container" style="border: 1px solid #999;">
    	
         <div class="row">

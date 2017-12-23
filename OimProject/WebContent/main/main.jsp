@@ -103,7 +103,7 @@ $( document ).ready( function() {
 	text-align: center;
 	background-color:#ffffff ;
 	width: 100%;
-	z-index:20;
+	z-index:9999;
 	margin:0px;
 	padding:0px;
 }
