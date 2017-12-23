@@ -13,8 +13,8 @@ public class MeetingVO {
 	private String meet_start;
 	private String meet_end;
 	private String meet_loc;
-	private int meet_total;
-	private int meet_limit;
+	private int meet_total; //정원
+	private int meet_limit; //신청가능인원
 	private String meet_info;
 	private int meet_price;
 	private int meet_like;
