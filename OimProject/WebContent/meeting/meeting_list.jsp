@@ -24,7 +24,7 @@
         $('div.caption p').each(function(){
         
         var length=30; //글자 최대길이 30
-        var minlength=16; //제목 글자가 한줄에 17정도됨
+        var minlength=16; //제목 글자가 한줄에 16정도됨
     	
         $(this).each(function(){ //제목글자길이가 30을 넘는순간부터 ...으로 처리하라
             if($(this).text().length >= length){
@@ -135,9 +135,10 @@
    font-size:15px;
    font-weight:bold;    
    text-align:left;
+   margin-bottom:20px;
 }
     
-    th,t{
+    th{
         text-align: center;
     }
     
@@ -368,24 +369,50 @@
                                  
                                   <li class="li_add"><span class="label label-primary" style="font-size:13px;">${vo.meet_cg }</span></li>
                                   <div class="col-sm-12" style="padding:0">
-                                  <p style="margin:0; padding:8px 0 8px 0;">${vo.meet_start } ~ ${vo.meet_end }</p>
+	                                  <c:if test="${vo.meet_start eq vo.meet_end}">
+	                                    <h6>${vo.meet_start }</h6>
+	                                  </c:if>
+                                  
+	                                  <c:if test="${vo.meet_start ne vo.meet_end}">
+	                                    <h6>${vo.meet_start } ~ ${vo.meet_end }</h6>
+	                                  </c:if>
+	                                  
+	                              	  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><p class="p_add">${vo.meet_subject }</p></a>    
                                   </div>
                                   </div>
                                 
-                                  <a href="meeeting_detail.do?no=${vo.meet_no}&page=${curpage}"><p class="p_add">${vo.meet_subject }</p></a>
+                                  
                                   <a href="#" class="btn btn-primary" style="width:20%;">♡</a> 
                                   <span class="likeNumber">${vo.meet_like }</span>
-                                  <a href="#" class="btn btn-primary" style="float:right; width: 50%;">신청하기</a>
+                                  
+                                  <c:if test="${vo.meet_limit eq 0}"> <!-- 신청가능 인원이 0일때 버튼 비활성화 후 정원도달 출력 -->
+                                  	<a href="#" class="btn btn-primary disabled" style="float:right; width:50%;">정원도달</a>
+                                  </c:if>
+                                  
+                                  <c:if test="${vo.meet_limit ne 0}"> <!-- 신청가능 인원이 존재할때 몇명 신청가능한지 표시 -->
+                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="btn btn-primary" style="float:right; width:50%;"
+                                  onMouseOver="this.innerHTML='신청하기'" 
+                                  onMouseOut="this.innerHTML='${vo.meet_limit}명 신청가능'">${vo.meet_limit}명 신청가능</a>
+                                  </c:if>
                               </div>
-                              <div class="progress" style="margin-bottom:0; height:10px">
-                                  <div class="progress-bar progress-bar-primary" role="progressbar" style="width:50%"></div>
+                              
+                              <fmt:parseNumber var="percent" value="${(vo.meet_total-vo.meet_limit)/vo.meet_total*100}" integerOnly="true"/>
+                              <div class="progress" style="margin-bottom:0; height:10px"> <!-- 얼마나 신청했는지 %값 계산해서 progress bar형태로 표시 -->
+                              	  <c:if test="${percent eq 100}">
+                              	  <div class="progress-bar progress-bar-danger" role="progressbar" style="width:${percent}%"></div>
+                              	  </c:if>
+                              	  
+                              	  <c:if test="${percent ne 100}">
+                                  <div class="progress-bar progress-bar-primary" role="progressbar" style="width:${percent}%"></div>
+                                  </c:if>
                             </div>
                          </div>
                       </div>
                 </c:forEach>
                       
                     </ul>  <!-- 모임뿌려주기 div 끝 ---> 
-                     <div class="col-sm-12 text-center">
+                    
+                     <div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
 					  <ul class="pagination">
 					    <li ><a href="meeting_list.do?page=${curpage<11?curpage:curpage-10 }">◀◀</a></li>
 					    <li ><a href="meeting_list.do?page=${curpage>1?curpage-1:curpage }">◀</a></li>
@@ -415,7 +442,7 @@
 					    <li ><a href="meeting_list.do?page=${curpage<totalpage?curpage+1:curpage }">▶</a></li>
 					    <li ><a href="meeting_list.do?page=${curpage<=totalpage-10?curpage+10:curpage }">▶▶</a></li>
 					  </ul>
-					</div>
+					</div> <!-- 페이지수 뿌려주기 div 끝-->
                </div>
            </div>
 
