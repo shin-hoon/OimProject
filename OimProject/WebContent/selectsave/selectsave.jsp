@@ -120,13 +120,17 @@
     
 </head>
 <body>
+	<c:if test="${view==0}">
+	<jsp:include page="../selectsave/selecNosave.jsp"></jsp:include>
+	</c:if>
+	<c:if test="${view!=0}">
 	<c:forEach var="vo" items="${checkBox}">
 	<div class="container">
 		<c:set var="cst_cg" value="${fn:split(vo.cst_cg,',')}"/>
 		<form method="post" action="../selectsave/selectsave_ok.jsp">
 		<div class="col-sm-12">
 			<input type="hidden" name="cst_no" value="1" />
-			<input type="text" name="cst_subject" size="90" maxlength="15" value="${view==0?'맞춤모임 이름을 입력해주세요.(최대15글자)':vo.subject}" />
+			<input type="text" name="cst_subject" size="90" maxlength="15" value="${vo.subject}" />
 		</div>
 		<div>
 			<div class="col-sm-1">
@@ -412,7 +416,8 @@
 			<div><input type="submit" value="검색저장"/></div>
 			</form>
 		</div>
-		</c:forEach>	
+	</c:forEach>
+	</c:if>			
 	
 		<div class="container" style="margin-top:5%">
 			<div class="col-lg-12 text-center">

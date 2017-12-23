@@ -9,7 +9,7 @@ import java.util.*;
 public class SelectDAO {
 	   private Connection conn;
 	   private PreparedStatement ps;
-	   private final String URL="jdbc:oracle:thin:@localhost:1521:ORCL";
+	   private final String URL="jdbc:oracle:thin:@211.238.142.223:1521:ORCL";
 	   
 	   public SelectDAO()
 	   {
