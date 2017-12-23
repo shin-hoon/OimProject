@@ -44,7 +44,7 @@
         <table class="table table-hover">
            <tr>
             <td class="col-sm-2" style="border-top:0" >
-                <h4>카테고리/모임명</h4>
+                <h5>카테고리/모임명</h5>
             </td>      
                
                <td class="col-sm-9" style="vertical-align: middle; border-top:0">
@@ -88,7 +88,7 @@
            
               <tr>
             <td class="col-sm-2">
-                <h4>모임일시</h4>
+                <h5>모임일시</h5>
             </td>      
                
                <td class="col-sm-9" style="vertical-align: middle">
@@ -121,7 +121,7 @@
            
                <tr>
             <td class="col-sm-2">
-                <h4>모임장소</h4>
+                <h5>모임장소</h5>
             </td>      
                
                <td class="col-sm-9">
@@ -248,71 +248,76 @@
       <div class="col-sm-12">
         <table class="table table-hover">
             <tr>
-                <td class="col-sm-2">
-                     <h4>유/무료 선택</h4>
+                <td class="col-sm-2" style="vertical-align:middle;">
+                     <h5>유/무료 선택</h5>
                 </td>
-                <td class="col-sm-10" style="vertical-align: middle">
+                <td class="col-sm-3" style="vertical-align:middle;">
                    		 <label class="radio-inline">
-                          <input type="radio" name="meet_gender" value="유료"> 유료
+                          <input type="radio" name="meet_charge" value="무료">무료
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="meet_gender" value="무료"> 무료
+                          <input type="radio" name="meet_charge" value="유료">유료
                         </label>
                 </td>
-            </tr>
-            
-            <tr>
-                <td class="col-sm-2">
-                     <h4>그룹설정</h4>
-                </td>
-                <td class="col-sm-10" style="vertical-align: middle">
-                    <table class="table table-bordered">
+                
+                 <td class="col-sm-7" style="vertical-align:middle;">
+                    <table class="table table-bordered" style="margin-bottom:0">
                        <tr>
-                          <th class="text-center">그룹명</th>
-                          <th class="text-center">총 인원</th> 
+                          <th class="text-center">모임정원</th> 
                           <th class="text-center">참가비용</th>
-                          <th class="text-center">동반인원</th> 
                        </tr>
                        
                        <tr>
-                           <td><input type="text" class="form-control" name=""></td>
-                           <td><input type="text" class="form-control" name="meet_total"></td>
-                           <td><input type="text" class="form-control" name=""></td>
-                           <td> 
-                               <select class="form-control" name=tel1>
-                                <option>없음</option>
-                                <option>본인포함 1명</option>
-                                <option>본인포함 2명</option>
-                                <option>본인포함 3명</option>
-					           </select>
+                           <td class="form-inline text-center" valign="middle"><input type="text" class="form-control" name="meet_total">명</td>
+                           
+                           
+                           <td class="form-inline text-center" valign="middle">
+						<script type="text/javascript">
+						    	$(function(){	
+						 	   	   $('input:radio[name="meet_charge"][value="무료"]').on('click',function(){
+						 	   		    $('input:text[name="meet_price"]').val('0');
+						 	   		    $('input:text[name="meet_price"]').attr("disabled",true);
+							   	   }); 
+							   	   
+							   	    $('input:radio[name="meet_charge"][value="유료"]').on('click',function(){
+							   	    	$('input:text[name="meet_price"]').val('');
+										$('input:text[name="meet_price"]').attr("disabled",false);
+								   });
+							   	});
+						    </script>
+    
+                             <input type="text" class="form-control" name="meet_price"/>원
                            </td>
                        </tr>
                     </table>
                 </td>
+                
             </tr>
             
+            <tr>
+            
+            
+            <tr>
+                <td class="col-sm-2" style="vertical-align:middle;">
+                    <h5>간단한 모임소개</h5>
+                </td>
+                <td class="col-sm-10" colspan=2 style="padding:20px 0 20px 0">
+                    <textarea class="form-control" name="meet_info" rows="8" cols="40" placeholder="모임 내용을 간단히 소개해주세요!" style="width: 100%"></textarea>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="3" class="col-sm-2">
+                    <h5>상세 내용</h5>
+                    <textarea class="form-control" name="meet_detail" rows="10" cols="45" style="width: 100%"></textarea>
+                </td>
+            </tr>
             
             <tr>
                 <td class="col-sm-2">
-                    <h4>간단한 모임소개</h4>
+                    <h5>신청 문의 연락처</h5>
                 </td>
-                <td class="col-sm-10">
-                    <textarea class="form-control" rows="5" cols="55" style="width: 100%"></textarea>
-                </td>
-            </tr>
-            
-            <tr>
-                <td colspan="2" class="col-sm-2">
-                    <h4>상세 내용</h4>
-                    <textarea class="form-control" rows="5" cols="55" style="width: 100%"></textarea>
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="col-sm-2">
-                    <h4>신청 문의 연락처</h4>
-                </td>
-                <td class="col-sm-10 form-inline" style="vertical-align: middle">
+                <td class="col-sm-10 form-inline" style="vertical-align: middle" colspan=2>
                    <label class="control-label">전화번호</label>
                     <select class="form-control" name=tel1 style="margin-left: 10px">
 						<option>010</option>
@@ -334,7 +339,7 @@
             </tr>
             
             <tr>
-                <td colspan="2" class="col-sm-12 text-center">
+                <td colspan="3" class="col-sm-12 text-center">
                     <input type="submit" class="btn btn-primary" value="개설완료" style="width: 12%">
                 </td>
             </tr>
