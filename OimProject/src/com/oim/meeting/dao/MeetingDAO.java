@@ -63,6 +63,8 @@ public class MeetingDAO {
 	      MeetingVO vo=new MeetingVO();
 	      SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
 	      try {
+	    	 session.update("meetingHitIncrement",meet_no);
+	    	 session.commit();
 	         vo=session.selectOne("meetingDetailData",meet_no);
 	         
 	      }catch(Exception ex) {

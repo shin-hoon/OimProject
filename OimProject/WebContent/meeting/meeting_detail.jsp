@@ -145,9 +145,9 @@
                   <span class="label label-danger" style="font-size:13px; margin-right:5px;">유료</span>
                </c:if>
             
-            <!-- 무료일경우 -->
-            <!--<span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>-->
             <span class="label label-primary" style="font-size:13px; margin-right:5px;" name="meet_cg">${vo.meet_cg }</span>
+            <span class="label label-warning" style="font-size:13px; margin-right:5px; float: right;" name="meet_hit">조회수 : ${vo.meet_hit}</span>
+            
             </div>
             <div class="left col-xs-3" style="border-right: 1px solid #999;">
                 <div class="left-detail">
@@ -228,7 +228,6 @@
                    <div id="map" style="width:100%;height:600px; margin: 0 auto;"></div>
                     
                         <script>
-                        var HOME_PATH = window.HOME_PATH || '.';
 
                         var oimlocation = new naver.maps.LatLng('${vo.meet_lat}', '${vo.meet_lng}'), //지도의 초기 중심 좌표
                             map = new naver.maps.Map('map', {
@@ -250,8 +249,8 @@
                             // 마커의 정보창 표시
                             var contentString = [
                                 '<div class="iw_inner" style="padding:10px;">',
-                                '   <h3>모임장소</h3>',
-                                '   <p>${vo.meet_loc }</p>',
+                                '   	<h3><img src="meeting/image/place.png" style="height: 30px; width: 30px;">모임장소</h3>',
+                                '		<p>${vo.meet_loc }</p>',
                                 '</div>'
                             ].join('');
 
