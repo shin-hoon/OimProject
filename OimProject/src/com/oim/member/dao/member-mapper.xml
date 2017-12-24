@@ -9,6 +9,4 @@
 INSERT INTO oim_member VALUES(#{om_id},#{om_pwd},#{om_name},#{om_birth},#{om_gender},#{om_tel},#{om_company},SYSDATE)";
 </insert>
 
-
-
 </mapper>

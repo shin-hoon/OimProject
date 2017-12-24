@@ -6,11 +6,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
 import com.oim.meeting.dao.MeetingDAO;
 import com.oim.meeting.dao.MeetingVO;
+import com.oim.member.dao.MemberVO;
 
 @Controller
 public class MeetingModel {
@@ -63,13 +65,23 @@ public class MeetingModel {
     }
     
     
-    @RequestMapping("meeting_insert.do")//모임개설
-    public String meeting_insert(HttpServletRequest req, HttpServletResponse res) {
+    @RequestMapping("meeting_insert.do")//모임개설 입력화면
+    public String meeting_insert(HttpServletRequest req, HttpServletResponse res/*, HttpSession session*/) {
     	
-    	
+/*    	String om_id=(String)session.getAttribute("om_id");
+    	MemberVO vo=MeetingDAO.meetingInsertData(Integer.parseInt(om_id));*/
     	
     	req.setAttribute("main_jsp", "../meeting/meeting_insert.jsp");
     	return "main/main.jsp";
+    }
+    
+    @RequestMapping("meeting_insert_ok.do") //모임개설완료
+    public String meeting_insertOK(HttpServletRequest req, HttpServletResponse res) {
+
+    	
+    	req.setAttribute("main_jsp","../meeting/meeting_insert_ok.jsp");
+    	return "main/main.jsp";		
+    	
     }
     
 }
