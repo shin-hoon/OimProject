@@ -39,12 +39,14 @@ public class SelectSaveModel {
 		   req.setAttribute("checkBox", checkBox);
 	   }
 	   
+	   req.setAttribute("num", num);
+	   req.setAttribute("totalCount", dao.totalCount);
 	   req.setAttribute("totalpage", totalpage);
 	   req.setAttribute("curpage", curpage);
 	   req.setAttribute("view", view);
    }
    
-   public void selectSave(HttpServletRequest req,HttpSession sess) throws UnsupportedEncodingException{
+   public void selectSave(HttpServletRequest req,HttpSession sess,HttpServletResponse res) throws UnsupportedEncodingException{
 	   try {
 		   req.setCharacterEncoding("EUC-KR");
 		   String cst_no = req.getParameter("cst_no");
@@ -54,6 +56,11 @@ public class SelectSaveModel {
 		   String cst_loc[] = req.getParameterValues("cst_loc");
 		   String cst_day[] = req.getParameterValues("cst_day");
 		   String cst_price[] = req.getParameterValues("cst_price");
+		   String saveNum=req.getParameter("saveNum");
+		   
+		   if(saveNum==null)	saveNum="1";
+		   int num=Integer.parseInt(saveNum);
+		   
 		   
 		   SelectSaveVO vo = new SelectSaveVO();
 		   
@@ -96,10 +103,22 @@ public class SelectSaveModel {
 		   
 		   SelectDAO dao = new SelectDAO();
 		   dao.selectSaveInsert(vo,id,Integer.parseInt(cst_no));
-		   
+		   res.sendRedirect("../selectsave/selectsave.jsp?saveNum="+saveNum);
 	   }catch(Exception e) {
 		   System.out.println(e.getMessage());
 	   }
+   }
+   
+   
+   public void selectDelete(HttpServletRequest req,HttpSession sess) throws UnsupportedEncodingException{ 
+	   SelectDAO dao=new SelectDAO();
+	   
+	   String id = (String)sess.getAttribute("id");
+	   String saveNum=req.getParameter("saveNum");
+	   
+	   int num=Integer.parseInt(saveNum);
+	   
+	   dao.selectSaveDelete(id,num);
    }
 }
 

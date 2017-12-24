@@ -18,6 +18,12 @@
       WHERE o.om_id=m.om_id AND m.meet_no=#{meet_no}              
    	</select>
    	
+   	<update id="meetingHitIncrement" parameterType="int">
+   		UPDATE meeting SET
+   		meet_hit=meet_hit+1
+   		WHERE meet_no = #{meet_no} 
+   	</update>
+   	
 	<select id="meetingTotalPage" resultType="int"> <!--총 페이지수 구하기  -->
 		SELECT CEIL(COUNT(*)/12) FROM meeting
 	</select>

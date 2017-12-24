@@ -145,9 +145,9 @@
                   <span class="label label-danger" style="font-size:13px; margin-right:5px;">유료</span>
                </c:if>
             
-            <!-- 무료일경우 -->
-            <!--<span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>-->
             <span class="label label-primary" style="font-size:13px; margin-right:5px;" name="meet_cg">${vo.meet_cg }</span>
+            <span class="label label-warning" style="font-size:13px; margin-right:5px; float: right;" name="meet_hit">조회수 : ${vo.meet_hit}</span>
+            
             </div>
             <div class="left col-xs-3" style="border-right: 1px solid #999;">
                 <div class="left-detail">
@@ -228,21 +228,45 @@
                    <div id="map" style="width:100%;height:600px; margin: 0 auto;"></div>
                     
                         <script>
-                            var map = new naver.maps.Map('map', {
-                                center: new naver.maps.LatLng('${vo.meet_lat}', '${vo.meet_lng}'), //지도의 초기 중심 좌표
+
+                        var oimlocation = new naver.maps.LatLng('${vo.meet_lat}', '${vo.meet_lng}'), //지도의 초기 중심 좌표
+                            map = new naver.maps.Map('map', {
+                                center: oimlocation.destinationPoint(0, 500),
                                 zoom: 8, //지도의 초기 줌 레벨
                                 minZoom: 1, //지도의 최소 줌 레벨
                                 zoomControl: true, //줌 컨트롤의 표시 여부
                                 zoomControlOptions: { //줌 컨트롤의 옵션
-                                    position: naver.maps.Position.TOP_RIGHT
+                                position: naver.maps.Position.TOP_RIGHT
                                 }
+                            }),
+                            marker = new naver.maps.Marker({ // 지도마커 생성
+                                map: map,
+                                position: oimlocation
                             });
-                            var marker = new naver.maps.Marker({
-                                position: new naver.maps.LatLng('${vo.meet_lat}', '${vo.meet_lng}'),
-                                map: map
-                            });
+                            
                             map.setOptions("mapTypeControl", true); //지도 유형 컨트롤의 표시 여부
+							
+                            // 마커의 정보창 표시
+                            var contentString = [
+                                '<div class="iw_inner" style="padding:10px;">',
+                                '   	<h3><img src="meeting/image/place.png" style="height: 30px; width: 30px;">모임장소</h3>',
+                                '		<p>${vo.meet_loc }</p>',
+                                '</div>'
+                            ].join('');
 
+	                        var infowindow = new naver.maps.InfoWindow({
+	                            content: contentString
+	                        });
+							
+	                        naver.maps.Event.addListener(marker, "click", function(e) {
+	                            if (infowindow.getMap()) {
+	                                infowindow.close();
+	                            } else {
+	                                infowindow.open(map, marker);
+	                            }
+	                        });
+	
+	                        infowindow.open(map, marker);
 
                             // 지도 인터랙션 옵션
                             $("#interaction").on("click", function(e) {
@@ -274,7 +298,7 @@
                                     $(this).addClass("control-on");
                                 }
                             });
-                                                        $("#min-max-zoom").on("click", function(e) {
+                            $("#min-max-zoom").on("click", function(e) {
                                 e.preventDefault();
 
                                 if (map.getOptions("minZoom") === 10) {

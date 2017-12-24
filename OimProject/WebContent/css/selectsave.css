@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+#SubContentsTab {
+	height: 61px;
+}
+#SubContentsTab ul::after {
+	content: " ";
+	display: block;
+	clear: both;
+}
+#SubContentsTab ul li {
+	float: left;
+	list-style:none;
+}
+#SubContentsTab ul li a {
+	display: block;
+	width: 325px;
+	height: 38px;
+	border-top: 1px solid #dce2e7;
+	border-right: 1px solid #dce2e7;
+	border-bottom: 2px solid #ffd100;
+	line-height: 38px;
+	font-weight: bold;
+	text-align: center;
+	color: #474747;
+	background-color: #fbfbfb;
+}
+#SubContentsTab ul li:first-child a {
+	border-left: 1px solid #dce2e7;
+}
+#SubContentsTab ul li a.on {
+	width: 324px;
+	height: 37px;
+	margin-left: -1px;
+	padding-bottom: 2px;
+	border: 2px solid #ffd100;
+	border-bottom: none;
+	background-color: #fff;
+}
+#SubContentsTab ul li:first-child a.on {
+	margin-left: 0px;
+}
