@@ -24,18 +24,50 @@
     
 </head>
 <body>	
-		<form method="post" action="../member/join_ok.jsp" name="frm">
+		<form method="post" action="meeting_insert_ok.do" enctype="multipart/form-data">
          <div class="container" style="margin-bottom: 50px;">
          <h2 style="width: 1100px; margin:20px auto">개설하기</h2>
 		<div class="row meetingRow" style="border: 1px solid #ddd">
 		
 		
 		<div class="col-sm-2">      
-		       <div class="col-sm-12 text-center" style="padding:0; margin-top:10px;">
+		       <div class="col-sm-12 text-center" style="padding:0; height:170px; margin-top:10px;">
 		        
-		           <img style="width: 100%; height: 100%; border: 1px solid #ddd" id="thumbPreview"   src="https://static.onoffmix.com/images2/default/thumbnail_null.jpg" default="https://static.onoffmix.com/images2/default/thumbnail_null.jpg" alt="대표이미지">
-		        <input style="margin: 10px" type="button" class="btn btn-primary" value="사진변경">
-		       
+		           <img src="https://static.onoffmix.com/images2/default/thumbnail_null.jpg" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
+		           default="https://static.onoffmix.com/images2/default/thumbnail_null.jpg" alt="대표이미지">
+		           
+		         <script type="text/javascript"> 
+		         	$(function(){ //사진변경 버튼 클릭했을때 file타입의 버튼 강제 클릭 이벤트 발생
+		         		$('.profile').on('click',function(){
+		         			$('#upload').trigger('click');
+		         		});
+		         		
+		         		function handleImgFileSelect(e){//사진 선택했을때 미리보기 기능
+		         			
+		         			var files=e.target.files;
+		         			var filesArr=Array.prototype.slice.call(files);
+		         			
+		         			filesArr.forEach(function(f){
+		         				
+		         				sel_file=f;
+		         				
+		         				var reader=new FileReader();
+		         				reader.onload=function(e){
+		         					$('#poster').attr("src",e.target.result);
+		         				}
+		         				reader.readAsDataURL(f);
+		         			});
+		         		}
+		         	
+		         		$('#upload').on('change',handleImgFileSelect);
+		         	});
+		         </script>  
+		      </div>
+		      
+		      <div class="col-sm-12 text-center">
+		        <input style="margin: 10px" type="button" class="btn btn-primary profile" value="사진변경">
+		        <input type="file" name="upload" id="upload" accept=".jpg, .jpeg, .png"
+		        style="display:none">
 		      </div>
 		</div>
 		
@@ -59,7 +91,7 @@
                    </script>
                    
                     <div class="btn-group" style="width:150px">
-                      <button class="btn btn-default btn-category" name="meet_cg" style="width:80%;">카테고리 선택</button>
+                      <button class="btn btn-default btn-category" data-toggle=dropdown name="meet_cg" style="width:80%;">카테고리 선택</button>
                       <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:20%; height:34px;">
                         <span class="caret"></span>
                       </button>
@@ -136,7 +168,7 @@
                     <div class="detailMap" id="detailMap">
                    <div id="map" style="width:100%; height:300px; margin: 0 auto;"></div>
                     
-                        <script>
+                        <script> //네이버지도
                             var map = new naver.maps.Map('map', {
                                 center: new naver.maps.LatLng(37.50960113, 127.05812649), //지도의 초기 중심 좌표
                                 zoom: 8, //지도의 초기 줌 레벨
