@@ -172,7 +172,9 @@
 				</span>
 				</div>
 			</div>
-			<div><input type="submit" value="검색저장"/></div>
+			<div class="text-center">
+				<input type="submit" value="검색저장"/>
+			</div>
 			</form>
 		</div>
 </body>
