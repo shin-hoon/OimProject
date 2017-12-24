@@ -1,1 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oim.application.dao.application-mapper">
+	<!-- 내가 개설한 모임 신청자 조회 -->
+	<select id="ApplicationListCheckData" resultType="ApplicationVO" parameterType="String">
+	
+	</select>
+	<!-- 신청 insert -->
+	<select id="ApplicationInsertData" parameterType="String">
+	</select>
+	<!-- 내가 신청한 모임 조회 -->
+	<select id="ApplicationMyListData" resultType="ApplicationVO" parameterType="String">
+	
+	</select>
+</mapper>
