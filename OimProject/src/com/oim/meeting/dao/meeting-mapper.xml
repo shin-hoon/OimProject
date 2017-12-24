@@ -22,4 +22,15 @@
 		SELECT CEIL(COUNT(*)/12) FROM meeting
 	</select>
 	
+	<select id="meetingInsertData" resultType="com.oim.member.dao.MemberVO" parameterType="String"> <!-- 모임개설하는 화면에서 작성자 정보 불러오기 -->
+		SELECT om_id, om_tel FROM oim_member
+		WHERE om_id=#{om_id} 
+		
+	</select>
+	
+	<insert id="meetingInsertOK" parameterType="meetingVO"> <!--모임개설 완료 insert하기-->
+		INSERT INTO meeting VALUES(meeting_no_seq.nextval, #{meet_charge}, #{meet_cg}, #{meet_poster}, #{om_id}, #{meet_subject}, #{meet_start}, #{meet_end},
+		#{meet_loc}, #{meet_total}, #{meet_limit}, #{meet_info}, #{meet_price}, 0, #{meet_detail}, #{meet_lat}, #{meet_lng}, SYSDATE, 0)
+	</insert>
+	
 </mapper>
