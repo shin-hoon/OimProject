@@ -15,15 +15,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<title>Insert title here</title>
+	<link rel="stylesheet" href="../css/selectsave.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-	
-	
-	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	
-	
 	<link href="../css/oim_style.css" rel="stylesheet">
 	<link rel="stylesheet" href="../css/bootstrap.css">
 	
@@ -53,6 +48,19 @@
 <script type="text/javascript">
 	 /*체크박스 이벤트 스크립트*/
     $(function () {
+    	 $('#DeleteBtn').click(function(){
+    	 	var id = $('#id').val();
+    		var saveNum = $('#saveNum').val();
+    		$.ajax({
+    			type:'post',
+    			url:'../selectsave/selectDelete.jsp',
+    			data:{"id":id,"saveNum":saveNum},
+    			success:function(response){
+    				alert("맞춤모임"+saveNum+" 삭제 되었습니다.");
+    				location.href="../selectsave/selectsave.jsp";
+    		 	}
+    		 });
+    	 });
        
     $('.button-checkbox').each(function () {
         // Settings
@@ -120,16 +128,38 @@
     
 </head>
 <body>
+	<div class="container">
+		<div id="SubContentsTab" >
+			<ul >
+				<li>
+					<a href="../selectsave/selectsave.jsp?saveNum=1" ${num==1?'class="on"':''}>
+						<span id="selectSave1">맞춤모임1</span>
+					</a>
+				</li>
+				<li>
+					<a href="../selectsave/selectsave.jsp?saveNum=2" ${num==2?'class="on"':''}>
+						<span id="selectSave2">맞춤모임2</span>
+					</a>
+				</li>
+				<li>
+					<a href="../selectsave/selectsave.jsp?saveNum=3" ${num==3?'class="on"':''}>
+						<span id="selectSave3">맞춤모임3</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<c:if test="${view==0}">
-	<jsp:include page="../selectsave/selecNosave.jsp"></jsp:include>
+	<jsp:include page="../selectsave/selectNoSave.jsp"></jsp:include>
 	</c:if>
+	
 	<c:if test="${view!=0}">
 	<c:forEach var="vo" items="${checkBox}">
 	<div class="container">
 		<c:set var="cst_cg" value="${fn:split(vo.cst_cg,',')}"/>
 		<form method="post" action="../selectsave/selectsave_ok.jsp">
 		<div class="col-sm-12">
-			<input type="hidden" name="cst_no" value="1" />
+			<input type="hidden" name="cst_no" value="${view}" />
 			<input type="text" name="cst_subject" size="90" maxlength="15" value="${vo.subject}" />
 		</div>
 		<div>
@@ -413,13 +443,28 @@
 				</span>
 				</div>
 			</div>
-			<div><input type="submit" value="검색저장"/></div>
+			<div class="text-center">
+				<input type="submit" value="검색저장"/>
+				<input type="button" id="DeleteBtn" value="검색삭제"/>
+				<input type="hidden" id="id" value="${id}">
+				<input type="hidden" name="saveNum" id="saveNum" value="${num}">
+			</div>
 			</form>
 		</div>
 	</c:forEach>
 	</c:if>			
 	
-		<div class="container" style="margin-top:5%">
+	
+	
+		<div class="container col-lg-12 text-center" style="margin-top:5%">
+			<c:if test="${view==0}">
+				<b style="font-size:40px">전체 모임정보 : ${totalCount}건</b>
+			</c:if>
+			<c:if test="${view!=0}">
+				<b style="font-size:40px">검색된 모임정보 : ${totalCount}건</b>
+			</c:if>
+		</div>
+		<div class="container">
 			<div class="col-lg-12 text-center">
 				<ul class="thumbnails">
 				<c:forEach var="vo" items="${list}" >

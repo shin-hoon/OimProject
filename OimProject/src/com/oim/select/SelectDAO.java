@@ -10,6 +10,7 @@ public class SelectDAO {
 	   private Connection conn;
 	   private PreparedStatement ps;
 	   private final String URL="jdbc:oracle:thin:@211.238.142.223:1521:ORCL";
+	   static public int totalCount = 0;
 	   
 	   public SelectDAO()
 	   {
@@ -251,10 +252,10 @@ public class SelectDAO {
 			   }
 			   
 			   
-			   System.out.println(sql);
 			   ps=conn.prepareStatement(sql);
 			   rs=ps.executeQuery();
 			   int i=1;
+			   totalCount = 0;
 			   while(rs.next())
 			   {
 				   SelectListVO vo=new SelectListVO();
@@ -278,7 +279,7 @@ public class SelectDAO {
 				   vo.setMeet_regdate(rs.getDate(18));
 				   vo.setMeet_hit(rs.getInt(19));
 				   vo.setRownum(rs.getInt(20));
-	
+				   totalCount++;
 				   if(i>=start && i<=end) {
 					   list.add(vo);
 				   }
@@ -420,6 +421,24 @@ public class SelectDAO {
 			return check;
 		}
 	   
+	   public void selectSaveDelete(String id, int num) {
+			try {
+				getConnection();
+				String sql = "DELETE FROM cst_meeting "
+			   			   + "WHERE om_id = ? AND cst_no = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setInt(2, num);
+				ps.executeUpdate();
+				ps.close();
+			}catch(Exception e) {
+				System.out.println("selectSaveDelete : "+e.getMessage());
+			}
+			finally {
+				disConnection();
+			}
+		}
+	   
 	   
 	   public int TotalPage() {
 			int total=0;
@@ -431,6 +450,15 @@ public class SelectDAO {
 				ResultSet rs = ps.executeQuery();
 				rs.next();
 				total=rs.getInt(1);
+				rs.close();
+				ps.close();
+				
+				sql = "SELECT COUNT(*) FROM meeting";
+				
+				ps = conn.prepareStatement(sql);
+				rs = ps.executeQuery();
+				rs.next();
+				totalCount=rs.getInt(1);
 				rs.close();
 				ps.close();
 			}catch(Exception e) {
@@ -586,7 +614,6 @@ public class SelectDAO {
 			   
 			   
 			   sql += ")";
-			   System.out.println(sql);
 			   ps=conn.prepareStatement(sql);
 			   rs=ps.executeQuery();
 			   rs.next();
