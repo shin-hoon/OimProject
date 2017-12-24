@@ -10,6 +10,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.oim.member.dao.MemberVO;
+
 public class MeetingDAO {
 	private static SqlSessionFactory ssf;
 	//XML 파싱내용을 전송
@@ -75,6 +77,38 @@ public class MeetingDAO {
 	      return vo;
 	   }
 	
+	public static MemberVO meetingInsertData(int om_id) { //모임개설화면에서 사용자 정보 보여주기
+		
+		MemberVO vo=new MemberVO();
+		SqlSession session=ssf.openSession();
+		try {
+			vo=session.selectOne("meetingInsertData",om_id);
+			
+		}catch(Exception ex) {
+			System.out.println("meetingInsertData: "+ex.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+		return vo;
+	}
+	
+	public static void meetingInsertOk(MeetingVO vo) { //모임개설 insert
+		
+		SqlSession session=ssf.openSession(true); //오토커밋 적용
+		try {
+			session.insert("meetingInsertOk",vo);
+			
+		}catch(Exception ex) {
+			System.out.println("meetingInsertOk: "+ex.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+	}
+
 	   
 //	   public MeetingDAO() { //데이터  파싱에서 DB에 insert하는 용도로 작성한 임시코드
 //	      try {
