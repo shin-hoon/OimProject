@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="container">
-		<form method="post" action="../selectsave/selectsave_ok.jsp">
+		<form method="post" action="selectsave/selectsave_ok.jsp">
 		<div class="col-sm-12">
 			<input type="hidden" name="cst_no" value="${num}"/>
 			<input type="text" name="cst_subject" size="90" maxlength="15" value="맞춤모임 이름을 입력해주세요.(최대15글자)" />
@@ -174,6 +174,8 @@
 			</div>
 			<div class="text-center">
 				<input type="submit" value="검색저장"/>
+				<input type="hidden" id="id" value="${id}">
+				<input type="hidden" name="saveNum" id="saveNum" value="${num}">
 			</div>
 			</form>
 		</div>

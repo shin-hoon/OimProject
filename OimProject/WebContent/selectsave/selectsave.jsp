@@ -15,12 +15,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<title>Insert title here</title>
-	<link rel="stylesheet" href="../css/selectsave.css">
+	<link rel="stylesheet" href="css/selectsave.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-	<link href="../css/oim_style.css" rel="stylesheet">
-	<link rel="stylesheet" href="../css/bootstrap.css">
+	<!-- <link href="../css/oim_style.css" rel="stylesheet"> -->
+	<!-- <link rel="stylesheet" href="../css/bootstrap.css"> -->
 	
 	<style type="text/css">
 		.label {
@@ -53,11 +53,11 @@
     		var saveNum = $('#saveNum').val();
     		$.ajax({
     			type:'post',
-    			url:'../selectsave/selectDelete.jsp',
+    			url:'selectsave/selectDelete.jsp',
     			data:{"id":id,"saveNum":saveNum},
     			success:function(response){
     				alert("맞춤모임"+saveNum+" 삭제 되었습니다.");
-    				location.href="../selectsave/selectsave.jsp";
+    				location.href="selectsave.do";
     		 	}
     		 });
     	 });
@@ -132,17 +132,17 @@
 		<div id="SubContentsTab" >
 			<ul >
 				<li>
-					<a href="../selectsave/selectsave.jsp?saveNum=1" ${num==1?'class="on"':''}>
+					<a href="selectsave.do?saveNum=1" ${num==1?'class="on"':''}>
 						<span id="selectSave1">맞춤모임1</span>
 					</a>
 				</li>
 				<li>
-					<a href="../selectsave/selectsave.jsp?saveNum=2" ${num==2?'class="on"':''}>
+					<a href="selectsave.do?saveNum=2" ${num==2?'class="on"':''}>
 						<span id="selectSave2">맞춤모임2</span>
 					</a>
 				</li>
 				<li>
-					<a href="../selectsave/selectsave.jsp?saveNum=3" ${num==3?'class="on"':''}>
+					<a href="selectsave.do?saveNum=3" ${num==3?'class="on"':''}>
 						<span id="selectSave3">맞춤모임3</span>
 					</a>
 				</li>
@@ -157,7 +157,7 @@
 	<c:forEach var="vo" items="${checkBox}">
 	<div class="container">
 		<c:set var="cst_cg" value="${fn:split(vo.cst_cg,',')}"/>
-		<form method="post" action="../selectsave/selectsave_ok.jsp">
+		<form method="post" action="selectsave/selectsave_ok.jsp">
 		<div class="col-sm-12">
 			<input type="hidden" name="cst_no" value="${view}" />
 			<input type="text" name="cst_subject" size="90" maxlength="15" value="${vo.subject}" />
@@ -509,28 +509,28 @@
 	
 	<div class="container text-center">
 		<ul class="pagination">
-       		<li><a href="../selectsave/selectsave.jsp?page=${curpage<11?curpage:curpage-10 }">◀◀</a></li>
-       		<li><a href="../selectsave/selectsave.jsp?page=${curpage<2?curpage:curpage-1 }">◀</a></li>
+       		<li><a href="selectsave.do?page=${curpage<11?curpage:curpage-10}&saveNum=${num}">◀◀</a></li>
+       		<li><a href="selectsave.do?page=${curpage<2?curpage:curpage-1}&saveNum=${num}">◀</a></li>
        				
-       		<fmt:parseNumber var="num" value="${curpage/10}" integerOnly="true"/>
-       		<c:set var="num" value="${num<=0?1:num*10}"/>  
-       		<c:forEach var="i"  begin="${num}" end="${num==1?num+8:num+9}">
+       		<fmt:parseNumber var="num1" value="${curpage/10}" integerOnly="true"/>
+       		<c:set var="num1" value="${num1<=0?1:num1*10}"/>  
+       		<c:forEach var="i"  begin="${num1}" end="${num==1?num+8:num+9}">
        			<c:choose>
        				<c:when test="${i > totalpage }"></c:when>
        				<c:when test="${i==curpage}">
 	    				<li class="active">
-	    					<a href="selectsave.jsp?page=${i}">	${i} </a>
+	    					<a href="selectsave.do?page=${i}&saveNum=${num}">	${i} </a>
 	    				</li>
        				</c:when>
        				<c:when test="${i <= totalpage}">
        					<li>
-       						<a href="selectsave.jsp?page=${i }"> ${i} </a>
+       						<a href="selectsave.do?page=${i}&saveNum=${num}"> ${i} </a>
        					</li>
        				</c:when>
        			</c:choose>
        		</c:forEach>
-       		<li><a href="../selectsave/selectsave.jsp?page=${curpage<totalpage?curpage+1:curpage}">▶</a></li>
-            <li><a href="../selectsave/selectsave.jsp?page=${curpage<=totalpage-10?curpage+10:curpage}">▶▶</a></li>
+       		<li><a href="selectsave.do?page=${curpage<totalpage?curpage+1:curpage}&saveNum=${num}">▶</a></li>
+            <li><a href="selectsave.do?page=${curpage<=totalpage-10?curpage+10:curpage}&saveNum=${num}">▶▶</a></li>
 		</ul>
 	</div>
 	<div class="container" style="height:300px;"></div>
