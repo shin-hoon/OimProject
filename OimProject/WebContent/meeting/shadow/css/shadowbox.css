@@ -34,7 +34,7 @@
   height: 100%;
   display: none;
   visibility: hidden;
-  z-index: 999;
+  z-index: 99999;
 }
 body > #sb-container {
   /* use position:fixed in modern browsers */
