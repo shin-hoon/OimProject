@@ -3,6 +3,8 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.oim.meeting.dao.MeetingVO" alias="MeetingVO"/>
+		<typeAlias type="com.oim.application.dao.ApplicationVO" alias="ApplicationVO"/>
+		<typeAlias type="com.oim.member.dao.MemberVO" alias="MemberVO"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -18,5 +20,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/oim/meeting/dao/meeting-mapper.xml"/>
+		<mapper resource="com/oim/application/dao/application-mapper.xml"/>
+		<mapper resource="com/oim/member/dao/member-mapper.xml"/>
 	</mappers>
 </configuration>
