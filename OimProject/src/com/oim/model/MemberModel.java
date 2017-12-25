@@ -61,12 +61,9 @@ public class MemberModel {
 			
 		}
 		
-		/*System.out.println(vo.getCount());*/
 		
 		req.setAttribute("count", vo.getCount());
-		
-	
-		
+
 		
 		return "member/login_ok.jsp";
 	}
