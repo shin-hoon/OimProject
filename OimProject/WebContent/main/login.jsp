@@ -232,104 +232,177 @@ function ok(om_id){
 </script>
 </head>
 <body>
-
-<jsp:include page="${login_jsp}"></jsp:include>
-
-	
-<!--===사이트 로고 ====-->
-	<div class="container oim-logo">
-		<div class="oim-logo-img">
-		<!-- 오임 로고 이미지 -->
-			<a href="main.do"><img alt="오늘의 모임" src="img/oim.png" class="img-responsive"></a>
-		</div>
-		
-		<!-- 검색창 -->
-		<div class="col-md-6 oim-sc">
-        	<div id="custom-search-input">
-        		<div class="input-group col-md-12">
-                    <input type="text" class="form-control input-lg" placeholder="모임을 입력하세요" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
+<!-- 노랭색 네비바 -->
+	<div class="add_section" >
+         <div class="container" style="line-height:30px;">
+               <li class="section-li" style="margin-left:10px;">
+               <button type="button" class="oim_btn_yw" data-toggle="modal" data-target="#join">
+               	회원가입</button></li>
+               <li class="section-li" style="margin-right:10px;">
+               <button type="submit" class="oim_btn_yw" data-toggle="modal" data-target="#login">
+               	로그인</button></li>
+         </div>
 	</div>
-<!-- 사이트 로고 끝 -->
 	
-	
-	
-<!--==== 네비바 위에 회색선 ====-->
-	<!-- <hr class="oim-hr"> -->
-<!--===흰색 네비바====== -->
-	<nav class="navbar navbar-default oim-nb" style="border:0;">
-		
-		<div class="container">
-			<div class="navbar-header page-scroll">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand page-scroll" href="#"></a>
-			</div>
-			
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<!-- 메뉴 왼쪽으로 -->
-				<ul class="nav navbar-nav navbar-left">
+	<!-- 로그인 모달 팝업 -->
+	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header oim_modal">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		<h3 class="modal-title" id="myModalLabel">로그인</h3>
+	      </div>
+	      <div class="modal-body" style="margin:0px auto;">
+					<table class="w3-table w3-hoverable" >
+					<tr>
+						<td width=30% style="text-align: right;">아이디<br><span>(E-mail)</span></td>
+						<td width=70% >
+						<input type="text" name="id" size=20>
+						<span class="help-block">이메일을 입력하세요</span>
+						</td>
+					</tr>
+					<tr>
+						<td width=30% style="text-align: right;">비밀번호</td>
+						<td width=70% >
+						<input type="text" name=pwd size=20 required>
+						</td>
+					</tr>
 
-					<li>
-						<a href="main.do"><span class="glyphicon glyphicon-home"></span></a>
-					</li>
-					<li>
-						<a href="meeting_list.do">모임</a>
-					</li>
-					<li>
-						<a href="selectsave.do">맞춤모임</a>
-					</li>
-					<li class="boardmenu">
-		                  <a href="#" >커뮤니티</a>
-		                  
-		                  	<ul class="board">
-		                     <li>공지사항</li>
-		                     <li>문의게시판(Q&A)</li>
-		                     <li>자유게시판(소통)</li>
-		                  	</ul>
-               </li>
-				</ul>
-			<!-- 메뉴 오른쪽 -->
-				<ul class="nav navbar-nav navbar-right">
-					<li class="disabled"> <!-- 비활성화: 모임 개설 시에만 나타남  -->
-						<a href="#">모임 개설하기</a>
-					</li>
-					<li class="disabled"> <!-- 비활성화: 모임 개설 시에만 나타남  -->
-						<a href="#">모임관리</a>
-					</li>
-					<li>
-						<a href="main.jsp?mode=5">마이페이지</a>
-					</li>
-				</ul>
+					<tr>
+						<td colspan="2" class="text-center" style="margin:auto; text-align:center;">
+						<button type="submit" value=joinok class="btn btn-mg btn-danger"> 로그인
+						<span class="glyphicon glyphicon-ok" ></span></button>
+						<button type="submit" value=joinok class="btn btn-mg oim_btn_gr"> 취소
+						<span class="glyphicon glyphicon-remove" ></span></button>
+						
+						</td>
+					</tr>
+					</table>
+				</div>
 			</div>
+	      </div>
 		</div>
-	</nav>	<!-- /.container-fluid -->
-	
-	<!-- =====맨위로 올라가기 버튼======== -->
-		<p id="back-top">
-			<a href="#top"><i class="fa fa-angle-up"></i></a>
-		</p>
-	
- 	<jsp:include page="${main_jsp}"></jsp:include>
-					
-	
-<!-- =======푸터 ========-->
-		<footer class="footer" style="position:relative">
-		    <div class="container text-center">
-          		<p>오늘의  모임 </p>
-    		</div>
-         </footer>
-       
-</body>
-</html>
+		<!-- 로그인 모달 끝 -->
+		
+		
+<!-- 회원가입 모달 팝업 -->
+	<div class="modal fade" id="join" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header oim_modal">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		
+		<h3 class="modal-title" id="myModalLabel">회원가입</h3>
+	      </div>
+	      <div class="modal-body">
+	      <form method="post" action="../member/join_modal_ok.jsp" id="frm">   <!--name:키값  ic:클래스랑같은것 -->
+					<table class="w3-table w3-hoverable">
+					<tr>
+						<td width=20%>아이디<br><span>(E-mail)</span></td>
+						<td width=80%>
+						<input type="text" name="om_id" size=30 required readonly>
+						
+						<input type="button" value="중복체크" class="btn btn-sm btn-primary" id="idcheck" data-toggle="modal" data-target="#idcheck-modal">
+						<span class="help-block">이메일을 입력하세요</span>
+						</td>
+					</tr>
+					<tr>
+						<td width=30% class="add_td">비밀번호</td>
+						<td width=70% >
+						<input id="password" type="password" name=om_pwd size=30 required>
+						</td>
+					</tr>
+					<tr>
+						<td width=20% class="text-right">비밀번호 확인</td>
+						<td width=80% class="text-left">
+						<input id="check_password" type="password" name=om_pwd size=30 required>
+						
+						<span class="help-block"><font name="check" size="2" color="red"></font> </span>
+						</td>
+					</tr>
+					<tr>
+						<td width=20% class="text-right">이름</td>
+						<td width=80% class="text-left">
+						<input type="text" name=om_name size=15>
+						</td>
+					</tr>
+					<tr>
+						<td width=20% class="text-right">생년월일</td>
+						<td width=80% class="text-left">
+						<input type="date" name=om_birth size=20>
+						</td>
+					</tr>
+					<tr>
+						<td width=20% class="text-right">성별</td>
+						<td width=80% class="text-left">
+						<input type="radio" name=om_gender value="여자" checked>여자
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name=om_gender value="남자">남자
+						</td>
+					</tr>
+					<tr>
+						<td width=20% class="text-right">전화번호</td>
+						<td width=80% class="text-left">
+						<select name=tel1 style="height:30px;">
+							<option>010</option>
+							<option>011</option>
+							<option>017</option>
+						</select> -
+						<input type="text" name=tel2 size=7> -
+						<input type="text" name=tel3 size=7>
+						</td>
+					</tr>
+					<tr>
+						<td width=20% class="text-right">소속명</td>
+						<td width=80% class="text-left">
+						<input type="text" name=om_company size=20>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text-center" style="margin:auto; text-align:center;">
+						<button type="submit" value=joinok class="btn btn-mg btn-danger"> 회원가입
+						<span class="glyphicon glyphicon-ok" ></span></button>
+						<button type="submit" value=joinok class="btn btn-mg oim_btn_gr"> 가입취소
+						<span class="glyphicon glyphicon-remove" ></span></button>
+						
+						</td>
+					</tr>
+					</table>
+					</form>
+				</div>
+			</div>
+	      </div>
+		</div>
+		<!----- 회원가입 모달 끝 ---->
+		
+		<!-- ----중복체크모달 -->
+		<!-- 모달 팝업 -->
+		<div class="modal fade" id="idcheck-modal" tabindex="10" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	  		<div class="modal-dialog">
+	    		<div class="modal-content" style="width:60%;">
+	      			<div class="modal-header oim_modal">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+		
+						<h3 class="modal-title">중복체크</h3>
+	      			</div>
+	      			<div class="modal-body">
+						<table class="table table-hover" id="res_table">
+							<tr>
+								<td class="text-left">
+									ID:<input type="text" name="id" size=12 id="id">
+									<input type=button value="중복체크" class="btn btn-info btn-sm" id="checkBtn">
+								</td>
+							</tr>
+							<tr>
+								<td class="text-center" id="res">
+									<!--위에서 확인버튼이 눌리면 사용가능한지 불가능한지 나타낸다  -->
+								</td>
+							</tr>
+							<tr>
+								<td class="text-center" id="res_ok">
+							</tr>
+						</table>
+					</div>
+				</div>
+	      	</div>
+		</div>

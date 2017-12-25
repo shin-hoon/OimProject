@@ -12,6 +12,8 @@ public class MainModel {
 	@RequestMapping("main.do")
 	public String main_page(HttpServletRequest req, HttpServletResponse res) {
 		
+		
+		req.setAttribute("login_jsp","login.jsp");
 		req.setAttribute("main_jsp","default.jsp");
 		return "main/main.jsp";
 	}
