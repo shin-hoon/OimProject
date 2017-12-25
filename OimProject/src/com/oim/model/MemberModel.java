@@ -39,8 +39,11 @@ public class MemberModel {
 		String pwd= req.getParameter("pwd");
 		
 		int count=MemberDAO.OimLogincheck(id);  //	1)아이디 존재 여부 확인
-		MemberVO vo=new MemberVO();
 		
+		System.out.println("1) 아이디존재여부 count:"+count);
+		
+		
+		MemberVO vo=new MemberVO();
 		if(count==0)  		
 		{
 			vo.setCount(1);   //아이디가 존재하지 않는다면    count=1
@@ -48,8 +51,6 @@ public class MemberModel {
 		else				//아이디가 존재한다면
 		{
 			vo=MemberDAO.OimLogin(id);
-			
-		} 
 			
 			if(pwd.equals(vo.getOm_pwd()))  //비밀번호 까지 같다면
 			{
@@ -61,22 +62,20 @@ public class MemberModel {
 				vo.setCount(2);	 //					count=2				
 			}
 			
-			//결과값을 추가
-			req.setAttribute("id", vo.getOm_id());
-			req.setAttribute("name", vo.getOm_name());
-			req.setAttribute("tel", vo.getOm_tel());
-			req.setAttribute("gender", vo.getOm_gender());
-			req.setAttribute("company", vo.getOm_company());
-			req.setAttribute("regdate", vo.getOm_regdate());
-			req.setAttribute("count", vo.getCount());
-
-			
-			return "member/login_ok.jsp";
-			
 		}
 		
+		//결과값을 추가
+		req.setAttribute("id", vo.getOm_id());
+		req.setAttribute("name", vo.getOm_name());
+		req.setAttribute("tel", vo.getOm_tel());
+		req.setAttribute("gender", vo.getOm_gender());
+		req.setAttribute("company", vo.getOm_company());
+		req.setAttribute("regdate", vo.getOm_regdate());
+		req.setAttribute("count", vo.getCount());
+		System.out.println("req.setAttribute(count):"+req.getAttribute("count"));
+		return "member/login_ok.jsp";
 		
-	
+	}
 	
 	
 	
