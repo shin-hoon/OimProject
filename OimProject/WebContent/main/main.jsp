@@ -162,61 +162,7 @@ $( document ).ready( function() {
 
 </style>
 
-<!-- 로그인 스트립트  -->
-<script type="text/javascript">
-$(function(){
-	$('#loginBtn').click(function(){
-		var id=$('#id').val();
-		if(id.trim()=="")
-			{
-				$('#id').focus();
-				return;
-			}
-		else
-		{
-			$('#result').text(" ");
-		}
-		var pwd=$('#pwd').val();
-		if(pwd.trim()=="")
-			{
-				$('#pwd').focus();
-				return;
-			}
-		else
-		{
-			$('#result').text(" ");
-		}
-		
-		//값이 정상으로 들어왔으면
-		$.ajax({
-			type:'post',
-			url:'Oim_Login.do',
-			data:{"id":id,"pwd":pwd},
-			success:function(response){
-				var count=response.trim();
-				if(count==1)
-				{
-					$('#result').text("아이디가 존재하지 않습니다.");
-					$('#id').val("");
-					$('#pwd').val("");
-					$('#id').focus();
-				}
-				else if(count==2)
-				{
-					$('#result').text("비밀번호가 틀립니다.");
-					$('#pwd').val("");
-					$('#pwd').focus();
-				}
-				else
-				{
-					
-					location.href="main.do";
-				}
-			}
-		});
-	});
-});
-</script>
+
 
 </head>
 <body>

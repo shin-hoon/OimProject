@@ -37,6 +37,8 @@ public class MemberModel {
 		String pwd= req.getParameter("pwd");
 		
 		
+		
+		
 		int count=MemberDAO.OimLogincheck(id);  //	1)아이디 존재 여부 확인
 		MemberVO vo=new MemberVO();
 		
@@ -59,12 +61,14 @@ public class MemberModel {
 			
 		}
 		
-		System.out.println(vo.getCount());
+		/*System.out.println(vo.getCount());*/
 		
 		req.setAttribute("count", vo.getCount());
 		
+	
 		
-		return "main/main.jsp";
+		
+		return "member/login_ok.jsp";
 	}
 	
 }
