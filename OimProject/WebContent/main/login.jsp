@@ -175,7 +175,7 @@ $(function(){
 	
 	<c:if test="${sessionScope.id!=null }"> <!-- 세션에 id가 저장되어있으면 보여지는 네비바 -->
 	<div class="add_section" >
-		 <form method="post" action="../member/logout_ok.jsp">
+		 <form method="post" action="member/logout_ok.jsp">
          <div class="container" style="line-height:30px;">
                <li class="section-li" style="margin-left:10px;">
                <input type=submit class="oim_btn_yw" value="로그아웃" id="logoutBtn">
