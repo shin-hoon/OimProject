@@ -25,6 +25,7 @@
 				   <div class="col-sm-12" style="margin-top:30px;">
 						<a href="#" class="btn btn-primary" style="width:100px; margin-right:20px">홈</a>
 						<a href="#" class="btn btn-primary" style="width:100px">모임관리</a>
+
 					</div>
 			</div>
 		</div>

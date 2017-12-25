@@ -398,13 +398,20 @@
                               
                               <fmt:parseNumber var="percent" value="${(vo.meet_total-vo.meet_limit)/vo.meet_total*100}" integerOnly="true"/>
                               <div class="progress" style="margin-bottom:0; height:10px"> <!-- 얼마나 신청했는지 %값 계산해서 progress bar형태로 표시 -->
-                              	  <c:if test="${percent eq 100}">
+                              	  
+                              	  <c:if test="${percent >= 0 && percent <= 30}">
+                                  <div class="progress-bar progress-bar-success" role="progressbar" style="width:${percent}%"></div>
+                                  </c:if>
+                                  
+                              	  <c:if test="${percent > 30 && percent <= 80}">
+                                  <div class="progress-bar progress-bar-primary" role="progressbar" style="width:${percent}%"></div>
+                                  </c:if>
+                                  
+                              	  <c:if test="${percent > 80}">
                               	  <div class="progress-bar progress-bar-danger" role="progressbar" style="width:${percent}%"></div>
                               	  </c:if>
                               	  
-                              	  <c:if test="${percent ne 100}">
-                                  <div class="progress-bar progress-bar-primary" role="progressbar" style="width:${percent}%"></div>
-                                  </c:if>
+                              	  
                             </div>
                          </div>
                       </div>

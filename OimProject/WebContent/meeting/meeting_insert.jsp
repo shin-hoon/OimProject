@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,12 +25,12 @@
     
 </head>
 <body>	
-		<form method="post" action="meeting_insert_ok.do" enctype="multipart/form-data">
+		
          <div class="container" style="margin-bottom: 50px;">
          <h2 style="width: 1100px; margin:20px auto">개설하기</h2>
 		<div class="row meetingRow" style="border: 1px solid #ddd">
 		
-		
+		<form method="post" action="meeting_insert_ok.do"> <!-- enctype="multipart/form-data" -->
 		<div class="col-sm-2">      
 		       <div class="col-sm-12 text-center" style="padding:0; height:170px; margin-top:10px;">
 		        
@@ -84,14 +85,17 @@
                   <script>
                       $(function(){ //dropdown버튼을 select형식으로 만드는 스크립트코드
                         $('.dropdown-menu li > a').bind('click', function (e) {
-                            var cgText = $(this).text();
-                            $('button.btn-category').text(cgText);
+                            var value = $(this).text();
+                            $('input.btn-category').val(value);
+                            $('input.meet_cg').val(value);
                         });
                        });
                    </script>
                    
                     <div class="btn-group" style="width:150px">
-                      <button class="btn btn-default btn-category" data-toggle=dropdown name="meet_cg" style="width:80%;">카테고리 선택</button>
+                      <input type="button" class="btn btn-default btn-category" data-toggle=dropdown name="category" value="카테고리 선택" style="width:80%;"/>
+					  <input type="hidden" class="meet_cg" name="meet_cg"> <!--실제 카테고리 값이 담기는 부분  -->
+
                       <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:20%; height:34px;">
                         <span class="caret"></span>
                       </button>
@@ -143,7 +147,8 @@
                             timePicker24Hour: true,
                             timePickerIncrement: 1,
                             locale: {
-                                format: '  YYYY-MM-DD HH:mm  ',
+                                format:'YYYY-MM-DD HH:mm',
+                                separator:' ~ '
                             }
                         });
                     });
@@ -158,10 +163,10 @@
                
                <td class="col-sm-9">
                    <div class="form group form-inline" style="margin-bottom:15px; vertical-align: middle">
-                       <input type="text" class="form-control" size="50">
+                       <input type="text" class="form-control" name="meet_loc" size="50">
                        <input type="button" class="btn btn-default" value="검색">
                         <label style="font-weight: normal">
-                          <input type="checkbox" name="meet_loc">장소없음/미정
+                          <input type="checkbox">장소없음/미정
                         </label>
                    </div>
                    
@@ -378,8 +383,7 @@
         </table>
           
       </div>
-			
-		</form>
+        </form>
 	</div>
   </div>
 </body>
