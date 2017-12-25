@@ -166,9 +166,8 @@ $( document ).ready( function() {
 </head>
 <body>
 
-<jsp:include page="${login_jsp}"></jsp:include>
+<jsp:include page="login.jsp"></jsp:include>
 
-	
 <!--===사이트 로고 ====-->
 	<div class="container oim-logo">
 		<div class="oim-logo-img">
