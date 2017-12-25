@@ -161,6 +161,7 @@
 <div class="jumbotron">
   <div class="container text-left">
   	<div class="row">  
+  	<form method="post" action="meeting_find.do">
              <table class="table table-bordered "> <!-- 체크박스 테이블 시작 -->
                  <tr>
                     <td class="col-sm-1" style="text-align:center; vertical-align: middle">
@@ -169,60 +170,60 @@
                      <td class="col-sm-11">
                           <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">교육</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="교육" />
                     </span>
                         
                          <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">강연</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="강연"/>
                     </span>
                      <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">세미나/컨퍼런스</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="세미나/컨퍼런스"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">문화/예술</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="문화/예술"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">방송/연예</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="방송/연예"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">취미활동</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="취미활동"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">소모임/친목행사</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="소모임/친목행사"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">공모전</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="공모전"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">전시/박람회</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="전시/박람회"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">패션/뷰티</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="패션/뷰티"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">이벤트/파티</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="이벤트/파티"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">여행</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="여행"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">후원금 모금</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="후원금 모금"/>
                     </span>  
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">기타</button>
-                        <input type="checkbox" name="category" class="hidden" />
+                        <input type="checkbox" name="category" class="hidden" value="기타"/>
                     </span>      
                         
                      </td>
@@ -236,39 +237,39 @@
                      <td class="col-sm-11">
                          <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">서울</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="loc" class="hidden" value="서울"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">부산/울산/경남</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="loc" class="hidden" value="부산|울산|경남"/>
                     </span>
                      <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">인천/경기</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="loc" class="hidden" value="인천|경기"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">대전/충청/세종</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="loc" class="hidden" value="대전|충청|세종"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">광주/전라</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="loc" class="hidden" value="광주|전라"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">강원</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="loc" class="hidden" value="강원"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">대구/경북</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="loc" class="hidden" value="대구|경북"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">제주</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="loc" class="hidden" value="제주"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">기타지역</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="loc" class="hidden" value="기타지역"/>
                     </span>
                         
                      </td>
@@ -281,11 +282,11 @@
                      <td class="col-sm-11">
                             <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">주중</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="week" class="hidden" value="월|화|수|목|금"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">주말</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="week" class="hidden" value="토|일"/>
                     </span>   
                      </td>
                  </tr>
@@ -297,27 +298,27 @@
                      <td class="col-sm-11">
                           <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">무료</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="price" class="hidden" value="0"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary"> 10000원</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="price" class="hidden" value="10000"/>
                     </span>
                      <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">10000원 ~ 25000원</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="price" class="hidden" value="10000 AND 25000"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">25000원 ~ 40000원</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="price" class="hidden" value="25000 AND 40000"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">40000원 ~ 99000원</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="price" class="hidden" value="40000 AND 99000"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">99000원 ~</button>
-                        <input type="checkbox" name="loc" class="hidden" />
+                        <input type="checkbox" name="price" class="hidden" value="99000"/>
                     </span>
                      </td>
                  </tr>
@@ -330,14 +331,19 @@
                      <td>
                          <div class="input-daterange input-group" id="datepicker">
                             <input type="text" class="input-sm form-control" name="from" placeholder="From date"/>
-                            <span class="input-group-addon">to</span>
+                            <span class="input-group-addon">&nbsp; ~ &nbsp;</span>
                             <input type="text" class="input-sm form-control" name="to" placeholder="To date"/>
                          </div>
                     </td>
                  </tr>
+                 
+                 <tr>
+                 	<td colspan=2 class="text-center">
+                    <input type="submit" class="btn btn-primary" value="검색하기">
+                    </td>
+                 </tr>
              </table> <!-- 체크박스 테이블 끝 -->
-             
-
+             </form>
         </div>
  	</div>
   </div>
