@@ -1,9 +1,8 @@
 package com.oim.member.dao;
 
 import java.io.Reader;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -26,14 +25,14 @@ public class MemberDAO {
 	
 	//=========회원가입
     //아이디중복체크
-  	public int OimIdcheck(String id) {
+  	public static int OimIdcheck(String id) {
   		int count=0;
   		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
   		try {
-  			count=session.selectOne("memberIdcheck");
+  			count=session.selectOne("OimIdcheck",id);
   					
   		}catch(Exception ex) {
-  			System.out.println("memberIdcheck: "+ex.getMessage());
+  			System.out.println("OimIdcheck: "+ex.getMessage());
   		}finally {
   			if(session!=null)
   				session.close();
@@ -43,13 +42,13 @@ public class MemberDAO {
   	
   	
   	//회원가입
-  	public void OimJoin(MemberVO vo) {
+  	public static void OimJoin(MemberVO vo) {
   		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
   		
   		
   		try
   		{
-  			session.insert("oim_member_Join",vo);
+  			session.insert("OimJoin",vo);
   		}
   		catch(Exception ex) {
   			System.out.println(ex.getMessage());
@@ -59,6 +58,47 @@ public class MemberDAO {
   			
   		}
   	}
+  	
+  	//로그인) 아이디 존재 체크
+  	public static int OimLogincheck(String id)
+  	{
+  		int count=0;
+  		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+  		try {
+  			count=session.selectOne("OimLogincheck",id);
+  			
+  					
+  		}catch(Exception ex) {
+  			System.out.println("OimLogincheck: "+ex.getMessage());
+  		}finally {
+  			if(session!=null)
+  				session.close();
+  		}
+  		return count;
+  		
+  	}
+  	
+  	//로그인
+  	public static MemberVO OimLogin(String id)
+	{
+		MemberVO vo=new MemberVO();
+		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+		try {
+				vo=session.selectOne("OimLogin",id);
+				
+			}
+			
+		catch(Exception ex)
+		{
+			System.out.println("OimLogin: "+ex.getMessage());
+		}
+		finally
+		{
+			if(session!=null)
+  				session.close();
+		}
+		return vo;
+	}
 
 	/*//로그인 
     		public MemberVO OimLogin(String id,String pwd)

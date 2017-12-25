@@ -6,22 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		
-		<!-- 기존 부트스트랩(항상가져오는 3줄)  --->
-  		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-  		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-   		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-  		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-  		
-  		<!-- 모달   -->
-		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-		<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
-		<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> <!-- class="w3-table w3-hoverable" -->
-		
-		<!-- 비밀번호 확인 스트립 -->
-		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <title>Insert title here</title>
 <style type="text/css">
@@ -113,7 +97,12 @@ function ok(om_id){
   }); //#check_password.keyup
  });
 </script>
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ ----------->
+
 </head>
+
+
 <body>
 <!-- 노랭색 네비바 -->
 	<div class="add_section" >
@@ -136,36 +125,38 @@ function ok(om_id){
 		<h3 class="modal-title" id="myModalLabel">로그인</h3>
 	      </div>
 	      <div class="modal-body" style="margin:0px auto;">
+	      			<form>
 					<table class="w3-table w3-hoverable" >
 					<tr>
 						<td width=30% style="text-align: right;">아이디<br><span>(E-mail)</span></td>
 						<td width=70% >
-						<input type="text" name="id" size=20>
+						<input type="text" name="id" size=20 id="id">
 						<span class="help-block">이메일을 입력하세요</span>
 						</td>
 					</tr>
 					<tr>
 						<td width=30% style="text-align: right;">비밀번호</td>
 						<td width=70% >
-						<input type="text" name=pwd size=20 required>
+						<input type="text" name=pwd size=20 id="pwd">
 						</td>
 					</tr>
 
 					<tr>
 						<td colspan="2" class="text-center" style="margin:auto; text-align:center;">
-						<button type="submit" value=joinok class="btn btn-mg btn-danger"> 로그인
+						<button type=button class="btn btn-mg btn-danger" id="loginBtn"> 로그인
 						<span class="glyphicon glyphicon-ok" ></span></button>
-						<button type="submit" value=joinok class="btn btn-mg oim_btn_gr"> 취소
+						<button class="btn btn-mg oim_btn_gr" data-dismiss="modal"> 취소
 						<span class="glyphicon glyphicon-remove" ></span></button>
-						
+						<div id="result" style="color:black"></div>
 						</td>
 					</tr>
 					</table>
+					</form>
 				</div>
 			</div>
 	      </div>
 		</div>
-		<!-- 로그인 모달 끝 -->
+		<!--  로그인 모달 끝 -->
 		
 		
 <!-- 회원가입 모달 팝업 -->
@@ -289,3 +280,5 @@ function ok(om_id){
 				</div>
 	      	</div>
 		</div>
+		</body>
+		</html>

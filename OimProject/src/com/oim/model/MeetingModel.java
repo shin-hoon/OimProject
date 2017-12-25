@@ -38,7 +38,7 @@ public class MeetingModel {
 		req.setAttribute("totalpage", totalpage);
 		req.setAttribute("curpage", curpage);
 		req.setAttribute("list", list);
-		req.setAttribute("login_jsp","../main/login.jsp");   		//로그인 페이지 추가
+		
 		req.setAttribute("main_jsp", "../meeting/meeting_list.jsp");
 		return "main/main.jsp";
 	}
@@ -50,7 +50,7 @@ public class MeetingModel {
        
        req.setAttribute("vo", vo);
        
-       req.setAttribute("login_jsp","../main/login.jsp");   		//로그인 페이지 추가
+      
        req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
        return "main/main.jsp";
     }
@@ -73,7 +73,7 @@ public class MeetingModel {
 /*    	String om_id=(String)session.getAttribute("om_id");
     	MemberVO vo=MeetingDAO.meetingInsertData(Integer.parseInt(om_id));*/
     	
-    	req.setAttribute("login_jsp","../main/login.jsp");   		//로그인 페이지 추가
+    	
     	req.setAttribute("main_jsp", "../meeting/meeting_insert.jsp");
     	return "main/main.jsp";
     }
@@ -118,7 +118,7 @@ public class MeetingModel {
     	System.out.println("모임소개: "+meet_info);
     	System.out.println("상세내용: "+meet_detail);
     	
-    	req.setAttribute("login_jsp","../main/login.jsp");   		//로그인 페이지 추가
+    	
     	req.setAttribute("main_jsp","../meeting/meeting_insert_ok.jsp");
     	return "main/main.jsp";		
     	

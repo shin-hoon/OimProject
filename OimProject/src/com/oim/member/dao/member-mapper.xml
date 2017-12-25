@@ -2,11 +2,16 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.oim.member.dao.member-mapper">
-<select id="OimIdcheck" resultType="int" parameterType="String"> <!-- 아이디 중복체크ㅡ -->
+<select id="OimIdcheck" resultType="int" parameterType="String"> <!-- 회원가입) 아이디 중복체크ㅡ -->
 	SELECT COUNT(*) FROM oim_member WHERE om_id=#{om_id}
 </select>
 <insert id="OimJoin" parameterType="MemberVO"> <!-- 회원가입 -->
-INSERT INTO oim_member VALUES(#{om_id},#{om_pwd},#{om_name},#{om_birth},#{om_gender},#{om_tel},#{om_company},SYSDATE)";
+	INSERT INTO oim_member VALUES(#{om_id},#{om_pwd},#{om_name},#{om_birth},#{om_gender},#{om_tel},#{om_company},SYSDATE)
 </insert>
-
+<select id="OimLogincheck" resultType="int" parameterType="String"> <!-- 로그인) 아이디 존재 여부 -->
+	SELECT COUNT(*) FROM oim_member WHERE om_id=#{om_id}
+</select>
+<select id="OimLogin" resultType="MemberVO" parameterType="String">
+	SELECT om_id,om_pwd,om_name,om_birth,om_gender,om_tel,om_company,om_regdate FROM oim_member WHERE om_id=#{om_id}
+</select>
 </mapper>
