@@ -470,7 +470,7 @@
 				<c:forEach var="vo" items="${list}" >
 						<div class="col-sm-3">
 						<div class="thumbnail">
-							<a href="../meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster}" ></a>
+							<a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster}" ></a>
 							<div class="caption">
 								<div>
 									<li class="li_add">
@@ -496,7 +496,7 @@
 									${vo.meet_subject }
 								</p>
 								<p align="center">
-									<a href="../meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="btn btn-primary btn-block">신청하기</a>
+									<a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="btn btn-primary btn-block">신청하기</a>
 								</p>
 							</div>
 						</div>
