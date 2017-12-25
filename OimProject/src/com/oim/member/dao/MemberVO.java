@@ -59,7 +59,15 @@ public void setOm_gender(String om_gender) {
 	this.om_gender = om_gender;
 }
 public String getOm_tel() {
-	return tel1+"-"+tel2+"-"+tel3;
+	
+	if(tel2==null || tel3==null) {	//초기 DB에 저장되어있는 정보일 경우
+		return om_tel;
+	}
+	else {							
+		return tel1+"-"+tel2+"-"+tel3;
+	}
+	//return tel1+"-"+tel2+"-"+tel3;
+	//return om_tel;
 }
 public void setOm_tel(String om_tel) {
 	this.om_tel = om_tel;

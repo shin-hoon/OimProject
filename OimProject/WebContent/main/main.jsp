@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -244,7 +245,7 @@ $( document ).ready( function() {
 						<a href="#">모임관리</a>
 					</li>
 					<li>
-						<a href="main.jsp?mode=5">마이페이지</a>
+						<a href="Oim_mypage.do">마이페이지</a>
 					</li>
 				</ul>
 			</div>
@@ -260,7 +261,7 @@ $( document ).ready( function() {
 					
 	
 <!-- =======푸터 ========-->
-		<footer class="footer" style="position:relative">
+		<footer class="footer" style="position:relative; bottom:0;">
 		    <div class="container text-center">
           		<p>오늘의  모임 </p>
     		</div>

@@ -12,10 +12,11 @@
 			session.setAttribute("tel", request.getAttribute("tel"));
 			session.setAttribute("gender", request.getAttribute("gender"));
 			session.setAttribute("company", request.getAttribute("company"));
-			session.setAttribute("regdate", request.getAttribute("regdate").toString());
+			session.setAttribute("regdate", request.getAttribute("regdate"));
 	} 
 	 
 	System.out.println("session.getAttribute(id):"+session.getAttribute("id"));
+	System.out.println("session.getAttribute(regdate):"+session.getAttribute("regdate"));
 	
 %>
 <%=count %>

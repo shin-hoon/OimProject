@@ -77,6 +77,12 @@ public class MemberModel {
 		
 	}
 	
+	@RequestMapping("Oim_mypage.do")
+	public String Oim_mypage(HttpServletRequest req, HttpServletResponse res)
+	{
+		req.setAttribute("main_jsp","../member/mypage.jsp");
+		return "main/main.jsp";
+	}
 	
 	
 	

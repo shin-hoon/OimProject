@@ -15,7 +15,7 @@ public class SelectSaveModel {
 	@RequestMapping("selectsave.do")
 	public String main_page(HttpServletRequest req, HttpServletResponse res) {
 		
-		req.setAttribute("login_jsp","../main/login.jsp");   		//로그인 페이지 추가
+		
 		req.setAttribute("main_jsp","../selectsave/selectsave.jsp");
 		return "main/main.jsp";
 	}

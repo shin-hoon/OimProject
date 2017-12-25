@@ -1,16 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="com.oim.member.dao.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="com.oim.member.dao.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>¸¶ÀÌÆäÀÌÁö</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>ë§ˆì´íŽ˜ì´ì§€</title>
 
-<!--tab-pane Ãß°¡  -->
+<!--tab pane ì¶”ê°€-->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script> 
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<!--Ãß°¡  ³¡-->
+
 
 
 
@@ -18,12 +19,12 @@
 
 .tab-pane { color:black;}
 
-/*Å×ÀÌºí½ºÅ¸ÀÏ: ¼±Áö¿ì±â*/
+/*í…Œì´ë¸”ìŠ¤íƒ€ì¼: ì„ ì§€ìš°ê¸°*/
 table td:last-child {border-right:none;}
 table tr:last-child td {border-bottom:none;}
-/* Å×ÀÌºí½ºÅ¸ÀÏ->¼±Áö¿ì±â  ³¡ */
+/* í…Œì´ë¸”ìŠ¤íƒ€ì¼->ì„ ì§€ìš°ê¸°  ë */
 
-/*Å×ÀÌºí ¾ÆÀÌÄÜ  */
+/*í…Œì´ë¸” ì•„ì´ì½˜  */
 .oim-icon{
    margin-right:2%;
    float:left;
@@ -63,89 +64,89 @@ body{
    
    
    
-<!-- Ä«Å×°í¸® ÅÇ -->
+<!-- ì¹´í…Œê³ ë¦¬ íƒ­ -->
    <div class="container">
-	   	<!-- Mypage °ËÁ¤ ·Î°í ³×ºñ -->
+	   	<!-- Mypage ê²€ì • ë¡œê³  ë„¤ë¹„ -->
 	   <nav class="mypage" style="background-color:#2E2E2E; height:80px;">
 	      <div class="container text-left">
 	         <h2 style="color:#ffffff;"><b>Mypage</b></h2>
 	      </div>
 	   </nav>
-	<!-- Mypage °ËÁ¤ ·Î°í ³×ºñ  ³¡-->
+	<!-- Mypage ê²€ì • ë¡œê³  ë„¤ë¹„  ë-->
       <div class="tabtable" > 
         <ul class="nav nav-tabs" ><br>
-          <li class="active"><a href="#tab1" data-toggle="tab">È¨</a></li>
-          <li><a href="#tab2" data-toggle="tab">È¸¿øÁ¤º¸¼öÁ¤</a></li>
-          <li><a href="#tab3" data-toggle="tab">½ÅÃ»³»¿ª</a></li>
-          <li><a href="#tab4" data-toggle="tab">Âò³»¿ª</a></li>
-          <li><a href="#tab5" data-toggle="tab">È¸¿øÅ»Åð</a></li>
+          <li class="active"><a href="#tab1" data-toggle="tab">í™ˆ</a></li>
+          <li><a href="#tab2" data-toggle="tab">íšŒì›ì •ë³´ìˆ˜ì •</a></li>
+          <li><a href="#tab3" data-toggle="tab">ì‹ ì²­ë‚´ì—­</a></li>
+          <li><a href="#tab4" data-toggle="tab">ì°œë‚´ì—­</a></li>
+          <li><a href="#tab5" data-toggle="tab">íšŒì›íƒˆí‡´</a></li>
         </ul>
          <div class="tab-content" style="border: 1px solid #eee">
         
-<!--ÅÇÀ» ÅÇ°¡´ÉÇÏ°Ô ÇÏ·Á¸é, ¸ðµç ÅÇ¸¶´Ù °íÀ¯ÇÑ IDÀÇ .tab-paneÀ» ¸¸µé°í ÀÌ ¸ðµÎ¸¦ .tab-content¸ð ¹­´Â´Ù -->      
-<!-- ¸¶ÀÌÆäÀÌÁö È¨ -->
+<!--íƒ­ì„ íƒ­ê°€ëŠ¥í•˜ê²Œ í•˜ë ¤ë©´, ëª¨ë“  íƒ­ë§ˆë‹¤ ê³ ìœ í•œ IDì˜ .tab-paneì„ ë§Œë“¤ê³  ì´ ëª¨ë‘ë¥¼ .tab-contentëª¨ ë¬¶ëŠ”ë‹¤ -->      
+<!-- ë§ˆì´íŽ˜ì´ì§€ í™ˆ -->
            <div class="tab-pane active" id="tab1"> 
              <div class="oim-mypage home">
-                <span class="oim-icon glyphicon glyphicon-user"></span>${sessionScope.name }´ÔÀÇ ¸¶ÀÌÆäÀÌÁöÀÔ´Ï´Ù
+                <span class="oim-icon glyphicon glyphicon-user"></span>${sessionScope.name }ë‹˜ì˜ ë§ˆì´íŽ˜ì´ì§€ìž…ë‹ˆë‹¤
              </div>
-         <!-- È¸¿øÁ¤º¸ Å×ÀÌºí -->
+         <!-- íšŒì›ì •ë³´ í…Œì´ë¸” -->
              <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                <tr>
                   <td width=25% class="text-right">
-                     <span class="oim-icon glyphicon glyphicon-envelope"></span>ÀÌ¸ÞÀÏ
+                     <span class="oim-icon glyphicon glyphicon-envelope"></span>ì´ë©”ì¼
                   </td>
                   <td width=75% class="text-center" id="email">${sessionScope.id }</td>
                </tr>
                <tr>
                   <td width=25% class="text-right">
-                     <span class="oim-icon glyphicon glyphicon-earphone"></span>ÈÞ´ëÀüÈ­
+                     <span class="oim-icon glyphicon glyphicon-earphone"></span>íœ´ëŒ€ì „í™”
                   </td>
                   <td width=75% class="text-center" id="tel">${sessionScope.tel }</td>                  
                </tr>
                <tr>
                   <td width=25% class="text-right">
-                     <span class="oim-icon glyphicon glyphicon-heart"></span>¼ºº°
+                     <span class="oim-icon glyphicon glyphicon-heart"></span>ì„±ë³„
                   </td>
                   <td width=75% class="text-center" id="gender">${sessionScope.gender }</td>                  
                </tr>
                <tr>
                   <td width=25% class="text-right">
-                     <span class="oim-icon glyphicon glyphicon-calendar"></span>°¡ÀÔÀÏ
+                     <span class="oim-icon glyphicon glyphicon-calendar"></span>ê°€ìž…ì¼
                   </td>
-                  <td width=75% class="text-center" id="regdate">${sessionScope.regdate }</td>                  
+                  <td width=75% class="text-center" id="regdate"><fmt:formatDate value="${sessionScope.regdate }" pattern="yyyy-MM-dd"/></td>                  
                </tr>
             </table>
           </div>
           
           
-<!-- È¸¿øÁ¤º¸¼öÁ¤ -->
+<!-- íšŒì›ì •ë³´ìˆ˜ì • -->
           <div class="tab-pane" id="tab2">
              <div class="oim-mypage update">
-               <span class=" oim-icon glyphicon glyphicon-pencil"></span><h4>È¸¿øÁ¤º¸ ¼öÁ¤</h4>
+               <span class=" oim-icon glyphicon glyphicon-pencil"></span><h4>íšŒì›ì •ë³´ ìˆ˜ì •</h4>
                <h6>
-                  ¾ÆÀÌµð·Î »ç¿ëµÇ´Â ÀÌ¸ÞÀÏÀº º¯°æÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.
+                  ì•„ì´ë””ë¡œ ì‚¬ìš©ë˜ëŠ” ì´ë©”ì¼ì€ ë³€ê²½í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
                   <br><br><br>
-                  <ºñ¹Ð¹øÈ£ º¯°æ½Ã À¯ÀÇ»çÇ×>
+                  <ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì‹œ ìœ ì˜ì‚¬í•­>
                   <br><br>
-                  - °³ÀÎÁ¤º¸º¸È£¸¦ À§ÇØ ÃÖ¼Ò 3°³¿ù ÀÌ³»¿¡´Â Á¤±âÀûÀ¸·Î ºñ¹Ð¹øÈ£¸¦ º¯°æÇØ ÁÖ½Ã´Â °Ô ÁÁ½À´Ï´Ù.<br>
-                  - ºñ¹Ð¹øÈ£´Â ½¬¿î¹øÈ£³ª Å¸ »çÀÌÆ®¿Í °°À» °æ¿ì µµ¿ëµÇ±â ½±½À´Ï´Ù.<br>
-                  - ÁÖ¹Î¹øÈ£,ÀüÈ­¹øÈ£,»ýÀÏ µî °³ÀÎÁ¤º¸¿Í ¿¬°üµÈ ¹®ÀÚ³ª ¼ýÀÚ´Â º¸¾È»ó À§ÇèÀÌ ³ôÀ¸¹Ç·Î »ç¿ëÀ» ÀÚÁ¦ÇØ ÁÖ¼¼¿ä.<br>   
+                  - ê°œì¸ì •ë³´ë³´í˜¸ë¥¼ ìœ„í•´ ìµœì†Œ 3ê°œì›” ì´ë‚´ì—ëŠ” ì •ê¸°ì ìœ¼ë¡œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•´ ì£¼ì‹œëŠ” ê²Œ ì¢‹ìŠµë‹ˆë‹¤.<br>
+                  - ë¹„ë°€ë²ˆí˜¸ëŠ” ì‰¬ìš´ë²ˆí˜¸ë‚˜ íƒ€ ì‚¬ì´íŠ¸ì™€ ê°™ì„ ê²½ìš° ë„ìš©ë˜ê¸° ì‰½ìŠµë‹ˆë‹¤.<br>
+                  - ì£¼ë¯¼ë²ˆí˜¸,ì „í™”ë²ˆí˜¸,ìƒì¼ ë“± ê°œì¸ì •ë³´ì™€ ì—°ê´€ëœ ë¬¸ìžë‚˜ ìˆ«ìžëŠ” ë³´ì•ˆìƒ ìœ„í—˜ì´ ë†’ìœ¼ë¯€ë¡œ ì‚¬ìš©ì„ ìžì œí•´ ì£¼ì„¸ìš”.<br>   
                </h6>
             </div>
              
-         <!-- È¸¿øÁ¤º¸ Å×ÀÌºí -->
+         <!-- íšŒì›ì •ë³´ í…Œì´ë¸” -->
             <form method="post" action="../member/update_ok.jsp">
                 <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                   <tr>
                      <td width=30% class="text-right">
-                        <span class="oim-icon glyphicon glyphicon-envelope"></span>ÀÌ¸ÞÀÏ
+                        <span class="oim-icon glyphicon glyphicon-envelope"></span>ì´ë©”ì¼
                      </td>
-                     <!-- dbµé¾î¿Í¾ßÇÔ  -->
+                     <!-- dbë“¤ì–´ì™€ì•¼í•¨  -->
                      <td width=70% class="text-center" name="id">${sessionScope.id }</td>
                   </tr>
                   <tr>
                      <td width=30% class="text-right">
-                        <span class="oim-icon glyphicon glyphicon-earphone"></span>ÈÞ´ëÀüÈ­
+                        <span class="oim-icon glyphicon glyphicon-earphone"></span>íœ´ëŒ€ì „í™”
                      </td>
                      <td width=70% class="text-center">
                         <input type=text name=tel size=30 id="tel" value=${sessionScope.tel }>
@@ -153,26 +154,26 @@ body{
                   </tr>
                   <tr>
                      <td width=30% class="text-right">
-                        <span class="oim-icon glyphicon glyphicon-lock"></span>»õ·Î¿î ºñ¹Ð¹øÈ£ ÀÔ·Â 
+                        <span class="oim-icon glyphicon glyphicon-lock"></span>ìƒˆë¡œìš´ ë¹„ë°€ë²ˆí˜¸ ìž…ë ¥ 
                      </td>
                      <td width=70% class="text-center">
                         <input type=text name=pwd size=30 id="pwd"><br>
-                        <h6 style="color:#DF013A;">*ºñ¹Ð¹øÈ£´Â 8~24±ÛÀÚ ÀÌ³»·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä.</h6>
+                        <h6 style="color:#DF013A;">*ë¹„ë°€ë²ˆí˜¸ëŠ” 8~24ê¸€ìž ì´ë‚´ë¡œ ìž…ë ¥í•´ ì£¼ì„¸ìš”.</h6>
                      </td>                  
                   </tr>
                   <tr>
                      <td width=30% class="text-right">
-                        <span class="oim-icon glyphicon glyphicon-lock"></span>ºñ¹Ð¹øÈ£ ÀçÀÔ·Â
+                        <span class="oim-icon glyphicon glyphicon-lock"></span>ë¹„ë°€ë²ˆí˜¸ ìž¬ìž…ë ¥
                      </td>
                      <td width=70% class="text-center">
                         <input type=text name=pwd_ok size=30 id="pwd_ok">
-                        <h6 style="color:#DF013A;">*»õ·Î¿î ºñ¹Ð¹øÈ£ º¯°æÈ®ÀÎÀ» À§ÇÏ¿© ´Ù½Ã ÇÑ¹ø ÀÔ·ÂÇØ ÁÖ¼¼¿ä.</h6>
+                        <h6 style="color:#DF013A;">*ìƒˆë¡œìš´ ë¹„ë°€ë²ˆí˜¸ ë³€ê²½í™•ì¸ì„ ìœ„í•˜ì—¬ ë‹¤ì‹œ í•œë²ˆ ìž…ë ¥í•´ ì£¼ì„¸ìš”.</h6>
                      </td>                  
                   </tr>
                   <tr>
                      <td colspan="2" class="text-center">
-                        <input type="submit" class="btn btn-info btn-sm" value="¼öÁ¤ÇÏ±â">
-                        <input type=button class="btn btn-danger btn-sm" value="Ãë¼Ò" onclick="javascript:history.back()">
+                        <input type="submit" class="btn btn-info btn-sm" value="ìˆ˜ì •í•˜ê¸°">
+                        <input type=button class="btn btn-danger btn-sm" value="ì·¨ì†Œ" onclick="javascript:history.back()">
                      </td>
                     </tr>
                </table>
@@ -181,105 +182,105 @@ body{
           
           
           
-<!-- ½ÅÃ»³»¿ª -->       
+<!-- ì‹ ì²­ë‚´ì—­ -->       
           <div class="tab-pane" id="tab3">
              <div class="oim-mypage out">
-               <span class=" oim-icon glyphicon glyphicon-bookmark"></span><h4>½ÅÃ»³»¿ª</h4>
-               <!-- ½ÅÃ»³»¿ª Ã£±â¹öÆ° -->
+               <span class=" oim-icon glyphicon glyphicon-bookmark"></span><h4>ì‹ ì²­ë‚´ì—­</h4>
+               <!-- ì‹ ì²­ë‚´ì—­ ì°¾ê¸°ë²„íŠ¼ -->
                 <div class="input-group" style="width:30%; float:right">
                   <input type="text" class="form-control" placeholder="Search for...">
                   <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Ã£±â</button>
+                    <button class="btn btn-default" type="button">ì°¾ê¸°</button>
                   </span>
                 </div><!-- /input-group -->
             </div>
             <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                <thead>
-                  <tr><!-- ÇÑÁÙÀ» ÀÇ¹Ì -->
-                     <th width=10% class="text-center">¹øÈ£</th><!-- ¿­ -->
-                     <th width=65% class="text-center">¸ðÀÓ</th>
-                     <th width=25% class="text-center">°ü¸®</th>
+                  <tr><!-- í•œì¤„ì„ ì˜ë¯¸ -->
+                     <th width=10% class="text-center">ë²ˆí˜¸</th><!-- ì—´ -->
+                     <th width=65% class="text-center">ëª¨ìž„</th>
+                     <th width=25% class="text-center">ê´€ë¦¬</th>
                   </tr>
                </thead>
                <tbody>
                   <tr>
-                     <td class="text-center" style="vertical-align:middle;">¹øÈ£</td>
+                     <td class="text-center" style="vertical-align:middle;">ë²ˆí˜¸</td>
                      <td>
                         <div style="float:left; width:40%;">
                            <img src="img/img1.jpg" style="width:100%; height:100%; float:left; display:">
                         </div>
                         <div class="oim-meet" style="padding:3%; width:60%; float:left;">
-                           <h4><b>Job¾Æ¶ó! ITÃë¾÷</b></h4>
-                           <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">¹«·á</span></li>
-                               <li class="li_add"><span class="label label-primary" style="font-size:13px;">¸ðÀÓÁ¾·á</span></li>
+                           <h4><b>Jobì•„ë¼! ITì·¨ì—…</b></h4>
+                           <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">ë¬´ë£Œ</span></li>
+                               <li class="li_add"><span class="label label-primary" style="font-size:13px;">ëª¨ìž„ì¢…ë£Œ</span></li>
                                <br><br><br><br>
-                                              ¸ðÀÓ±â°£:<br>
-                                              ¸ðÀÓÀå¼Ò:<br>
+                                              ëª¨ìž„ê¸°ê°„:<br>
+                                              ëª¨ìž„ìž¥ì†Œ:<br>
                         </div>
                      </td>
                      <td class="text-center"  style="margin-tob:10%; vertical-align:bottom">
-                        <input type=button class="btn btn-success btn-sm" value="½ÅÃ»È®ÀÎ">
-                        <input type=button class="btn btn-danger btn-sm" value="½ÅÃ»Ãë¼Ò">
+                        <input type=button class="btn btn-success btn-sm" value="ì‹ ì²­í™•ì¸">
+                        <input type=button class="btn btn-danger btn-sm" value="ì‹ ì²­ì·¨ì†Œ">
                      </td>
                   </tr>
                   <tr>
-                     <td class="text-center" style="vertical-align:middle;">¹øÈ£</td>
+                     <td class="text-center" style="vertical-align:middle;">ë²ˆí˜¸</td>
                      <td>
                         <div style="float:left; width:40%;">
                            <img src="img/img1.jpg" style="width:100%; height:100%; float:left; display:">
                         </div>
                         <div class="oim-meet" style="padding:3%; width:60%; float:left;">
-                           <h4><b>Job¾Æ¶ó! ITÃë¾÷</b></h4>
-                           <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">¹«·á</span></li>
-                               <li class="li_add"><span class="label label-primary" style="font-size:13px;">¸ðÀÓÁ¾·á</span></li>
+                           <h4><b>Jobì•„ë¼! ITì·¨ì—…</b></h4>
+                           <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">ë¬´ë£Œ</span></li>
+                               <li class="li_add"><span class="label label-primary" style="font-size:13px;">ëª¨ìž„ì¢…ë£Œ</span></li>
                                <br><br><br><br>
-                                              ¸ðÀÓ±â°£:<br>
-                                              ¸ðÀÓÀå¼Ò:<br>
+                                              ëª¨ìž„ê¸°ê°„:<br>
+                                              ëª¨ìž„ìž¥ì†Œ:<br>
                         </div>
                      </td>
                      <td class="text-center"  style="margin-tob:10%; vertical-align:bottom">
-                        <input type=button class="btn btn-success btn-sm" value="½ÅÃ»È®ÀÎ">
-                        <input type=button class="btn btn-danger btn-sm" value="½ÅÃ»Ãë¼Ò">
+                        <input type=button class="btn btn-success btn-sm" value="ì‹ ì²­í™•ì¸">
+                        <input type=button class="btn btn-danger btn-sm" value="ì‹ ì²­ì·¨ì†Œ">
                      </td>
                   </tr>
                   <tr>
-                     <td class="text-center" style="vertical-align:middle;">¹øÈ£</td>
+                     <td class="text-center" style="vertical-align:middle;">ë²ˆí˜¸</td>
                      <td>
                         <div style="float:left; width:40%;">
                            <img src="img/img1.jpg" style="width:100%; height:100%; float:left; display:">
                         </div>
                         <div class="oim-meet" style="padding:3%; width:60%; float:left;">
-                           <h4><b>Job¾Æ¶ó! ITÃë¾÷</b></h4>
-                           <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">¹«·á</span></li>
-                               <li class="li_add"><span class="label label-primary" style="font-size:13px;">¸ðÀÓÁ¾·á</span></li>
+                           <h4><b>Jobì•„ë¼! ITì·¨ì—…</b></h4>
+                           <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">ë¬´ë£Œ</span></li>
+                               <li class="li_add"><span class="label label-primary" style="font-size:13px;">ëª¨ìž„ì¢…ë£Œ</span></li>
                                <br><br><br><br>
-                                              ¸ðÀÓ±â°£:<br>
-                                              ¸ðÀÓÀå¼Ò:<br>
+                                              ëª¨ìž„ê¸°ê°„:<br>
+                                              ëª¨ìž„ìž¥ì†Œ:<br>
                         </div>
                      </td>
                      <td class="text-center"  style="margin-tob:10%; vertical-align:bottom">
-                        <input type=button class="btn btn-success btn-sm" value="½ÅÃ»È®ÀÎ">
-                        <input type=button class="btn btn-danger btn-sm" value="½ÅÃ»Ãë¼Ò">
+                        <input type=button class="btn btn-success btn-sm" value="ì‹ ì²­í™•ì¸">
+                        <input type=button class="btn btn-danger btn-sm" value="ì‹ ì²­ì·¨ì†Œ">
                      </td>
                   </tr>
                   <tr>
-                     <td class="text-center" style="vertical-align:middle;">¹øÈ£</td>
+                     <td class="text-center" style="vertical-align:middle;">ë²ˆí˜¸</td>
                      <td>
                         <div style="float:left; width:40%;">
                            <img src="img/img1.jpg" style="width:100%; height:100%; float:left; display:">
                         </div>
                         <div class="oim-meet" style="padding:3%; width:60%; float:left;">
-                           <h4><b>Job¾Æ¶ó! ITÃë¾÷</b></h4>
-                           <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">¹«·á</span></li>
-                               <li class="li_add"><span class="label label-primary" style="font-size:13px;">¸ðÀÓÁ¾·á</span></li>
+                           <h4><b>Jobì•„ë¼! ITì·¨ì—…</b></h4>
+                           <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">ë¬´ë£Œ</span></li>
+                               <li class="li_add"><span class="label label-primary" style="font-size:13px;">ëª¨ìž„ì¢…ë£Œ</span></li>
                                <br><br><br><br>
-                                              ¸ðÀÓ±â°£:<br>
-                                              ¸ðÀÓÀå¼Ò:<br>
+                                              ëª¨ìž„ê¸°ê°„:<br>
+                                              ëª¨ìž„ìž¥ì†Œ:<br>
                         </div>
                      </td>
                      <td class="text-center"  style="margin-tob:10%; vertical-align:bottom">
-                        <input type=button class="btn btn-success btn-sm" value="½ÅÃ»È®ÀÎ">
-                        <input type=button class="btn btn-danger btn-sm" value="½ÅÃ»Ãë¼Ò">
+                        <input type=button class="btn btn-success btn-sm" value="ì‹ ì²­í™•ì¸">
+                        <input type=button class="btn btn-danger btn-sm" value="ì‹ ì²­ì·¨ì†Œ">
                      </td>
                   </tr>
                   
@@ -289,52 +290,51 @@ body{
           </div>
           
           
-<!-- Âò³»¿ª -->
+<!-- ì°œë‚´ì—­ -->
           <div class="tab-pane" id="tab4">
-            <p>Âò³»¿ªÀÔ´Ï´Ù</p>
+            <p>ì°œë‚´ì—­ìž…ë‹ˆë‹¤</p>
           </div>
           
           
-<!-- È¸¿øÅ»Åð -->
+<!-- íšŒì›íƒˆí‡´ -->
           <div class="tab-pane " id="tab5">
              <div class="oim-mypage out">
-               <span class=" oim-icon glyphicon glyphicon-log-out"></span><h4>È¸¿øÅ»Åð</h4>
+               <span class=" oim-icon glyphicon glyphicon-log-out"></span><h4>íšŒì›íƒˆí‡´</h4>
                <h6>
                <br>
-                  ¾È³çÇÏ¼¼¿ä. OIMÀÔ´Ï´Ù
+                  ì•ˆë…•í•˜ì„¸ìš”. OIMìž…ë‹ˆë‹¤
                   <br><br>
-                  È¸¿øÅ»Åð Àü¿¡ ¾Æ·¡ ³»¿ëÀ» ²À È®ÀÎÇØ ÁÖ¼¼¿ä.
+                  íšŒì›íƒˆí‡´ ì „ì— ì•„ëž˜ ë‚´ìš©ì„ ê¼­ í™•ì¸í•´ ì£¼ì„¸ìš”.
                   <br><br>
-                  È¸¿øÅ»Åð ½ÅÃ»½Ã È¸¿ø´Ô ÀÌ¸ÞÀÏ ¾ÆÀÌµð·Î Áï½Ã Å»Åð Ã³¸®°¡ ÁøÇàµÇ°í, 
-                  °¡ÀÔ½Ã ÀÔ·ÂÇÏ¼Ì´ø È¸¿øÁ¤º¸´Â ¸ðµÎ »èÁ¦°¡ µË´Ï´Ù.
+                  íšŒì›íƒˆí‡´ ì‹ ì²­ì‹œ íšŒì›ë‹˜ ì´ë©”ì¼ ì•„ì´ë””ë¡œ ì¦‰ì‹œ íƒˆí‡´ ì²˜ë¦¬ê°€ ì§„í–‰ë˜ê³ , 
+                  ê°€ìž…ì‹œ ìž…ë ¥í•˜ì…¨ë˜ íšŒì›ì •ë³´ëŠ” ëª¨ë‘ ì‚­ì œê°€ ë©ë‹ˆë‹¤.
                   <br>
-                  ´Ü, °ø°øÀû ¼º°ÝÀÇ °Ô½Ã¹°Àº Å»Åð ÈÄ¿¡µµ »èÁ¦µÇÁö ¾Ê°í °Ô½Ã¹°ÀÇ »èÁ¦¸¦ ¿øÇÏ½Ã´Â °æ¿ì¿¡´Â ¹Ýµå½Ã »èÁ¦ÇÏ½Å ÈÄ, 
-                  È¸¿øÅ»Åð¸¦ ½ÅÃ»ÇÏ½Ã¸é µË´Ï´Ù.
+                  ë‹¨, ê³µê³µì  ì„±ê²©ì˜ ê²Œì‹œë¬¼ì€ íƒˆí‡´ í›„ì—ë„ ì‚­ì œë˜ì§€ ì•Šê³  ê²Œì‹œë¬¼ì˜ ì‚­ì œë¥¼ ì›í•˜ì‹œëŠ” ê²½ìš°ì—ëŠ” ë°˜ë“œì‹œ ì‚­ì œí•˜ì‹  í›„, 
+                  íšŒì›íƒˆí‡´ë¥¼ ì‹ ì²­í•˜ì‹œë©´ ë©ë‹ˆë‹¤.
                </h6>
             </div>
             <form method="post" action="../member/delete_ok.jsp">
             <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                <tr>
                   <td width=25% class="text-right">
-                     <span class="glyphicon glyphicon-envelope"></span>&nbsp;Å»ÅðÇÒ ¾ÆÀÌµð(Email)
+                     <span class="glyphicon glyphicon-envelope"></span>&nbsp;íƒˆí‡´í•  ì•„ì´ë””(Email)
                   </td>
                   <td width=75% class="text-center" id="email">${sessionScope.id }
                   </td>
                </tr>
                <tr>
                   <td width=30% class="text-right">
-                     <span class="glyphicon glyphicon-lock"></span>&nbsp;ºñ¹Ð¹øÈ£ ÀÔ·Â
+                     <span class="glyphicon glyphicon-lock"></span>&nbsp;ë¹„ë°€ë²ˆí˜¸ ìž…ë ¥
                   </td>
                   <td width=70% class="text-center">
-                     <input type=text name=om_pwd size=30 id="new-pwd">
-                      <span class="help-block"><font name="check" size="2" color="#DF013A"></font>*º»ÀÎ ÀÎÁõÀ» À§ÇØ ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä </span>
-                      <!-- <h6 style="color:#DF013A;">*º»ÀÎ ÀÎÁõÀ» À§ÇØ ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä</h6> -->
+                     <input type=text name=pwd size=30 id="new-pwd">
+                      <h6 style="color:#DF013A;">*ë³¸ì¸ ì¸ì¦ì„ ìœ„í•´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”</h6>
                   </td>                  
                </tr>
                <tr>
                   <td colspan="2" class="text-center">
-                  	 <input type="submit" class="btn btn-danger btn-sm" value="È¸¿øÅ»Åð" >
-                     <input type=button class="btn btn-info btn-sm" value="´Ù½Ã»ý°¢ÇÏ±â" onclick="javascript:history.back()">
+                  	 <input type="submit" class="btn btn-danger btn-sm" value="íšŒì›íƒˆí‡´" >
+                     <input type=button class="btn btn-info btn-sm" value="ë‹¤ì‹œìƒê°í•˜ê¸°" onclick="javascript:history.back()">
                   </td>
                </tr>
             </table>
