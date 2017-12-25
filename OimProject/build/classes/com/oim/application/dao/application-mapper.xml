@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.oim.application.dao.application-mapper">
+	<!-- 내가 개설한 모임조회 -->
+	<!-- <select id="MyMeetingListData" resultType="ApplicationVO" parameterType="String">
+		SELECT m.meet_poster, m.meet_subject, m.meet_total, m.meet_limit
+		FROM meeting m, application a
+		WHERE m.om_id = 
+	</select> -->
 	<!-- 내가 개설한 모임 신청자 조회 -->
+	<!-- 신청번호 -->
 	<select id="ApplicationListCheckData" resultType="ApplicationVO" parameterType="String">
-	
+		SELECT m.meet_poster, m.meet_subject, m.meet_total, m.meet_limit, 
+		a.ac_no, a.om_id, a.om_tel, a.om_company, a.ac_regdate
+		FROM meeting m, application a
+		WHERE m.om_id = #{om_hid}
 	</select>
 	<!-- 신청 insert -->
-	<select id="ApplicationInsertData" parameterType="String">
-	</select>
+	<insert id="ApplicationInsertData" parameterType="ApplicationVO">
+		INSERT INTO application VALUES(application_no_seq.nextval,#{om_id},#{meet_no},SYSDATE)
+	</insert>
+	<update id="ApplicationlimitUpdate" parameterType="int">
+		UPDATE meeting SET
+		meet_limit=meet_limit-1
+		WHERE meet_no=#{meet_no}
+	</update>
 	<!-- 내가 신청한 모임 조회 -->
 	<select id="ApplicationMyListData" resultType="ApplicationVO" parameterType="String">
-	
+		SELECT m.meet_poster, m.meet_subject, m.meet_total, m.meet_limit, m.om_id, m.om_tel, m.om_company, a.ac_regdate
+		FROM meeting m, application a
+		where a.om_id = #{om_aid}
 	</select>
 </mapper>

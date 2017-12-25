@@ -11,19 +11,15 @@ public class ApplicationVO {
 	private Date ac_regdate;
 	
 	private String meet_poster;
-	private int meet_no; 
+	private int meet_no;
 	private String meet_subject;
 	private int meet_price;
 	private int meet_total;
 	private int meet_limit;
 	
-	private String om_hid;
-	private String om_htel;
-	private String om_hemail;
-	
-	private String om_aid;
-	private String om_atel;
-	private String om_aemail;
+	private String om_id;
+	private String om_tel;
+	private String om_company;
 	
 	public int getAc_no() {
 		return ac_no;
@@ -73,41 +69,26 @@ public class ApplicationVO {
 	public void setMeet_limit(int meet_limit) {
 		this.meet_limit = meet_limit;
 	}
-	public String getOm_hid() {
-		return om_hid;
+	public String getOm_id() {
+		return om_id;
 	}
-	public void setOm_hid(String om_hid) {
-		this.om_hid = om_hid;
+	public void setOm_id(String om_id) {
+		this.om_id = om_id;
 	}
-	public String getOm_htel() {
-		return om_htel;
+	public String getOm_tel() {
+		return om_tel;
 	}
-	public void setOm_htel(String om_htel) {
-		this.om_htel = om_htel;
+	public void setOm_tel(String om_tel) {
+		this.om_tel = om_tel;
 	}
-	public String getOm_hemail() {
-		return om_hemail;
+	public String getOm_company() {
+		return om_company;
 	}
-	public void setOm_hemail(String om_hemail) {
-		this.om_hemail = om_hemail;
+	public void setOm_company(String om_company) {
+		this.om_company = om_company;
 	}
-	public String getOm_aid() {
-		return om_aid;
-	}
-	public void setOm_aid(String om_aid) {
-		this.om_aid = om_aid;
-	}
-	public String getOm_atel() {
-		return om_atel;
-	}
-	public void setOm_atel(String om_atel) {
-		this.om_atel = om_atel;
-	}
-	public String getOm_aemail() {
-		return om_aemail;
-	}
-	public void setOm_aemail(String om_aemail) {
-		this.om_aemail = om_aemail;
-	}
+	
+	
+	
 	
 }
