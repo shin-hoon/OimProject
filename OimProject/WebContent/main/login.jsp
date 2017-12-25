@@ -12,25 +12,6 @@
   		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
    		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
   		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-  	   
-  		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		<!-- 템플릿 css -->
-		<link href="css/owl.carousel.css" rel="stylesheet">
-		<link href="css/owl.theme.default.min.css"  rel="stylesheet">
-		<link href="css/animate.css" rel="stylesheet">
-		<link href="css/style.css" rel="stylesheet">
-		<!-- 우리가 추가한 css -->     
-		<link href="css/oim_style.css" rel="stylesheet">
-  		
-  		<!-- 슬라이드에 필요한 스크립트  -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		
-		<!-- 태그모임 추가 tab css  -->
-	    <link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" /> <!-- 느낌있게 사진배열 -->
-	    <link rel="stylesheet" href="css/bootstrap.css">
   		
   		<!-- 모달   -->
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -43,127 +24,11 @@
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <title>Insert title here</title>
-<script>
-   $(document).ready(function(){
-      $(".boardmenu>a").click(function(){
-         $(this).next(".board").toggleClass(".board");
-      });
-   });
-   $(document).ready(function(){
-        // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
-        $(".boardmenu>a").click(function(){
-            var submenu = $(this).next(".board");
- 
-            // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-            if( submenu.is(":visible") ){
-                submenu.slideUp();
-            }else{
-                submenu.slideDown();
-            }
-        });
-    });
-   
-</script>
 
 
-<!-- 스크롤 내렸을때 흰색 메뉴바 상단 고정하는 스트립트 -->
-<script type="text/javascript">
-$( document ).ready( function() {
-    var jbOffset = $( '.oim-nb' ).offset();
-    $( window ).scroll( function() {
-      if ( $( document ).scrollTop() > jbOffset.top ) {
-        $( '.oim-nb' ).addClass( 'oim-Fixed' );
-        $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');
-       /*  $('.oim-nb').css('background-color', '#fcbe03').css('color', 'white');    왜안될까??*/
-      }
-      else {
-        $( '.oim-nb' ).removeClass( 'oim-Fixed' );
-        $('.oim-nb').css('background-color', 'white');
-      }
-    });
-  } );
-</script>
-
-<style>
-	.boardmenu a{cursor:pointer;}
-	.boardmenu .board{display:none;}
-</style>
-
-<style>
-
-.footer {
-  bottom: 0;
-  width: 100%;
-  height: 70px;
-  background-color: gray;
-}
-
- /* 흰색 네비바  */
-.oim-nb {
-	text-align: center;
-	background-color:#ffffff ;
-	width: 100%;
-	z-index:20;    /*로그인,회원가입 모달이 안보여서 잠시 낮출게여*/
-	margin:0px;
-	padding:0px;
-}
-
-.oim-logo{
-	margin:15%; margin-top:2%; margin-bottom:1%; 
-	margin-left:28%
-}
-
-.oim-Content {
-	height: 5000px;
-}
-.oim-Fixed {
-	position: fixed;
-	top: 0px;
-}
-.oim_btn_yw{
-	background-color: #fcbe03;
-	font-family: "Open Sans",sans-serif;
-	color:white;
-	border: 0;
-	outline:0;
-}
-.oim_btn_yw:hover{
-	background-color: #fcbe03;
-	font-family: "Open Sans",sans-serif;
-	color:white;
-	border: 0.5px solid #fcbe03;
-	outline:0;
-
-}
-.oim_modal{
-	background-color: #fcbe03;
-	font-family: "Open Sans",sans-serif;
-	color:white;
-	border-radius: 0.5em 0.5em 0.5em 0;
-
-}
-.oim_btn_gr{
-	background-color: #848484;
-	font-family: "Open Sans",sans-serif;
-	color:white;
-	line-height: 22px;
-	border: 0;
-	outline:0;
-}
-.oim_btn_gr:hover, .oim_btn_gr:focus{
-	background-color: #2E2E2E;
-	font-family: "Open Sans",sans-serif;
-	color:white;
-	line-height: 22px;
-	border: 0;
-	outline:0;
-	
-}
-
-</style>
 
 <!-- 회원가입모달-> 아이디중복체크 스크립트 -->
-<script type="text/javascript">
+<script type="text/javascript"> 
 $(function(){
 	$('#checkBtn').click(function(){ /*#checkBtn 셀랙터  */
 

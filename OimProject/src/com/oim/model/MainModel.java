@@ -13,7 +13,7 @@ public class MainModel {
 	public String main_page(HttpServletRequest req, HttpServletResponse res) {
 		
 		
-		req.setAttribute("login_jsp","login.jsp"); //추가했는데 커밋!!!!!!!!!!!!!!!!!!!!!
+		req.setAttribute("login_jsp","login.jsp");  
 		req.setAttribute("main_jsp","default.jsp");
 		return "main/main.jsp";
 	}
