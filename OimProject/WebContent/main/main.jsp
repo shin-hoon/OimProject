@@ -162,74 +162,7 @@ $( document ).ready( function() {
 
 </style>
 
-<!-- 회원가입모달-> 아이디중복체크 스크립트 -->
-<script type="text/javascript">
-$(function(){
-	$('#checkBtn').click(function(){ /*#checkBtn 셀랙터  */
 
-		var id=$('#id').val();
-
-		if(id.trim()=="") //아이디가 입력이 안되었을때
-
-		
-		
-		{
-			$('#id').focus();
-			return;
-		}
-		$.ajax({   //*******
-			type:'POST', // type: 데이터를 무슨 방식으로 보낼꺼냐
-			url:'main.do', // 멤버.jsp에서 만들어짐
-
-			data:{"om_id":id}, // 값을 보냄 ','를 찍고 값을 여러개 보낼 수 있다.
-
-			success:function(response) //idcheck_result.jsp'여기서 실행된 결과값을 넣어준다
-
-			{
-				//성공했을때
-				var result=response.trim();
-				
-				if(result==0)    //중복된 아이디가  0이면(없으면)====> 사용가능한 아이디
-				{
-					$('#res').html("<font color=blue>"+id+"은(는) 사용 가능한 아이디입니다.</font>");
-					$('#res_ok').html("<input type=submit value=확인 onclick=ok('"+id+"')>"); 
-																//  ㄴ>매개변수 작은따음표를 꼭 써줘야 한다 , 안쓰면 숫자로 인식한다
-						// 확인 버튼이 눌리면 중복확인창이 사라진다
-						// ok 버튼을 눌렀을때 ===> 밑에 함수 처리
-				
-				}else
-				{
-					$('#res').html("<font color=red>"+id+"은(는) 이미 사용중인 아이디입니다.</font>");
-					$('#id').val("");
-					$('#id').focus();
-					$('#res_ok').html("");
-				}
-			}
-		});
-	});
-});
-function ok(om_id){
-	parent.frm.om_id.value=om_id;
-	parent.idcheck-modal.close();      // 중복체크하고 아이디를 사용할 수 있을때 사용한다는 확인 버튼을 누르면 쉐도우 박스가 자동으로 꺼지면서 입력한 아이디가 자동으로 아이디 창으로 입력된다
-}
-
-//비밀번호 일치 확인
- $(function(){
-  $('#password').keyup(function(){
-   $('font[name=check]').text('');
-  }); //#password.keyup
-
-  $('#check_password').keyup(function(){
-   if($('#password').val()!=$('#check_password').val()){
-    $('font[name=check]').text('');
-    $('font[name=check]').html("<font color=red>"+"암호가 일치하지 않습니다.다시입력하세요.");
-   }else{
-    $('font[name=check]').text('');
-    $('font[name=check]').html("<font color=blue>"+"암호가 일치합니다.");
-   }
-  }); //#check_password.keyup
- });
-</script>
 </head>
 <body>
 

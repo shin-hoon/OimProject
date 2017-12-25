@@ -24,7 +24,25 @@
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <title>Insert title here</title>
-
+<style type="text/css">
+.oim_btn_gr{
+	background-color: #848484;
+	font-family: "Open Sans",sans-serif;
+	color:white;
+	line-height: 22px;
+	border: 0;
+	outline:0;
+}
+.oim_btn_gr:hover, .oim_btn_gr:focus{
+	background-color: #2E2E2E;
+	font-family: "Open Sans",sans-serif;
+	color:white;
+	line-height: 22px;
+	border: 0;
+	outline:0;
+	
+}
+</style>
 
 
 <!-- 회원가입모달-> 아이디중복체크 스크립트 -->
