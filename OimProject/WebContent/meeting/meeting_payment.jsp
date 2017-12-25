@@ -49,6 +49,8 @@
 <body>
 	<div class="container">
 		<div class="row">
+		<form action="meeting_payment_ok.do" method="post">
+		<input type="hidden" id="meet_no" name="meet_no" value="${vo.meet_no }"/>
 			<table class="table">
 				<tr>
 					<td id="poster" style="width: 20%;">
@@ -118,6 +120,7 @@
 			    <button type="submit" class="btn btn-primary" id="apply" value="신청">신청하기</button>
 			    <button class="btn" id="cancle" value="취소">취소하기</button>
 			</center>
+		</form>
 		</div>
 	</div>
 </body>
