@@ -55,10 +55,27 @@ public class MeetingDAO {
 		}finally {
 			if(session!=null)
 				session.close(); //커넥션을 반환한다.
+		}
+		return list;
+	}
+	
+	public static List<MeetingVO> meetingFindData(Map map){ //모임검색결과 필터링해서 뿌리기
+		
+		List<MeetingVO> list=new ArrayList<MeetingVO>();
+		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+		try {
+			list=session.selectList("meetingFindData",map);
+			
+		}catch(Exception ex) {
+			System.out.println("meetingFindData: "+ex.getMessage());
+		}finally {
+			if(session!=null)
+				session.close(); //커넥션을 반환한다.
 			
 		}
 		return list;
 	}
+	
 	//dao
 	public static MeetingVO meetingDetailData(int meet_no){ //모임 상세정보 보여주기
 	      

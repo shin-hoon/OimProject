@@ -1,5 +1,6 @@
 package com.oim.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,59 @@ public class MeetingModel {
 		req.setAttribute("main_jsp", "../meeting/meeting_list.jsp");
 		return "main/main.jsp";
 	}
+	
+	@RequestMapping("meeting_find.do") //모임검색결과
+	public String meeting_find(HttpServletRequest req, HttpServletResponse res) throws Throwable{
+		
+		req.setCharacterEncoding("UTF-8");
+		String page=req.getParameter("page");
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int rowSize=12;
+		int start= (rowSize*curpage)-(rowSize-1);
+		int end= rowSize*curpage;
+		int totalpage=0;
+		
+		String categoryTemp[]= req.getParameterValues("category");
+		
+		List<String> category= new ArrayList<String>();
+		for(String s:categoryTemp) {
+			category.add(s);
+		}
+		
+		for(String s:category) {
+			System.out.println(s);
+		}
+		
+		System.out.println();
+		
+		String loc[]= req.getParameterValues("loc");
+		String week[]= req.getParameterValues("week");
+		String price[]= req.getParameterValues("price");
+		String from=req.getParameter("from");
+		String to=req.getParameter("to");
+		
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("category", category);
+		map.put("loc", loc);
+		map.put("price", price);
+		map.put("from", from);
+		map.put("to", to);
+		
+		List<MeetingVO> list=MeetingDAO.meetingFindData(map);
+		totalpage=MeetingDAO.meetingTotalPage();
+		
+		//jsp로 전송
+		req.setAttribute("totalpage", totalpage);
+		req.setAttribute("curpage", curpage);
+		req.setAttribute("list", list);
+		req.setAttribute("main_jsp", "../meeting/meeting_find.jsp");
+		return "main/main.jsp";
+	}
+	
     @RequestMapping("meeting_detail.do")
     public String meeting_detail(HttpServletRequest req, HttpServletResponse res) {
        String meet_no = req.getParameter("meet_no");
@@ -50,7 +104,7 @@ public class MeetingModel {
        
        req.setAttribute("vo", vo);
        
-      
+
        req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
        return "main/main.jsp";
     }
@@ -73,7 +127,7 @@ public class MeetingModel {
 /*    	String om_id=(String)session.getAttribute("om_id");
     	MemberVO vo=MeetingDAO.meetingInsertData(Integer.parseInt(om_id));*/
     	
-    	
+
     	req.setAttribute("main_jsp", "../meeting/meeting_insert.jsp");
     	return "main/main.jsp";
     }
@@ -118,7 +172,7 @@ public class MeetingModel {
     	System.out.println("모임소개: "+meet_info);
     	System.out.println("상세내용: "+meet_detail);
     	
-    	
+
     	req.setAttribute("main_jsp","../meeting/meeting_insert_ok.jsp");
     	return "main/main.jsp";		
     	
