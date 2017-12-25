@@ -1,8 +1,6 @@
 package com.oim.member.dao;
 
 import java.io.Reader;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -98,67 +96,30 @@ public class MemberDAO {
 		}
 		return vo;
 	}
+  	
+  	//회원정보 수정
+  	public static void OimUpdate(MemberVO vo)
+	{
+  		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+		try {
+			
+			session.update("OimUpdate",vo);
+			session.commit();
+			System.out.println(vo.getOm_tel()+vo.getOm_id()+vo.getOm_pwd());
+			
+			
+		}catch(Exception ex)
+		{
+			System.out.println("OimUpdate"+ex.getMessage());
+		}
+		finally
+		{
+			if(session!=null)
+  				session.close();
+		}
+	}
 
-	/*//로그인 
-    		public MemberVO OimLogin(String id,String pwd)
-    		{
-    			MemberVO vo=new MemberVO();
-    			try {
-    				getConnection();
-    				
-    				//1. 아이디 있는지 확인
-    				String sql="SELECT COUNT(*) FROM oim_member WHERE om_id=?";
-    				ps=conn.prepareStatement(sql);
-    				ps.setString(1, id);
-    				ResultSet rs=ps.executeQuery();
-    				rs.next();
-    				int no=rs.getInt(1);
-    				
-    				if(no==0)  
-    				{
-    					vo.setCount(1);  //아이디가 존재하지 않는다면 count=1
-    				}
-    				else //아이디가 존재한다면
-    				{
-    					sql="SELECT om_id,om_pwd,om_name,om_birth,om_gender,om_tel,om_company,om_regdate "
-    							+"FROM oim_member "
-    							+"WHERE om_id=?";
-    					ps=conn.prepareStatement(sql);
-    					ps.setString(1, id);
-    					rs=ps.executeQuery();
-    					rs.next();
-    					vo.setOm_id(rs.getString(1));
-    					vo.setOm_pwd(rs.getString(2));
-    					vo.setOm_name(rs.getString(3));
-    					vo.setOm_birth(rs.getString(4));
-    					vo.setOm_gender(rs.getString(5));
-    					vo.setOm_tel(rs.getString(6));
-    					vo.setOm_company(rs.getString(7));
-    					vo.setOm_regdate(rs.getDate(8));
-    					rs.close();
-    					ps.close();
-    					
-    					if(pwd.equals(vo.getOm_pwd())) //비밀번호까지 일치한다면
-    					{
-    						vo.setCount(3);  //count=3
-    					}
-    					else  //비밀번호가 다르다면
-    					{
-    						vo.setCount(2);  //count=2
-    					}
-    					
-    				}
-    				
-    			}catch(Exception ex)
-    			{
-    				System.out.println(ex.getMessage());
-    			}
-    			finally
-    			{
-    				disConnection();
-    			}
-    			return vo;
-    		}
+	/*
     		
     		
     		//회원정보 수정

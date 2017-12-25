@@ -93,7 +93,7 @@ body{
              <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                <tr>
                   <td width=25% class="text-right">
-                     <span class="oim-icon glyphicon glyphicon-envelope"></span>이메일
+                     <span class="oim-icon glyphicon glyphicon-envelope"></span>아이디(E-mail)
                   </td>
                   <td width=75% class="text-center" id="email">${sessionScope.id }</td>
                </tr>
@@ -135,7 +135,7 @@ body{
             </div>
              
          <!-- 회원정보 테이블 -->
-            <form method="post" action="../member/update_ok.jsp">
+            <form method="post" action="Oim_Update.do">
                 <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                   <tr>
                      <td width=30% class="text-right">
@@ -149,7 +149,7 @@ body{
                         <span class="oim-icon glyphicon glyphicon-earphone"></span>휴대전화
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=tel size=30 id="tel" value=${sessionScope.tel }>
+                        <input type=text name=tel size=30 id="tel" placeholder=${sessionScope.tel }>
                      </td>                  
                   </tr>
                   <tr>

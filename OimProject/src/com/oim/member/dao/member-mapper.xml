@@ -14,4 +14,7 @@
 <select id="OimLogin" resultType="MemberVO" parameterType="String">
 	SELECT om_id,om_pwd,om_name,om_birth,om_gender,om_tel,om_company,om_regdate FROM oim_member WHERE om_id=#{om_id}
 </select>
+<update id="OimUpdate" parameterType="MemberVO">
+	UPDATE oim_member SET om_tel=#{om_tel},om_pwd=#{om_pwd} WHERE om_id=#{om_id}
+</update>
 </mapper>

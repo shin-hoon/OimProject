@@ -1,5 +1,7 @@
 package com.oim.model;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -84,10 +86,53 @@ public class MemberModel {
 		return "main/main.jsp";
 	}
 	
+	@RequestMapping("Oim_Update.do")
+	public String Oim_Update(HttpServletRequest req,HttpSession sess,HttpServletResponse res)throws Throwable{
 	
-	
-	
+		req.setCharacterEncoding("UTF-8");
 		
+		String tel=req.getParameter("tel");
+		String pwd =req.getParameter("pwd"); 	//새로운 비밀번호
+		String pwd_ok=req.getParameter("pwd_ok"); //새로운 비밀번호 확인
+		
+		
+		System.out.println("req tel: "+ tel);
+		System.out.println("req pwd: "+ pwd);
+		System.out.println("req tel: "+ pwd_ok);
+		System.out.println("=================");
+		
+		
+		//alert창 띄우기 위해서 여기서 부터 update_ok.jsp로..?
+		MemberVO vo=new MemberVO();
+		if(pwd.equals(pwd_ok))
+		{
+			//사용자가 입력한 값->VO
+			vo.setOm_id((String)sess.getAttribute("id"));
+			vo.setOm_tel(tel);
+			vo.setOm_pwd(pwd);
+			
+			//바뀐 VO-> DB저장
+			MemberDAO.OimUpdate(vo);
+			
+			//세션업데이트
+			sess.setAttribute("tel", tel);
+			sess.setAttribute("pwd", pwd);
+		}
+		else
+		{
+			System.out.println("비밀번호 틀렸습니다");
+		}
+		
+		
+		return "member/update_ok.jsp";
 	}
+	
+	
+	
+	
+	
+	
+}
+	
 	
 
