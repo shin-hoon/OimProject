@@ -2,6 +2,8 @@ package com.oim.model;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
@@ -36,9 +38,6 @@ public class MemberModel {
 		String id= req.getParameter("id");
 		String pwd= req.getParameter("pwd");
 		
-		
-		
-		
 		int count=MemberDAO.OimLogincheck(id);  //	1)아이디 존재 여부 확인
 		MemberVO vo=new MemberVO();
 		
@@ -50,22 +49,40 @@ public class MemberModel {
 		{
 			vo=MemberDAO.OimLogin(id);
 			
+		} 
+			
 			if(pwd.equals(vo.getOm_pwd()))  //비밀번호 까지 같다면
 			{
 				vo.setCount(3);  //					count=3
+				System.out.println(vo.getOm_id()+vo.getOm_pwd()+vo.getOm_name()+vo.getOm_birth()+vo.getOm_gender()+vo.getOm_tel()+vo.getOm_company()+vo.getOm_regdate().toString());
 			}
 			else							//비밀번호가 다르다면
 			{
 				vo.setCount(2);	 //					count=2				
 			}
 			
+			//결과값을 추가
+			req.setAttribute("id", vo.getOm_id());
+			req.setAttribute("name", vo.getOm_name());
+			req.setAttribute("tel", vo.getOm_tel());
+			req.setAttribute("gender", vo.getOm_gender());
+			req.setAttribute("company", vo.getOm_company());
+			req.setAttribute("regdate", vo.getOm_regdate());
+			req.setAttribute("count", vo.getCount());
+
+			
+			return "member/login_ok.jsp";
+			
 		}
 		
 		
-		req.setAttribute("count", vo.getCount());
-
+	
+	
+	
+	
+	
+	
 		
-		return "member/login_ok.jsp";
 	}
 	
-}
+

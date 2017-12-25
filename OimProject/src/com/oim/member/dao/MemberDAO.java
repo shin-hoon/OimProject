@@ -85,7 +85,6 @@ public class MemberDAO {
 		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
 		try {
 				vo=session.selectOne("OimLogin",id);
-				
 			}
 			
 		catch(Exception ex)

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -159,16 +160,34 @@ $(function(){
 
 <body>
 <!-- 노랭색 네비바 -->
+	<c:if test="${sessionScope.id==null }">  <!-- 세션에 id가 null값이면 보여지는 네비바 -->
 	<div class="add_section" >
          <div class="container" style="line-height:30px;">
                <li class="section-li" style="margin-left:10px;">
                <button type="button" class="oim_btn_yw" data-toggle="modal" data-target="#join">
                	회원가입</button></li>
                <li class="section-li" style="margin-right:10px;">
-               <button type="submit" class="oim_btn_yw" data-toggle="modal" data-target="#login">
+               <button type="button" class="oim_btn_yw" data-toggle="modal" data-target="#login">
                	로그인</button></li>
          </div>
 	</div>
+	</c:if>
+	
+	<c:if test="${sessionScope.id!=null }"> <!-- 세션에 id가 저장되어있으면 보여지는 네비바 -->
+	<div class="add_section" >
+		 <form method="post" action="../member/logout_ok.jsp">
+         <div class="container" style="line-height:30px;">
+               <li class="section-li" style="margin-left:10px;">
+               <input type=submit class="oim_btn_yw" value="로그아웃" id="logoutBtn">
+                </li>
+               &nbsp;&nbsp;&nbsp;
+               <li class="section-li" style="margin-right:10px;">
+               <div class="form-group" style="color:white">
+						${sessionScope.name }님 안녕하세요!
+         	   </div>
+		</div>
+		</form>
+	</c:if>
 	
 	<!-- 로그인 모달 팝업 -->
 	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
