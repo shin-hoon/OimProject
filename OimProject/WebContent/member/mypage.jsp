@@ -142,7 +142,9 @@ body{
                         <span class="oim-icon glyphicon glyphicon-envelope"></span>이메일
                      </td>
                      <!-- db들어와야함  -->
-                     <td width=70% class="text-center" name="id">${sessionScope.id }</td>
+                     <td width=70% class="text-center">${sessionScope.id }
+                     	<input type="hidden" name="id" value="${sessionScope.id }" />
+                     </td>
                   </tr>
                   <tr>
                      <td width=30% class="text-right">

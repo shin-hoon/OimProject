@@ -42,8 +42,6 @@ public class MemberModel {
 		
 		int count=MemberDAO.OimLogincheck(id);  //	1)아이디 존재 여부 확인
 		
-		System.out.println("1) 아이디존재여부 count:"+count);
-		
 		
 		MemberVO vo=new MemberVO();
 		if(count==0)  		
@@ -57,7 +55,7 @@ public class MemberModel {
 			if(pwd.equals(vo.getOm_pwd()))  //비밀번호 까지 같다면
 			{
 				vo.setCount(3);  //					count=3
-				System.out.println(vo.getOm_id()+vo.getOm_pwd()+vo.getOm_name()+vo.getOm_birth()+vo.getOm_gender()+vo.getOm_tel()+vo.getOm_company()+vo.getOm_regdate().toString());
+				
 			}
 			else							//비밀번호가 다르다면
 			{
@@ -74,7 +72,7 @@ public class MemberModel {
 		req.setAttribute("company", vo.getOm_company());
 		req.setAttribute("regdate", vo.getOm_regdate());
 		req.setAttribute("count", vo.getCount());
-		System.out.println("req.setAttribute(count):"+req.getAttribute("count"));
+		
 		return "member/login_ok.jsp";
 		
 	}
@@ -87,27 +85,27 @@ public class MemberModel {
 	}
 	
 	@RequestMapping("Oim_Update.do")
-	public String Oim_Update(HttpServletRequest req,HttpSession sess,HttpServletResponse res)throws Throwable{
-	
-		req.setCharacterEncoding("UTF-8");
+	public String Oim_Update(HttpServletRequest req,HttpServletResponse res)throws Throwable{
 		
+		req.setCharacterEncoding("UTF-8");
+			
+		String id=req.getParameter("id");
 		String tel=req.getParameter("tel");
 		String pwd =req.getParameter("pwd"); 	//새로운 비밀번호
 		String pwd_ok=req.getParameter("pwd_ok"); //새로운 비밀번호 확인
-		
-		
+			
+		System.out.println("req id: "+ id);
 		System.out.println("req tel: "+ tel);
 		System.out.println("req pwd: "+ pwd);
 		System.out.println("req tel: "+ pwd_ok);
 		System.out.println("=================");
-		
-		
-		//alert창 띄우기 위해서 여기서 부터 update_ok.jsp로..?
+	
+		/*//alert창 띄우기 위해서 여기서 부터 update_ok.jsp로..?
 		MemberVO vo=new MemberVO();
 		if(pwd.equals(pwd_ok))
 		{
 			//사용자가 입력한 값->VO
-			vo.setOm_id((String)sess.getAttribute("id"));
+			vo.setOm_id((id);
 			vo.setOm_tel(tel);
 			vo.setOm_pwd(pwd);
 			
@@ -121,14 +119,14 @@ public class MemberModel {
 		else
 		{
 			System.out.println("비밀번호 틀렸습니다");
-		}
+		}*/
 		
 		
 		return "member/update_ok.jsp";
 	}
 	
 	@RequestMapping("Oim_meetpage.do")
-	public static String Oim_meetpage(HttpServletRequest req, HttpServletResponse res)
+	public String Oim_meetpage(HttpServletRequest req, HttpServletResponse res)
 	{
 		req.setAttribute("main_jsp","../member/meetpage.jsp");
 		return "main/main.jsp";
