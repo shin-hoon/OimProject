@@ -104,15 +104,16 @@ public class SelectDAO {
 		   return list;
 	   }
 	   
-	   public List<SelectListVO> saveList(int page,int view){
+	   public List<SelectListVO> saveList(String id,int page,int view){
 		   List<SelectListVO> list=new ArrayList<SelectListVO>();
 		   
 		   try {
 			   getConnection();
 			   String sql = "SELECT cst_cg,cst_loc,cst_day,cst_price FROM cst_meeting "
-					   	  + "WHERE cst_no=?";
+					   	  + "WHERE cst_no=? AND om_id=? ";
 			   ps = conn.prepareStatement(sql);
 			   ps.setInt(1, view);
+			   ps.setString(2, id);
 			   ResultSet rs = ps.executeQuery();
 			   rs.next();
 			   
@@ -251,7 +252,7 @@ public class SelectDAO {
 				   sql += " )";
 			   }
 			   
-			   
+			   System.out.println(sql);
 			   ps=conn.prepareStatement(sql);
 			   rs=ps.executeQuery();
 			   int i=1;
@@ -471,14 +472,15 @@ public class SelectDAO {
 		}
 	
 	   
-	   public int saveTotalPage(int page,int view){
+	   public int saveTotalPage(String id,int page,int view){
 		   int totalpage=1;
 		   try {
 			   getConnection();
 			   String sql = "SELECT cst_cg,cst_loc,cst_day,cst_price FROM cst_meeting "
-					   	  + "WHERE cst_no=?";
+					   	  + "WHERE cst_no=? AND om_id = ?";
 			   ps = conn.prepareStatement(sql);
 			   ps.setInt(1, view);
+			   ps.setString(2, id);
 			   ResultSet rs = ps.executeQuery();
 			   rs.next();
 			   
@@ -614,6 +616,7 @@ public class SelectDAO {
 			   
 			   
 			   sql += ")";
+			   System.out.println(sql);
 			   ps=conn.prepareStatement(sql);
 			   rs=ps.executeQuery();
 			   rs.next();

@@ -28,8 +28,10 @@ public class SelectSaveModel {
 	   
 	   if(page==null)		page="1";
 	   if(saveNum==null)	saveNum="1";
+	   if(id == null) id = "null";
 	   int curpage=Integer.parseInt(page);
 	   int num=Integer.parseInt(saveNum);
+	   
 	   
 	   
 	   int view = dao.saveNo(id,num);
@@ -41,10 +43,10 @@ public class SelectSaveModel {
 		   req.setAttribute("list", list);
 	   }
 	   else {
-		   List<SelectListVO> list = dao.saveList(curpage,view);
+		   List<SelectListVO> list = dao.saveList(id,curpage,view);
 		   List<SelectSaveVO> checkBox = dao.saveCheckBox(id,num);
 		   
-		   totalpage = dao.saveTotalPage(curpage,view);
+		   totalpage = dao.saveTotalPage(id,curpage,view);
 		   req.setAttribute("list", list);
 		   req.setAttribute("checkBox", checkBox);
 	   }

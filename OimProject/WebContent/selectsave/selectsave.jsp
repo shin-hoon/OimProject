@@ -66,8 +66,8 @@
     	 
     	$(function(){
     		$('#InsertBtn').click(function(){
-    	   	 	var id = $('#id').val();
-    	   	 	if(id==''){
+    	   	 	var id = $('#id2').val();
+    	   	 	if(id==""){
     	   	 		alert("로그인 후 이용해주세요");
     	   	 	}
     	   	 });

@@ -174,7 +174,7 @@
 			</div>
 			<div class="text-center">
 				<input type="submit" id="InsertBtn" value="검색저장"/>
-				<input type="hidden" id="id" value="${id}">
+				<input type="hidden" id="id2" value="${id}">
 				<input type="hidden" name="saveNum" id="saveNum" value="${num}">
 			</div>
 			</form>
