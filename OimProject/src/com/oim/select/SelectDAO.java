@@ -50,7 +50,9 @@ public class SelectDAO {
 			   int start=(page*rowSize)-(rowSize-1);
 			   int end=(page*rowSize);
 			   String sql="SELECT meet_no,meet_charge,meet_cg,meet_poster,om_id,meet_subject,"
-			   			 +"meet_start,meet_end,meet_loc,meet_total,meet_limit,meet_info,"
+					     +"TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') meet_start,"
+					     +"TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') meet_end,"
+			   			 +"meet_loc,meet_total,meet_limit,meet_info,"
 			   			 +"meet_price,meet_like,meet_detail,meet_lat,meet_lng,meet_regdate,"
 			   			 +"meet_hit,num "
 					     +"FROM (SELECT meet_no,meet_charge,meet_cg,meet_poster,om_id,meet_subject, " 
@@ -252,7 +254,6 @@ public class SelectDAO {
 				   sql += " )";
 			   }
 			   
-			   System.out.println(sql);
 			   ps=conn.prepareStatement(sql);
 			   rs=ps.executeQuery();
 			   int i=1;
@@ -616,7 +617,6 @@ public class SelectDAO {
 			   
 			   
 			   sql += ")";
-			   System.out.println(sql);
 			   ps=conn.prepareStatement(sql);
 			   rs=ps.executeQuery();
 			   rs.next();

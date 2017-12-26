@@ -67,8 +67,9 @@
     $(function(){
           $('#apply').click(function(){
         	 var meet_no = $('#meet_no').attr("value");
+        	 var om_id = $('#om_id').attr("value")
              Shadowbox.open({
-               content:"meeting_payment.do?meet_no="+meet_no,		
+               content:"meeting_payment.do?meet_no="+meet_no+"&om_id="+om_id,		
                player:'iframe',
                title:'신청내역확인',
                width:1200,
@@ -137,7 +138,7 @@
    	
         <div class="row">
         <input type="hidden" id="meet_no" name="meet_no" value="${vo.meet_no }"/>
-        <input type="hidden" id="om_id" name="om_id" value="${sessionScope.id}""/>
+        <input type="hidden" id="om_id" name="om_id" value="${sessionScope.id}"/>
             <div class="top col-xs-12" style="vertical-align: middle;">
                <c:if test="${vo.meet_price==0 }">
                   <span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>

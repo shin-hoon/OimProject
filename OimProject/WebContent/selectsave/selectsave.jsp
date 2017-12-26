@@ -525,7 +525,7 @@
        				
        		<fmt:parseNumber var="num1" value="${curpage/10}" integerOnly="true"/>
        		<c:set var="num1" value="${num1<=0?1:num1*10}"/>  
-       		<c:forEach var="i"  begin="${num1}" end="${num==1?num+8:num+9}">
+       		<c:forEach var="i"  begin="${num1}" end="${num1==1?num1+8:num1+9}">
        			<c:choose>
        				<c:when test="${i > totalpage }"></c:when>
        				<c:when test="${i==curpage}">

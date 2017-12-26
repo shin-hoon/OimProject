@@ -171,7 +171,7 @@
 		#{meet_loc}, #{meet_total}, #{meet_limit}, #{meet_info}, #{meet_price}, 0, #{meet_detail}, #{meet_lat}, #{meet_lng}, SYSDATE, 0)
 	</insert>
 	
-	<select id="meetingDetailInfo" resultType="MemberVO" parameterType="String"> <!-- 모임개설하는 화면에서 작성자 정보 불러오기 -->
+	<select id="meetingDetailInfo" resultType="com.oim.member.dao.MemberVO" parameterType="String"> <!-- 모임신청 인원정보 불러오기 -->
 		SELECT om_tel, om_company 
 		FROM oim_member
 		WHERE om_id=#{om_id} 
