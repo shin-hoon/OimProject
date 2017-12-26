@@ -32,7 +32,7 @@
 
 <!-- 회원가입모달-> 아이디중복체크 스크립트 -->
 <script type="text/javascript"> 
-$(function(){
+  $(function(){
 	$('#checkBtn').click(function(){ /*#checkBtn 셀랙터  */
 
 		var id=$('#id').val();
@@ -51,7 +51,7 @@ $(function(){
 
 			{
 				//성공했을때
-				var result=response.trim();
+				 var result=response.trim();
 				
 				if(result==0)    //중복된 아이디가  0이면(없으면)====> 사용가능한 아이디
 				{
@@ -64,10 +64,15 @@ $(function(){
 					$('#id').val("");
 					$('#id').focus();
 					$('#res_ok').html("");
-				}
+				} 
+				if()
 			}
 		});
 	});
+});
+
+$(function(){
+	
 });
 function ok(om_id){
 	parent.frm.om_id.value=om_id;
