@@ -7,7 +7,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:useBean id="model" class="com.oim.model.SelectSaveModel" />
 <%
-	String id = "jeong"; session.setAttribute("id", id);
 	model.meetingList(request,session);	
 %>
 <!DOCTYPE html>
@@ -16,13 +15,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="css/selectsave.css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 	<script src="//code.jquery.com/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-	<!-- <link href="../css/oim_style.css" rel="stylesheet"> -->
+	 --><!-- <link href="../css/oim_style.css" rel="stylesheet"> -->
 	<!-- <link rel="stylesheet" href="../css/bootstrap.css"> -->
 	
 	<style type="text/css">
+		*{
+			color:black;
+		}
 		.label {
 			padding: 10px 8px 10px;
 		}
@@ -61,7 +63,16 @@
     		 	}
     		 });
     	 });
-       
+    	 
+    	$(function(){
+    		$('#InsertBtn').click(function(){
+    	   	 	var id = $('#id').val();
+    	   	 	if(id==''){
+    	   	 		alert("로그인 후 이용해주세요");
+    	   	 	}
+    	   	 });
+    	});   		
+    	 
     $('.button-checkbox').each(function () {
         // Settings
         var $widget = $(this),
