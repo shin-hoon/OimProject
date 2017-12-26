@@ -245,7 +245,9 @@ $( document ).ready( function() {
 						<a href="#">모임관리</a>
 					</li>
 					<li>
+						<c:if test="${sessionScope.id!=null }">
 						<a href="Oim_mypage.do">마이페이지</a>
+						</c:if>
 					</li>
 				</ul>
 			</div>
