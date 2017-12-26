@@ -46,8 +46,8 @@ public class MeetingModel {
 	
 
 	@RequestMapping("meeting_find.do") //모임검색결과
-	public String meeting_find(HttpServletRequest req, HttpServletResponse res){
-		try {
+	public String meeting_find(HttpServletRequest req, HttpServletResponse res) throws Throwable{
+
 			req.setCharacterEncoding("UTF-8");
 			
 			String page=req.getParameter("page");
@@ -72,36 +72,41 @@ public class MeetingModel {
 			List<String> week= new ArrayList<String>();
 			List<String> price= new ArrayList<String>();
 			
+			if(categoryTemp!=null) {
 			for(String s:categoryTemp) {
 				category.add(s);
-			}
-			for(String s:category) {
 				System.out.print(s+" ");
+				}
+				System.out.println();
 			}
-			System.out.println();
 			
+			if(locTemp!=null) {
 			for(String s:locTemp) {
 				loc.add(s);
 				System.out.print(s+" ");
 			}
-			System.out.println();
+				System.out.println();
+			}
 			
+			if(weekTemp!=null) {
 			for(String s:weekTemp) {
 				week.add(s);
 				System.out.print(s+" ");
 			}
 			System.out.println();
+			}
 			
+			if(priceTemp!=null) {
 			for(String s:priceTemp) {
 				price.add(s);
 				System.out.print(s+" ");
 			}
 			System.out.println();
+			}
 			
 			System.out.println(from);
 			System.out.println(to);
 
-			
 			Map map=new HashMap();
 			
 			map.put("category", category);
@@ -123,10 +128,6 @@ public class MeetingModel {
 			req.setAttribute("curpage", curpage);
 			req.setAttribute("list", list);
 			req.setAttribute("main_jsp", "../meeting/meeting_find.jsp");
-		}catch(Exception ex) {
-			System.out.println("meeting_find: "+ex.getMessage());
-			
-		}
 		
 		return "main/main.jsp";
 	}

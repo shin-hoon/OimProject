@@ -16,26 +16,26 @@
          FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like
          FROM meeting  
          <where>
-         	<if test="category!=null">
+         	<if test="category != null">
          		meet_cg IN
          		<foreach collection="category" item="cg" open="(" close=")" separator=",">
          			#{cg}
          		</foreach>
          	</if>
-         	<if test="loc!=null">
+         	<if test="loc != null">
          		AND REGEXP_LIKE(meet_loc,
          		<foreach collection="loc" item="lc" open="" close=")" separator="||">
          			#{lc}
          		</foreach>
          	</if>
-         	<if test="week!=null">
+         	<if test="week != null">
          		AND REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'DY','NLS_DATE_LANGUAGE=korean'),
          	<foreach collection="week" item="wk" open="" close=")" separator="||">
          			#{wk}
          		</foreach>
          	</if>
          	
-          	<if test="price!=null">
+          	<if test="price != null">
          		AND
          		<foreach collection="price" item="pr" index="index" open="" close="" separator="OR">
          		<choose>
@@ -70,7 +70,7 @@
          		</foreach>
          	</if>
          	
-         	<if test="from!=null and to!=null">
+         	<if test="from != null and to != null">
          		AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
          	</if>
          	</where>
