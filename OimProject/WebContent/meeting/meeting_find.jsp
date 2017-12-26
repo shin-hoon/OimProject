@@ -306,19 +306,19 @@
                     </span>
                      <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">10000원 ~ 25000원</button>
-                        <input type="checkbox" name="price" class="hidden" value="10000 AND 25000"/>
+                        <input type="checkbox" name="price" class="hidden" value="25000"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">25000원 ~ 40000원</button>
-                        <input type="checkbox" name="price" class="hidden" value="25000 AND 40000"/>
+                        <input type="checkbox" name="price" class="hidden" value="40000"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">40000원 ~ 99000원</button>
-                        <input type="checkbox" name="price" class="hidden" value="40000 AND 99000"/>
+                        <input type="checkbox" name="price" class="hidden" value="990001"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">99000원 ~</button>
-                        <input type="checkbox" name="price" class="hidden" value="99000"/>
+                        <input type="checkbox" name="price" class="hidden" value="990002"/>
                     </span>
                      </td>
                  </tr>
@@ -339,7 +339,7 @@
                  
                  <tr>
                  	<td colspan=2 class="text-center">
-                    <input type="submit" class="btn btn-primary" value="렛츠기릿">
+                    <input type="submit" class="btn btn-primary" value="검색하기">
                     </td>
                  </tr>
              </table> <!-- 체크박스 테이블 끝 -->
@@ -425,7 +425,7 @@
                       
                     </ul>  <!-- 모임뿌려주기 div 끝 ---> 
                     
-   <%--                   <div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
+                     <div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
 					  <ul class="pagination">
 					    <li ><a href="meeting_list.do?page=${curpage<11?curpage:curpage-10 }">◀◀</a></li>
 					    <li ><a href="meeting_list.do?page=${curpage>1?curpage-1:curpage }">◀</a></li>
@@ -448,14 +448,14 @@
 			       			</c:choose>
 			       		</c:forEach>
        		
- 						 	<c:forEach var="curpage" begin="1"  end="${totalpage }">
+ 						 	<%-- <c:forEach var="curpage" begin="1"  end="${totalpage }">
 						    	<li ><a href="meeting_list.do?page=${curpage}">${curpage}</a></li>
-						    </c:forEach>
+						    </c:forEach> --%>
 						    
 					    <li ><a href="meeting_list.do?page=${curpage<totalpage?curpage+1:curpage }">▶</a></li>
 					    <li ><a href="meeting_list.do?page=${curpage<=totalpage-10?curpage+10:curpage }">▶▶</a></li>
 					  </ul>
-					</div> <!-- 페이지수 뿌려주기 div 끝--> --%>
+					</div> <!-- 페이지수 뿌려주기 div 끝-->
                </div>
            </div>
 

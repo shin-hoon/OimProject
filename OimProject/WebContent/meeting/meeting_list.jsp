@@ -306,19 +306,19 @@
                     </span>
                      <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">10000원 ~ 25000원</button>
-                        <input type="checkbox" name="price" class="hidden" value="10000 AND 25000"/>
+                        <input type="checkbox" name="price" class="hidden" value="25000"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">25000원 ~ 40000원</button>
-                        <input type="checkbox" name="price" class="hidden" value="25000 AND 40000"/>
+                        <input type="checkbox" name="price" class="hidden" value="40000"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">40000원 ~ 99000원</button>
-                        <input type="checkbox" name="price" class="hidden" value="40000 AND 99000"/>
+                        <input type="checkbox" name="price" class="hidden" value="990001"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn locbtn" data-color="primary">99000원 ~</button>
-                        <input type="checkbox" name="price" class="hidden" value="99000"/>
+                        <input type="checkbox" name="price" class="hidden" value="990002"/>
                     </span>
                      </td>
                  </tr>
