@@ -16,9 +16,21 @@ import com.oim.member.dao.MemberVO;
 public class MemberModel {
 
 	@RequestMapping("Oim_Idcheck.do")
-	public String Oim_Idcheck(HttpServletRequest req, HttpServletResponse res)
+	public String Oim_Idcheck(HttpServletRequest req, HttpServletResponse res) throws Throwable
 	{
+		System.out.println("model로 왔음");
+		req.setCharacterEncoding("UTF-8");
+		MemberVO vo=new MemberVO();
 		
+		String om_id=req.getParameter("om_id");
+		
+		/*String om_pwd =req.getParameter("om_pwd");
+		String om_name =req.getParameter("om_name");
+		String om_birth=req.getParameter("om_birth");
+		String om_gender=req.getParameter("om_gender");
+		String om_tel=req.getParameter("om_tel");
+		String om_company=req.getParameter("om_company");*/
+		 	
 		/*해야한다..
 		<%@ page language="java" contentType="text/html; charset=EUC-KR"
 			    pageEncoding="EUC-KR" import="com.sist.dao.*"%>
@@ -29,7 +41,15 @@ public class MemberModel {
 			   request.setAttribute("count", count);
 			%>
 			${count }*/
-		return "main/main.jsp";
+		vo.setOm_id(om_id);
+		/*vo.setOm_pwd(om_pwd);
+		vo.setOm_name(om_name);
+		vo.setOm_birth(om_birth);
+		vo.setOm_gender(om_gender);
+		vo.setOm_tel(om_tel);
+		vo.setOm_company(om_company);*/
+		
+		return "main/idCheck_ok.jsp";
 	}
 	
 	

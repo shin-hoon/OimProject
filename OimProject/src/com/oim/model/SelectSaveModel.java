@@ -9,18 +9,16 @@ import javax.servlet.http.HttpSession;
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
 import com.oim.select.*;
+
 @Controller
 public class SelectSaveModel {
-	
 	@RequestMapping("selectsave.do")
-	public String main_page(HttpServletRequest req, HttpServletResponse res) {
-		
-		
+	public String selectSavePage(HttpServletRequest req, HttpServletResponse res) {
 		req.setAttribute("main_jsp","../selectsave/selectsave.jsp");
 		return "main/main.jsp";
 	}
 
-	
+	@RequestMapping("default.do")
    public void meetingList(HttpServletRequest req,HttpSession sess) throws UnsupportedEncodingException{ 
 	   SelectDAO dao=new SelectDAO();
 	   
@@ -57,7 +55,7 @@ public class SelectSaveModel {
 	   req.setAttribute("curpage", curpage);
 	   req.setAttribute("view", view);
    }
-   
+	@RequestMapping("default2.do")
    public void selectSave(HttpServletRequest req,HttpSession sess,HttpServletResponse res) throws UnsupportedEncodingException{
 	   try {
 		   req.setCharacterEncoding("UTF-8");
@@ -73,7 +71,10 @@ public class SelectSaveModel {
 		   if(saveNum==null)	saveNum="1";
 		   int num=Integer.parseInt(saveNum);
 		   
-		   
+		   if(id==null) {
+			   res.sendRedirect("../selectsave.do?saveNum="+saveNum);
+			   return;
+		   }
 		   SelectSaveVO vo = new SelectSaveVO();
 		   
 		   vo.setCst_no(Integer.parseInt(cst_no));
@@ -121,7 +122,7 @@ public class SelectSaveModel {
 	   }
    }
    
-   
+	@RequestMapping("default3.do")
    public void selectDelete(HttpServletRequest req,HttpSession sess) throws UnsupportedEncodingException{ 
 	   SelectDAO dao=new SelectDAO();
 	   
