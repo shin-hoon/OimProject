@@ -10,12 +10,11 @@
          WHERE num BETWEEN #{start} AND #{end}            	
 	</select>
 	
-	<select id="meetingFindData" resultType="MeetingVO" parameterType="java.util.Map"> <!--모임검색결과 필터링해서 뿌리기  -->
+	<select id="meetingFindData" resultType="MeetingVO" parameterType="java.util.Map"> <!--검색결과 보여주기  -->
 		 SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start, TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
          FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as num
          FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like
-         FROM meeting
-         
+         FROM meeting  
          <where>
          	<if test="category!=null">
          		meet_cg IN
@@ -23,25 +22,124 @@
          			#{cg}
          		</foreach>
          	</if>
-         	
          	<if test="loc!=null">
-         		
+         		AND REGEXP_LIKE(meet_loc,
+         		<foreach collection="loc" item="lc" open="" close=")" separator="||">
+         			#{lc}
+         		</foreach>
          	</if>
-         	
          	<if test="week!=null">
-         		
+         		AND REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'DY','NLS_DATE_LANGUAGE=korean'),
+         	<foreach collection="week" item="wk" open="" close=")" separator="||">
+         			#{wk}
+         		</foreach>
          	</if>
          	
-         	<if test="price!=null">
+          	<if test="price!=null">
+         		AND
+         		<foreach collection="price" item="pr" index="index" open="" close="" separator="OR">
+         		<choose>
+         		          		
+         			<when test='pr.equals("0")'>
+         				meet_price = #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("10000")'>
+         				meet_price <![CDATA[ <= ]]> #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("25000")'>
+         				meet_price BETWEEN 10000 AND #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("40000")'>
+         				meet_price BETWEEN 25000 AND #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("990001")'>
+         				meet_price BETWEEN 40000 AND #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("990002")'>
+         				meet_price <![CDATA[ >= ]]> #{pr} 
+         			</when>
          		
+         			<otherwise>
+         			</otherwise>
+         		</choose>
+         		</foreach>
          	</if>
          	
          	<if test="from!=null and to!=null">
-         		
+         		AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
          	</if>
-         </where>
-         ORDER BY meet_no DESC))
-         WHERE num BETWEEN #{start} AND #{end}   
+         	</where>
+         ORDER BY meet_start DESC))
+         WHERE num BETWEEN #{start} AND #{end}            	
+	</select>
+	
+		<select id="meetingFindTotalPage"> <!--검색결과 총 페이지수 구하기  -->
+		SELECT CEIL(COUNT(*)/12) FROM meeting
+		         <where>
+         	<if test="category!=null">
+         		meet_cg IN
+         		<foreach collection="category" item="cg" open="(" close=")" separator=",">
+         			#{cg}
+         		</foreach>
+         	</if>
+         	<if test="loc!=null">
+         		AND REGEXP_LIKE(meet_loc,
+         		<foreach collection="loc" item="lc" open="" close=")" separator="||">
+         			#{lc}
+         		</foreach>
+         	</if>
+         	<if test="week!=null">
+         		AND REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'DY','NLS_DATE_LANGUAGE=korean'),
+         	<foreach collection="week" item="wk" open="" close=")" separator="||">
+         			#{wk}
+         		</foreach>
+         	</if>
+         	
+          	<if test="price!=null">
+         		AND
+         		<foreach collection="price" item="pr" index="index" open="" close="" separator="OR">
+         		<choose>
+         		          		
+         			<when test='pr.equals("0")'>
+         				meet_price = #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("10000")'>
+         				meet_price <![CDATA[ <= ]]> #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("25000")'>
+         				meet_price BETWEEN 10000 AND #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("40000")'>
+         				meet_price BETWEEN 25000 AND #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("990001")'>
+         				meet_price BETWEEN 40000 AND #{pr}  
+         			</when>
+         			
+         			<when test='pr.equals("990002")'>
+         				meet_price <![CDATA[ >= ]]> #{pr} 
+         			</when>
+         		
+         			<otherwise>
+         			</otherwise>
+         		</choose>
+         		</foreach>
+         	</if>
+         	
+         	<if test="from!=null and to!=null">
+         		AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
+         	</if>
+         	</where>
+		
 	</select>
 	
 	<select id="meetingDetailData" resultType="MeetingVO" parameterType="int">
