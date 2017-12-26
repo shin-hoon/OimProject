@@ -39,19 +39,15 @@ $(function(){
 
 		if(id.trim()=="") //아이디가 입력이 안되었을때
 
-		
-		
 		{
 			$('#id').focus();
 			return;
 		}
 		$.ajax({   //*******
 			type:'POST', // type: 데이터를 무슨 방식으로 보낼꺼냐
-			url:'main.do', // 멤버.jsp에서 만들어짐
-
-			data:{"om_id":id}, // 값을 보냄 ','를 찍고 값을 여러개 보낼 수 있다.
-
-			success:function(response) //idcheck_result.jsp'여기서 실행된 결과값을 넣어준다
+			url:'Oim_Idcheck.do', // 멤버.jsp에서 만들어짐
+			data:{"om_id":id},
+			success:function(response)
 
 			{
 				//성공했을때
@@ -61,10 +57,7 @@ $(function(){
 				{
 					$('#res').html("<font color=blue>"+id+"은(는) 사용 가능한 아이디입니다.</font>");
 					$('#res_ok').html("<input type=submit value=확인 onclick=ok('"+id+"')>"); 
-																//  ㄴ>매개변수 작은따음표를 꼭 써줘야 한다 , 안쓰면 숫자로 인식한다
-						// 확인 버튼이 눌리면 중복확인창이 사라진다
-						// ok 버튼을 눌렀을때 ===> 밑에 함수 처리
-				
+															
 				}else
 				{
 					$('#res').html("<font color=red>"+id+"은(는) 이미 사용중인 아이디입니다.</font>");
