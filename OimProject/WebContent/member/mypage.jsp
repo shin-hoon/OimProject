@@ -54,8 +54,6 @@ body{
 }
 </style>
 
-
-
 </head>
 <body>
 
@@ -169,12 +167,13 @@ body{
                      </td>
                      <td width=70% class="text-center">
                         <input type=text name=pwd_ok size=30 id="pwd_ok">
-                        <h6 style="color:#DF013A;">*새로운 비밀번호 변경확인을 위하여 다시 한번 입력해 주세요.</h6>
+                        <div id="result" style="color:#DF013A;">*새로운 비밀번호 변경확인을 위하여 다시 한번 입력해 주세요.</div>
+                        
                      </td>                  
                   </tr>
                   <tr>
                      <td colspan="2" class="text-center">
-                        <input type="submit" class="btn btn-info btn-sm" value="수정하기">
+                        <input type="submit" class="btn btn-info btn-sm" id="modify" value="수정하기">
                         <input type=button class="btn btn-danger btn-sm" value="취소" onclick="javascript:history.back()">
                      </td>
                     </tr>
