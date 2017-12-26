@@ -44,10 +44,16 @@ public class MeetingModel {
 		return "main/main.jsp";
 	}
 	
+
 	@RequestMapping("meeting_find.do") //모임검색결과
-	public String meeting_find(HttpServletRequest req, HttpServletResponse res) throws Throwable{
+	public String meeting_find(HttpServletRequest req, HttpServletResponse res){
+		try {
+			req.setCharacterEncoding("UTF-8");	
+		}catch(Exception ex) {
+			System.out.println("meeting_find: "+ex.getMessage());
+			
+		}
 		
-		req.setCharacterEncoding("UTF-8");
 		String page=req.getParameter("page");
 		if(page==null)
 			page="1";
@@ -57,36 +63,60 @@ public class MeetingModel {
 		int end= rowSize*curpage;
 		int totalpage=0;
 		
-		String categoryTemp[]= req.getParameterValues("category");
 		
+		String categoryTemp[]= req.getParameterValues("category"); //카테고리
+		String locTemp[]= req.getParameterValues("loc"); //지역
+		String weekTemp[]= req.getParameterValues("week"); //주중or주말
+		String priceTemp[]= req.getParameterValues("price");//참여비용
+		
+		String from=req.getParameter("from");//시작일 ~부터
+		String to=req.getParameter("to");//시작일 ~까지		
 		List<String> category= new ArrayList<String>();
+		List<String> loc= new ArrayList<String>();
+		List<String> week= new ArrayList<String>();
+		List<String> price= new ArrayList<String>();
+		
 		for(String s:categoryTemp) {
 			category.add(s);
 		}
-		
 		for(String s:category) {
-			System.out.println(s);
+			System.out.print(s+" ");
 		}
-		
 		System.out.println();
 		
-		String loc[]= req.getParameterValues("loc");
-		String week[]= req.getParameterValues("week");
-		String price[]= req.getParameterValues("price");
-		String from=req.getParameter("from");
-		String to=req.getParameter("to");
+		for(String s:locTemp) {
+			loc.add(s);
+			System.out.print(s+" ");
+		}
+		System.out.println();
 		
+		for(String s:weekTemp) {
+			week.add(s);
+			System.out.print(s+" ");
+		}
+		System.out.println();
+		
+		for(String s:priceTemp) {
+			price.add(s);
+			System.out.print(s+" ");
+		}
+		System.out.println();
+		
+		System.out.println(from);
+		System.out.println(to);
+
 		Map map=new HashMap();
-		map.put("start", start);
-		map.put("end", end);
 		map.put("category", category);
 		map.put("loc", loc);
+		map.put("week", week);
 		map.put("price", price);
 		map.put("from", from);
 		map.put("to", to);
+		map.put("start", start);
+		map.put("end", end);
 		
 		List<MeetingVO> list=MeetingDAO.meetingFindData(map);
-		totalpage=MeetingDAO.meetingTotalPage();
+		totalpage=MeetingDAO.meetingFindTotalPage();
 		
 		//jsp로 전송
 		req.setAttribute("totalpage", totalpage);

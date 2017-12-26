@@ -76,6 +76,23 @@ public class MeetingDAO {
 		return list;
 	}
 	
+	public static int meetingFindTotalPage() { //검색결과 총 페이지수 구하기
+		
+		int totalpage=0;
+		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+		try {
+			totalpage=session.selectOne("meetingFindTotalPage");
+			
+		}catch(Exception ex) {
+			System.out.println("meetingFindTotalPage: "+ex.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+		return totalpage;
+	}
+	
 	//dao
 	public static MeetingVO meetingDetailData(int meet_no){ //모임 상세정보 보여주기
 	      
