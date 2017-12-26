@@ -78,7 +78,7 @@
          WHERE num BETWEEN #{start} AND #{end}            	
 	</select>
 	
-		<select id="meetingFindTotalPage"> <!--검색결과 총 페이지수 구하기  -->
+		<select id="meetingFindTotalPage" resultType="int" parameterType="java.util.Map"> <!--검색결과 총 페이지수 구하기  -->
 		SELECT CEIL(COUNT(*)/12) FROM meeting
 		         <where>
          	<if test="category!=null">

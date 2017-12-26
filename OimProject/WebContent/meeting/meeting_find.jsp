@@ -427,8 +427,8 @@
                     
                      <div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
 					  <ul class="pagination">
-					    <li ><a href="meeting_list.do?page=${curpage<11?curpage:curpage-10 }">◀◀</a></li>
-					    <li ><a href="meeting_list.do?page=${curpage>1?curpage-1:curpage }">◀</a></li>
+					    <li ><a href="meeting_find.do?page=${curpage<11?curpage:curpage-10 }">◀◀</a></li>
+					    <li ><a href="meeting_find.do?page=${curpage>1?curpage-1:curpage }">◀</a></li>
 					    
  					  <fmt:parseNumber var="num" value="${curpage/10}" integerOnly="true"/>
  					   <fmt:parseNumber var="num2" value="${curpage%10}" integerOnly="true"/>
@@ -440,10 +440,10 @@
 			       				<c:when test="${i>totalpage }">
 			       				</c:when>
 			       				<c:when test="${i==curpage}">
-				    				<li class="active"><a href="meeting_list.do?page=${i}">${i}</a></li>
+				    				<li class="active"><a href="meeting_find.do?page=${i}">${i}</a></li>
 			       				</c:when>
 			       				<c:when test="${i <= totalpage}">
-			       					<li><a href="meeting_list.do?page=${i}">${i}</a></li>
+			       					<li><a href="meeting_find.do?page=${i}">${i}</a></li>
 			       				</c:when>
 			       			</c:choose>
 			       		</c:forEach>
@@ -452,8 +452,8 @@
 						    	<li ><a href="meeting_list.do?page=${curpage}">${curpage}</a></li>
 						    </c:forEach> --%>
 						    
-					    <li ><a href="meeting_list.do?page=${curpage<totalpage?curpage+1:curpage }">▶</a></li>
-					    <li ><a href="meeting_list.do?page=${curpage<=totalpage-10?curpage+10:curpage }">▶▶</a></li>
+					    <li ><a href="meeting_find.do?page=${curpage<totalpage?curpage+1:curpage }">▶</a></li>
+					    <li ><a href="meeting_find.do?page=${curpage<=totalpage-10?curpage+10:curpage }">▶▶</a></li>
 					  </ul>
 					</div> <!-- 페이지수 뿌려주기 div 끝-->
                </div>

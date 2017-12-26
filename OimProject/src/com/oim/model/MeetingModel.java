@@ -48,81 +48,86 @@ public class MeetingModel {
 	@RequestMapping("meeting_find.do") //모임검색결과
 	public String meeting_find(HttpServletRequest req, HttpServletResponse res){
 		try {
-			req.setCharacterEncoding("UTF-8");	
+			req.setCharacterEncoding("UTF-8");
+			
+			String page=req.getParameter("page");
+			if(page==null)
+				page="1";
+			
+			int curpage=Integer.parseInt(page);
+			int rowSize=12;
+			int start= (rowSize*curpage)-(rowSize-1);
+			int end= rowSize*curpage;
+			int totalpage=0;
+			
+			String categoryTemp[]= req.getParameterValues("category"); //카테고리
+			String locTemp[]= req.getParameterValues("loc"); //지역
+			String weekTemp[]= req.getParameterValues("week"); //주중or주말
+			String priceTemp[]= req.getParameterValues("price");//참여비용
+			
+			String from=req.getParameter("from");//시작일 ~부터
+			String to=req.getParameter("to");//시작일 ~까지		
+			List<String> category= new ArrayList<String>();
+			List<String> loc= new ArrayList<String>();
+			List<String> week= new ArrayList<String>();
+			List<String> price= new ArrayList<String>();
+			
+			for(String s:categoryTemp) {
+				category.add(s);
+			}
+			for(String s:category) {
+				System.out.print(s+" ");
+			}
+			System.out.println();
+			
+			for(String s:locTemp) {
+				loc.add(s);
+				System.out.print(s+" ");
+			}
+			System.out.println();
+			
+			for(String s:weekTemp) {
+				week.add(s);
+				System.out.print(s+" ");
+			}
+			System.out.println();
+			
+			for(String s:priceTemp) {
+				price.add(s);
+				System.out.print(s+" ");
+			}
+			System.out.println();
+			
+			System.out.println(from);
+			System.out.println(to);
+
+			
+			Map map=new HashMap();
+			
+			map.put("category", category);
+			map.put("loc", loc);
+			map.put("week", week);
+			map.put("price", price);
+			map.put("from", from);
+			map.put("to", to);
+			map.put("start", start);
+			map.put("end", end);
+			
+			List<MeetingVO> list=MeetingDAO.meetingFindData(map);
+			totalpage=MeetingDAO.meetingFindTotalPage(map);
+			
+			System.out.println("totalpage: "+totalpage);
+			
+			//jsp로 전송
+			req.setAttribute("totalpage", totalpage);
+			req.setAttribute("curpage", curpage);
+			req.setAttribute("list", list);
+			req.setAttribute("main_jsp", "../meeting/meeting_find.jsp");
 		}catch(Exception ex) {
 			System.out.println("meeting_find: "+ex.getMessage());
 			
 		}
 		
-		String page=req.getParameter("page");
-		if(page==null)
-			page="1";
-		int curpage=Integer.parseInt(page);
-		int rowSize=12;
-		int start= (rowSize*curpage)-(rowSize-1);
-		int end= rowSize*curpage;
-		int totalpage=0;
-		
-		
-		String categoryTemp[]= req.getParameterValues("category"); //카테고리
-		String locTemp[]= req.getParameterValues("loc"); //지역
-		String weekTemp[]= req.getParameterValues("week"); //주중or주말
-		String priceTemp[]= req.getParameterValues("price");//참여비용
-		
-		String from=req.getParameter("from");//시작일 ~부터
-		String to=req.getParameter("to");//시작일 ~까지		
-		List<String> category= new ArrayList<String>();
-		List<String> loc= new ArrayList<String>();
-		List<String> week= new ArrayList<String>();
-		List<String> price= new ArrayList<String>();
-		
-		for(String s:categoryTemp) {
-			category.add(s);
-		}
-		for(String s:category) {
-			System.out.print(s+" ");
-		}
-		System.out.println();
-		
-		for(String s:locTemp) {
-			loc.add(s);
-			System.out.print(s+" ");
-		}
-		System.out.println();
-		
-		for(String s:weekTemp) {
-			week.add(s);
-			System.out.print(s+" ");
-		}
-		System.out.println();
-		
-		for(String s:priceTemp) {
-			price.add(s);
-			System.out.print(s+" ");
-		}
-		System.out.println();
-		
-		System.out.println(from);
-		System.out.println(to);
-
-		Map map=new HashMap();
-		map.put("category", category);
-		map.put("loc", loc);
-		map.put("week", week);
-		map.put("price", price);
-		map.put("from", from);
-		map.put("to", to);
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<MeetingVO> list=MeetingDAO.meetingFindData(map);
-		totalpage=MeetingDAO.meetingFindTotalPage();
-		
-		//jsp로 전송
-		req.setAttribute("totalpage", totalpage);
-		req.setAttribute("curpage", curpage);
-		req.setAttribute("list", list);
-		req.setAttribute("main_jsp", "../meeting/meeting_find.jsp");
 		return "main/main.jsp";
 	}
 	
