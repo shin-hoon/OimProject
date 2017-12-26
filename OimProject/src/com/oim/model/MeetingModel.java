@@ -112,10 +112,16 @@ public class MeetingModel {
     @RequestMapping("meeting_payment.do")
     public String meeting_payment(HttpServletRequest req, HttpServletResponse res) {
     	String meet_no = req.getParameter("meet_no");
+    	String id = req.getParameter("id");
+    	System.out.println(id);
+    	
     	System.out.println("meet_no:"+meet_no);
     	MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
+    	MemberVO vo2 = MeetingDAO.meetingDetailInfo(id);
     	
+    	req.setAttribute("vo2", vo2);
         req.setAttribute("vo", vo);
+        
         req.setAttribute("meeting_payment.do", "meeting_payment.jsp");
     	return "meeting/meeting_payment.jsp";
     }

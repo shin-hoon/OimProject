@@ -137,6 +137,7 @@
    	
         <div class="row">
         <input type="hidden" id="meet_no" name="meet_no" value="${vo.meet_no }"/>
+        <input type="hidden" id="om_id" name="om_id" value="${sessionScope.id}""/>
             <div class="top col-xs-12" style="vertical-align: middle;">
                <c:if test="${vo.meet_price==0 }">
                   <span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>

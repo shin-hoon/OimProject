@@ -94,15 +94,16 @@
             <table class="table">
 				<tr>
 					<td class="success text-center" width="20%">이름</td>
-					<td class="text-center name" width="30%" id="name">장연식</td>
-					<td class="success text-center" width="20%">이메일</td>
-					<td class="text-center email" width="30%" id="email">jang1234@daum.net</td>
+					<td class="text-center name" width="30%" id="name">${sessionScope.name}</td>
+					<td class="success text-center" width="20%">아이디</td>
+					<td class="text-center email" width="30%" id="om_id" name="om_id"
+					value="${sessionScope.id}">${sessionScope.id}</td>
 				</tr>
 				<tr>
 					<td class="success text-center" width="20%">소속</td>
-					<td class="text-center company" width="30%" id="company">쌍용교육센터</td>
+					<td class="text-center company" width="30%" id="company">${vo2.om_company }</td>
 					<td class="success text-center" width="20%">전화번호</td>
-					<td class="text-center tel" width="30%" id="tel">010-9699-8645</td>
+					<td class="text-center tel" width="30%" id="tel">${vo2.om_tel }</td>
                 </tr>
 			</table>
 			<h3>결제정보</h3>

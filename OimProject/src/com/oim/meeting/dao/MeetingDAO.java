@@ -127,6 +127,23 @@ public class MeetingDAO {
 			}
 		}
 	}
+	
+	public static MemberVO meetingDetailInfo(String om_id) { //모임개설화면에서 사용자 정보 보여주기
+		
+		MemberVO vo=new MemberVO();
+		SqlSession session=ssf.openSession();
+		try {
+			vo=session.selectOne("meetingDetailInfo",om_id);
+			
+		}catch(Exception ex) {
+			System.out.println("meetingDetailInfo: "+ex.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+		return vo;
+	}
 
 	   
 //	   public MeetingDAO() { //데이터  파싱에서 DB에 insert하는 용도로 작성한 임시코드
