@@ -127,6 +127,12 @@ public class MemberModel {
 		return "member/update_ok.jsp";
 	}
 	
+	@RequestMapping("Oim_meetpage.do")
+	public static String Oim_meetpage(HttpServletRequest req, HttpServletResponse res)
+	{
+		req.setAttribute("main_jsp","../member/meetpage.jsp");
+		return "main/main.jsp";
+	}
 	
 	
 	

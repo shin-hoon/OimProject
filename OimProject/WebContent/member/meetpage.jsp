@@ -5,9 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>모임관리</title>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
 
 <!--추가한것 -탭 -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script> 
@@ -40,6 +39,8 @@
 table td:last-child {border-right:none;}
 table tr:last-child td {border-bottom:none;}
 <!-- --------------------------------------------테이블스타일->선지우기  끝-->
+
+.tab-pane { color:black;}
 
 /*테이블 아이콘  */
 .oim-icon{
