@@ -113,22 +113,6 @@ public class MeetingDAO {
 	      return vo;
 	   }
 	
-	public static MemberVO meetingInsertData(int om_id) { //모임개설화면에서 사용자 정보 보여주기
-		
-		MemberVO vo=new MemberVO();
-		SqlSession session=ssf.openSession();
-		try {
-			vo=session.selectOne("meetingInsertData",om_id);
-			
-		}catch(Exception ex) {
-			System.out.println("meetingInsertData: "+ex.getMessage());
-		}finally {
-			if(session!=null) {
-				session.close();
-			}
-		}
-		return vo;
-	}
 	
 	public static void meetingInsertOk(MeetingVO vo) { //모임개설 insert
 		

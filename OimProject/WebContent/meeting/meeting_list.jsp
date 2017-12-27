@@ -282,11 +282,11 @@
                      <td class="col-sm-11">
                             <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">주중</button>
-                        <input type="checkbox" name="week" class="hidden" value="월|화|수|목|금"/>
+                        <input type="checkbox" name="week" class="hidden" value="2|3|4|5|6"/>
                     </span>
                     <span class="button-checkbox">
                         <button type="button" class="btn checkbtn" data-color="primary">주말</button>
-                        <input type="checkbox" name="week" class="hidden" value="토|일"/>
+                        <input type="checkbox" name="week" class="hidden" value="1|7"/>
                     </span>   
                      </td>
                  </tr>
