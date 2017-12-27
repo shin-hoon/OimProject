@@ -146,6 +146,8 @@ $(function(){
 	  }); //#check_password.keyup
 	 });
 
+	
+	
 </script> 
 </head>
 
