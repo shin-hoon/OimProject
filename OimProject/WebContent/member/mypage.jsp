@@ -54,14 +54,27 @@ body{
 }
 </style>
 
+<script type="text/javascript">
+//회원정보 일치 확인
+$(function(){
+ $('#pwd').keyup(function(){
+  $('font[name=check]').text('');
+ }); //#password.keyup
+
+ $('#pwd_ok').keyup(function(){
+  if($('#pwd').val()!=$('#pwd_ok').val()){
+   $('font[name=check]').text('');
+   $('font[name=check]').html("<font color=red>"+"암호가 일치하지 않습니다.다시입력하세요.");
+  }else{
+   $('font[name=check]').text('');
+   $('font[name=check]').html("<font color=blue>"+"암호가 일치합니다.");
+  }
+ }); //#check_password.keyup
+});
+</script>
 </head>
+
 <body>
-
-
-
-   
-   
-   
 <!-- 카테고리 탭 -->
    <div class="container">
 	   	<!-- Mypage 검정 로고 네비 -->
@@ -167,7 +180,7 @@ body{
                      </td>
                      <td width=70% class="text-center">
                         <input type=text name=pwd_ok size=30 id="pwd_ok">
-                        <div id="result" style="color:#DF013A;">*새로운 비밀번호 변경확인을 위하여 다시 한번 입력해 주세요.</div>
+                         <span class="help-block"><font name="check" size="2" color="red"></font> </span>
                         
                      </td>                  
                   </tr>

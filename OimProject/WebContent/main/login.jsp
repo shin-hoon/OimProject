@@ -31,7 +31,7 @@
 
 
 <!-- 로그인 스트립트  -->
-<!-- <script type="text/javascript">
+ <script type="text/javascript">
 $(function(){
 	$('#loginBtn').click(function(){
 		var id=$('#id').val();
@@ -84,7 +84,7 @@ $(function(){
 		});
 	});
 });
-</script> -->
+</script> 
 
 
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ ----------->
@@ -188,7 +188,7 @@ $(function(){
 	</c:if>
 	
 	<!-- 로그인 모달 팝업 -->
-	<!-- <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header oim_modal">
@@ -196,7 +196,7 @@ $(function(){
 		<h3 class="modal-title" id="myModalLabel">로그인</h3>
 	      </div>
 	      <div class="modal-body" style="margin:0px auto;">
-	      			<form>
+	      			
 					<table class="w3-table w3-hoverable" >
 					<tr>
 						<td width=30% style="text-align: right;">아이디<br><span>(E-mail)</span></td>
@@ -222,11 +222,11 @@ $(function(){
 						</td>
 					</tr>
 					</table>
-					</form>
+					
 				</div>
 			</div>
 	      </div>
-		</div> -->
+		</div> 
 		<!--  로그인 모달 끝 -->
 		
 		

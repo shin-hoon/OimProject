@@ -58,9 +58,11 @@ public class MemberModel {
 	@RequestMapping("Oim_Login.do")
 	public String Oim_Login(HttpServletRequest req, HttpServletResponse res)throws Throwable{
 	
+		HttpSession session=req.getSession();
 		req.setCharacterEncoding("UTF-8");
 		String id= req.getParameter("id");
 		String pwd= req.getParameter("pwd");
+		
 		
 		int count=MemberDAO.OimLogincheck(id);  //	1)아이디 존재 여부 확인
 		
@@ -77,6 +79,9 @@ public class MemberModel {
 			if(pwd.equals(vo.getOm_pwd()))  //비밀번호 까지 같다면
 			{
 				vo.setCount(3);  //					count=3
+				session.setAttribute("id", id);
+				session.setAttribute("name", vo.getOm_name());
+				System.out.println("세션id: "+id);
 				
 			}
 			else							//비밀번호가 다르다면
@@ -85,14 +90,7 @@ public class MemberModel {
 			}
 			
 		}
-		
-		//결과값을 추가
-		req.setAttribute("id", vo.getOm_id());
-		req.setAttribute("name", vo.getOm_name());
-		req.setAttribute("tel", vo.getOm_tel());
-		req.setAttribute("gender", vo.getOm_gender());
-		req.setAttribute("company", vo.getOm_company());
-		req.setAttribute("regdate", vo.getOm_regdate());
+		System.out.println(id);
 		req.setAttribute("count", vo.getCount());
 		
 		return "member/login_ok.jsp";
