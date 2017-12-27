@@ -42,36 +42,41 @@ public class MemberModel {
 	public String Oim_Join(HttpServletRequest req, HttpServletResponse res) throws Throwable
 	{
 		req.setCharacterEncoding("UTF-8");
-	      
-	      MemberVO vo=new MemberVO();
-	      
-	      String om_id=req.getParameter("om_id");
-	      String om_pwd=req.getParameter("om_pwd");
-	      String om_name=req.getParameter("om_name");
-	      String om_birth=req.getParameter("om_birth");
-	      String om_gender=req.getParameter("om_gender");
-	      String tel1=req.getParameter("tel1");
-	      String tel2=req.getParameter("tel2");
-	      String tel3=req.getParameter("tel3");
-	      String om_company=req.getParameter("om_company");;
-	     
-	      vo.setOm_id(om_id);
-	      vo.setOm_pwd(om_pwd);
-	      vo.setOm_name(om_name);
-	      vo.setOm_birth(om_birth);
-	      vo.setOm_gender(om_gender);
-	      vo.setOm_tel(tel1+tel2+tel3);
-	      vo.setOm_company(om_company);
+	      try {
+	    	  MemberVO vo=new MemberVO();
+		      
+		      String om_id=req.getParameter("om_id");
+		      String om_pwd=req.getParameter("om_pwd");
+		      String om_name=req.getParameter("om_name");
+		      String om_birth=req.getParameter("om_birth");
+		      String om_gender=req.getParameter("om_gender");
+		      String tel1=req.getParameter("tel1");
+		      String tel2=req.getParameter("tel2");
+		      String tel3=req.getParameter("tel3");
+		      String om_company=req.getParameter("om_company");;
+		     
+		      vo.setOm_id(om_id);
+		      vo.setOm_pwd(om_pwd);
+		      vo.setOm_name(om_name);
+		      vo.setOm_birth(om_birth);
+		      vo.setOm_gender(om_gender);
+		      vo.setOm_tel(tel1+tel2+tel3);
+		      vo.setOm_company(om_company);
 
-	      System.out.println("아이디(Email):"+om_id);
-	      System.out.println("비밀번호:"+om_pwd);
-	      System.out.println("이름:"+om_name);
-	      System.out.println("생년월일:"+om_birth);
-	      System.out.println("성별:"+om_gender);
-	      System.out.println("전화번호:"+vo.getOm_tel());
-	      System.out.println("소속명:"+om_company);
+		      System.out.println("아이디(Email):"+om_id);
+		      System.out.println("비밀번호:"+om_pwd);
+		      System.out.println("이름:"+om_name);
+		      System.out.println("생년월일:"+om_birth);
+		      System.out.println("성별:"+om_gender);
+		      System.out.println("전화번호:"+vo.getOm_tel());
+		      System.out.println("소속명:"+om_company);
+		      
+		      MemberDAO.OimJoin(vo);
+	      }catch(Exception ex)
+	      {
+	    	  System.out.println("에러"+ex.getMessage());
+	      }
 	      
-	      MemberDAO.OimJoin(vo);
 
 	      return "main/main.jsp";
 
