@@ -41,6 +41,7 @@ public class MemberModel {
 	@RequestMapping("Oim_Join.do")
 	public String Oim_Join(HttpServletRequest req, HttpServletResponse res) throws Throwable
 	{
+		try {
 		req.setCharacterEncoding("UTF-8");
 	      
 	      MemberVO vo=new MemberVO();
@@ -72,6 +73,11 @@ public class MemberModel {
 	      System.out.println("¼Ò¼Ó¸í:"+om_company);
 	      
 	      MemberDAO.OimJoin(vo);
+		}
+		catch(Exception ex)
+		{
+			System.out.println(ex.getMessage());
+		}
 
 	      return "main/main.jsp";
 
