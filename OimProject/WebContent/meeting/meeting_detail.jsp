@@ -66,18 +66,24 @@
         }); 
     $(function(){
           $('#apply').click(function(){
+        	 
         	 var meet_no = $('#meet_no').attr("value");
         	 var om_id = $('#om_id').attr("value")
-             Shadowbox.open({
-               content:"meeting_payment.do?meet_no="+meet_no+"&om_id="+om_id,		
-               player:'iframe',
-               title:'신청내역확인',
-               width:1200,
-               height:700
-             }); 
+        	 if(om_id.trim()==""){
+        		 alert("로그인 후 이용해주세요.")
+        	 }else{
+        		 Shadowbox.open({
+                     content:"meeting_payment.do?meet_no="+meet_no+"&om_id="+om_id,		
+                     player:'iframe',
+                     title:'신청내역확인',
+                     width:1200,
+                     height:700
+                   });  
+        	 }
           });
        });
 </script>
+
 <!--meeting_detail/CSS-->
 <style type="text/css">
     .row{
@@ -192,7 +198,7 @@
                 <div class="right-pay">   
                <h2 class="price" id="price" style="text-align: right;">가격 : ${vo.meet_price } 원</h2>
                     <a href="#" class="btn btn-large btn-danger jjim" id="jjim" style="float: right; height: 50px;">♡<br>1</a>
-                    <c:if test="${vo.meet_limit!=0 }">
+                    <c:if test="${vo.meet_limit!=0}">
                     	<a href="#" class="btn btn-large btn-primary apply" id="apply" style="float: right; height: 50px;">신청하기</a>
                     </c:if>
                     <c:if test="${vo.meet_limit==0 }">

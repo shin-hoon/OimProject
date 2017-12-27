@@ -6,39 +6,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>모임관리</title>
 
-
-
-<!--추가한것 -탭 -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<!--추가한것  끝-->
-
-
 <!-- 모임 수정에 필요한것 -->
-    <!--DateTimePicker링크-->
-      <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
-      <script type="text/javascript" src="js/moment.js"></script>
-      <script type="text/javascript" src="js/daterangepicker.js"></script>
+<!--DateTimePicker링크-->
+<link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
+<script type="text/javascript" src="js/moment.js"></script>
+<script type="text/javascript" src="js/daterangepicker.js"></script>
+
       
-    <!-- 네이버 지도 -->
-   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=1e5PfwhPM359PFhc_Qqy&callback=CALLBACK_FUNCTION"></script>
-   
-    <style>
-        .meetingRow{
-            width: 1100px;
-            margin: 0 auto;
-        }
-    </style>
-
-
-
-
+<!-- 네이버 지도 -->
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=1e5PfwhPM359PFhc_Qqy&callback=CALLBACK_FUNCTION"></script>
 
 <!-- 테이블스타일->선지우기 -->
 <style type="text/css">
 table td:last-child {border-right:none;}
 table tr:last-child td {border-bottom:none;}
 <!-- --------------------------------------------테이블스타일->선지우기  끝-->
+.meetingRow{
+    width: 1100px;
+    margin: 0 auto;
+}
 
 .tab-pane { color:black;}
 
@@ -56,69 +42,55 @@ table tr:last-child td {border-bottom:none;}
    display:block;
    margin-top:5px;
    margin-bottom:5px;
-
-
-
 </style>
-
 </head>
 <body>
-
-   
-   
    
 <!-- 카테고리 탭 -->
-   <div class="container">
-      <!-- Mypage 검정 로고 네비 -->
-      <nav class="mypage" style="background-color:#2E2E2E; height:50px;">
-         <div class="container text-left">
-            <h3 style="color:#ffffff;"><b>모임관리</b></h3>
-         </div>
-      </nav>
+<div class="container">
+	<!-- Mypage 검정 로고 네비 -->
+    <nav class="mypage" style="background-color:#2E2E2E; height:50px;">
+    	<div class="container text-left">
+        	<h3 style="color:#ffffff;"><b>모임관리</b></h3>
+        </div>
+    </nav>
 <!-- Mypage 검정 로고 네비  끝-->
+    <div class="tabtable" > 
+    	<ul class="nav nav-tabs" ><br>
+        	<li class="active"><a href="#tab1" data-toggle="tab">모임관리 홈</a></li>
+            <li><a href="#tab2" data-toggle="tab">신청자관리</a></li>
+            <li><a href="#tab3" data-toggle="tab">모임수정</a></li>
+        </ul>
+        <div class="tab-content" style="border: 1px solid #eee">
 
-      <div class="tabtable" > 
-           <ul class="nav nav-tabs" ><br>
-             <li class="active"><a href="#tab1" data-toggle="tab">모임관리 홈</a></li>
-             <li><a href="#tab2" data-toggle="tab">신청자관리</a></li>
-             <li><a href="#tab3" data-toggle="tab">모임수정</a></li>
-           </ul>
-           <div class="tab-content" style="border: 1px solid #eee">
-              
-              
-              
-              
-              
-              
-              
-<!-- =====모임관리 홈======== -->
-              <div class="tab-pane active" id="tab1"> 
-               <div class="oim-mypage home">
-                     <h4><span class="oim-icon glyphicon glyphicon-user"></span>모임관리 홈</h4>
+		<!-- =====모임관리 홈======== -->
+        	<div class="tab-pane active" id="tab1"> 
+            	<div class="oim-mypage home">
+                	<h4><span class="oim-icon glyphicon glyphicon-user"></span>모임관리 홈</h4>
                 </div>
      <!-- 회원정보 테이블 -->
                 <table class="table table-hover" style="margin:6%; width:85%;  margin-bottom:5%;">
-                   <thead>
-                       <tr>
+                	<thead>
+                    	<tr>
                            <th style="color:#2E2E2E;">내가 개설한 모임</th><!-- 열 -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                           <td width=20% class="text-center">
-                                 <img src="img/img1.jpg" style="width:55%; height:20%; margin:0%; margin-right:0%;">
-                              </td>
-                              <td width=60% class="text-left vertical-align: Middle" style="vertical-align: Middle">
-                                 <span class="label label-default">모임종료</span>
-                                 <span class="label label-danger">유료</span>
-                                 <br><br>
-                                 <font class="oim_font" size=2px;><span class="glyphicon glyphicon-tree-deciduous">개설일: </span></font>&nbsp;&nbsp;
-                               <font class="oim_font" size=2px;><span class="glyphicon glyphicon-calendar">참여신청: </span></font>&nbsp;&nbsp;
-                               <font class="oim_font" size=2px;><span class="glyphicon glyphicon-ok">모임기간: </span></font>&nbsp;&nbsp;
-                              </td>
-                              <td width=20% class="text-center" style="vertical-align: middle">
-                               <h4><span class="label label-default">모임종료</span></h4>
-                              </td>
+                   		<tr>
+                        	<td width=20% class="text-center">
+                            	<img src="img/img1.jpg" style="width:55%; height:20%; margin:0%; margin-right:0%;">
+                            </td>
+                            <td width=60% class="text-left vertical-align: Middle" style="vertical-align: Middle">
+                            	<span class="label label-default">모임종료</span>
+                                <span class="label label-danger">유료</span>
+                                <br><br>
+                                <font class="oim_font" size=2px;><span class="glyphicon glyphicon-tree-deciduous">개설일: </span></font>&nbsp;&nbsp;
+                                <font class="oim_font" size=2px;><span class="glyphicon glyphicon-calendar">참여신청: </span></font>&nbsp;&nbsp;
+                                <font class="oim_font" size=2px;><span class="glyphicon glyphicon-ok">모임기간: </span></font>&nbsp;&nbsp;
+                            </td>
+                            	<td width=20% class="text-center" style="vertical-align: middle">
+                               		<h4><span class="label label-default">모임종료</span></h4>
+                              	</td>
                         </tr>
                         <tr>
                            <td width=20% class="text-center">
