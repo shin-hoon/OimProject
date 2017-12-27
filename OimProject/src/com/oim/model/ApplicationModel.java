@@ -27,7 +27,7 @@ public class ApplicationModel {
 		System.out.println(om_id);
 		
     	req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
-        return "main/main.jsp";
+        return "meeting_detail.do";
     }
 }
 

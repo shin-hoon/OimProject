@@ -228,7 +228,7 @@ table tr:last-child td {border-bottom:none;}
           
           
 <!--================== 모임수정 ===================== -->
-           <div class="tab-pane active" id="tab3"> 
+           <div class="tab-pane" id="tab3"> 
            	<h4><span class="oim-icon glyphicon glyphicon-user"></span>모임 수정</h4>
                
                 

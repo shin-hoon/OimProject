@@ -30,7 +30,7 @@
     $(function() {
         $('#apply').click(function() {
             alert("결제가 완료되었습니다.")
-            parent.location.reload();
+            parent.location.reload()
         });
     });
 </script>
