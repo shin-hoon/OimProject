@@ -31,11 +31,10 @@
          		</foreach>
          	</if>
          	
-         	
          	<if test="week.size()!=0 and week!=null">
-         		AND REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'DY','NLS_DATE_LANGUAGE=korean'),
-         	<foreach collection="week" item="wk" open="" close=")" separator="||">
-         			#{wk}
+         		AND 
+         	<foreach collection="week" item="wk" open="" close="" separator="OR">
+         		REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'D'),#{wk})
          		</foreach>
          	</if>
          	
@@ -75,7 +74,7 @@
          		</foreach>
          	</if>
          	
-         	<if test="from!='' and to!=''">
+         	<if test="(from!='' and to!='') and (from!=null and to!=null)">
          		AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
          	</if>
          	</where>
@@ -101,14 +100,12 @@
          		</foreach>
          	</if>
          	
-         	
          	<if test="week.size()!=0 and week!=null">
-         		AND REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'DY','NLS_DATE_LANGUAGE=korean'),
-         	<foreach collection="week" item="wk" open="" close=")" separator="||">
-         			#{wk}
+         		AND 
+         	<foreach collection="week" item="wk" open="" close="" separator="OR">
+         		REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'D'),#{wk})
          		</foreach>
          	</if>
-         	
          	
           	<if test="price.size()!=0 and price!=null">
          		AND
@@ -145,7 +142,7 @@
          		</foreach>
          	</if>
          	
-         	<if test="from!='' and to!=''">
+         	<if test="(from!='' and to!='') and (from!=null and to!=null)">
          		AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
          	</if>
          	</where>
@@ -168,12 +165,6 @@
    	
 	<select id="meetingTotalPage" resultType="int"> <!--총 페이지수 구하기  -->
 		SELECT CEIL(COUNT(*)/12) FROM meeting
-	</select>
-	
-	<select id="meetingInsertData" resultType="com.oim.member.dao.MemberVO" parameterType="String"> <!-- 모임개설하는 화면에서 작성자 정보 불러오기 -->
-		SELECT om_id, om_tel FROM oim_member
-		WHERE om_id=#{om_id} 
-		
 	</select>
 	
 	<insert id="meetingInsertOK" parameterType="meetingVO"> <!--모임개설 완료 insert하기-->

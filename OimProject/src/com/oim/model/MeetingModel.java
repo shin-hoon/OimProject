@@ -126,8 +126,7 @@ public class MeetingModel {
 					
 					List<MeetingVO> list=MeetingDAO.meetingFindData(map);
 					totalpage=MeetingDAO.meetingFindTotalPage(map);
-					
-					System.out.println("totalpage: "+totalpage);		
+							
 					
 					//jsp로 전송
 					HttpSession session=req.getSession();
@@ -139,6 +138,8 @@ public class MeetingModel {
 						session.setAttribute("price", price);
 						session.setAttribute("from", from);
 						session.setAttribute("to", to);
+						
+						System.out.println("totalpage: "+totalpage);
 					}
 					else //페이지를 옮겨갈 경우에는 map에 메모리를 새로 할당해서 session에 저장된 검색결과를 넣는다.
 					{
@@ -153,6 +154,7 @@ public class MeetingModel {
 						map.put("end", end);
 						list=MeetingDAO.meetingFindData(map);
 						totalpage=MeetingDAO.meetingFindTotalPage(map);
+						System.out.println("totalpage: "+totalpage);
 					}
 					req.setAttribute("totalpage", totalpage);
 					req.setAttribute("curpage", curpage);
@@ -193,12 +195,14 @@ public class MeetingModel {
     
     
     @RequestMapping("meeting_insert.do")//모임개설 입력화면
-    public String meeting_insert(HttpServletRequest req, HttpServletResponse res/*, HttpSession session*/) {
+    public String meeting_insert(HttpServletRequest req, HttpServletResponse res) {
     	
-/*    	String om_id=(String)session.getAttribute("om_id");
-    	MemberVO vo=MeetingDAO.meetingInsertData(Integer.parseInt(om_id));*/
     	
-
+    	HttpSession session=req.getSession();
+    	MemberVO vo=MeetingDAO.meetingDetailInfo((String)session.getAttribute("id"));
+    	
+    	
+    	req.setAttribute("vo", vo);
     	req.setAttribute("main_jsp", "../meeting/meeting_insert.jsp");
     	return "main/main.jsp";
     }
@@ -207,24 +211,48 @@ public class MeetingModel {
     public String meeting_insertOK(HttpServletRequest req, HttpServletResponse res) throws Throwable{
 
     	req.setCharacterEncoding("UTF-8");
-    	String meet_cg=req.getParameter("meet_cg");
-    	/*String poster=req.getParameter("meet_poster");*/
-    	/*String om_id=req.getParameter("om_id");*/
-    	String meet_subject=req.getParameter("meet_subject");
-    	String meet_date=req.getParameter("meet_date");
-    	String meet_start=meet_date.substring(0, meet_date.indexOf("~")-1);
-    	String meet_end=meet_date.substring(meet_date.indexOf("~")+2);
-    	String meet_loc1=req.getParameter("meet_loc1");
-    	String meet_loc2=req.getParameter("meet_loc2");
-    	String meet_charge=req.getParameter("meet_charge");
-    	String meet_total=req.getParameter("meet_total");
-    	String meet_limit=req.getParameter("meet_total");//처음 만들때 신청가능인원은 정원과 같다
-    	String meet_price=req.getParameter("meet_price");
+    	HttpSession session=req.getSession();
+    	String meet_cg=req.getParameter("meet_cg"); //카테고리
+    	/*String poster=req.getParameter("meet_poster");*/ //포스터
+     	String om_id=(String)session.getAttribute("id"); //id (로그인정보 세션에서 받아오기)
+    	String meet_subject=req.getParameter("meet_subject"); //제목
+    	String meet_date=req.getParameter("meet_date"); //모임날짜
+    	String meet_start=meet_date.substring(0, meet_date.indexOf("~")-1); //잘라서 시작날짜 나누기
+    	String meet_end=meet_date.substring(meet_date.indexOf("~")+2); //잘라서 종료날짜 나누기
+    	String meet_loc1=req.getParameter("meet_loc1"); //주소
+    	String meet_loc2=req.getParameter("meet_loc2"); ///상세주소
+    	String meet_charge=req.getParameter("meet_charge"); //유/무료 여부
+    	String meet_total=req.getParameter("meet_total"); //정원
+    	String meet_limit=req.getParameter("meet_total");//신청가능인원 => 처음 만들때 신청가능인원은 정원과 같다
+    	String meet_price=req.getParameter("meet_price"); //참여비용
     	/*String meet_lat=req.getParameter("meet_lat");*///위도
     	/*String meet_lng=req.getParameter("meet_lng");*///경도
-    	String meet_info=req.getParameter("meet_info");
-    	String meet_detail=req.getParameter("meet_detail");
+    	String meet_info=req.getParameter("meet_info"); //모임내용
+    	String meet_detail=req.getParameter("meet_detail"); //상세정보
     	
+    	MeetingVO vo=new MeetingVO();
+    	vo.setMeet_cg(meet_cg);
+//    	vo.setMeet_poster(meet_poster);
+    	vo.setOm_id(om_id);
+    	vo.setMeet_subject(meet_subject);
+    	vo.setMeet_start(meet_start);
+    	vo.setMeet_end(meet_end);
+    	if(meet_loc1.equals("") && meet_loc2.equals("")) { //입력된 모임장소가 없을때
+    		vo.setMeet_loc("미정이거나 등록된 모임장소가 없습니다");
+    	}else {												//입력된 모임장소가 있을때
+    		vo.setMeet_loc("["+meet_loc1+"] "+meet_loc2); 
+    	}
+    	vo.setMeet_charge(meet_charge);
+    	vo.setMeet_total(Integer.parseInt(meet_total));
+    	vo.setMeet_limit(Integer.parseInt(meet_limit));
+    	vo.setMeet_price(Integer.parseInt(meet_price));
+//    	vo.setMeet_lat(meet_lat);
+//    	vo.setMeet_lng(meet_lng);
+    	vo.setMeet_info(meet_info);
+    	vo.setMeet_detail(meet_detail);
+    	
+    	
+    	MeetingDAO.meetingInsertOk(vo); //모임개설하기
     	
     	System.out.println("모임 카테고리: "+meet_cg);
     	/*System.out.println("모임 포스터:" + poster);*/
@@ -243,7 +271,7 @@ public class MeetingModel {
     	System.out.println("모임소개: "+meet_info);
     	System.out.println("상세내용: "+meet_detail);
     	
-
+    	
     	req.setAttribute("main_jsp","../meeting/meeting_insert_ok.jsp");
     	return "main/main.jsp";		
     	
