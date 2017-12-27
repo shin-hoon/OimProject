@@ -33,7 +33,9 @@
 <!-- 로그인 스트립트  -->
  <script type="text/javascript">
 $(function(){
-	$('#loginBtn').click(function(){
+	
+	
+	 $('#loginBtn').click(function(){
 		var login_id=$('#login_id').val();
 		if(login_id.trim()=="")
 			{
@@ -82,9 +84,10 @@ $(function(){
 				}
 			}
 		});
-	});
-	/* 회원가입모달 ,아이디중복체크 스크립트  */
-	$('#checkBtn').click(function(){ 	/*#checkBtn 셀랙터  */
+	}); 
+
+//회원가입 아이디 중복체크 모달
+	 $('#checkBtn').click(function(){ 
 
 	      var id=$('#id').val();
 
@@ -94,11 +97,11 @@ $(function(){
 	         $('#id').focus();
 	         return;
 	      }
-	      $.ajax({   //*******
-	         type:'POST', // type: 데이터를 무슨 방식으로 보낼꺼냐
-	         url:'member/idCheck_ok.jsp', // 멤버.jsp에서 만들어짐
-	         data:{"om_id":id}, // 값을 보냄 ','를 찍고 값을 여러개 보낼 수 있다.
-	         success:function(response) //idcheck_result.jsp'여기서 실행된 결과값을 넣어준다
+	      $.ajax({ 
+	         type:'POST',
+	         url:'member/idCheck_ok.jsp', 
+	         data:{"om_id":id},
+	         success:function(response)
 
 	         {
 	            //성공했을때
@@ -107,12 +110,9 @@ $(function(){
 	            if(result==0)    //중복된 아이디가  0이면(없으면)====> 사용가능한 아이디
 	            {
 	               $('#res').html("<font color=blue>"+id+"은(는) 사용 가능한 아이디입니다.</font>");
-	               $('#res_ok').html("<input type=submit value=확인 onclick=ok('"+id+"')>");  
-	              
-	                                                //  ㄴ>매개변수 작은따음표를 꼭 써줘야 한다 , 안쓰면 숫자로 인식한다
+	               $('#res_ok').html("<input type=submit value=확인 onclick=ok('"+id+"')>");
 	                  // 확인 버튼이 눌리면 중복확인창이 사라진다
 	                  // ok 버튼을 눌렀을때 ===> 밑에 함수 처리
-	            
 	            }else
 	            {
 	               $('#res').html("<font color=red>"+id+"은(는) 이미 사용중인 아이디입니다.</font>");
@@ -123,7 +123,7 @@ $(function(){
 	         }
 	      });
 	   });
-	
+	});
 	function ok(om_id){
 	   parent.frm.om_id.value=om_id;
 	   parent.idcheck-modal.close();      // 중복체크하고 아이디를 사용할 수 있을때 사용한다는 확인 버튼을 누르면 쉐도우 박스가 자동으로 꺼지면서 입력한 아이디가 자동으로 아이디 창으로 입력된다
@@ -145,7 +145,7 @@ $(function(){
 	   }
 	  }); //#check_password.keyup
 	 });
-});
+
 </script> 
 </head>
 
@@ -186,40 +186,43 @@ $(function(){
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header oim_modal">
-		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-		<h3 class="modal-title" id="myModalLabel">로그인</h3>
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<h3 class="modal-title" id="myModalLabel">로그인</h3>
 	      </div>
+	      
 	      <div class="modal-body" style="margin:0px auto;">
 	      			
-					<table class="w3-table w3-hoverable" >
-					<tr>
-						<td width=30% style="text-align: right;">아이디<br><span>(E-mail)</span></td>
-						<td width=70% >
+			<table class="w3-table w3-hoverable" >
+				<tr>
+					<td width=30% style="text-align: right;">아이디<br><span>(E-mail)</span></td>
+					<td width=70% >
 						<input type="text" name=id size=20 id="login_id">
 						<span class="help-block">이메일을 입력하세요</span>
-						</td>
-					</tr>
-					<tr>
-						<td width=30% style="text-align: right;">비밀번호</td>
-						<td width=70% >
+					</td>
+				</tr>
+				<tr>
+					<td width=30% style="text-align: right;">비밀번호</td>
+					<td width=70% >
 						<input type="text" name=pwd size=20 id="login_pwd">
-						</td>
-					</tr>
+					</td>
+				</tr>
 
-					<tr>
-						<td colspan="2" class="text-center" style="margin:auto; text-align:center;">
+				<tr>
+					<td colspan="2" class="text-center" style="margin:auto; text-align:center;">
 						<button type=button class="btn btn-mg btn-danger" id="loginBtn"> 로그인
-						<span class="glyphicon glyphicon-ok" ></span></button>
+							<span class="glyphicon glyphicon-ok" ></span>
+						</button>
 						<button class="btn btn-mg oim_btn_gr" data-dismiss="modal"> 취소
-						<span class="glyphicon glyphicon-remove" ></span></button>
+							<span class="glyphicon glyphicon-remove" ></span>
+						</button>
 						<div id="result" style="color:black"></div>
-						</td>
-					</tr>
-					</table>
+					</td>
+				</tr>
+			</table>
 					
-				</div>
-			</div>
-	      </div>
+		</div>
+		</div>
+	    </div>
 		</div> 
 		<!--  로그인 모달 끝 -->
 		
@@ -234,12 +237,12 @@ $(function(){
       <h3 class="modal-title" id="myModalLabel">회원가입</h3>
          </div>
          <div class="modal-body">
-         <form method="post" action="Oim_Join.do" id="frm">   <!--name:키값  ic:클래스랑같은것 -->
+         <form method="post" action="Oim_Join.do" id="frm">   <!--name:키값  id:클래스랑같은것 -->
                <table class="w3-table w3-hoverable">
                <tr>
                   <td width=20%>아이디<br><span>(E-mail)</span></td>
                   <td width=80%>
-                  <input type="text" name="om_id" size=30 required readonly>
+                  <input type="text" name="om_id" size=30 value="" required readonly>
                   
                   <input type="button" value="중복체크" class="btn btn-sm btn-primary" id="idcheck" data-toggle="modal" data-target="#idcheck-modal">
                   <span class="help-block">이메일을 입력하세요</span>

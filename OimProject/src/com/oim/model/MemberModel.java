@@ -45,7 +45,6 @@ public class MemberModel {
 	      
 	      MemberVO vo=new MemberVO();
 	      
-	      
 	      String om_id=req.getParameter("om_id");
 	      String om_pwd=req.getParameter("om_pwd");
 	      String om_name=req.getParameter("om_name");

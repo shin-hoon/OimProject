@@ -43,7 +43,6 @@ public class MemberDAO {
   	public static void OimJoin(MemberVO vo) {
   		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
   		
-  		
   		try
   		{
   			session.insert("OimJoin",vo);
