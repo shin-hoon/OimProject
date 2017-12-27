@@ -39,6 +39,7 @@ public class MemberDAO {
   	}
   	
   	
+  	
   	//회원가입
   	public static void OimJoin(MemberVO vo) {
   		
