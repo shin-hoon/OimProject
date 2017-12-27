@@ -34,20 +34,20 @@
  <script type="text/javascript">
 $(function(){
 	$('#loginBtn').click(function(){
-		var id=$('#id').val();
-		if(id.trim()=="")
+		var login_id=$('#login_id').val();
+		if(login_id.trim()=="")
 			{
-				$('#id').focus();
+				$('#login_id').focus();
 				return;
 			}
 		else
 		{
 			$('#result').text(" ");
 		}
-		var pwd=$('#pwd').val();
-		if(pwd.trim()=="")
+		var login_pwd=$('#login_pwd').val();
+		if(login_pwd.trim()=="")
 			{
-				$('#pwd').focus();
+				$('#login_pwd').focus();
 				return;
 			}
 		else
@@ -59,21 +59,21 @@ $(function(){
 		$.ajax({
 			type:'post',
 			url:'Oim_Login.do',
-			data:{"id":id,"pwd":pwd},
+			data:{"id":login_id,"pwd":login_pwd},
 			success:function(response){
 				var count=response.trim();
 				if(count==1)
 				{
 					$('#result').text("아이디가 존재하지 않습니다.");
-					$('#id').val("");
-					$('#pwd').val("");
-					$('#id').focus();
+					$('#login_id').val("");
+					$('#login_pwd').val("");
+					$('#login_id').focus();
 				}
 				else if(count==2)
 				{
 					$('#result').text("비밀번호가 틀립니다.");
-					$('#pwd').val("");
-					$('#pwd').focus();
+					$('#login_pwd').val("");
+					$('#login_pwd').focus();
 				}
 				else
 				{
@@ -83,15 +83,8 @@ $(function(){
 			}
 		});
 	});
-});
-</script> 
-
-
-<!-- ------------------------------------------------------------------------------------------------------------------------------------------------------ ----------->
-<!-- 회원가입모달-> 아이디중복체크 스크립트 -->
-<script type="text/javascript"> 
-	$(function(){
-	   $('#checkBtn').click(function(){ 	/*#checkBtn 셀랙터  */
+	/* 회원가입모달 ,아이디중복체크 스크립트  */
+	$('#checkBtn').click(function(){ 	/*#checkBtn 셀랙터  */
 
 	      var id=$('#id').val();
 
@@ -114,7 +107,8 @@ $(function(){
 	            if(result==0)    //중복된 아이디가  0이면(없으면)====> 사용가능한 아이디
 	            {
 	               $('#res').html("<font color=blue>"+id+"은(는) 사용 가능한 아이디입니다.</font>");
-	               $('#res_ok').html("<input type=submit value=확인 onclick=ok('"+id+"')>"); 
+	               $('#res_ok').html("<input type=submit value=확인 onclick=ok('"+id+"')>");  
+	              
 	                                                //  ㄴ>매개변수 작은따음표를 꼭 써줘야 한다 , 안쓰면 숫자로 인식한다
 	                  // 확인 버튼이 눌리면 중복확인창이 사라진다
 	                  // ok 버튼을 눌렀을때 ===> 밑에 함수 처리
@@ -129,7 +123,7 @@ $(function(){
 	         }
 	      });
 	   });
-	});
+	
 	function ok(om_id){
 	   parent.frm.om_id.value=om_id;
 	   parent.idcheck-modal.close();      // 중복체크하고 아이디를 사용할 수 있을때 사용한다는 확인 버튼을 누르면 쉐도우 박스가 자동으로 꺼지면서 입력한 아이디가 자동으로 아이디 창으로 입력된다
@@ -151,8 +145,8 @@ $(function(){
 	   }
 	  }); //#check_password.keyup
 	 });
-	
-</script>
+});
+</script> 
 </head>
 
 
@@ -201,14 +195,14 @@ $(function(){
 					<tr>
 						<td width=30% style="text-align: right;">아이디<br><span>(E-mail)</span></td>
 						<td width=70% >
-						<input type="text" name="id" size=20 id="id">
+						<input type="text" name=id size=20 id="login_id">
 						<span class="help-block">이메일을 입력하세요</span>
 						</td>
 					</tr>
 					<tr>
 						<td width=30% style="text-align: right;">비밀번호</td>
 						<td width=70% >
-						<input type="text" name=pwd size=20 id="pwd">
+						<input type="text" name=pwd size=20 id="login_pwd">
 						</td>
 					</tr>
 
