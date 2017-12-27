@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.Map"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -34,14 +34,31 @@
             if($(this).text().length <= minlength){ //제목이 1줄짜리 일때는 <br>태그를 줘서 2줄짜리랑 같은 크기로 만들어라 
                $(this).html($(this).text()+'<br></br>');
            }
-            
         });
         }); 
     });
     
     /*체크박스 이벤트 스크립트*/
     $(function () {
-    	
+		<c:forEach var="cg" items="${sessionScope.category}" varStatus="listidx"> //체크된것을 유지하기 위해 jstl과 jquery를 혼용함
+			$("input:checkbox[name='category']:checkbox[value='${cg}']").prop('checked', true);
+		</c:forEach>
+		
+		<c:forEach var="lc" items="${sessionScope.loc}" varStatus="listidx">
+			$("input:checkbox[name='loc']:checkbox[value='${lc}']").prop('checked', true);
+		</c:forEach>
+	
+		<c:forEach var="wk" items="${sessionScope.week}" varStatus="listidx">
+			$("input:checkbox[name='week']:checkbox[value='${wk}']").prop('checked', true);
+		</c:forEach>
+
+		<c:forEach var="pc" items="${sessionScope.price}" varStatus="listidx">
+			$("input:checkbox[name='price']:checkbox[value='${pc}']").prop('checked', true);
+		</c:forEach>
+		
+		$("input:text[name='from']").val('${sessionScope.from}');
+		$("input:text[name='to']").val('${sessionScope.to}');
+			
     $('.button-checkbox').each(function () {
         // Settings
         var $widget = $(this),
@@ -104,6 +121,12 @@
         }
         init();
     });
+    
+    /* $('.page_a').click(function(){
+    	var url=$(this).attr("value");
+    	location.href=url;
+    	$('#mfrm').submit();
+    }); */
 });
     
     
@@ -161,7 +184,8 @@
 <div class="jumbotron">
   <div class="container text-left">
   	<div class="row">  
-  	<form method="post" action="meeting_find.do">
+  	
+  	<form method="post" action="meeting_find.do" id="mfrm">
              <table class="table table-bordered "> <!-- 체크박스 테이블 시작 -->
                  <tr>
                     <td class="col-sm-1" style="text-align:center; vertical-align: middle">
@@ -447,13 +471,10 @@
 			       				</c:when>
 			       			</c:choose>
 			       		</c:forEach>
-       		
- 						 	<%-- <c:forEach var="curpage" begin="1"  end="${totalpage }">
-						    	<li ><a href="meeting_list.do?page=${curpage}">${curpage}</a></li>
-						    </c:forEach> --%>
-						    
+
 					    <li ><a href="meeting_find.do?page=${curpage<totalpage?curpage+1:curpage }">▶</a></li>
 					    <li ><a href="meeting_find.do?page=${curpage<=totalpage-10?curpage+10:curpage }">▶▶</a></li>
+					   
 					  </ul>
 					</div> <!-- 페이지수 뿌려주기 div 끝-->
                </div>
