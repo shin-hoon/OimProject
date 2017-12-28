@@ -326,13 +326,15 @@ $(function(){
                   회원탈퇴를 신청하시면 됩니다.
                </h6>
             </div>
-            <form method="post" action="../member/delete_ok.jsp">
+            
             <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
+               <form method="post" action="Oim_Delete.do">
                <tr>
                   <td width=25% class="text-right">
                      <span class="glyphicon glyphicon-envelope"></span>&nbsp;탈퇴할 아이디(Email)
                   </td>
                   <td width=75% class="text-center" id="email">${sessionScope.id }
+                  
                   </td>
                </tr>
                <tr>
@@ -340,7 +342,7 @@ $(function(){
                      <span class="glyphicon glyphicon-lock"></span>&nbsp;비밀번호 입력
                   </td>
                   <td width=70% class="text-center">
-                     <input type=text name=pwd size=30 id="new-pwd">
+                     <input type=text name=new_pwd size=30 id="new_pwd">
                       <h6 style="color:#DF013A;">*본인 인증을 위해 비밀번호를 입력해 주세요</h6>
                   </td>                  
                </tr>
@@ -350,8 +352,8 @@ $(function(){
                      <input type=button class="btn btn-info btn-sm" value="다시생각하기" onclick="javascript:history.back()">
                   </td>
                </tr>
+                </form>
             </table>
-            </form>
          </div>
          
          

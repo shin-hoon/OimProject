@@ -29,28 +29,34 @@ public class DispatcherServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String cmd = request.getRequestURI();
+			//System.out.println("1)cmd: "+cmd);
 			cmd = cmd.substring(request.getContextPath().length()+1); //main.do
 			for(String s:list) {
 				Class clsName = Class.forName(s); //클래스 정보 읽기
 				if(clsName.isAnnotationPresent(Controller.class)==false)
 					continue;
 				Object obj = clsName.newInstance();
-				
+				//System.out.println("2)obj: "+ obj);
 				Method[] methods = clsName.getDeclaredMethods(); //선언되어 있는 클래스의 메소드를 읽어온다.
+				//System.out.println("3)methods: "+methods);
 				for(Method m:methods) {
 					RequestMapping rm = m.getAnnotation(RequestMapping.class);
+					//System.out.println("4)rm: "+rm);
 					if(rm.value().equals(cmd)) {
 						//@RequestMapping("main.do") 
 						// rm.value() = main.do
 						String jsp = (String)m.invoke(obj, request,response); //invoke : 호출하는 역할
 						//가변 매개변수 : Object... (invoke에 커서 갖다대면 알게됨ㅋㅋ) => 가변데이터형 (데이터수 무상관)
+						//System.out.println("5)jsp: "+jsp);
 						RequestDispatcher rd = request.getRequestDispatcher(jsp);
-						
+						//System.out.println("6)rd: "+rd);
+						//System.out.println("--------------------------------------------");
 						rd.forward(request, response);
 						return; //service메소드 종료
 					}
 				}
 			}
+			
 		}catch (Exception e) {
 			System.out.println("service : "+e.getMessage());
 		}

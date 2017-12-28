@@ -129,37 +129,52 @@ public class MemberDAO {
   				session.close();
 		}
 	}
+  	
+  	//È¸¿øÅ»Åð) ºñ¹Ð¹øÈ£ È®ÀÎ
+  	public static String OimDeletecheck(String id)
+  	{
+  		String db_pwd="";
+  		SqlSession session=ssf.openSession();
+  		
+  		
+  		try {
+  			
+  			db_pwd=session.selectOne("OimDeletecheck",id);  
+  			
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println("OimDeletecheck: "+ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  		return db_pwd;
+  	}
+  	
+  	
+  	//È¸¿øÅ»Åð 
+  	public static void OimDelete(String id)
+  	{
+  		SqlSession session=ssf.openSession(true);
+  		try {
+  			session.delete("OimDelete",id);
+  		}catch(Exception ex)
+  		{
+  			System.out.println("OimDelete: "+ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  	}
 
 	/*
-    		
-    		
-    		//È¸¿øÁ¤º¸ ¼öÁ¤
-    		public void OimUpdate(MemberVO vo)
-    		{
-    			
-    			try {
-    				getConnection();
-    				
-    				String sql="UPDATE oim_member SET "
-    							+"om_tel=?,om_pwd=? "
-    							+"WHERE om_id=?";
-    				ps=conn.prepareStatement(sql);
-    				ps.setString(1, vo.getOm_tel());
-    				ps.setString(2, vo.getOm_pwd());
-    				ps.setString(3, vo.getOm_id());
-    				ps.executeUpdate();
-    				
-    				
-    			}catch(Exception ex)
-    			{
-    				System.out.println(ex.getMessage());
-    			}
-    			finally
-    			{
-    				disConnection();
-    			}
-    		}
-    		
     		//È¸¿øÅ»Åð 
     		public boolean OimDelete(String id, String pwd)
     		{

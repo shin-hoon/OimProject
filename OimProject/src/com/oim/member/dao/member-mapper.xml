@@ -17,4 +17,10 @@
 <update id="OimUpdate" parameterType="MemberVO">
 	UPDATE oim_member SET om_tel=#{om_tel},om_pwd=#{om_pwd} WHERE om_id=#{om_id}
 </update>
+<select id="OimDeletecheck" resultType="String" parameterType="String"> <!-- 회원탈퇴) 비밀번호 확인 -->
+	SELECT om_pwd FROM oim_member WHERE om_id=#{om_id}
+</select>
+<delete id="OimDelete" parameterType="String">
+	DELETE FROM oim_member WHERE om_id=#{om_id}
+</delete>
 </mapper>

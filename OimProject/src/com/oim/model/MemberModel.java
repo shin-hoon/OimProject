@@ -1,5 +1,7 @@
 package com.oim.model;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -146,6 +148,7 @@ public class MemberModel {
 		String pwd_ok=req.getParameter("pwd_ok"); 
 
 		MemberVO vo=new MemberVO();
+		String re ="";
 		
 		if(pwd.equals(pwd_ok))
 		{
@@ -157,11 +160,51 @@ public class MemberModel {
 			
 			//바뀐VO->DB저장
 			MemberDAO.OimUpdate(vo);
+			re="member/update_ok.jsp";
+		}
+		else
+		{
+			re="member/update_fail.jsp";
 		}
 		
-		return "Oim_mypage.do";
+		return re;
+		//return "Oim_mypage.do";
 	}
 	
+	@RequestMapping("Oim_Delete.do")
+	public String Oim_Delete(HttpServletRequest req,HttpServletResponse res)throws Throwable{
+	{
+		req.setCharacterEncoding("UTF-8");
+		
+		HttpSession session=req.getSession();
+		
+		String id=(String)session.getAttribute("id");
+		String new_pwd=req.getParameter("new_pwd");
+	
+		
+		MemberVO vo=new MemberVO();
+		vo.setOm_id(id);
+		String db_pwd=MemberDAO.OimDeletecheck(id);
+		
+		String re ="";
+		
+		if(new_pwd.equals(db_pwd))
+		{
+			MemberDAO.OimDelete(id);
+			session.invalidate();
+			re="member/delete_ok.jsp";
+			
+		}
+		else
+		{
+			System.out.println("실패");
+			re="member/delete_fail.jsp";
+		}
+		
+		
+		return re;
+	}
+}
 }
 	
 	
