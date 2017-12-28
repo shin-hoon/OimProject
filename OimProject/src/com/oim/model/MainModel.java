@@ -16,4 +16,6 @@ public class MainModel {
 		req.setAttribute("main_jsp","default.jsp");
 		return "main/main.jsp";
 	}
+	
+	
 }

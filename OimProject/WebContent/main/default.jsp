@@ -68,7 +68,7 @@
                               </div>
                          </div>
                       </div>
-                      <div class="col-sm-3">
+                      <!-- <div class="col-sm-3">
                          <div class="thumbnail">
                            <img src="img/poster2.png" alt="마감임박">
                              <div class="caption">
@@ -172,7 +172,7 @@
                                   <p align="center"><a href="#" class="btn btn-primary btn-block">신청하기</a></p>
                               </div>
                          </div>
-                      </div>
+                      </div> -->
                     </ul>   
                </div>
            </div>
