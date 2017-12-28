@@ -1,103 +1,5 @@
 @charset "UTF-8";
 
-* {
-	color: black;
-}
-
-.label {
-	padding: 10px 8px 10px;
-}
-
-@media ( min-width : 768px) {
-	.label {
-		padding: .0em .0em .0em;
-	}
-}
-
-@media ( min-width : 992px) {
-	.label {
-		padding: 10px 8px 10px;
-	}
-}
-
-.row div {
-	display: inline-block;
-}
-.checkbtn {
-	text-align: left;
-	font-size: 70%;
-	font-weight: bold;
-	margin : 0.4%;
-	width: 15%;
-}
-
-@media ( max-width : 1182px) {
-	.checkbtn {
-		width: 30%;
-	}
-}
-
-.selectSave{
-	padding: 8px 6px 6px;
-	font-weight: bold;
-	font-size: 80%;
-	background-color: #fcbe03;
-}
-
-
-
-
-
-
-.input-group-addon.primary {
-	color: rgb(255, 255, 255);
-	background-color: rgb(50, 118, 177);
-	border-color: rgb(40, 94, 142);
-}
-
-.input-group-addon.success {
-    color: rgb(255, 255, 255);
-    background-color: rgb(92, 184, 92);
-    border-color: rgb(76, 174, 76);
-}
-.input-group-addon.info {
-    color: rgb(255, 255, 255);
-    background-color: rgb(57, 179, 215);
-    border-color: rgb(38, 154, 188);
-}
-.input-group-addon.warning {
-    color: rgb(255, 255, 255);
-    background-color: rgb(240, 173, 78);
-    border-color: rgb(238, 162, 54);
-}
-.input-group-addon.danger {
-    color: rgb(255, 255, 255);
-    background-color: rgb(217, 83, 79);
-    border-color: rgb(212, 63, 58);
-}
-
-
-
-
-
-.btn.outline {
-    background: none;
-    padding: 8px 18px;
-}
-.btn-primary.outline {
-    border: 2px solid #0099cc;
-    color: #0099cc;
-}
-.btn-primary.outline:hover, .btn-primary.outline:focus, .btn-primary.outline:active, .btn-primary.outline.active, .open > .dropdown-toggle.btn-primary {
-    color: #33a6cc;
-    border-color: #33a6cc;
-}
-.btn-primary.outline:active, .btn-primary.outline.active {
-    border-color: #007299;
-    color: #007299;
-    box-shadow: none;
-}
-
 #SubContentsTab {
 	height: 61px;
 }
@@ -112,7 +14,7 @@
 }
 #SubContentsTab ul li a {
 	display: block;
-	width: 348px;
+	width: 325px;
 	height: 38px;
 	border-top: 1px solid #dce2e7;
 	border-right: 1px solid #dce2e7;
@@ -127,7 +29,7 @@
 	border-left: 1px solid #dce2e7;
 }
 #SubContentsTab ul li a.on {
-	width: 347px;
+	width: 324px;
 	height: 37px;
 	margin-left: -1px;
 	padding-bottom: 2px;
@@ -138,5 +40,3 @@
 #SubContentsTab ul li:first-child a.on {
 	margin-left: 0px;
 }
-
-
