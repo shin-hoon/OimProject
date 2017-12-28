@@ -15,19 +15,12 @@
 	<div class="container">
 		<form method="post" action="selectsave/selectsave_ok.jsp">
 		<div class="col-sm-12">
-			<div class="form-group">
-					<input type="hidden" name="cst_no" value="${num}"/>
-					<div class="input-group" style="width:93%">
-						<input type="text" class="form-control"  
-							id="validate-text" placeholder="맞춤모임 이름을 입력해주세요.(최대15글자)"
-							name="cst_subject" maxlength="15" required>
-						<span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
-					</div>
-			</div>
+			<input type="hidden" name="cst_no" value="${num}"/>
+			<input type="text" name="cst_subject" size="90" maxlength="15" value="맞춤모임 이름을 입력해주세요.(최대15글자)" />
 		</div>
-		<div class="row">
+		<div>
 			<div class="col-sm-1">
-				<span class="btn btn-warning" style="font-size:70%;background-color:#0099cc">모임카테고리</span>		
+				<span>모임카테고리</span>
 			</div>
 				<div class="col-sm-11">
 				<span class="button-checkbox">
@@ -89,9 +82,9 @@
             	</div>
 				
 			</div>
-			<div class="row">
+			<div>
 				<div class="col-sm-1">
-					<span class="btn btn-warning" style="background-color:#0099cc">모임지역</span>
+				<span>모임지역</span>
 				</div>
 				<div class="col-sm-11">
 				<span class="button-checkbox">
@@ -133,9 +126,9 @@
             	</div>
             	
 			</div>
-			<div class="row">
+			<div>
 				<div class="col-sm-1">
-					<span class="btn btn-warning" style="background-color:#0099cc">모임요일</span>
+				<span>모임요일</span>
 				</div>
 				<div class="col-sm-11">
 				<span class="button-checkbox">
@@ -148,9 +141,9 @@
             	</span>
             	</div>
 			</div>
-			<div class="row" >
+			<div>
 				<div class="col-sm-1">
-					<span class="btn btn-warning" style="background-color:#0099cc">모임가격</span>
+				<span>모임가격</span>
 				</div>
 				<div class="col-sm-11">
 				<span class="button-checkbox">
@@ -179,8 +172,8 @@
 				</span>
 				</div>
 			</div>
-			<div class="text-center col-sm-12" style="margin-top:15px;">
-				<input type="submit" class="btn btn-primary btn-sm outline" id="InsertBtn" value="검색저장"/>
+			<div class="text-center">
+				<input type="submit" id="InsertBtn" value="검색저장"/>
 				<input type="hidden" id="id2" value="${id}">
 				<input type="hidden" name="saveNum" id="saveNum" value="${num}">
 			</div>
