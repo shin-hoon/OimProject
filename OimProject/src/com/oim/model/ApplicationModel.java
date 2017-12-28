@@ -27,7 +27,19 @@ public class ApplicationModel {
 		System.out.println(om_id);
 		
     	req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
+        return "meeting_detail.do";
+    }
+	@RequestMapping("meetpage_1.do")
+    public String meetpage_one(HttpServletRequest req, HttpServletResponse res) {
+	
+    	req.setAttribute("meetpage_1.do", "meetpage_1.jsp");
         return "main/main.jsp";
+    }
+	@RequestMapping("meetpage_2.do")
+    public String meetpage_two(HttpServletRequest req, HttpServletResponse res) {
+		
+    	req.setAttribute("meetpage_1.do", "../member/meetpage_2.jsp");
+        return "../member/meetpage_2.jsp";
     }
 }
 

@@ -22,7 +22,7 @@ public class MemberDAO {
 	}
 	
 	//=========회원가입
-    //아이디중복체크
+	 //아이디중복체크
   	public static int OimIdcheck(String id) {
   		int count=0;
   		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
@@ -39,23 +39,34 @@ public class MemberDAO {
   	}
   	
   	
+  	
   	//회원가입
   	public static void OimJoin(MemberVO vo) {
-  		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
   		
-  		
+  		System.out.println("");
+  		SqlSession session=ssf.openSession(true); //주소값을 얻어올때 사용한다.
   		try
   		{
   			session.insert("OimJoin",vo);
+  			
   		}
-  		catch(Exception ex) {
-  			System.out.println(ex.getMessage());
-  		}finally {
+  		catch(Exception ex) 
+  		{
+  			System.out.println("OimJoin: "+ex.getMessage());
+  		}
+  		finally {
   			if(session!=null)
   				session.close();
   			
   		}
   	}
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   	
   	//로그인) 아이디 존재 체크
   	public static int OimLogincheck(String id)

@@ -63,6 +63,7 @@
 <script type="text/javascript">
     Shadowbox.init({
            players:["iframe"]
+          
         }); 
     $(function(){
           $('#apply').click(function(){

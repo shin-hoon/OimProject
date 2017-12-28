@@ -356,13 +356,15 @@
                 </td>
                 <td class="col-sm-10 form-inline" style="vertical-align: middle" colspan=2>
                    <label class="control-label">전화번호</label>
-                    <select class="form-control" name=tel1 style="margin-left: 10px">
+                   <input class="form-control" type="text" name="tel" size=15 value="${vo.om_tel }" disabled>
+                   
+                    <!-- <select class="form-control" name=tel1 style="margin-left: 10px">
 						<option>010</option>
 						<option>011</option>
 						<option>017</option>
 					</select>
 					<input class="form-control" type="text" name="tel2" size=7>
-					<input class="form-control" type="text" name="tel3" size=7>
+					<input class="form-control" type="text" name="tel3" size=7> -->
                
                    <label class="control-label" style="margin-left: 20px">이메일</label>
                      <input class="form-control" type="text" name="email1" size=10 style="margin-left: 10px">@

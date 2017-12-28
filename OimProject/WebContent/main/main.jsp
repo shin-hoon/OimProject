@@ -238,9 +238,19 @@ $( document ).ready( function() {
 				</ul>
 			<!-- 메뉴 오른쪽 -->
 				<ul class="nav navbar-nav navbar-right">
-					<li> <!-- 비활성화: 모임 개설 시에만 나타남 class="disabled" -->
-						<a href="#">모임 개설하기</a>
-					</li>
+					 <!-- 비활성화: 모임 개설 시에만 나타남 class="disabled" -->
+						<c:if test="${sessionScope.id!=null }">
+							<li>
+							 <a href="meeting_insert.do">모임 개설하기</a>
+							</li>
+						</c:if>
+						
+						<c:if test="${sessionScope.id==null }">
+							<li class="disabled">
+							<a href="#">모임 개설하기</a>
+							</li>
+						</c:if>
+					
 					<li> <!-- 비활성화: 모임 개설 시에만 나타남  class="disabled"-->
 						<a href="Oim_meetpage.do">모임관리</a>
 					</li>
