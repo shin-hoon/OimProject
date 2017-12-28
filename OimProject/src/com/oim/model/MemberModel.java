@@ -41,11 +41,11 @@ public class MemberModel {
 	@RequestMapping("Oim_Join.do")
 	public String Oim_Join(HttpServletRequest req, HttpServletResponse res) throws Throwable
 	{
-		try {
-		req.setCharacterEncoding("UTF-8");
+	
+		
 	      try {
 	    	  MemberVO vo=new MemberVO();
-		      
+	    	  req.setCharacterEncoding("UTF-8");
 		      String om_id=req.getParameter("om_id");
 		      String om_pwd=req.getParameter("om_pwd");
 		      String om_name=req.getParameter("om_name");
