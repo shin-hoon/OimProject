@@ -256,7 +256,7 @@ public class MeetingModel {
     	
     	System.out.println("모임 카테고리: "+meet_cg);
     	/*System.out.println("모임 포스터:" + poster);*/
-    	/*System.out.println("개설자ID: "+om_id);*/
+    	System.out.println("개설자ID: "+om_id);
     	System.out.println("모임 제목: "+meet_subject);
     	System.out.println("모임일시: "+meet_date);
     	System.out.println("시작날짜: "+meet_start);
