@@ -20,34 +20,17 @@
 	}
 }
 
-.row div {
-	display: inline-block;
+.row > div > span{
+	display: block;
+	text-align: left;
+	background-color : #dce2e7;
 }
 .checkbtn {
 	text-align: left;
-	font-size: 70%;
-	font-weight: bold;
-	margin : 0.4%;
-	width: 15%;
-}
-
-@media ( max-width : 1182px) {
-	.checkbtn {
-		width: 30%;
-	}
-}
-
-.selectSave{
-	padding: 8px 6px 6px;
-	font-weight: bold;
 	font-size: 80%;
-	background-color: #fcbe03;
+	font-weight: bold;
+	width: 100%;
 }
-
-
-
-
-
 
 .input-group-addon.primary {
 	color: rgb(255, 255, 255);
@@ -112,7 +95,7 @@
 }
 #SubContentsTab ul li a {
 	display: block;
-	width: 348px;
+	width: 380px;
 	height: 38px;
 	border-top: 1px solid #dce2e7;
 	border-right: 1px solid #dce2e7;
@@ -127,7 +110,7 @@
 	border-left: 1px solid #dce2e7;
 }
 #SubContentsTab ul li a.on {
-	width: 347px;
+	width: 379px;
 	height: 37px;
 	margin-left: -1px;
 	padding-bottom: 2px;
@@ -138,5 +121,32 @@
 #SubContentsTab ul li:first-child a.on {
 	margin-left: 0px;
 }
+/* 
+@media ( min-width : 368px) {
+	#SubContentsTab ul li a {
+		width: 439px;
+	}
+	#SubContentsTab ul li a.on {
+		width: 438px;
+	}
+}
+ */
+ 
+ 
+@media ( min-width : 768px) {
+	#SubContentsTab ul li a {
+		width: 239px;
+	}
+	#SubContentsTab ul li a.on {
+		width: 238px;
+	}
+}
 
-
+@media ( min-width : 992px) {
+	#SubContentsTab ul li a {
+		width: 380px;
+	}
+	#SubContentsTab ul li a.on {
+		width: 379px;
+	}
+}

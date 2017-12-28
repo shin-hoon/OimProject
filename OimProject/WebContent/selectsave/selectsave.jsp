@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div class="container">
-		<div id="SubContentsTab">
+		<div id="SubContentsTab" >
 			<ul>
 				<li>
 					<a href="selectsave.do?saveNum=1" ${num==1?'class="on"':''}>
@@ -47,12 +47,11 @@
 	<c:if test="${view!=0}">
 	<c:forEach var="vo" items="${checkBox}">
 	<div class="container">
-		<c:set var="cst_cg" value="${fn:split(vo.cst_cg,',')}"/>
 		<form method="post" action="selectsave/selectsave_ok.jsp">
 		<div class="col-sm-12">
 			<div class="form-group">
 				<input type="hidden" name="cst_no" value="${view}" />
-				<div class="input-group" style="width:93%">
+				<div class="input-group" style="width:100%">
 					<input type="text" class="form-control"  
 						id="validate-text" placeholder="맞춤모임 이름을 입력해주세요.(최대15글자)"
 						name="cst_subject" maxlength="15" value="${vo.subject}"  
@@ -62,10 +61,10 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-1">
-				<span class="btn btn-warning" style="font-size:70%;background-color:#0099cc">모임카테고리</span>				
-			</div>
-				<div class="col-sm-11">
+			<div class="col-sm-3">
+			<c:set var="cst_cg" value="${fn:split(vo.cst_cg,',')}"/>
+				<span class="btn btn-warning" style="font-size:70%;background-color:#fcbe03">모임카테고리</span>				
+				
 				<span class="button-checkbox">
 	                <button type="button" class="btn checkbtn" data-color="primary">교육</button>
                 	<input type="checkbox" name="cst_cg" value="교육" class="hidden"
@@ -178,15 +177,11 @@
 						</c:forEach>
 					/>
             	</span>
-            	</div>
-				
-			</div>
-			<div class="row">
-				<div class="col-sm-1">
-					<span class="btn btn-warning" style="background-color:#0099cc">모임지역</span>
-				</div>
+            </div>
+			<div class="col-sm-3">
 				<c:set var="cst_loc" value="${fn:split(vo.cst_loc,',')}"/>
-				<div class="col-sm-11">
+				<span class="btn btn-warning" style="background-color:#fcbe03">모임지역</span>
+				
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">서울</button>
                 	<input type="checkbox" name="cst_loc" value="서울" class="hidden"
@@ -259,15 +254,11 @@
 						</c:forEach>   
                 	/>
             	</span>
-            	</div>
-            	
-			</div>
-			<div class="row">
-				<div class="col-sm-1">
-					<span class="btn btn-warning" style="background-color:#0099cc">모임요일</span>
-				</div>
+            </div>
+			<div class="col-sm-3">
 				<c:set var="cst_day" value="${fn:split(vo.cst_day,',')}"/>
-				<div class="col-sm-11">
+				<span class="btn btn-warning" style="background-color:#fcbe03">모임요일</span>
+				
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">주중</button>
                 	<input type="checkbox" name="cst_day" value="주중" class="hidden"
@@ -284,14 +275,11 @@
 						</c:forEach>   
                 	/>
             	</span>
-            	</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-1">
-					<span class="btn btn-warning" style="background-color:#0099cc">모임가격</span>
-				</div>
+            </div>
+			<div class="col-sm-3">
 				<c:set var="cst_price" value="${fn:split(vo.cst_price,',')}"/>
-				<div class="col-sm-11">
+				<span class="btn btn-warning" style="background-color:#fcbe03">모임가격</span>
+				
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">무료</button>
                 	<input type="checkbox" name="cst_price" value="0" class="hidden"
@@ -340,8 +328,8 @@
 						</c:forEach>   
                 	/>
 				</span>
-				</div>
 			</div>
+		</div>
 			<div class="text-center col-sm-12" style="margin-top:15px;">
 				<input type="submit" class="btn btn-primary btn-sm outline" value="검색저장"/>
 				<input type="button" class="btn btn-primary btn-sm outline" id="DeleteBtn" value="검색삭제"/>

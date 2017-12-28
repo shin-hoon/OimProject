@@ -17,7 +17,7 @@
 		<div class="col-sm-12">
 			<div class="form-group">
 					<input type="hidden" name="cst_no" value="${num}"/>
-					<div class="input-group" style="width:93%">
+					<div class="input-group" style="width:100%">
 						<input type="text" class="form-control"  
 							id="validate-text" placeholder="맞춤모임 이름을 입력해주세요.(최대15글자)"
 							name="cst_subject" maxlength="15" required>
@@ -26,10 +26,9 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-1">
-				<span class="btn btn-warning" style="font-size:70%;background-color:#0099cc">모임카테고리</span>		
-			</div>
-				<div class="col-sm-11">
+			<div class="col-sm-3">
+				<span class="btn btn-warning" style="background-color:#fcbe03">모임카테고리</span>
+
 				<span class="button-checkbox">
 	                <button type="button" class="btn checkbtn" data-color="primary">교육</button>
                 	<input type="checkbox" name="cst_cg" value="교육" class="hidden"/>
@@ -86,14 +85,11 @@
 	            	<button type="button" class="btn checkbtn" data-color="primary">기타</button>
                 	<input type="checkbox" name="cst_cg" value="기타" class="hidden"/>
             	</span>
-            	</div>
-				
 			</div>
-			<div class="row">
-				<div class="col-sm-1">
-					<span class="btn btn-warning" style="background-color:#0099cc">모임지역</span>
-				</div>
-				<div class="col-sm-11">
+			
+			<div class="col-sm-3">
+				<span class="btn btn-warning" style="background-color:#fcbe03">모임지역</span>
+					
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">서울</button>
                 	<input type="checkbox" name="cst_loc" value="서울" class="hidden"/>
@@ -130,29 +126,25 @@
 	            	<button type="button" class="btn checkbtn" data-color="primary">기타지역</button>
                 	<input type="checkbox" name="cst_loc" value="기타지역" class="hidden"/>
             	</span>
-            	</div>
+			
+            </div>
             	
-			</div>
-			<div class="row">
-				<div class="col-sm-1">
-					<span class="btn btn-warning" style="background-color:#0099cc">모임요일</span>
-				</div>
-				<div class="col-sm-11">
+			<div class="col-sm-3">
+				<span class="btn btn-warning" style="background-color:#fcbe03">모임요일</span>
+					
 				<span class="button-checkbox">
-	            	<button type="button" class="btn checkbtn" data-color="primary">주중</button>
-                	<input type="checkbox" name="cst_day" value="주중" class="hidden"/>
-            	</span>
+		           	<button type="button" class="btn checkbtn" data-color="primary">주중</button>
+               		<input type="checkbox" name="cst_day" value="주중" class="hidden"/>
+           		</span>
 				<span class="button-checkbox">
-	            	<button type="button" class="btn checkbtn" data-color="primary">주말</button>
-                	<input type="checkbox" name="cst_day" value="주말" class="hidden"/>
-            	</span>
-            	</div>
+		           	<button type="button" class="btn checkbtn" data-color="primary">주말</button>
+               		<input type="checkbox" name="cst_day" value="주말" class="hidden"/>
+           		</span>
 			</div>
-			<div class="row" >
-				<div class="col-sm-1">
-					<span class="btn btn-warning" style="background-color:#0099cc">모임가격</span>
-				</div>
-				<div class="col-sm-11">
+				
+			<div class="col-sm-3">
+				<span class="btn btn-warning" style="background-color:#fcbe03">모임가격</span>
+
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">무료</button>
                 	<input type="checkbox" name="cst_price" value="0" class="hidden"/>
@@ -177,9 +169,9 @@
 	            	<button type="button" class="btn checkbtn" data-color="primary">99,000원 ~</button>
                 	<input type="checkbox" name="cst_price" value="99001" class="hidden"/>
 				</span>
-				</div>
 			</div>
-			<div class="text-center col-sm-12" style="margin-top:15px;">
+		</div>
+			<div class="text-center col-lg-12" style="margin-top:15px;">
 				<input type="submit" class="btn btn-primary btn-sm outline" id="InsertBtn" value="검색저장"/>
 				<input type="hidden" id="id2" value="${id}">
 				<input type="hidden" name="saveNum" id="saveNum" value="${num}">
