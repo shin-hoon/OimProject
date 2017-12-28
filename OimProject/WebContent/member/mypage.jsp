@@ -64,10 +64,10 @@ $(function(){
  $('#pwd_ok').keyup(function(){
   if($('#pwd').val()!=$('#pwd_ok').val()){
    $('font[name=check]').text('');
-   $('font[name=check]').html("<font color=red>"+"암호가 일치하지 않습니다.다시입력하세요.");
+   $('font[name=check]').html("<font color=red>"+"*비밀번호를 다시입력하세요.");
   }else{
    $('font[name=check]').text('');
-   $('font[name=check]').html("<font color=blue>"+"암호가 일치합니다.");
+   $('font[name=check]').html("<font color=blue>"+"*비밀번호가 일치합니다.");
   }
  }); //#check_password.keyup
 });
@@ -152,7 +152,6 @@ $(function(){
                      <td width=30% class="text-right">
                         <span class="oim-icon glyphicon glyphicon-envelope"></span>이메일
                      </td>
-                     <!-- db들어와야함  -->
                      <td width=70% class="text-center">${sessionScope.id }
                      	<input type="hidden" name="id" value="${sessionScope.id }" />
                      </td>
@@ -162,7 +161,7 @@ $(function(){
                         <span class="oim-icon glyphicon glyphicon-earphone"></span>휴대전화
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=tel size=30 id="tel" placeholder=${sessionScope.tel }>
+                        <input type=text name=tel size=30 id="tel">
                      </td>                  
                   </tr>
                   <tr>
@@ -170,8 +169,8 @@ $(function(){
                         <span class="oim-icon glyphicon glyphicon-lock"></span>새로운 비밀번호 입력 
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=pwd size=30 id="pwd"><br>
-                        <h6 style="color:#DF013A;">*비밀번호는 8~24글자 이내로 입력해 주세요.</h6>
+                        <input type=text name=pwd size=30 id="pwd"><br>	
+                        <h6 style="color:black; font-size:12px;">*비밀번호는 8~24글자 이내로 입력해 주세요.</h6>
                      </td>                  
                   </tr>
                   <tr>
@@ -191,7 +190,7 @@ $(function(){
                      </td>
                     </tr>
                </table>
-            </form>
+             </form>
           </div>
           
           

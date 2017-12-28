@@ -110,7 +110,7 @@ public class MemberModel {
 				vo.setCount(3);  //					count=3
 				session.setAttribute("id", id);
 				session.setAttribute("name", vo.getOm_name());
-				System.out.println("세션id: "+id);
+				
 				
 			}
 			else							//비밀번호가 다르다면
@@ -119,7 +119,7 @@ public class MemberModel {
 			}
 			
 		}
-		System.out.println(id);
+		
 		req.setAttribute("count", vo.getCount());
 		
 		return "member/login_ok.jsp";
@@ -137,41 +137,29 @@ public class MemberModel {
 	public String Oim_Update(HttpServletRequest req,HttpServletResponse res)throws Throwable{
 		
 		req.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = req.getSession();
 			
-		String id=req.getParameter("id");
+		String id=(String)session.getAttribute("id");  
 		String tel=req.getParameter("tel");
-		String pwd =req.getParameter("pwd"); 	//새로운 비밀번호
-		String pwd_ok=req.getParameter("pwd_ok"); //새로운 비밀번호 확인
-			
-		System.out.println("req id: "+ id);
-		System.out.println("req tel: "+ tel);
-		System.out.println("req pwd: "+ pwd);
-		System.out.println("req tel: "+ pwd_ok);
-		System.out.println("=================");
-	
-		/*//alert창 띄우기 위해서 여기서 부터 update_ok.jsp로..?
+		String pwd =req.getParameter("pwd"); 	
+		String pwd_ok=req.getParameter("pwd_ok"); 
+
 		MemberVO vo=new MemberVO();
+		
 		if(pwd.equals(pwd_ok))
 		{
+			
 			//사용자가 입력한 값->VO
-			vo.setOm_id((id);
+			vo.setOm_id(id);
 			vo.setOm_tel(tel);
 			vo.setOm_pwd(pwd);
 			
-			//바뀐 VO-> DB저장
+			//바뀐VO->DB저장
 			MemberDAO.OimUpdate(vo);
-			
-			//세션업데이트
-			sess.setAttribute("tel", tel);
-			sess.setAttribute("pwd", pwd);
 		}
-		else
-		{
-			System.out.println("비밀번호 틀렸습니다");
-		}*/
 		
-		
-		return "member/update_ok.jsp";
+		return "Oim_mypage.do";
 	}
 	
 }

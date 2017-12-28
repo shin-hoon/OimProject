@@ -116,7 +116,7 @@ public class MemberDAO {
 			
 			session.update("OimUpdate",vo);
 			session.commit();
-			System.out.println(vo.getOm_tel()+vo.getOm_id()+vo.getOm_pwd());
+			System.out.println("회원정보수정:"+vo.getOm_tel()+vo.getOm_id()+vo.getOm_pwd());
 			
 			
 		}catch(Exception ex)
