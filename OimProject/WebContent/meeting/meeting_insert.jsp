@@ -14,7 +14,8 @@
       <script type="text/javascript" src="js/daterangepicker.js"></script>
       
     <!-- 네이버 지도 -->
-   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=1e5PfwhPM359PFhc_Qqy&callback=CALLBACK_FUNCTION"></script>
+   <!-- <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=1e5PfwhPM359PFhc_Qqy&callback=CALLBACK_FUNCTION"></script> -->
+   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&callback=CALLBACK_FUNCTION"></script>
    
     <style>
         .meetingRow{
@@ -129,15 +130,6 @@
                
                <td class="col-sm-9" style="vertical-align: middle">
                       
-<!--
-                       <div class="input-daterange input-group" id="datepicker">
-                            <input type="text" class="input-sm form-control" name="from" placeholder="From date"/>
-                            <span class="input-group-addon">to</span>
-                            <input type="text" class="input-sm form-control" name="to" placeholder="To date"/>
-
-                         </div>
--->
-
                     <input type="text" class="form-control meet_date" name="meet_date"/>
 
                     <script type="text/javascript">
@@ -163,32 +155,75 @@
                
                <td class="col-sm-9">
                    <div class="form group form-inline" style="margin-bottom:15px; vertical-align: middle">
-                       <input type="text" class="form-control" name="meet_loc" size="50">
-                       <input type="button" class="btn btn-default" value="검색">
-                        <label style="font-weight: normal">
-                          <input type="checkbox">장소없음/미정
+                       <input type="text" class="form-control" name="meet_loc" id="searchText" size="50">
+                       <input type="button" class="btn btn-default" id="searchBtn" value="검색">
+                        <label style="font-weight: normal">&nbsp;
+                          <input type="checkbox" class="noplace">장소없음/미정
+                          
+                          <!--장소 미정 체크했을때, 해제했을때 이벤트 발생  -->
+                          <script type="text/javascript">
+                          	$(function(){
+                          	  $(".noplace").change(function(){ 
+                          		 if($('.noplace').is(":checked")==true){ /*장소미정 체크했을때  */
+                          			$('.detailMap').css("display","none");
+                          			$('#searchText').val('');
+									$('#searchText').attr("disabled",true);
+									$('#searchBtn').attr("disabled",true);
+                          		}else{									/*장소미정 해제했을때 */
+                          			$('.detailMap').css("display","block");
+                          			$('#searchText').attr("disabled",false);
+									$('#searchBtn').attr("disabled",false);
+                          		} 
+                          	 });
+                          	});
+                          </script>
                         </label>
                    </div>
                    
-                    <div class="detailMap" id="detailMap">
+                   <div class="detailMap" id="detailMap">
                    <div id="map" style="width:100%; height:300px; margin: 0 auto;"></div>
                     
-                        <script> //네이버지도
-                            var map = new naver.maps.Map('map', {
-                                center: new naver.maps.LatLng(37.50960113, 127.05812649), //지도의 초기 중심 좌표
+                         <script>
+
+                        var oimlocation = new naver.maps.LatLng(37.4942653,126.7200840), //지도의 초기 중심 좌표
+                        
+                            map = new naver.maps.Map('map', {
+                                center: oimlocation.destinationPoint(0, 500),
                                 zoom: 8, //지도의 초기 줌 레벨
                                 minZoom: 1, //지도의 최소 줌 레벨
                                 zoomControl: true, //줌 컨트롤의 표시 여부
                                 zoomControlOptions: { //줌 컨트롤의 옵션
-                                    position: naver.maps.Position.TOP_RIGHT
+                                position: naver.maps.Position.TOP_RIGHT
                                 }
+                            }),
+                            marker = new naver.maps.Marker({ // 지도마커 생성
+                                map: map,
+                                position: oimlocation
                             });
-                            var marker = new naver.maps.Marker({
-                                position: new naver.maps.LatLng(37.50960113, 127.05812649),
-                                map: map
-                            });
+                            
                             map.setOptions("mapTypeControl", true); //지도 유형 컨트롤의 표시 여부
+							
+                            // 마커의 정보창 표시
+                           var contentString = [
+                                '<div class="iw_inner" style="padding:10px;">',
+                                '   	<h6><img src="meeting/image/place.png" style="height: 20px; width: 20px;">모임장소:</h6>',
+                                '		<p></p>',
+                                '</div>'
+                            ].join('');
 
+	                        var infowindow = new naver.maps.InfoWindow({
+	                            content: contentString
+	                        });
+							
+	                        naver.maps.Event.addListener(marker, "click", function(e) {
+	                            if (infowindow.getMap()) {
+	                                infowindow.close();
+	                            } else {
+	                                infowindow.open(map, marker);
+	                            }
+	                        });
+	
+	                        infowindow.open(map, marker);
 
                             // 지도 인터랙션 옵션
                             $("#interaction").on("click", function(e) {
@@ -220,7 +255,7 @@
                                     $(this).addClass("control-on");
                                 }
                             });
-                                                        $("#min-max-zoom").on("click", function(e) {
+                            $("#min-max-zoom").on("click", function(e) {
                                 e.preventDefault();
 
                                 if (map.getOptions("minZoom") === 10) {
@@ -272,7 +307,7 @@
                            <div class="input-group-addon">
                             <span class="glyphicon glyphicon-map-marker"></span> 
                            </div>
-                           <input type="text" class="form-control" name="meet_loc1" value="모임 장소 : [제로원디자인센터] 서울 종로구 동숭동 서울시 종로구 동숭길 122-6 국민대학교" readonly="readonly"/>
+                           <input type="text" class="form-control" name="meet_loc1" value="[제로원디자인센터] 서울 종로구 동숭동 서울시 종로구 동숭길 122-6 국민대학교" readonly="readonly"/>
                           </div>
                           
                           <input type="text" class="form-control" name="meet_loc2" placeholder="나머지 주소를 입력해 주세요.">
