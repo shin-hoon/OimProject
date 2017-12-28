@@ -15,133 +15,12 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="css/selectsave.css">
-	<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
-	<script src="//code.jquery.com/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-	 --><!-- <link href="../css/oim_style.css" rel="stylesheet"> -->
-	<!-- <link rel="stylesheet" href="../css/bootstrap.css"> -->
-	
-	<style type="text/css">
-		*{
-			color:black;
-		}
-		.label {
-			padding: 10px 8px 10px;
-		}
-		@media (min-width: 768px)   {
-  			.label {
-    			padding: .0em .0em .0em;
-  			}
-		}
-		@media (min-width: 992px)   {
-  			.label {
-    			padding: 10px 8px 10px;
-  			}
-		}
-		
-	.checkbtn{
-        text-align:left;
-        font-size: 12px;
-        font-weight: bold;
-        margin: 3px;
-        width: 13%;
-    }
-	</style>
-<script type="text/javascript">
-	 /*체크박스 이벤트 스크립트*/
-    $(function () {
-    	 $('#DeleteBtn').click(function(){
-    	 	var id = $('#id').val();
-    		var saveNum = $('#saveNum').val();
-    		$.ajax({
-    			type:'post',
-    			url:'selectsave/selectDelete.jsp',
-    			data:{"id":id,"saveNum":saveNum},
-    			success:function(response){
-    				alert("맞춤모임"+saveNum+" 삭제 되었습니다.");
-    				location.href="selectsave.do";
-    		 	}
-    		 });
-    	 });
-    	 
-    	$(function(){
-    		$('#InsertBtn').click(function(){
-    	   	 	var id = $('#id2').val();
-    	   	 	if(id==""){
-    	   	 		alert("로그인 후 이용해주세요");
-    	   	 	}
-    	   	 });
-    	});   		
-    	 
-    $('.button-checkbox').each(function () {
-        // Settings
-        var $widget = $(this),
-            $button = $widget.find('button'),
-            $checkbox = $widget.find('input:checkbox'),
-            color = $button.data('color'),
-            settings = {
-                on: {
-                    icon: 'glyphicon glyphicon-check'
-                },
-                off: {
-                    icon: 'glyphicon glyphicon-unchecked'
-                }
-            };
-
-        /*Event Handlers*/
-        $button.on('click', function () {
-            $checkbox.prop('checked', !$checkbox.is(':checked'));
-            $checkbox.triggerHandler('change');
-            updateDisplay();
-        });
-        $checkbox.on('change', function () {
-            updateDisplay();
-        });
-        /*Actions*/
-        function updateDisplay() {
-            var isChecked = $checkbox.is(':checked');
-
-            // Set the button's state
-            $button.data('state', (isChecked) ? "on" : "off");
-
-            // Set the button's icon
-            $button.find('.state-icon')
-                .removeClass()
-                .addClass('state-icon ' + settings[$button.data('state')].icon);
-
-            // Update the button's color
-            if (isChecked) {
-                $button
-                    .removeClass('btn-default')
-                    .addClass('btn-' + color + ' active');
-            }
-            else {
-                $button
-                    .removeClass('btn-' + color + ' active')
-                    .addClass('btn-default');
-            }
-        }
-
-        // Initialization
-        function init() { 
-
-            updateDisplay();
-
-            // Inject the icon if applicable
-            if ($button.find('.state-icon').length == 0) {
-                $button.prepend('<i class="state-icon ' + settings[$button.data('state')].icon + '"></i> ');
-            }
-        }
-        init();
-    });
-});
-    </script>
-    
+	<script type="text/javascript" src="js/selectsave.js"></script>
 </head>
 <body>
 	<div class="container">
-		<div id="SubContentsTab" >
-			<ul >
+		<div id="SubContentsTab">
+			<ul>
 				<li>
 					<a href="selectsave.do?saveNum=1" ${num==1?'class="on"':''}>
 						<span id="selectSave1">맞춤모임1</span>
@@ -160,6 +39,7 @@
 			</ul>
 		</div>
 	</div>
+	
 	<c:if test="${view==0}">
 	<jsp:include page="../selectsave/selectNoSave.jsp"></jsp:include>
 	</c:if>
@@ -170,12 +50,20 @@
 		<c:set var="cst_cg" value="${fn:split(vo.cst_cg,',')}"/>
 		<form method="post" action="selectsave/selectsave_ok.jsp">
 		<div class="col-sm-12">
-			<input type="hidden" name="cst_no" value="${view}" />
-			<input type="text" name="cst_subject" size="90" maxlength="15" value="${vo.subject}" />
+			<div class="form-group">
+				<input type="hidden" name="cst_no" value="${view}" />
+				<div class="input-group" style="width:93%">
+					<input type="text" class="form-control"  
+						id="validate-text" placeholder="맞춤모임 이름을 입력해주세요.(최대15글자)"
+						name="cst_subject" maxlength="15" value="${vo.subject}"  
+						required>
+					<span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+				</div>
+			</div>
 		</div>
-		<div>
+		<div class="row">
 			<div class="col-sm-1">
-				<span>모임카테고리</span>
+				<span class="btn btn-warning" style="font-size:70%;background-color:#0099cc">모임카테고리</span>				
 			</div>
 				<div class="col-sm-11">
 				<span class="button-checkbox">
@@ -293,9 +181,9 @@
             	</div>
 				
 			</div>
-			<div>
+			<div class="row">
 				<div class="col-sm-1">
-				<span>모임지역</span>
+					<span class="btn btn-warning" style="background-color:#0099cc">모임지역</span>
 				</div>
 				<c:set var="cst_loc" value="${fn:split(vo.cst_loc,',')}"/>
 				<div class="col-sm-11">
@@ -374,9 +262,9 @@
             	</div>
             	
 			</div>
-			<div>
+			<div class="row">
 				<div class="col-sm-1">
-				<span>모임요일</span>
+					<span class="btn btn-warning" style="background-color:#0099cc">모임요일</span>
 				</div>
 				<c:set var="cst_day" value="${fn:split(vo.cst_day,',')}"/>
 				<div class="col-sm-11">
@@ -398,9 +286,9 @@
             	</span>
             	</div>
 			</div>
-			<div>
+			<div class="row">
 				<div class="col-sm-1">
-				<span>모임가격</span>
+					<span class="btn btn-warning" style="background-color:#0099cc">모임가격</span>
 				</div>
 				<c:set var="cst_price" value="${fn:split(vo.cst_price,',')}"/>
 				<div class="col-sm-11">
@@ -454,9 +342,9 @@
 				</span>
 				</div>
 			</div>
-			<div class="text-center">
-				<input type="submit" value="검색저장"/>
-				<input type="button" id="DeleteBtn" value="검색삭제"/>
+			<div class="text-center col-sm-12" style="margin-top:15px;">
+				<input type="submit" class="btn btn-primary btn-sm outline" value="검색저장"/>
+				<input type="button" class="btn btn-primary btn-sm outline" id="DeleteBtn" value="검색삭제"/>
 				<input type="hidden" id="id" value="${id}">
 				<input type="hidden" name="saveNum" id="saveNum" value="${num}">
 			</div>
