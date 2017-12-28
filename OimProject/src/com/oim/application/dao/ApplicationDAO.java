@@ -1,13 +1,14 @@
 package com.oim.application.dao;
 
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import com.oim.meeting.dao.MeetingVO;
 
 public class ApplicationDAO {
 	private static SqlSessionFactory ssf;
@@ -22,7 +23,25 @@ public class ApplicationDAO {
 			System.out.println(ex.getMessage());
 		}
 	}
+	//모임 관리자 홈
+	public static List<MeetingVO> MyMeetingList(Map map) { 
+		
+		List<MeetingVO> list = new ArrayList<MeetingVO>();
+		SqlSession session=ssf.openSession(); 
+		try {
+			list=session.selectList("MyMeetingList",map);
+			
+		}catch(Exception ex) {
+			System.out.println("MyMeetingList : "+ex.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+		return list;
+	}
 	
+	//모임 신청자관리
 	public static List<ApplicationVO> ApplicationListCheckData(String om_hid) { 
 		
 		List<ApplicationVO> list = new ArrayList<ApplicationVO>();
@@ -39,6 +58,7 @@ public class ApplicationDAO {
 		}
 		return list;
 	}
+	//모임신청
 	public static void ApplicationInsertData(ApplicationVO vo) { 
 		
 		
@@ -56,6 +76,7 @@ public class ApplicationDAO {
 			}
 		}
 	}
+	
 	public static List<ApplicationVO> ApplicationMyListData(String om_aid){
 		List<ApplicationVO> list = new ArrayList<ApplicationVO>();
 		SqlSession session=ssf.openSession(); 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,8 +16,9 @@
 		<!-- 셀렉트박스 : 내가만든 모임 선택 -->
 		<div class="oim-manager" style="margin:0%; width:88%; margin-bottom:2%; margin-top:6%;">
 			<select class="form-control" style="width:40%; margin-bottom:3%;">
-				<option>유예나입니다</option>
-				<option>박서리입니다</option>
+				<c:forEach var="vo" items="${list}">
+					<option>${vo.meet_subject }</option>
+				</c:forEach>
 			</select>
 		</div>
 		<!-- 내가만든 모임 정보 -->

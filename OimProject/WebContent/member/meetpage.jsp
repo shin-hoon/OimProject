@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +75,7 @@ table tr:last-child td {border-bottom:none;}
 				            
 				<!-- ============신청자관리 =============-->
 				<div class="tab-pane" id="tab2">
-					<jsp:include page="meetpage_2.jsp"></jsp:include>
+					<jsp:include page="meetpage_2.jsp"></jsp:include> 
 				</div>
 				
 				<!--================== 모임수정 ===================== -->
@@ -84,5 +85,6 @@ table tr:last-child td {border-bottom:none;}
 			</div><!-- 선 -->
 		</div><!-- 탭 -->
 	</div><!-- container -->
+	<div style="height: 100px"></div>
 </body>
 </html>

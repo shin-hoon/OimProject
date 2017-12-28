@@ -9,11 +9,25 @@
 	</select> -->
 	<!-- 내가 개설한 모임 신청자 조회 -->
 	<!-- 신청번호 -->
+	<select id="MyMeetingList" resultType="MeetingVO" parameterType="java.util.Map">
+		SELECT meet_poster, meet_subject,meet_end,meet_price,meet_total,meet_limit,meet_hit,num
+		FROM(SELECT meet_poster, meet_subject,meet_end,meet_price,meet_total,meet_limit,meet_hit,rownum as num
+		FROM(SELECT meet_poster, meet_subject,meet_end,meet_price,meet_total,meet_limit,meet_hit,num
+		FROM meeting ORDER BY meet_no DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+		AND om_id = #{om_hid}
+	</select>
+	<select id="MyMeetingTotal" resultType="int" parameterType="String">
+		SELECT CEIL(COUNT(*)/12) FROM meeting
+		WHERE om_id = #{om_hid}
+	</select>
 	<select id="ApplicationListCheckData" resultType="ApplicationVO" parameterType="String">
-		SELECT m.meet_poster, m.meet_subject, m.meet_total, m.meet_limit, 
-		a.ac_no, a.om_id, a.om_tel, a.om_company, a.ac_regdate
-		FROM meeting m, application a
-		WHERE m.om_id = #{om_hid}
+		SELECT mt.meet_poster, mt.meet_subject, mt.meet_total, mt.meet_limit, 
+		a.ac_no, a.om_id, a.ac_regdate, m.om_tel, m.om_company
+		FROM meeting mt, application a, oim_member m
+		WHERE a.meet_no = mt.meet_no
+		AND m.om_id=a.om_id
+		AND mt.om_id = #{om_hid}
 	</select>
 	<!-- 신청 insert -->
 	<insert id="ApplicationInsertData" parameterType="ApplicationVO">

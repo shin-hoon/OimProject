@@ -5,9 +5,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
 </head>
 <body>
-
+<div>
 	<div class="oim-mypage home">
 		<h4><span class="oim-icon glyphicon glyphicon-user"></span>모임관리 홈</h4>
 	</div>
@@ -18,6 +19,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			
 			<tr>
 				<td width=20% class="text-center">
 					<img src="img/img1.jpg" style="width:55%; height:20%; margin:0%; margin-right:0%;">
@@ -67,6 +69,6 @@
 			</tr>                 
 		</tbody>
 	</table>
-
+</div>
 </body>
 </html>
