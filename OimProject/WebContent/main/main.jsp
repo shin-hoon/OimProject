@@ -263,13 +263,13 @@ $( document ).ready( function() {
 			</div>
 		</div>
 	</nav>	<!-- /.container-fluid -->
-	
+	<jsp:include page="${main_jsp}"></jsp:include>
 	<!-- =====맨위로 올라가기 버튼======== -->
 		<p id="back-top">
 			<a href="#top"><i class="fa fa-angle-up"></i></a>
 		</p>
 	
- 	<jsp:include page="${main_jsp}"></jsp:include>
+ 	
 					
 	
 <!-- =======푸터 ========-->

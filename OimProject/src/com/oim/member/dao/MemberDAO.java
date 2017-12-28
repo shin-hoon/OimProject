@@ -1,7 +1,9 @@
 package com.oim.member.dao;
 
 import java.io.Reader;
-
+import java.util.ArrayList;
+import java.util.List;
+import com.oim.meeting.dao.MeetingVO;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -216,7 +218,28 @@ public class MemberDAO {
     			return bcheck;
     		}*/
 
-    		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+  	public static List<MeetingVO> TodayMeeting()
+  	{
+  		List<MeetingVO> list=new ArrayList<MeetingVO>();
+  		SqlSession session=ssf.openSession();
+  		
+  		try {
+  			
+  			list=session.selectList("TodayMeeting");
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println(ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  		return list;
+  	}
     		
     		
     		

@@ -1,6 +1,9 @@
 package com.oim.model;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,6 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
+import com.oim.meeting.dao.MeetingDAO;
+import com.oim.meeting.dao.MeetingVO;
 import com.oim.member.dao.MemberDAO;
 import com.oim.member.dao.MemberVO;
 
@@ -172,7 +177,7 @@ public class MemberModel {
 	}
 	
 	@RequestMapping("Oim_Delete.do")
-	public String Oim_Delete(HttpServletRequest req,HttpServletResponse res)throws Throwable{
+	public String Oim_Delete(HttpServletRequest req,HttpServletResponse res)throws Throwable
 	{
 		req.setCharacterEncoding("UTF-8");
 		
@@ -204,8 +209,55 @@ public class MemberModel {
 		
 		return re;
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	@RequestMapping("Today_Meeting.do")
+	public String Today_Meeting(HttpServletRequest req,HttpServletResponse res) {
+		
+
+		String page=req.getParameter("page");
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int rowSize=12;
+		int start= (rowSize*curpage)-(rowSize-1);
+		int end= rowSize*curpage;
+		int totalpage=0;
+		
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<MeetingVO> list=MeetingDAO.meetingListData(map);
+		totalpage=MeetingDAO.meetingTotalPage();
+		
+		//jsp·Î Àü¼Û
+		req.setAttribute("totalpage", totalpage);
+		req.setAttribute("curpage", curpage);
+		req.setAttribute("list", list);
+		
+		req.setAttribute("main_jsp", "../meeting/meeting_list.jsp");
+		return "main/main.jsp";
+	
+		
+			
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
-}
+
 	
 	
 

@@ -23,4 +23,8 @@
 <delete id="OimDelete" parameterType="String">
 	DELETE FROM oim_member WHERE om_id=#{om_id}
 </delete>
+<select id="TodayMeeting" resultType="MeetingVO">
+SELECT meet_no, meet_poster, meet_charge,meet_subject,meet_cg,TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end
+FROM meeting	                     	
+</select>
 </mapper>

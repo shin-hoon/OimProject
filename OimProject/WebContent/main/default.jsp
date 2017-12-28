@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +10,29 @@
 		
 		
 <title>Insert title here</title>
+
+
+<script type="text/javascript">
+/*caption안에 p태그의 글자수가 일정수치 이상되면 ...으로 표시하는 스크립트*/
+$(function(){
+    $('div.caption p').each(function(){
+    
+    var length=30; //글자 최대길이 30
+    var minlength=16; //제목 글자가 한줄에 16정도됨
+	
+    $(this).each(function(){ //제목글자길이가 30을 넘는순간부터 ...으로 처리하라
+        if($(this).text().length >= length){
+            $(this).text($(this).text().substr(0,length)+'...');
+        }
+
+        if($(this).text().length <= minlength){ //제목이 1줄짜리 일때는 <br>태그를 줘서 2줄짜리랑 같은 크기로 만들어라 
+           $(this).html($(this).text()+'<br></br>');
+       }
+        
+    });
+    }); 
+});
+</script>
 </head>
 
 <body>
@@ -49,130 +74,28 @@
       <div class="container" style="padding-top:70px; padding-bottom:70px;">
             <div class="col-lg-12 text-center">
                <div class="section-title">
-                  <h2>마감 임박 모임</h2>
-                  <p>모집기간이 얼마 안남은 모임</p>
+                  <h2>오늘의 모임</h2>
+                  <p>오늘 올라온 핫한 모임을 추천해 드립니다</p>
                </div>
                   <ul class="thumbnails">
+                  <c:forEach var="vo" items="${list }" begin="1" end="8">
                       <div class="col-sm-3">
                          <div class="thumbnail">
-                           <img src="img/poster2.png" alt="마감임박">
+                            <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }" alt="마감임박"></a>
                              <div class="caption">
                                    <div>
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right;">12/1 ~ 1/5</p>
+                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">${vo.meet_charge }</span></li>
+                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">${vo.meet_cg }</span></li>
+                                  <p style="text-align:right; font-size:9pt;"><b>~${vo.meet_end }</b></p>
                                   </div>
                                  
-                                  <p class="p_add">2017 콘텐츠인사이드</p>
-                                  <p align="center"><a href="#" class="btn btn-primary btn-block">신청하기</a></p>
+                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><p class="p_add">${vo.meet_subject }</p></a>
+                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="btn btn-primary" style="align:center;">자세히보기</a>
                               </div>
                          </div>
                       </div>
-                      <!-- <div class="col-sm-3">
-                         <div class="thumbnail">
-                           <img src="img/poster2.png" alt="마감임박">
-                             <div class="caption">
-                                   <div>
-                                 <li class="li_add"><span class="label label-success" style="font-size:13px; margin-right:5px;">유료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right;">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 콘텐츠인사이드</p>
-                                  <p align="center"><a href="#" class="btn btn-primary btn-block">신청하기</a></p>
-                              </div>
-                         </div>
-                      </div>
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                           <img src="img/poster2.png" alt="마감임박">
-                             <div class="caption">
-                                   <div>
-                                 <li class="li_add"><span class="label label-success" style="font-size:13px; margin-right:5px;">유료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right;">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 콘텐츠인사이드</p>
-                                  <p align="center"><a href="#" class="btn btn-primary btn-block">신청하기</a></p>
-                              </div>
-                         </div>
-                      </div>
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                           <img src="img/poster2.png" alt="마감임박">
-                             <div class="caption">
-                                   <div>
-                                 <li class="li_add"><span class="label label-success" style="font-size:13px; margin-right:5px;">유료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right;">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 콘텐츠인사이드</p>
-                                  <p align="center"><a href="#" class="btn btn-primary btn-block">신청하기</a></p>
-                              </div>
-                         </div>
-                      </div>
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                           <img src="img/poster2.png" alt="마감임박">
-                             <div class="caption">
-                                   <div>
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right;">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 콘텐츠인사이드</p>
-                                  <p align="center"><a href="#" class="btn btn-primary btn-block">신청하기</a></p>
-                              </div>
-                         </div>
-                      </div>
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                           <img src="img/poster2.png" alt="마감임박">
-                             <div class="caption">
-                                   <div>
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right;">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 콘텐츠인사이드</p>
-                                  <p align="center"><a href="#" class="btn btn-primary btn-block">신청하기</a></p>
-                              </div>
-                         </div>
-                      </div>
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                           <img src="img/poster2.png" alt="마감임박">
-                             <div class="caption">
-                                   <div>
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right;">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 콘텐츠인사이드</p>
-                                  <p align="center"><a href="#" class="btn btn-primary btn-block">신청하기</a></p>
-                              </div>
-                         </div>
-                      </div>
-                      <div class="col-sm-3">
-                         <div class="thumbnail">
-                           <img src="img/poster2.png" alt="마감임박">
-                             <div class="caption">
-                                   <div>
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">무료</span></li>
-                                  <li class="li_add"><span class="label label-primary" style="font-size:13px;">문화/예술</span></li>
-                                  <p style="text-align:right;">12/1 ~ 1/5</p>
-                                  </div>
-                                 
-                                  <p class="p_add">2017 콘텐츠인사이드</p>
-                                  <p align="center"><a href="#" class="btn btn-primary btn-block">신청하기</a></p>
-                              </div>
-                         </div>
-                      </div> -->
+                      
+                    </c:forEach>
                     </ul>   
                </div>
            </div>
