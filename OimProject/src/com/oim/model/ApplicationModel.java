@@ -41,6 +41,12 @@ public class ApplicationModel {
     	req.setAttribute("meetpage_1.do", "../member/meetpage_2.jsp");
         return "../member/meetpage_2.jsp";
     }
+	@RequestMapping("Oim_meetpage.do")
+	public String Oim_meetpage(HttpServletRequest req, HttpServletResponse res)
+	{
+		req.setAttribute("main_jsp","../member/meetpage.jsp");
+		return "main/main.jsp";
+	}
 }
 
 

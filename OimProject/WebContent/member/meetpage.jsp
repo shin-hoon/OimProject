@@ -11,8 +11,6 @@
 <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
 <script type="text/javascript" src="js/moment.js"></script>
 <script type="text/javascript" src="js/daterangepicker.js"></script>
-
-      
 <!-- 네이버 지도 -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=1e5PfwhPM359PFhc_Qqy&callback=CALLBACK_FUNCTION"></script>
 
@@ -43,7 +41,13 @@ table tr:last-child td {border-bottom:none;}
    margin-top:5px;
    margin-bottom:5px;
 </style>
-
+<script type="text/javascript">
+	$(function() {
+		$('#1').click(function() {
+			
+		})
+	})
+</script>
 </head>
 <body>
 <!-- 카테고리 탭 -->
@@ -57,9 +61,9 @@ table tr:last-child td {border-bottom:none;}
 <!-- Mypage 검정 로고 네비  끝-->
 		<div class="tabtable" > 
 			<ul class="nav nav-tabs" ><br>
-				<li class="active"><a href="#tab1" data-toggle="tab">모임관리 홈</a></li>
-				<li><a href="#tab2" data-toggle="tab">신청자관리</a></li>
-				<li><a href="#tab3" data-toggle="tab">모임수정</a></li>
+				<li class="active"><a href="#tab1" id="1" data-toggle="tab" >모임관리 홈</a></li>
+				<li><a href="#tab2" id="2" data-toggle="tab">신청자관리</a></li>
+				<li><a href="#tab3" id="3" data-toggle="tab">모임수정</a></li>
 			</ul>
 			<div class="tab-content" style="border: 1px solid #eee">
 			
@@ -70,7 +74,7 @@ table tr:last-child td {border-bottom:none;}
 				            
 				<!-- ============신청자관리 =============-->
 				<div class="tab-pane" id="tab2">
-					<jsp:include page="meetpage_2.do"></jsp:include>
+					<jsp:include page="meetpage_2.jsp"></jsp:include>
 				</div>
 				
 				<!--================== 모임수정 ===================== -->
