@@ -10,15 +10,15 @@
 	<!-- 내가 개설한 모임 신청자 조회 -->
 	<!-- 신청번호 -->
 	<select id="MyMeetingList" resultType="MeetingVO" parameterType="java.util.Map">
-		SELECT meet_poster, meet_subject,meet_end,meet_price,meet_total,meet_limit,meet_hit,num
-		FROM(SELECT meet_poster, meet_subject,meet_end,meet_price,meet_total,meet_limit,meet_hit,rownum as num
-		FROM(SELECT meet_poster, meet_subject,meet_end,meet_price,meet_total,meet_limit,meet_hit,num
-		FROM meeting ORDER BY meet_no DESC))
+		SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate,num
+		FROM(SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate,rownum as num
+		FROM(SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate
+		FROM meeting WHERE om_id = #{om_hid} ORDER BY meet_no DESC))
 		WHERE num BETWEEN #{start} AND #{end}
-		AND om_id = #{om_hid}
+		
 	</select>
 	<select id="MyMeetingTotal" resultType="int" parameterType="String">
-		SELECT CEIL(COUNT(*)/12) FROM meeting
+		SELECT CEIL(COUNT(*)/5) FROM meeting
 		WHERE om_id = #{om_hid}
 	</select>
 	<select id="ApplicationListCheckData" resultType="ApplicationVO" parameterType="String">

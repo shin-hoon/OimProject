@@ -1,6 +1,7 @@
 
 package com.oim.model;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import com.oim.application.dao.*;
 import javax.servlet.http.HttpServletRequest;
@@ -47,23 +48,27 @@ public class ApplicationModel {
 		if(page==null)
 			page="1";
 		int curpage=Integer.parseInt(page);
-		int rowSize=12;
+		int rowSize=5;
 		int start= (rowSize*curpage)-(rowSize-1);
 		int end= rowSize*curpage;
 		int totalpage=0;
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdf.format(date);
 		map.put("start", start);
 		map.put("end", end);
 		map.put("om_hid", id);
+		
 		List<MeetingVO> mlist = ApplicationDAO.MyMeetingList(map);
 		req.setAttribute("mlist", mlist);
-		
+		req.setAttribute("today", today);
 		
 		//모임 신청자관리
 		List<ApplicationVO> list = ApplicationDAO.ApplicationListCheckData(id);
 		
-		System.out.println(list.size());
-		
+		System.out.println(mlist.size());
 		req.setAttribute("list", list);
+		
 		req.setAttribute("main_jsp","../member/meetpage.jsp");
 		return "main/main.jsp";
 	}

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,22 +21,37 @@
 			</tr>
 		</thead>
 		<tbody>
-			
+			<c:forEach var="mvo" items="${mlist }">
 			<tr>
 				<td width=20% class="text-center">
-					<img src="img/img1.jpg" style="width:55%; height:20%; margin:0%; margin-right:0%;">
+					<img src="${mvo.meet_poster }" style="width:55%; height:20%; margin:0%; margin-right:0%;">&nbsp;
 				</td>
                 <td width=60% class="text-left vertical-align: Middle" style="vertical-align: Middle">
-					<span class="label label-default">모임종료</span>
-					<span class="label label-danger">유료</span><br><br>
-					<font class="oim_font" size=2px;><span class="glyphicon glyphicon-tree-deciduous">개설일: </span></font>&nbsp;&nbsp;
-					<font class="oim_font" size=2px;><span class="glyphicon glyphicon-calendar">참여신청: </span></font>&nbsp;&nbsp;
-					<font class="oim_font" size=2px;><span class="glyphicon glyphicon-ok">모임기간: </span></font>&nbsp;&nbsp;
+					<span>${mvo.meet_subject }</span>
+					<c:if test="${mvo.meet_price==0 }">
+						<span class="label label-primary">무료</span><br>
+					</c:if>
+					<c:if test="${mvo.meet_price!=0 }">
+						<span class="label label-danger">유료</span><br>
+					</c:if>
+					<font class="oim_font" size=2px;>
+						<span class="glyphicon glyphicon-tree-deciduous">
+							개설일: <fmt:formatDate value="${mvo.meet_regdate }" pattern="yyyy-MM-dd"/>
+						</span>
+					</font><br>
+					<font class="oim_font" size=2px;><span class="glyphicon glyphicon-calendar">신청가능인원: ${mvo.meet_limit } / ${mvo.meet_total }</span></font><br>
+					<font class="oim_font" size=2px;><span class="glyphicon glyphicon-ok">모임기간: ${mvo.meet_start } ~ ${mvo.meet_end } </span></font>
 				</td>
 				<td width=20% class="text-center" style="vertical-align: middle">
-					<h4><span class="label label-default">모임종료</span></h4>
+					<c:if test="${mvo.meet_end < today }">
+						<h4><span class="label label-default">모임종료</span></h4>
+					</c:if>
+					<c:if test="${mvo.meet_end > today }">
+						<h4><span class="label label-info">진행중</span></h4>
+					</c:if>
 				</td>
 			</tr>
+			</c:forEach>
             <tr>
 	            <td colspan="4" class="text-center">
 		            <a href="#" class="btn btn-default btn-sm">이전</a>&nbsp;
@@ -61,7 +78,14 @@
 			<tr style="height: 100px; line-height: 50px;">
 				<td style="width:25%; vertical-align: middle;" class="text-center">1건</td>
 				<td style="width:25%; vertical-align: middle;" class="text-center">0원</td>
-				<td style="width:25%; vertical-align: middle;" class="text-center">총 1명</td>
+				
+				<c:forEach var="i" items="${list }" varStatus="count">
+					<%-- <fmt:parseNumber var="l" type="number" value="${i.meet_limit}" />
+					<fmt:parseNumber var="t" type="number" value="${i.meet_total}" /> --%>
+					<fmt:parseNumber var="total" type="number" value="${total+i.meet_total-i.meet_limit }"/> 
+				</c:forEach>
+				
+				<td style="width:25%; vertical-align: middle;" class="text-center">총 ${total }명</td>
 				<td style="width:25%; vertical-align: middle;" class="text-center">36회</td>
 			</tr>
 			<tr>
