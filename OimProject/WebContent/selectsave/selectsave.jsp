@@ -63,7 +63,7 @@
 		<div class="row">
 			<div class="col-sm-3">
 			<c:set var="cst_cg" value="${fn:split(vo.cst_cg,',')}"/>
-				<span class="btn btn-warning" style="font-size:70%;background-color:#fcbe03">모임카테고리</span>				
+				<span class="btn btn-warning border-trim">모임카테고리</span>				
 				
 				<span class="button-checkbox">
 	                <button type="button" class="btn checkbtn" data-color="primary">교육</button>
@@ -180,7 +180,7 @@
             </div>
 			<div class="col-sm-3">
 				<c:set var="cst_loc" value="${fn:split(vo.cst_loc,',')}"/>
-				<span class="btn btn-warning" style="background-color:#fcbe03">모임지역</span>
+				<span class="btn btn-warning border-trim">모임지역</span>
 				
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">서울</button>
@@ -257,7 +257,7 @@
             </div>
 			<div class="col-sm-3">
 				<c:set var="cst_day" value="${fn:split(vo.cst_day,',')}"/>
-				<span class="btn btn-warning" style="background-color:#fcbe03">모임요일</span>
+				<span class="btn btn-warning border-trim">모임요일</span>
 				
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">주중</button>
@@ -278,7 +278,7 @@
             </div>
 			<div class="col-sm-3">
 				<c:set var="cst_price" value="${fn:split(vo.cst_price,',')}"/>
-				<span class="btn btn-warning" style="background-color:#fcbe03">모임가격</span>
+				<span class="btn btn-warning border-trim">모임가격</span>
 				
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">무료</button>
@@ -330,7 +330,7 @@
 				</span>
 			</div>
 		</div>
-			<div class="text-center col-sm-12" style="margin-top:15px;">
+			<div class="text-center col-sm-12 border-submit"">
 				<input type="submit" class="btn btn-primary btn-sm outline" value="검색저장"/>
 				<input type="button" class="btn btn-primary btn-sm outline" id="DeleteBtn" value="검색삭제"/>
 				<input type="hidden" id="id" value="${id}">

@@ -27,7 +27,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-3">
-				<span class="btn btn-warning" style="background-color:#fcbe03">모임카테고리</span>
+				<span class="btn btn-warning border-trim">모임카테고리</span>
 
 				<span class="button-checkbox">
 	                <button type="button" class="btn checkbtn" data-color="primary">교육</button>
@@ -88,7 +88,7 @@
 			</div>
 			
 			<div class="col-sm-3">
-				<span class="btn btn-warning" style="background-color:#fcbe03">모임지역</span>
+				<span class="btn btn-warning border-trim">모임지역</span>
 					
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">서울</button>
@@ -130,7 +130,7 @@
             </div>
             	
 			<div class="col-sm-3">
-				<span class="btn btn-warning" style="background-color:#fcbe03">모임요일</span>
+				<span class="btn btn-warning border-trim">모임요일</span>
 					
 				<span class="button-checkbox">
 		           	<button type="button" class="btn checkbtn" data-color="primary">주중</button>
@@ -143,7 +143,7 @@
 			</div>
 				
 			<div class="col-sm-3">
-				<span class="btn btn-warning" style="background-color:#fcbe03">모임가격</span>
+				<span class="btn btn-warning border-trim">모임가격</span>
 
 				<span class="button-checkbox">
 	            	<button type="button" class="btn checkbtn" data-color="primary">무료</button>
@@ -171,7 +171,7 @@
 				</span>
 			</div>
 		</div>
-			<div class="text-center col-lg-12" style="margin-top:15px;">
+			<div class="text-center col-lg-12 border-submit">
 				<input type="submit" class="btn btn-primary btn-sm outline" id="InsertBtn" value="검색저장"/>
 				<input type="hidden" id="id2" value="${id}">
 				<input type="hidden" name="saveNum" id="saveNum" value="${num}">
