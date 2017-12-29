@@ -16,6 +16,16 @@ import com.oim.meeting.dao.MeetingDAO;
 import com.oim.meeting.dao.MeetingVO;
 import com.oim.member.dao.MemberVO;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 @Controller
 public class MeetingModel {
 	@RequestMapping("meeting_list.do") //모임목록
@@ -205,6 +215,78 @@ public class MeetingModel {
     	req.setAttribute("vo", vo);
     	req.setAttribute("main_jsp", "../meeting/meeting_insert.jsp");
     	return "main/main.jsp";
+    }
+    
+    @RequestMapping("loc_search.do")//모임장소 지역검색
+    public String loc_search(HttpServletRequest req, HttpServletResponse res) {
+    	
+
+    	    String clientId = "_meOdew7lewhDIHb1HpK";//애플리케이션 클라이언트 아이디값";
+	        String clientSecret = "T7NOHRhl3A";//애플리케이션 클라이언트 시크릿값";
+	        String search=req.getParameter("search");
+	        try {
+
+	            String text = URLEncoder.encode(search, "UTF-8");
+	            String apiURL="https://openapi.naver.com/v1/search/local?display=10&query="+text;
+	            URL url = new URL(apiURL);
+	            HttpURLConnection con = (HttpURLConnection)url.openConnection();
+	            con.setRequestMethod("GET");
+	            con.setRequestProperty("X-Naver-Client-Id", clientId);
+	            con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
+	            int responseCode = con.getResponseCode();
+	            BufferedReader br;
+	            if(responseCode==200) { // 정상 호출
+	                br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+	            } else {  // 에러 발생
+	                br = new BufferedReader(new InputStreamReader(con.getErrorStream(),"UTF-8"));
+	            }
+	            String inputLine;
+	            StringBuffer response = new StringBuffer();
+	            while ((inputLine = br.readLine()) != null) {
+	                response.append(inputLine+"\n");
+	            }
+	            br.close();
+	            
+	            String json = response.toString();
+	            JSONParser jp = new JSONParser();
+	            JSONObject obj = (JSONObject)jp.parse(json);
+	            JSONArray arr=(JSONArray)obj.get("items");
+	            
+
+	            List<MeetingVO> list=new ArrayList<MeetingVO>(); 
+	            
+
+	            // 괄호나 이상한 문자를 처리할때
+	            for(int i=0; i<arr.size(); i++) {
+	            	JSONObject jo = (JSONObject)arr.get(i);
+	            	String title = (String)jo.get("title");
+	            	String address = (String)jo.get("address");
+	            	String mapx = (String)jo.get("mapx");
+	            	String mapy = (String)jo.get("mapy");
+	            		
+	            		title=title.replace("<b>", "");
+	    	            title=title.replace("</b>", "");
+	    	    
+	    	            System.out.println(title);
+	    	            System.out.println(mapx);
+	    	            System.out.println(mapy);
+	    	            
+	    	        MeetingVO vo = new MeetingVO();         
+	            	vo.setMeet_loc("["+title+"] "+address);
+	            	vo.setMeet_lat(mapx);
+	            	vo.setMeet_lng(mapy);
+	            	list.add(vo);
+	            }
+	            
+
+	            req.setAttribute("list", list);
+  
+	        } catch (Exception e) {
+	            System.out.println(e);
+	        }
+    	
+    	
+    	return "meeting/loc_search.jsp";
     }
     
     @RequestMapping("meeting_insert_ok.do") //모임개설완료
