@@ -267,9 +267,9 @@ public class MeetingModel {
 	            		title=title.replace("<b>", "");
 	    	            title=title.replace("</b>", "");
 	    	    
-	    	            System.out.println(title);
-	    	            System.out.println(mapx);
-	    	            System.out.println(mapy);
+//	    	            System.out.println(title);
+//	    	            System.out.println(mapx);
+//	    	            System.out.println(mapy);
 	    	            
 	    	        MeetingVO vo = new MeetingVO();         
 	            	vo.setMeet_loc("["+title+"] "+address);

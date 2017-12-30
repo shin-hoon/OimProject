@@ -13,6 +13,16 @@
 <script>
 $(function(){
 		
+	$(document).mouseup(function (e){
+
+		var container = $('.searchList');
+
+		if( container.has(e.target).length === 0)
+
+		container.hide();
+
+		});
+	
 		$('.searchList li a').click(function(){
 			
 			 var str=$(this).text();
