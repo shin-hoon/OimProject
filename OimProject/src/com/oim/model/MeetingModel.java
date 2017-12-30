@@ -266,11 +266,7 @@ public class MeetingModel {
 	            		
 	            		title=title.replace("<b>", "");
 	    	            title=title.replace("</b>", "");
-	    	    
-//	    	            System.out.println(title);
-//	    	            System.out.println(mapx);
-//	    	            System.out.println(mapy);
-	    	            
+	            
 	    	        MeetingVO vo = new MeetingVO();         
 	            	vo.setMeet_loc("["+title+"] "+address);
 	            	vo.setMeet_lat(mapx);
@@ -307,8 +303,8 @@ public class MeetingModel {
     	String meet_total=req.getParameter("meet_total"); //정원
     	String meet_limit=req.getParameter("meet_total");//신청가능인원 => 처음 만들때 신청가능인원은 정원과 같다
     	String meet_price=req.getParameter("meet_price"); //참여비용
-    	/*String meet_lat=req.getParameter("meet_lat");*///위도
-    	/*String meet_lng=req.getParameter("meet_lng");*///경도
+    	String meet_lat=req.getParameter("meet_lat");//위도
+    	String meet_lng=req.getParameter("meet_lng");//경도
     	String meet_info=req.getParameter("meet_info"); //모임내용
     	String meet_detail=req.getParameter("meet_detail"); //상세정보
     	
@@ -322,19 +318,19 @@ public class MeetingModel {
     	if(meet_loc1.equals("") && meet_loc2.equals("")) { //입력된 모임장소가 없을때
     		vo.setMeet_loc("미정이거나 등록된 모임장소가 없습니다");
     	}else {												//입력된 모임장소가 있을때
-    		vo.setMeet_loc("["+meet_loc1+"] "+meet_loc2); 
+    		vo.setMeet_loc(meet_loc1+" "+meet_loc2); 
     	}
     	vo.setMeet_charge(meet_charge);
     	vo.setMeet_total(Integer.parseInt(meet_total));
     	vo.setMeet_limit(Integer.parseInt(meet_limit));
     	vo.setMeet_price(Integer.parseInt(meet_price));
-//    	vo.setMeet_lat(meet_lat);
-//    	vo.setMeet_lng(meet_lng);
+    	vo.setMeet_lat(meet_lat);
+    	vo.setMeet_lng(meet_lng);
     	vo.setMeet_info(meet_info);
     	vo.setMeet_detail(meet_detail);
     	
     	
-    	MeetingDAO.meetingInsertOk(vo); //모임개설하기
+//    	MeetingDAO.meetingInsertOk(vo); //모임개설하기
     	
     	System.out.println("모임 카테고리: "+meet_cg);
     	/*System.out.println("모임 포스터:" + poster);*/
@@ -348,8 +344,8 @@ public class MeetingModel {
     	System.out.println("유/무료여부: "+meet_charge);
     	System.out.println("모임정원: "+meet_total);
     	System.out.println("참가비용: "+meet_price);
-    	/*System.out.println("위도: "+meet_lat);*/
-    	/*System.out.println("경도: "+meet_lng);*/
+    	System.out.println("위도: "+meet_lat);
+    	System.out.println("경도: "+meet_lng);
     	System.out.println("모임소개: "+meet_info);
     	System.out.println("상세내용: "+meet_detail);
     	

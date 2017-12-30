@@ -17,23 +17,27 @@ $(function(){
 
 		var container = $('.searchList');
 
-		if( container.has(e.target).length === 0)
+		if( container.has(e.target).length === 0) //검색결과 리스트 외부를 클릭하면 창이 꺼진다
 
 		container.hide();
 
 		});
 	
-		$('.searchList li a').click(function(){
+		$('.searchList li a').click(function(){ //해당 주소를 클릭하면 입력이 되면서 지도에 해당위치를 보여준다
 			
 			 var str=$(this).text();
 			 
 			 $('input:text[name="meet_loc1"]').val(str);
+			 
+			 
 			 $('.searchList').hide();
 		 
 			var loc=$(this).attr("data-loc"); //이름
-			var lat=$(this).attr("data-loc"); //위도
 			var lat=$(this).attr("data-lat"); //위도
 			var lng=$(this).attr("data-lng"); //경도
+			
+			$('input:hidden[name="meet_lat"]').val(lat);
+			$('input:hidden[name="meet_lng"]').val(lng);
 			   
 			 var position = new naver.maps.Point(lat,lng);
 			  
@@ -52,5 +56,8 @@ $(function(){
                         		data-loc="${vo.meet_loc}" data-lat="${vo.meet_lat}" data-lng="${vo.meet_lng}">${vo.meet_loc}</a></li>
                         	</c:forEach>
                         	</ul>
+                        	
+                        	<input type="hidden" name="meet_lat" value=""> <!--위도값을 넘기기위한 input 태그  -->
+                        	<input type="hidden" name="meet_lng" value=""> <!--경도값을 넘기기위한 input 태그  -->
 </body>
 </html>

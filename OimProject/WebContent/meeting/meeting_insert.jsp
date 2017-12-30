@@ -58,8 +58,11 @@ $(function(){
 		<div class="col-sm-2">      
 		       <div class="col-sm-12 text-center" style="padding:0; height:170px; margin-top:10px;">
 		        
-		           <img src="https://static.onoffmix.com/images2/default/thumbnail_null.jpg" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
-		            alt="대표이미지">
+		           <!-- <img src="https://static.onoffmix.com/images2/default/thumbnail_null.jpg" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
+		            alt="대표이미지"> -->
+		            
+		            <img src="http://drive.google.com/uc?export=view&id=1IaPW70w3VoiKCDzMxd5PEPCf6zbWapQX"
+		            style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster" />
 		           
 		         <script type="text/javascript"> 
 		         	$(function(){ //사진변경 버튼 클릭했을때 file타입의 버튼 강제 클릭 이벤트 발생
@@ -159,45 +162,18 @@ $(function(){
 
                     <script type="text/javascript">
                     $(function() {
-                    	
-                    	
-                    	
-                        $('.meet_date').daterangepicker({
-                        	 
+                        $('.meet_date').daterangepicker({ 
                             timePicker: true,
                             timePicker24Hour: true,
-                           
                             timePickerIncrement: 10,
+                            
                             locale: {
                                 format:'YYYY-MM-DD HH:mm',
                                 separator:' ~ ',
                                 applyLabel:"확인",
                                 cancelLabel:"취소",
-						
-                                daysOfWeek:[
-                                	"일",
-                                	"월",
-                                	"화",
-                                	"수",
-                                	"목",
-                                	"금",
-                                	"토"
-                                ],
-                                
-                                monthNames:[
-                                	"1월",
-                                	"2월",
-                                	"3월",
-                                	"4월",
-                                	"5월",
-                                	"6월",
-                                	"7월",
-                                	"8월",
-                                	"9월",
-                                	"10월",
-                                	"11월",
-                                	"12월"
-                                ]
+                                daysOfWeek:["일","월","화","수","목","금","토"],
+                                monthNames:["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"]
                             }
                         });
                     });
