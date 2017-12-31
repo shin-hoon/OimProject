@@ -54,9 +54,10 @@
 			</c:forEach>
             <tr>
 	            <td colspan="4" class="text-center">
-		            <a href="#" class="btn btn-default btn-sm">이전</a>&nbsp;
-		            <a href="#" class="btn btn-default btn-sm">다음</a>&nbsp;&nbsp;
-		            <%-- <%=curpage %> page / <%=totalpage %> pages --%>
+	            	
+	            	<a href="Oim_meetpage.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-default btn-sm">이전</a>
+            		<a href="Oim_meetpage.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-default btn-sm">다음</a>
+            		${curpage } page / ${totalpage } pages
 	            </td>
             </tr>
 		</tbody>
@@ -76,17 +77,17 @@
 				<th width:25% class="text-center active">개설한 모임 총 페이지 뷰</th>
 			</tr>
 			<tr style="height: 100px; line-height: 50px;">
-				<td style="width:25%; vertical-align: middle;" class="text-center">1건</td>
-				<td style="width:25%; vertical-align: middle;" class="text-center">0원</td>
-				
-				<c:forEach var="i" items="${list }" varStatus="count">
-					<%-- <fmt:parseNumber var="l" type="number" value="${i.meet_limit}" />
-					<fmt:parseNumber var="t" type="number" value="${i.meet_total}" /> --%>
-					<fmt:parseNumber var="total" type="number" value="${total+i.meet_total-i.meet_limit }"/> 
+				<c:forEach var="i" items="${mlist2 }" varStatus="count">
+					<fmt:parseNumber var="mttotal" type="number" value="${mttotal+i.meet_no }"/>
+					<fmt:parseNumber var="pricetotal" type="number" value="${pricetotal+(i.meet_total-i.meet_limit)*i.meet_price }"/> 
+					<fmt:parseNumber var="inwontotal" type="number" value="${inwontotal+i.meet_total-i.meet_limit }"/>
+					<fmt:parseNumber var="hittotal" type="number" value="${hittotal+i.meet_hit }"/> 
 				</c:forEach>
 				
-				<td style="width:25%; vertical-align: middle;" class="text-center">총 ${total }명</td>
-				<td style="width:25%; vertical-align: middle;" class="text-center">36회</td>
+				<td style="width:25%; vertical-align: middle;" class="text-center">${mttotal}건</td>
+				<td style="width:25%; vertical-align: middle;" class="text-center">총 ${pricetotal }원</td>
+				<td style="width:25%; vertical-align: middle;" class="text-center">총 ${inwontotal }명</td>
+				<td style="width:25%; vertical-align: middle;" class="text-center">${hittotal }회</td>
 			</tr>
 			<tr>
 			<th colspan="4" class="active text-center">현황 자세히 보기</th>

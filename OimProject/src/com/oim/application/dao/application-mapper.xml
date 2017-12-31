@@ -15,19 +15,22 @@
 		FROM(SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate
 		FROM meeting WHERE om_id = #{om_hid} ORDER BY meet_no DESC))
 		WHERE num BETWEEN #{start} AND #{end}
-		
 	</select>
-	<select id="MyMeetingTotal" resultType="int" parameterType="String">
+	<select id="MyMeetingList2" resultType="MeetingVO" parameterType="String">
+		SELECT 1 as meet_no,meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate
+		FROM meeting WHERE om_id = #{om_hid} ORDER BY meet_no DESC
+	</select>
+	<select id="MyMeetingTotalPage" resultType="int" parameterType="String">
 		SELECT CEIL(COUNT(*)/5) FROM meeting
 		WHERE om_id = #{om_hid}
 	</select>
 	<select id="ApplicationListCheckData" resultType="ApplicationVO" parameterType="String">
-		SELECT mt.meet_poster, mt.meet_subject, mt.meet_total, mt.meet_limit, 
-		a.ac_no, a.om_id, a.ac_regdate, m.om_tel, m.om_company
+		SELECT mt.meet_subject,mt.meet_no, a.om_id, m.om_tel, m.om_company, a.ac_regdate
 		FROM meeting mt, application a, oim_member m
-		WHERE a.meet_no = mt.meet_no
+		WHERE mt.meet_no = #{meet_no}
 		AND m.om_id=a.om_id
 		AND mt.om_id = #{om_hid}
+		ORDER BY ac_no ASC
 	</select>
 	<!-- 신청 insert -->
 	<insert id="ApplicationInsertData" parameterType="ApplicationVO">

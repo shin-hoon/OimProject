@@ -23,6 +23,7 @@ public class ApplicationDAO {
 			System.out.println(ex.getMessage());
 		}
 	}
+	
 	//모임 관리자 홈
 	public static List<MeetingVO> MyMeetingList(Map map) { 
 		
@@ -40,7 +41,40 @@ public class ApplicationDAO {
 		}
 		return list;
 	}
-	
+	//모임 관리자 홈2
+		public static List<MeetingVO> MyMeetingList2(String om_hid) { 
+			
+			List<MeetingVO> list = new ArrayList<MeetingVO>();
+			SqlSession session=ssf.openSession(); 
+			try {
+				list=session.selectList("MyMeetingList2",om_hid);
+				
+			}catch(Exception ex) {
+				System.out.println("MyMeetingList2 : "+ex.getMessage());
+			}finally {
+				if(session!=null) {
+					session.close();
+				}
+			}
+			return list;
+		}
+	//모임 총페이지
+		public static int MyMeetingTotalPage(String om_hid) { 
+			
+			int totalpage = 0;
+			SqlSession session=ssf.openSession(); 
+			try {
+				totalpage=session.selectOne("MyMeetingTotalPage",om_hid);
+				
+			}catch(Exception ex) {
+				System.out.println("MyMeetingTotalPage : "+ex.getMessage());
+			}finally {
+				if(session!=null) {
+					session.close();
+				}
+			}
+			return totalpage;
+		}
 	//모임 신청자관리
 	public static List<ApplicationVO> ApplicationListCheckData(String om_hid) { 
 		
