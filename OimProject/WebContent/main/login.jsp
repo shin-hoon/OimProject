@@ -157,12 +157,14 @@ $(function(){
 	<c:if test="${sessionScope.id==null }">  <!-- 세션에 id가 null값이면 보여지는 네비바 -->
 	<div class="add_section" >
          <div class="container" style="line-height:30px;">
+         <ul>
                <li class="section-li" style="margin-left:10px;">
                <button type="button" class="oim_btn_yw" data-toggle="modal" data-target="#join">
                	회원가입</button></li>
                <li class="section-li" style="margin-right:10px;">
                <button type="button" class="oim_btn_yw" data-toggle="modal" data-target="#login">
                	로그인</button></li>
+           </ul>
          </div>
 	</div>
 	</c:if>
@@ -171,16 +173,20 @@ $(function(){
 	<div class="add_section" >
 		 <form method="post" action="member/logout_ok.jsp">
          <div class="container" style="line-height:30px;">
+         <ul>
                <li class="section-li" style="margin-left:10px;">
                <input type=submit class="oim_btn_yw" value="로그아웃" id="logoutBtn">
                 </li>
-               &nbsp;&nbsp;&nbsp;
+                	&nbsp;&nbsp;&nbsp;
                <li class="section-li" style="margin-right:10px;">
                <div class="form-group" style="color:white">
 						${sessionScope.name }님 안녕하세요!
          	   </div>
+         	   </li>
+          </ul>
 		</div>
 		</form>
+		</div>
 	</c:if>
 	
 	<!-- 로그인 모달 팝업 -->
