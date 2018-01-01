@@ -81,6 +81,7 @@ $(function(){
 				{
 					
 					location.href="main.do";
+					history.go(0);
 				}
 			}
 		});
