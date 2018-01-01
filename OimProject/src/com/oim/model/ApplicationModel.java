@@ -28,8 +28,6 @@ public class ApplicationModel {
 		vo.setMeet_no(Integer.parseInt(meet_no));
 		vo.setOm_id(om_id);
 		ApplicationDAO.ApplicationInsertData(vo);
-		System.out.println(meet_no);
-		System.out.println(om_id);
 		
     	req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
         return "meeting_detail.do";
@@ -40,7 +38,6 @@ public class ApplicationModel {
 	{
 		HttpSession session = req.getSession();
 		String id = (String)session.getAttribute("id");
-		System.out.println(id);
 		
 		//葛烙包府 权 1
 		Map map = new HashMap();
@@ -66,25 +63,40 @@ public class ApplicationModel {
 		totalpage=ApplicationDAO.MyMeetingTotalPage(id);
 		req.setAttribute("totalpage", totalpage);
 		req.setAttribute("curpage", curpage);
-		System.out.println(totalpage);
+		//System.out.println(totalpage);
 		
 		//葛烙包府 权 2
 		List<MeetingVO> mlist2 = ApplicationDAO.MyMeetingList2(id);
 		req.setAttribute("mlist2", mlist2);
 		
-		//葛烙 脚没磊包府
-		List<ApplicationVO> alist = ApplicationDAO.ApplicationListCheckData(id);
-		req.setAttribute("alist", alist);
-
-
 		
 		req.setAttribute("main_jsp","../member/meetpage.jsp");
 		return "main/main.jsp";
 	}
+	
 	@RequestMapping("application_list.do")
     public String application_list(HttpServletRequest req, HttpServletResponse res) {
 		
+		HttpSession session = req.getSession();
+		String id = (String)session.getAttribute("id");
+		String meet_no = req.getParameter("meet_no"); 
 		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdf.format(date);
+		req.setAttribute("today", today);
+		
+		MeetingVO vo = ApplicationDAO.MyMeetingOne(Integer.parseInt(meet_no));
+		req.setAttribute("vo", vo);
+		
+		
+		//葛烙 脚没磊包府
+//		ApplicationVO vo2 = new ApplicationVO();
+//		vo2.setMeet_no(Integer.parseInt(meet_no));
+//		vo2.setOm_id(id);
+//		List<ApplicationVO> alist = ApplicationDAO.ApplicationListCheckData(vo2);
+		
+//		req.setAttribute("alist", alist);
 		
         return "member/application_list.jsp";
     }

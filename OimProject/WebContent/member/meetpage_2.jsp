@@ -8,12 +8,11 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	$(function() {
-		$("#option:selected").each(function() {
-			
+		$("select option:selected").on(function() {
 			var meet_no=$(this).attr("value");
 			$.ajax({
 				type:"POST",
-				url:"application_list.do",
+				url:"application_list.do?meet_no="+meet_no,
 				data:{"meet_no":meet_no},
 				success:function(response)
 				{

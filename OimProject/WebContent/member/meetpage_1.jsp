@@ -78,7 +78,7 @@
 			</tr>
 			<tr style="height: 100px; line-height: 50px;">
 				<c:forEach var="i" items="${mlist2 }" varStatus="count">
-					<fmt:parseNumber var="mttotal" type="number" value="${mttotal+i.meet_no }"/>
+					<fmt:parseNumber var="mttotal" type="number" value="${mttotal+1 }"/>
 					<fmt:parseNumber var="pricetotal" type="number" value="${pricetotal+(i.meet_total-i.meet_limit)*i.meet_price }"/> 
 					<fmt:parseNumber var="inwontotal" type="number" value="${inwontotal+i.meet_total-i.meet_limit }"/>
 					<fmt:parseNumber var="hittotal" type="number" value="${hittotal+i.meet_hit }"/> 
