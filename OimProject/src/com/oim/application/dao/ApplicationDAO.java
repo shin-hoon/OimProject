@@ -92,13 +92,30 @@ public class ApplicationDAO {
 			}
 			return totalpage;
 		}
+		
 	//모임 신청자관리
-	public static List<ApplicationVO> ApplicationListCheckData(String om_hid) { 
+	public static MeetingVO MyMeetingOne(int meet_no) {
+		MeetingVO vo = new MeetingVO();
+		SqlSession session=ssf.openSession(); 
+		try {
+			vo=session.selectOne("MyMeetingOne",meet_no);
+			
+		}catch(Exception ex) {
+			System.out.println("MyMeetingOne : "+ex.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+		return vo;
+	}
+
+	public static List<ApplicationVO> ApplicationListCheckData(ApplicationVO vo) { 
 		
 		List<ApplicationVO> list = new ArrayList<ApplicationVO>();
 		SqlSession session=ssf.openSession(); 
 		try {
-			list=session.selectList("ApplicationListCheckData",om_hid);
+			list=session.selectList("ApplicationListCheckData",vo);
 			
 		}catch(Exception ex) {
 			System.out.println("ApplicationListCheckData : "+ex.getMessage());
@@ -109,6 +126,7 @@ public class ApplicationDAO {
 		}
 		return list;
 	}
+	
 	//모임신청
 	public static void ApplicationInsertData(ApplicationVO vo) { 
 		
