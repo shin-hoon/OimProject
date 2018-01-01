@@ -178,4 +178,12 @@
 		WHERE om_id=#{om_id} 
 	</select>
 	
+	<select id="meetingUpdate" resultType="MeetingVO" parameterType="int">
+      SELECT m.meet_no,m.meet_cg,m.meet_poster,o.om_tel,m.meet_subject,TO_CHAR(to_date(m.meet_start, 'YYYY-MM-DD HH24:MI'),'YYYY-MM-DD HH24:MI') as meet_start,
+      TO_CHAR(to_date(m.meet_end, 'YYYY-MM-DD HH24:MI'),'YYYY-MM-DD HH24:MI') as meet_end,
+      m.meet_loc, m.meet_total, m.meet_limit, m.meet_info, m.meet_price, m.meet_detail, m.meet_lat, m.meet_lng
+      FROM meeting m , oim_member o
+      WHERE o.om_id=m.om_id AND m.meet_no=#{meet_no}              
+   	</select>
+	
 </mapper>

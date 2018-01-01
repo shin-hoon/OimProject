@@ -145,6 +145,23 @@ public class MeetingDAO {
 		}
 		return vo;
 	}
+	
+	public static MeetingVO meetingUpdate(int meet_no) {
+		
+		MeetingVO vo=new MeetingVO();
+		SqlSession session=ssf.openSession();
+		
+		try {
+			vo=session.selectOne("meetingUpdate",meet_no);
+		}catch(Exception ex) {
+			System.out.println("meetingUpdate: "+ex.getMessage());
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+		
+		return vo;
+	}
 
 	   
 //	   public MeetingDAO() { //데이터  파싱에서 DB에 insert하는 용도로 작성한 임시코드

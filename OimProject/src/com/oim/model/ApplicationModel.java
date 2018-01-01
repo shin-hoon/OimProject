@@ -72,6 +72,10 @@ public class ApplicationModel {
 		List<MeetingVO> mlist2 = ApplicationDAO.MyMeetingList2(id);
 		req.setAttribute("mlist2", mlist2);
 		
+		//葛烙包府 权 3
+		List<MeetingVO> mlist3 = ApplicationDAO.MyMeetingList3(id);
+		req.setAttribute("mlist3", mlist3);
+		
 		//葛烙 脚没磊包府
 		List<ApplicationVO> alist = ApplicationDAO.ApplicationListCheckData(id);
 		req.setAttribute("alist", alist);

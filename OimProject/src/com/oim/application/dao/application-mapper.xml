@@ -20,6 +20,10 @@
 		SELECT 1 as meet_no,meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate
 		FROM meeting WHERE om_id = #{om_hid} ORDER BY meet_no DESC
 	</select>
+	<select id="MyMeetingList3" resultType="MeetingVO" parameterType="String">
+		SELECT meet_no, meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate
+		FROM meeting WHERE om_id = #{om_hid} ORDER BY meet_no DESC
+	</select>
 	<select id="MyMeetingTotalPage" resultType="int" parameterType="String">
 		SELECT CEIL(COUNT(*)/5) FROM meeting
 		WHERE om_id = #{om_hid}
