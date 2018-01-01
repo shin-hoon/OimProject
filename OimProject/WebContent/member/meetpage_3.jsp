@@ -70,7 +70,7 @@ $(function(){
                
          <div class="container" style="margin-bottom: 50px;">
                <select class="form-control selectBox" style="width:40%; margin-bottom:3%;">
-				<c:forEach var="vo" items="${mlist3}">
+				<c:forEach var="vo" items="${mlist2}">
 					<option id="option" data-no="${vo.meet_no }">${vo.meet_subject }</option>
 				</c:forEach>
 			</select>

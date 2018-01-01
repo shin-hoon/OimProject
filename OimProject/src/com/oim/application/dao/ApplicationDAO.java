@@ -58,23 +58,7 @@ public class ApplicationDAO {
 			}
 			return list;
 		}
-	//모임 관리자 홈3
-		public static List<MeetingVO> MyMeetingList3(String om_hid) { 
-			
-			List<MeetingVO> list = new ArrayList<MeetingVO>();
-			SqlSession session=ssf.openSession(); 
-			try {
-				list=session.selectList("MyMeetingList3",om_hid);
-				
-			}catch(Exception ex) {
-				System.out.println("MyMeetingList3 : "+ex.getMessage());
-			}finally {
-				if(session!=null) {
-					session.close();
-				}
-			}
-			return list;
-		}
+
 	//모임 총페이지
 		public static int MyMeetingTotalPage(String om_hid) { 
 			
