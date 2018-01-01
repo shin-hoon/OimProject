@@ -77,11 +77,11 @@ $(function(){
 <!-- 카테고리 탭 -->
    <div class="container">
 	   	<!-- Mypage 검정 로고 네비 -->
-	   <nav class="mypage" style="background-color:#2E2E2E; height:80px;">
-	      <div class="container text-left">
-	         <h2 style="color:#ffffff;"><b>Mypage</b></h2>
-	      </div>
-	   </nav>
+	   <nav class="mypage" style="background-color:#2E2E2E; height:50px;">
+			<div class="container text-left">
+				<h3 style="color:#ffffff;"><b>마이페이지</b></h3>
+			</div>
+		</nav>
 	<!-- Mypage 검정 로고 네비  끝-->
       <div class="tabtable" > 
         <ul class="nav nav-tabs" ><br>
@@ -126,6 +126,6 @@ $(function(){
        </div>
    </div>
 </div>
-
+<div style="height: 100px"></div>
 </body>
 </html>

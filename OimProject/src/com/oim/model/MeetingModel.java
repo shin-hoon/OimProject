@@ -36,7 +36,7 @@ public class MeetingModel {
 		int curpage=Integer.parseInt(page);
 		int rowSize=12;
 		int start= (rowSize*curpage)-(rowSize-1);
-		int end= rowSize*curpage;
+		int end= rowSize*curpage; 
 		int totalpage=0;
 		
 		Map map=new HashMap();
