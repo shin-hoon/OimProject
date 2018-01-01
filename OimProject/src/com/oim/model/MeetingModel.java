@@ -355,4 +355,16 @@ public class MeetingModel {
     	
     }
     
+    @RequestMapping("meeting_update.do")
+    public String meeting_Update(HttpServletRequest req, HttpServletResponse res) { //모임수정화면
+    	String meet_no=req.getParameter("meet_no");
+    	
+    	System.out.println(meet_no);
+    	MeetingVO vo=MeetingDAO.meetingUpdate(Integer.parseInt(meet_no));
+    	
+    	
+    	req.setAttribute("vo",vo);
+    	return "member/meeting_update.jsp";
+    }
+    
 }

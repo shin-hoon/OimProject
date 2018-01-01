@@ -50,4 +50,53 @@
 		FROM meeting m, application a
 		where a.om_id = #{om_aid}
 	</select>
+   <!-- 내가 개설한 모임조회 -->
+   <!-- 내가 개설한 모임 페이징기법 -->
+   <select id="MyMeetingList" resultType="MeetingVO" parameterType="java.util.Map">
+      SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate,num
+      FROM(SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate,rownum as num
+      FROM(SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate
+      FROM meeting WHERE om_id = #{om_hid} ORDER BY meet_no DESC))
+      WHERE num BETWEEN #{start} AND #{end}
+   </select>
+   <select id="MyMeetingTotalPage" resultType="int" parameterType="String">
+      SELECT CEIL(COUNT(*)/5) FROM meeting
+      WHERE om_id = #{om_hid}
+   </select>
+   <!-- 내가 개설한 모임 목록 -->
+   <select id="MyMeetingList2" resultType="MeetingVO" parameterType="String">
+      SELECT meet_no,meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate
+      FROM meeting WHERE om_id = #{om_hid} ORDER BY meet_no DESC
+   </select>
+   <!-- 내가 개설한 모임 신청자 조회 -->
+   <select id="MyMeetingOne" resultType="MeetingVO" parameterType="int">
+      SELECT meet_poster, meet_price, meet_start , meet_end,meet_total,meet_limit, meet_subject
+      FROM meeting
+      WHERE meet_no = #{meet_no}
+   </select>
+   <!-- 내가 개설한 모임 신청자 조회 -->
+   <select id="ApplicationListCheckData" resultType="ApplicationVO" parameterType="ApplicationVO">
+      SELECT a.om_id, m.om_tel, m.om_company, a.ac_regdate
+      FROM meeting mt, application a, oim_member m
+      WHERE mt.meet_no = #{meet_no}
+      AND m.om_id=a.om_id
+      AND mt.om_id = #{om_hid}
+      ORDER BY ac_no ASC
+   </select>
+   <!-- 모암신청 insert -->
+   <insert id="ApplicationInsertData" parameterType="ApplicationVO">
+      INSERT INTO application VALUES(application_no_seq.nextval,#{om_id},#{meet_no},SYSDATE)
+   </insert>
+   <!-- 모암신청하면 신청제한인원 감소 -->
+   <update id="ApplicationlimitUpdate" parameterType="int">
+      UPDATE meeting SET
+      meet_limit=meet_limit-1
+      WHERE meet_no=#{meet_no}
+   </update>
+   <!-- 내가 신청한 모임 조회 -->
+   <select id="ApplicationMyListData" resultType="ApplicationVO" parameterType="String">
+      SELECT m.meet_poster, m.meet_subject, m.meet_total, m.meet_limit, m.om_id, m.om_tel, m.om_company, a.ac_regdate
+      FROM meeting m, application a
+      where a.om_id = #{om_aid}
+   </select>
 </mapper>

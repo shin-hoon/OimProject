@@ -22,7 +22,6 @@ public class MainModel {
 		
 		//jsp로 전송
 		req.setAttribute("list", list);
-		System.out.println("성공");
 
 		req.setAttribute("main_jsp","default.jsp");
 		return "main/main.jsp";
