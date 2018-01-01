@@ -21,16 +21,17 @@
 	</select>
 	<!-- 내가 개설한 모임 신청자 조회 -->
 	<select id="MyMeetingOne" resultType="MeetingVO" parameterType="int">
-		SELECT meet_poster, meet_price, meet_start , meet_end,meet_total,meet_limit, meet_subject
+		SELECT meet_poster, meet_price, meet_start , meet_end,meet_total,meet_limit, meet_subject,meet_regdate
 		FROM meeting
 		WHERE meet_no = #{meet_no}
 	</select>
 	<!-- 내가 개설한 모임 신청자 조회 -->
-	<select id="ApplicationListCheckData" resultType="ApplicationVO" parameterType="ApplicationVO">
-		SELECT a.om_id, m.om_tel, m.om_company, a.ac_regdate
+	<select id="ApplicationListCheckData" resultType="ApplicationVO" parameterType="java.util.Map">
+		SELECT m.om_name,a.om_id, m.om_tel, m.om_company, a.ac_regdate
 		FROM meeting mt, application a, oim_member m
-		WHERE mt.meet_no = #{meet_no}
+		WHERE a.meet_no = #{meet_no}
 		AND m.om_id=a.om_id
+		AND mt.meet_no = a.meet_no
 		AND mt.om_id = #{om_hid}
 		ORDER BY ac_no ASC
 	</select>

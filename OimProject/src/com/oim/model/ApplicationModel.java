@@ -79,7 +79,7 @@ public class ApplicationModel {
       HttpSession session = req.getSession();
       String id = (String)session.getAttribute("id");
       String meet_no = req.getParameter("meet_no"); 
-      
+          
       Date date = new Date();
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
       String today = sdf.format(date);
@@ -90,12 +90,11 @@ public class ApplicationModel {
       
       
       //모임 신청자관리
-//      ApplicationVO vo2 = new ApplicationVO();
-//      vo2.setMeet_no(Integer.parseInt(meet_no));
-//      vo2.setOm_id(id);
-//      List<ApplicationVO> alist = ApplicationDAO.ApplicationListCheckData(vo2);
-      
-//      req.setAttribute("alist", alist);
+      Map map = new HashMap();
+      map.put("om_hid", id);
+      map.put("meet_no", meet_no);
+      List<ApplicationVO> alist = ApplicationDAO.ApplicationListCheckData(map);
+      req.setAttribute("alist", alist);
       
         return "member/application_list.jsp";
     }

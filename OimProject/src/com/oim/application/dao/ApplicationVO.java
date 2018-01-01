@@ -18,9 +18,16 @@ public class ApplicationVO {
 	private int meet_limit;
 	
 	private String om_id;
+	private String om_name;
 	private String om_tel;
 	private String om_company;
 	
+	public String getOm_name() {
+		return om_name;
+	}
+	public void setOm_name(String om_name) {
+		this.om_name = om_name;
+	}
 	public int getAc_no() {
 		return ac_no;
 	}

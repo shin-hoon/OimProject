@@ -40,6 +40,7 @@ public class ApplicationDAO {
 			}
 		}
 		return list;
+		
 	}
 	//모임 관리자 홈2
 		public static List<MeetingVO> MyMeetingList2(String om_hid) { 
@@ -94,12 +95,12 @@ public class ApplicationDAO {
 		return vo;
 	}
 
-	public static List<ApplicationVO> ApplicationListCheckData(ApplicationVO vo) { 
+	public static List<ApplicationVO> ApplicationListCheckData(Map map) { 
 		
 		List<ApplicationVO> list = new ArrayList<ApplicationVO>();
 		SqlSession session=ssf.openSession(); 
 		try {
-			list=session.selectList("ApplicationListCheckData",vo);
+			list=session.selectList("ApplicationListCheckData",map);
 			
 		}catch(Exception ex) {
 			System.out.println("ApplicationListCheckData : "+ex.getMessage());
