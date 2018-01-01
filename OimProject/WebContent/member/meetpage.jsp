@@ -42,13 +42,7 @@ table tr:last-child td {border-bottom:none;}
    margin-top:5px;
    margin-bottom:5px;
 </style>
-<script type="text/javascript">
-	$(function() {
-		$('#1').click(function() {
-			
-		})
-	})
-</script>
+
 </head>
 <body>
 <!-- Ä«Å×°í¸® ÅÇ -->

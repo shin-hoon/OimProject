@@ -387,17 +387,18 @@ $(function(){
                            
                            <td class="form-inline text-center" valign="middle">
 						<script type="text/javascript">
-						    	$(function(){	
-						 	   	   $('input:radio[name="meet_charge"][value="무료"]').on('click',function(){
-						 	   		    $('input:text[name="meet_price"]').val('0');
-						 	   		    $('input:text[name="meet_price"]').attr("disabled",true);
-							   	   }); 
-							   	   
-							   	    $('input:radio[name="meet_charge"][value="유료"]').on('click',function(){
-							   	    	$('input:text[name="meet_price"]').val('');
-										$('input:text[name="meet_price"]').attr("disabled",false);
-								   });
-							   	});
+				    	$(function(){	
+				    		$('input[name="meet_charge"]:radio').change(function(){
+				    			var type=$(this).val();
+				    			if(type == "무료"){
+				    				$('input:text[name="meet_price"]').val('0');
+				 	   		   		$('input:text[name="meet_price"]').attr("disabled",true);
+				    			}else{
+				    				$('input:text[name="meet_price"]').val('');
+									$('input:text[name="meet_price"]').attr("disabled",false);
+				    			}
+				    		});
+					   	});
 						    </script>
     
                              <input type="text" class="form-control" name="meet_price"/>원

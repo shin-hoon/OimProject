@@ -248,6 +248,7 @@
                                 position: naver.maps.Position.TOP_RIGHT
                                 }
                             }),
+                            
                             marker = new naver.maps.Marker({ // 지도마커 생성
                                 map: map,
                                 position: oimlocation

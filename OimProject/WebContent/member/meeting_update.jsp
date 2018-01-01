@@ -5,6 +5,55 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
+<script type="text/javascript"> //지역검색
+$(function(){
+	
+	$('#searchBtn').click(function(){
+		
+		var search=$('#searchText').val();
+		
+ 		$.ajax({
+			type:"POST",
+			url:"loc_search.do",
+			data:{"search":search},
+			success:function(res)
+			{
+				$('.searchArea').html(res);
+			}
+		});
+		
+	});
+});
+</script>
+
+<script type="text/javascript"> //유료 or 무료 라디오버튼 이벤트
+
+							 
+						    	$(function(){ //해당모임이 무료라면 무료에 체크가되고 아니라면 유료에 체크가 된다
+						    		var chargeValue='${vo.meet_charge}';			
+			 						
+						    		if(chargeValue=="무료"){
+						    			$('input:radio[name="meet_charge"][value="무료"]').prop('checked', true);
+						    		}else{
+						    			$('input:radio[name="meet_charge"][value="유료"]').prop('checked', true);
+						    		}
+						    		
+						    		
+						    		$('input[name="meet_charge"]:radio').change(function(){//무료를 클릭하면 0원이고 아니면 가격을 직접입력해야한다.
+						    			var chargeType=$(this).val();
+						    			if(chargeType == "무료"){
+						    				$('input:text[name="meet_price"]').val('0');
+						 	   		   		$('input:text[name="meet_price"]').attr("disabled",true);
+						    			}else{
+						    				$('input:text[name="meet_price"]').val('');
+											$('input:text[name="meet_price"]').attr("disabled",false);
+						    			}
+						    		});
+						    		
+						    		
+							   	});
+</script>
 </head>
 <body>
 <form method="post" action="meeting_update_ok.do"> <!-- enctype="multipart/form-data" -->
@@ -74,7 +123,7 @@
                        });
                    </script>
                    
-                    <div class="btn-group" style="width:150px">
+                    <div class="btn-group" style="width:150px"> <!-- 카테고리 드롭다운 리스트 -->
                       <input type="button" class="btn btn-default btn-category" data-toggle=dropdown name="category" value="${vo.meet_cg }" style="width:80%;"/>
 					  <input type="hidden" class="meet_cg" name="${vo.meet_cg }"> <!--실제 카테고리 값이 담기는 부분  -->
 
@@ -82,24 +131,24 @@
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" style=" max-height:300px; overflow: scroll">
-                         <li><a href="#">교육</a></li>
-                         <li><a href="#">강연</a></li>
-                         <li><a href="#">세미나/컨퍼런스</a></li>
-                         <li><a href="#">문화/예술</a></li>
-                         <li><a href="#">방송/연예</a></li>
-                         <li><a href="#">취미활동</a></li>
-                         <li><a href="#">소모임/친목행사</a></li>
-                         <li><a href="#">공모전</a></li>
-                         <li><a href="#">전시/박람회</a></li>
-                         <li><a href="#">패션/뷰티</a></li>
-                         <li><a href="#">이벤트/파티</a></li>
-                         <li><a href="#">여행</a></li>
-                         <li><a href="#">후원금 모금</a></li>
-                         <li><a href="#">기타</a></li>
+                         <li><a >교육</a></li>
+                         <li><a >강연</a></li>
+                         <li><a >세미나/컨퍼런스</a></li>
+                         <li><a >문화/예술</a></li>
+                         <li><a >방송/연예</a></li>
+                         <li><a >취미활동</a></li>
+                         <li><a >소모임/친목행사</a></li>
+                         <li><a >공모전</a></li>
+                         <li><a >전시/박람회</a></li>
+                         <li><a >패션/뷰티</a></li>
+                         <li><a >이벤트/파티</a></li>
+                         <li><a >여행</a></li>
+                         <li><a >후원금 모금</a></li>
+                         <li><a >기타</a></li>
                       </ul>
                     </div>
                     
-                    	<input type="text" class="form-control" style="width: 460px; display:inline-block; " name="meet_subject" placeholder="모임명을 입력해주세요.">
+                    	<input type="text" class="form-control" style="width: 460px; display:inline-block; " name="meet_subject" value="${vo.meet_subject }" placeholder="모임명을 입력해주세요.">
 
                </td>  
            </tr>
@@ -113,7 +162,7 @@
                       
                     <input type="text" class="form-control meet_date" name="meet_date" value="${vo.meet_start } ~ ${vo.meet_end }"/>
 
-                    <script type="text/javascript">
+                    <script type="text/javascript"> //datepicker 한글화
                     $(function() {
                         $('.meet_date').daterangepicker({ 
                             timePicker: true,
@@ -176,13 +225,14 @@
                    <div class="detailMap" id="detailMap">
                    <div id="map" style="width:100%; height:300px; margin: 0 auto; z-index:10"></div>
                     
-                         <script>
-
- 						 var oimlocation = new naver.maps.Point(309944, 552085),
+                         <script> 
+                         var oimlocation = new naver.maps.LatLng('${vo.meet_lat}','${vo.meet_lng}');
+                         var utmk = naver.maps.TransCoord.fromLatLngToUTMK(oimlocation); // 위/경도 -> UTMK
+                         var tm128 = naver.maps.TransCoord.fromUTMKToTM128(utmk);   // UTMK -> TM128
                          
- 						
+                         
                          map = new naver.maps.Map('map', {
-                             center:oimlocation, //좌표 표시
+                             center:tm128, //좌표 표시
                              zoom: 8, //지도의 초기 줌 레벨
                              mapTypes: new naver.maps.MapTypeRegistry({
                                  'normal': naver.maps.NaverMapTypeOption.getNormalMap({
@@ -198,6 +248,7 @@
                                      projection: naver.maps.TM128Coord
                                  })
                              }),
+                             
                              minZoom: 1, //지도의 최소 줌 레벨
                              zoomControl: true, //줌 컨트롤의 표시 여부
                              zoomControlOptions: { //줌 컨트롤의 옵션
@@ -207,7 +258,7 @@
                          
                          marker = new naver.maps.Marker({ // 지도마커 생성
                              map: map,
-                             position: oimlocation //마커표시
+                             position: tm128 //마커표시
                          });
                          
                         map.setOptions("mapTypeControl", true); //지도 유형 컨트롤의 표시 여부
@@ -295,7 +346,7 @@
                             <span class="glyphicon glyphicon-map-marker"></span> 
                            </div>
                            
-                           <input type="text" class="form-control" name="meet_loc1" value="" readonly="readonly"
+                           <input type="text" class="form-control" name="meet_loc1" readonly="readonly"
                            value="${vo.meet_loc }"/>
                           </div>
                           
@@ -306,6 +357,7 @@
 		    </table>
 		</div> 
       
+						    
       <div class="col-sm-12">
         <table class="table table-hover">
             <tr>
@@ -319,6 +371,7 @@
                         <label class="radio-inline">
                           <input type="radio" name="meet_charge" value="유료">유료
                         </label>
+                        
                 </td>
                 
                  <td class="col-sm-7" style="vertical-align:middle;">
@@ -329,23 +382,10 @@
                        </tr>
                        
                        <tr>
-                           <td class="form-inline text-center" valign="middle"><input type="text" class="form-control" name="meet_total">명</td>
+                           <td class="form-inline text-center" valign="middle"><input type="text" class="form-control" name="meet_total" value="${vo.meet_total }">명</td>
                            
                            
                            <td class="form-inline text-center" valign="middle">
-						<script type="text/javascript">
-						    	$(function(){	
-						 	   	   $('input:radio[name="meet_charge"][value="무료"]').on('click',function(){
-						 	   		    $('input:text[name="meet_price"]').val('0');
-						 	   		    $('input:text[name="meet_price"]').attr("disabled",true);
-							   	   }); 
-							   	   
-							   	    $('input:radio[name="meet_charge"][value="유료"]').on('click',function(){
-							   	    	$('input:text[name="meet_price"]').val('');
-										$('input:text[name="meet_price"]').attr("disabled",false);
-								   });
-							   	});
-						    </script>
     
                              <input type="text" class="form-control" name="meet_price" value="${vo.meet_price }"/>원
                            </td>
@@ -380,7 +420,7 @@
                 </td>
                 <td class="col-sm-10 form-inline" style="vertical-align: middle" colspan=2>
                    <label class="control-label">전화번호</label>
-                   <input class="form-control" type="text" name="tel" size=15 value="" disabled>
+                   <input class="form-control" type="text" name="tel" size=15 value="${vo.om_tel }" disabled>
                    
                     <!-- <select class="form-control" name=tel1 style="margin-left: 10px">
 						<option>010</option>
