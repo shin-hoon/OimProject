@@ -69,11 +69,6 @@ public class ApplicationModel {
       List<MeetingVO> mlist2 = ApplicationDAO.MyMeetingList2(id);
       req.setAttribute("mlist2", mlist2);
       
-      //모임관리 홈 2
-      List<MeetingVO> mlist3 = ApplicationDAO.MyMeetingList2(id);
-      req.setAttribute("mlist2", mlist3);
-      
-      
       req.setAttribute("main_jsp","../member/meetpage.jsp");
       return "main/main.jsp";
    }
