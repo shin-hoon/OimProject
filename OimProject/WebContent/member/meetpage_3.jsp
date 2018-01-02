@@ -25,27 +25,6 @@
         }
     </style>
     
-<script type="text/javascript"> //지역검색
-$(function(){
-	
-	$('#searchBtn').click(function(){
-		
-		var search=$('#searchText').val();
-		
- 		$.ajax({
-			type:"POST",
-			url:"loc_search.do",
-			data:{"search":search},
-			success:function(res)
-			{
-				$('.searchArea').html(res);
-			}
-		});
-		
-	});
-});
-</script>
-
 <script type="text/javascript"> //해당모임 수정 하는 창 띄우기
 	$(function() {
 		
@@ -65,12 +44,13 @@ $(function(){
 		
 	});
 </script>
+
 </head>
 <body>
            	<h4><span class="oim-icon glyphicon glyphicon-user"></span>모임 수정</h4>
                
          <div class="container" style="margin-bottom: 50px;">
-               <select class="form-control selectBox" style="width:40%; margin-bottom:3%;">
+               <select class="form-control selectBox" style="width:55%; margin-bottom:3%;">
 				<c:forEach var="vo" items="${mlist2}" varStatus="status">
 					<c:if test="${status.index eq 0 }">
 						<option id="option" data-no="${vo.meet_no }" class="option1">${vo.meet_subject }</option>

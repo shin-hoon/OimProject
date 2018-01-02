@@ -29,6 +29,8 @@
     <script type="text/javascript">
 $(function(){
 	
+	
+	
 	$('#searchBtn').click(function(){
 		
 		var search=$('#searchText').val();
@@ -44,6 +46,8 @@ $(function(){
 		});
 		
 	});
+	
+	
 });
 </script>
     

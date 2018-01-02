@@ -187,7 +187,7 @@ $( document ).ready( function() {
                     <input type="text" class="form-control input-lg" name="searchText" placeholder="모임을 입력하세요" />
 
                     <span class="input-group-btn"> <!--돋보기 버튼 -->
-                        <button class="btn btn-info btn-lg" id="searchBtn" type="button">
+                        <button class="btn btn-info btn-lg" id="wordSearch" type="button">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
@@ -197,7 +197,7 @@ $( document ).ready( function() {
                 </form>
                 <script type="text/javascript"> //돋보기 눌렀을때 submit 버튼 클릭이벤트 발생
                 	$(function(){
-                		$('#searchBtn').click(function(){
+                		$('#wordSearch').click(function(){
                 			$('#searchClick').trigger('click');
                 		});
                 	});
