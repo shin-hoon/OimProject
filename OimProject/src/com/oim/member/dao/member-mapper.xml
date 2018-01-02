@@ -39,7 +39,7 @@
 
 </select>
 <select id="HotMeeting" resultType="meetingVO"><!-- 핫모임 -->
-	SELECT meet_no,meet_poster,meet_subject,meet_hit
+	SELECT meet_no,meet_poster,meet_subject
 	FROM meeting
 	ORDER BY meet_hit DESC
 </select>

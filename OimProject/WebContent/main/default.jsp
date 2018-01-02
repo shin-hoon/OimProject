@@ -264,11 +264,11 @@ $(function(){
 				<div class="col-lg-12 text-center">
 					<div class="section-title">
 						<h2>HOT 모임</h2>
+						<p>사용자들이 가장 많이 클릭한 모임입니다</p>
 					</div>
 				</div>
 			</div>
 			<div class="row row-0-gutter">
-				<!-- start portfolio item -->
 				<c:forEach var="vo" items="${list4 }" begin="0" end="5">
 				<div class="col-md-4 col-0-gutter">
 					<div class="ot-portfolio-item">
@@ -276,86 +276,14 @@ $(function(){
 							<img src="${vo.meet_poster }" class="img-responsive" height="100%" width="100%"/>
 							<figcaption>
 								<h2>${vo.meet_subject }</h2>
-								<p>보실래요??1</p>
-								<a href="#" data-toggle="modal" data-target="#Modal-1">View more</a>
+								<p>클릭!!</p>
+								<a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}">View more</a>
 							</figcaption>
 						</figure>
 					</div>
 				</div>
 				</c:forEach>
-				<!-- end portfolio item -->
-				<!-- start portfolio item -->
-				<!-- <div class="col-md-4 col-0-gutter">
-					<div class="ot-portfolio-item">
-						<figure class="effect-bubba">
-							<img src="img/oim3.png" alt="img02" class="img-responsive" height="100%" width="100%"/>
-							<figcaption>
-								<h2>오늘의모임</h2>
-								<p>보실래요??2</p>
-								<a href="#" data-toggle="modal" data-target="#Modal-2">View more</a>
-							</figcaption>
-						</figure>
-					</div>
-				</div>
-				end portfolio item
-				start portfolio item
-				<div class="col-md-4 col-0-gutter">
-					<div class="ot-portfolio-item">
-						<figure class="effect-bubba">
-							<img src="img/oim3.png" alt="img02" class="img-responsive" height="100%" width="100%"/>
-							<figcaption>
-								<h2>오늘의모임</h2>
-								<p>보실래요??3</p>
-								<a href="#" data-toggle="modal" data-target="#Modal-3">View more</a>
-							</figcaption>
-						</figure>
-					</div>
-				</div>
-				end portfolio item
-			</div>
-			<div class="row row-0-gutter">
-				start portfolio item
-				<div class="col-md-4 col-0-gutter">
-					<div class="ot-portfolio-item">
-						<figure class="effect-bubba">
-							<img src="img/oim3.png" alt="img02" class="img-responsive" height="100%" width="100%"/>
-							<figcaption>
-								<h2>오늘의모임</h2>
-								<p>보실래요??</p>
-								<a href="#" data-toggle="modal" data-target="#Modal-4">View more</a>
-							</figcaption>
-						</figure>
-					</div>
-				</div>
-				end portfolio item
-				start portfolio item
-				<div class="col-md-4 col-0-gutter">
-					<div class="ot-portfolio-item">
-						<figure class="effect-bubba">
-							<img src="img/oim3.png" alt="img02" class="img-responsive" height="100%" width="100%"/>
-							<figcaption>
-								<h2>오늘의모임</h2>
-								<p>보실래요??</p>
-								<a href="#" data-toggle="modal" data-target="#Modal-5">View more</a>
-							</figcaption>
-						</figure>
-					</div>
-				</div>
-				end portfolio item
-				start portfolio item
-				<div class="col-md-4 col-0-gutter">
-					<div class="ot-portfolio-item">
-						<figure class="effect-bubba">
-							<img src="img/oim3.png" alt="img02" class="img-responsive" height="100%" width="100%"/>
-							<figcaption>
-								<h2>오늘의모임</h2>
-								<p>보실래요??</p>
-								<a href="#" data-toggle="modal" data-target="#Modal-2">View more</a>
-							</figcaption>
-						</figure>
-					</div>
-				</div> -->
-				<!-- end portfolio item -->
+				
 			</div>
 			</div><!-- end container -->
 		</section>
