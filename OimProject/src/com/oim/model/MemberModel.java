@@ -138,6 +138,13 @@ public class MemberModel {
 	@RequestMapping("Oim_mypage.do")
 	public String Oim_mypage(HttpServletRequest req, HttpServletResponse res)
 	{
+		//마이페이지 홈 데이터 뿌리기
+		HttpSession session=req.getSession();
+		String om_id=(String)session.getAttribute("id");
+		MemberVO vo=MemberDAO.Oimmypagehome(om_id);
+	
+		req.setAttribute("vo", vo);
+	
 		req.setAttribute("main_jsp","../member/mypage.jsp");
 		return "main/main.jsp";
 	}
@@ -210,7 +217,32 @@ public class MemberModel {
 		return re;
 	}
 	
+
+	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+	
+	
+	
+	//초대이벤트
+	/*@RequestMapping("Event_Meeting.do")
+	public String Event_meeting(HttpServletRequest req, HttpServletResponse res)throws Throwable {
+		
+		req.setCharacterEncoding("UTF-8");
+		List<MeetingVO> list=MemberDAO.EventMeeting();
+		
+		
+		
+		req.setAttribute("list", list);
+		req.setAttribute("main_jsp", "../main/default.jsp");
+		return "main/main.jsp";
+		
+	}*/
+	
+	
+	//테그별 모임
 
 	
 	

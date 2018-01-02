@@ -203,16 +203,16 @@ $(function(){
 	      			
 			<table class="w3-table w3-hoverable" >
 				<tr>
-					<td width=30% style="text-align: right;">아이디<br><span>(E-mail)</span></td>
+					<td width=30% style="text-align: right;">아이디<br></td>
 					<td width=70% >
 						<input type="text" name=id size=20 id="login_id">
-						<span class="help-block">이메일을 입력하세요</span>
+						<span class="help-block">아이디를 입력하세요</span>
 					</td>
 				</tr>
 				<tr>
 					<td width=30% style="text-align: right;">비밀번호</td>
 					<td width=70% >
-						<input type="text" name=pwd size=20 id="login_pwd">
+						<input type="password" name=pwd size=20 id="login_pwd">
 					</td>
 				</tr>
 

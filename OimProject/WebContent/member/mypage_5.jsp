@@ -27,7 +27,7 @@
            <form method="post" action="Oim_Delete.do">
            <tr>
               <td width=25% class="text-right">
-                 <span class="glyphicon glyphicon-envelope"></span>&nbsp;탈퇴할 아이디(Email)
+                 <span class="glyphicon glyphicon-envelope"></span>&nbsp;탈퇴할 아이디
               </td>
               <td width=75% class="text-center" id="email">${sessionScope.id }
               
@@ -38,7 +38,7 @@
                  <span class="glyphicon glyphicon-lock"></span>&nbsp;비밀번호 입력
               </td>
               <td width=70% class="text-center">
-                 <input type=text name=new_pwd size=30 id="new_pwd">
+                 <input type="password" name=new_pwd size=30 id="new_pwd">
                   <h6 style="color:#DF013A;">*본인 인증을 위해 비밀번호를 입력해 주세요</h6>
               </td>                  
            </tr>
