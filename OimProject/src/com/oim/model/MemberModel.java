@@ -163,6 +163,10 @@ public class MemberModel {
 
 		MemberVO vo=new MemberVO();
 		String re ="";
+		if(tel.trim().equals(""))
+		{
+			re="member/update_telfail.jsp";
+		}
 		
 		if(pwd.equals(pwd_ok))
 		{
@@ -181,7 +185,7 @@ public class MemberModel {
 		}
 		
 		return re;
-		//return "Oim_mypage.do";
+		
 	}
 	
 	@RequestMapping("Oim_Delete.do")
