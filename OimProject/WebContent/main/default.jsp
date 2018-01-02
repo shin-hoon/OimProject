@@ -269,21 +269,23 @@ $(function(){
 			</div>
 			<div class="row row-0-gutter">
 				<!-- start portfolio item -->
+				<c:forEach var="vo" items="${list4 }" begin="0" end="5">
 				<div class="col-md-4 col-0-gutter">
 					<div class="ot-portfolio-item">
 						<figure class="effect-bubba">
-							<img src="img/oim3.png" alt="img02" class="img-responsive" height="100%" width="100%"/>
+							<img src="${vo.meet_poster }" class="img-responsive" height="100%" width="100%"/>
 							<figcaption>
-								<h2>오늘의모임</h2>
+								<h2>${vo.meet_subject }</h2>
 								<p>보실래요??1</p>
 								<a href="#" data-toggle="modal" data-target="#Modal-1">View more</a>
 							</figcaption>
 						</figure>
 					</div>
 				</div>
+				</c:forEach>
 				<!-- end portfolio item -->
 				<!-- start portfolio item -->
-				<div class="col-md-4 col-0-gutter">
+				<!-- <div class="col-md-4 col-0-gutter">
 					<div class="ot-portfolio-item">
 						<figure class="effect-bubba">
 							<img src="img/oim3.png" alt="img02" class="img-responsive" height="100%" width="100%"/>
@@ -295,8 +297,8 @@ $(function(){
 						</figure>
 					</div>
 				</div>
-				<!-- end portfolio item -->
-				<!-- start portfolio item -->
+				end portfolio item
+				start portfolio item
 				<div class="col-md-4 col-0-gutter">
 					<div class="ot-portfolio-item">
 						<figure class="effect-bubba">
@@ -309,10 +311,10 @@ $(function(){
 						</figure>
 					</div>
 				</div>
-				<!-- end portfolio item -->
+				end portfolio item
 			</div>
 			<div class="row row-0-gutter">
-				<!-- start portfolio item -->
+				start portfolio item
 				<div class="col-md-4 col-0-gutter">
 					<div class="ot-portfolio-item">
 						<figure class="effect-bubba">
@@ -325,8 +327,8 @@ $(function(){
 						</figure>
 					</div>
 				</div>
-				<!-- end portfolio item -->
-				<!-- start portfolio item -->
+				end portfolio item
+				start portfolio item
 				<div class="col-md-4 col-0-gutter">
 					<div class="ot-portfolio-item">
 						<figure class="effect-bubba">
@@ -339,8 +341,8 @@ $(function(){
 						</figure>
 					</div>
 				</div>
-				<!-- end portfolio item -->
-				<!-- start portfolio item -->
+				end portfolio item
+				start portfolio item
 				<div class="col-md-4 col-0-gutter">
 					<div class="ot-portfolio-item">
 						<figure class="effect-bubba">
@@ -352,7 +354,7 @@ $(function(){
 							</figcaption>
 						</figure>
 					</div>
-				</div>
+				</div> -->
 				<!-- end portfolio item -->
 			</div>
 			</div><!-- end container -->

@@ -350,7 +350,7 @@ $(function(){
                         </td>
                      </tr>
                      <tr>
-                        <td class="text-center" id="res_ok">
+                        <td class="text-center" id="res_ok"  data-dismiss="modal">
                      </tr>
                   </table>
                </div>
