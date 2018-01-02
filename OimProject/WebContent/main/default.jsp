@@ -70,7 +70,7 @@ $(function(){
 				</div> 
 		</div>
 
-<!--============마감임박 모임 ==========-->
+<!--============오늘의모임 모임 ==========-->
       <div class="container" style="padding-top:70px; padding-bottom:70px;">
             <div class="col-lg-12 text-center">
                <div class="section-title">
