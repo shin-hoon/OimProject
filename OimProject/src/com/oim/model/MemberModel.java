@@ -127,6 +127,14 @@ public class MemberModel {
 		
 	}
 	
+	@RequestMapping("Oim_Logout.do")
+	public String Oim_Logout(HttpServletRequest req, HttpServletResponse res)
+	{
+		HttpSession session=req.getSession();
+		session.invalidate();
+		return "member/logout_ok.jsp";
+	}
+	
 	@RequestMapping("Oim_mypage.do")
 	public String Oim_mypage(HttpServletRequest req, HttpServletResponse res)
 	{

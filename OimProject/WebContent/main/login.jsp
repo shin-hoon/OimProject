@@ -80,7 +80,7 @@ $(function(){
 				else
 				{
 					
-					location.href="main.do";
+					//location.href="main.do";
 					history.go(0);
 				}
 			}
@@ -172,7 +172,7 @@ $(function(){
 	
 	<c:if test="${sessionScope.id!=null }"> <!-- 세션에 id가 저장되어있으면 보여지는 네비바 -->
 	<div class="add_section" >
-		 <form method="post" action="member/logout_ok.jsp">
+		 <form method="post" action="Oim_Logout.do">
          <div class="container" style="line-height:30px;">
          <ul>
                <li class="section-li" style="margin-left:10px;">
