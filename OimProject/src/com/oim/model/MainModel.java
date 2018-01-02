@@ -27,7 +27,8 @@ public class MainModel {
 		
 		if(om_id!=null) {
 			meetCount=ApplicationDAO.MyMeetingTotalPage(om_id);
-			req.setAttribute("meetCount", meetCount);
+			
+			session.setAttribute("meetCount", meetCount);
 		}
 		//jsp·Î Àü¼Û
 		req.setAttribute("list", list);

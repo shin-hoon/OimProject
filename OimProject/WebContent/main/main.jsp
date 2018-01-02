@@ -255,7 +255,7 @@ $( document ).ready( function() {
 							 <a href="meeting_insert.do">모임 개설하기</a>
 							</li>
 						</c:if>
-						<c:if test="${sessionScope.id!=null && meetCount>0}">
+						<c:if test="${sessionScope.id!=null && sessionScope.meetCount>0}">
 							 <li> 
 								<a href="Oim_meetpage.do">모임관리</a>
 							</li>
