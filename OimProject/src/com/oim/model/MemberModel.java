@@ -29,6 +29,10 @@ public class MemberModel {
 		
 		int count = MemberDAO.OimIdcheck(id);
 		
+		/*if()
+		{
+			
+		}*/
 
 		/*해야한다..
 		<%@ page language="java" contentType="text/html; charset=EUC-KR"
@@ -48,8 +52,6 @@ public class MemberModel {
 	@RequestMapping("Oim_Join.do")
 	public String Oim_Join(HttpServletRequest req, HttpServletResponse res) throws Throwable
 	{
-	
-		
 	      try {
 	    	  MemberVO vo=new MemberVO();
 	    	  req.setCharacterEncoding("UTF-8");
@@ -84,8 +86,6 @@ public class MemberModel {
 	      {
 	    	  System.out.println("에러"+ex.getMessage());
 	      }
-	      
-
 	      return "main/main.jsp";
 
 	}
@@ -99,9 +99,7 @@ public class MemberModel {
 		String id= req.getParameter("id");
 		String pwd= req.getParameter("pwd");
 		
-		
 		int count=MemberDAO.OimLogincheck(id);  //	1)아이디 존재 여부 확인
-		
 		
 		MemberVO vo=new MemberVO();
 		if(count==0)  		
@@ -117,16 +115,12 @@ public class MemberModel {
 				vo.setCount(3);  //					count=3
 				session.setAttribute("id", id);
 				session.setAttribute("name", vo.getOm_name());
-				
-				
 			}
 			else							//비밀번호가 다르다면
 			{
 				vo.setCount(2);	 //					count=2				
 			}
-			
 		}
-		
 		req.setAttribute("count", vo.getCount());
 		
 		return "member/login_ok.jsp";
@@ -157,7 +151,6 @@ public class MemberModel {
 		
 		if(pwd.equals(pwd_ok))
 		{
-			
 			//사용자가 입력한 값->VO
 			vo.setOm_id(id);
 			vo.setOm_tel(tel);
@@ -185,7 +178,6 @@ public class MemberModel {
 		
 		String id=(String)session.getAttribute("id");
 		String new_pwd=req.getParameter("new_pwd");
-	
 		
 		MemberVO vo=new MemberVO();
 		vo.setOm_id(id);
@@ -211,49 +203,36 @@ public class MemberModel {
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	//오늘의 모임 추천
 	@RequestMapping("Today_Meeting.do")
 	public String Today_Meeting(HttpServletRequest req,HttpServletResponse res) {
-		
-
-		String page=req.getParameter("page");
-		if(page==null)
-			page="1";
-		int curpage=Integer.parseInt(page);
-		int rowSize=12;
-		int start= (rowSize*curpage)-(rowSize-1);
-		int end= rowSize*curpage;
-		int totalpage=0;
-		
-		Map map=new HashMap();
-		map.put("start", start);
-		map.put("end", end);
-		
-		List<MeetingVO> list=MeetingDAO.meetingListData(map);
-		totalpage=MeetingDAO.meetingTotalPage();
-		
-		//jsp로 전송
-		req.setAttribute("totalpage", totalpage);
-		req.setAttribute("curpage", curpage);
+		List<MeetingVO> list=MemberDAO.TodayMeeting();
 		req.setAttribute("list", list);
 		
-		req.setAttribute("main_jsp", "../meeting/meeting_list.jsp");
+		req.setAttribute("main_jsp", "../../main/default.jsp");
 		return "main/main.jsp";
-	
-		
-			
-		
-		
-		
-		
 		
 	}
 	
 	
 	
+	//초대이벤트
+	@RequestMapping("Event_Meeting.do")
+	public String Event_meeting(HttpServletRequest req, HttpServletResponse res)throws Throwable {
+		
+		req.setCharacterEncoding("UTF-8");
+		List<MeetingVO> list=MemberDAO.EventMeeting();
+		
+		
+		
+		req.setAttribute("list", list);
+		req.setAttribute("main_jsp", "../main/default.jsp");
+		return "main/main.jsp";
+		
+	}
 	
 	
-	
+	//테그별 모임
 	
 	
 }

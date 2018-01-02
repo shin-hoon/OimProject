@@ -240,7 +240,29 @@ public class MemberDAO {
   		
   		return list;
   	}
-    		
+    	
+  	
+  	public static List<MeetingVO> EventMeeting()
+  	{
+  		List<MeetingVO> list=new ArrayList<MeetingVO>();
+  		SqlSession session=ssf.openSession();
+  		
+  		try {
+  			
+  			list=session.selectList("EventMeeting");
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println(ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  		return list;
+  	}
     		
     		
     		

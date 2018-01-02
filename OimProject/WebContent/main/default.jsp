@@ -90,7 +90,7 @@ $(function(){
                                   </div>
                                  
                                   <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><p class="p_add">${vo.meet_subject }</p></a>
-                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="btn btn-primary" style="align:center;">자세히보기</a>
+                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="btn btn-primary" style="align:center;">모임 상세 보기</a>
                               </div>
                          </div>
                       </div>
@@ -117,54 +117,21 @@ $(function(){
 				</div>
 				<div class="row">
 					<!-- about module -->
-					<div class="col-md-3 text-center">
-						<div class="mz-module">
-							<div class="mz-module-about">
-								<img src="img/event.jpg" style="widht:100px; height:200px;">
-								<h6>[초대이벤트]뮤지컬 "루나틱"</h6>
+					<c:forEach var="vo" items="${list }" begin="1" end="4">
+						<div class="col-md-3 text-center">
+							<div class="mz-module">
+								<div class="mz-module-about caption">
+									<img src="${vo.meet_poster }" style="widht:100px; height:200px;">
+									<p class="p_add" style="font-size:10pt; margin:1%;"><b>${vo.meet_subject }</b></p>
+								</div>
+								<a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="mz-module-button">이벤트 보기</a>
 							</div>
-							<a href="https://onoffmix.com/event/121695" class="mz-module-button">상세보기</a>
 						</div>
-					</div>
-					<!-- end about module -->
-					<!-- about module -->
-					<div class="col-md-3 text-center">
-						<div class="mz-module">
-							<div class="mz-module-about">
-								<img src="img/event.jpg" style="widht:100px; height:200px;">
-								<h6>[초대이벤트]뮤지컬 "루나틱"</h6>
-							</div>
-							<a href="https://onoffmix.com/event/121695" class="mz-module-button">상세보기</a>
-						</div>
-					</div>
-					<!-- end about module -->
-					<!-- about module -->
-					<div class="col-md-3 text-center">
-						<div class="mz-module">
-							<div class="mz-module-about">
-								<img src="img/event.jpg" style="widht:100px; height:200px;">
-								<h6>[초대이벤트]뮤지컬 "루나틱"</h6>
-							</div>
-							<a href="https://onoffmix.com/event/121695" class="mz-module-button">상세보기</a>
-						</div>
-					</div>
-					<!-- end about module -->
-					<!-- about module -->
-					<div class="col-md-3 text-center">
-						<div class="mz-module">
-							<div class="mz-module-about">
-								<img src="img/event.jpg" style="widht:100px; height:200px;">
-								<h6>[초대이벤트]뮤지컬 "루나틱"</h6>
-							</div>
-							<a href="https://onoffmix.com/event/121695" class="mz-module-button">상세보기</a>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</section>
 		
-
-
 
 
 <!-- ============ 태그모임 =========== -->
@@ -200,9 +167,9 @@ $(function(){
 			
 			              <article class="col-md-4 isotopeItem webdesign">
 			                <div class="portfolio-item">
-			                	<img src="img/poster1.png" alt="tag이미지" />
+			                	<a href="#"><img src="${vo.meet_poster }"/></a>
 			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                	<p style="align:left">[${vo.meet_cg }]${vo.meet_start } </p>
 			                </div>
 			              </article>
 			
@@ -271,6 +238,7 @@ $(function(){
 			                </div>
 			              </article>
 			            </div>
+			            
 			          </div>
 			        </div>
 			      </div>
