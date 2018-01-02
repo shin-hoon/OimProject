@@ -26,7 +26,7 @@
                 <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                   <tr>
                      <td width=30% class="text-right">
-                        <span class="oim-icon glyphicon glyphicon-envelope"></span>이메일
+                        <span class="oim-icon glyphicon glyphicon-envelope"></span>아이디
                      </td>
                      <td width=70% class="text-center">${sessionScope.id }
                      	<input type="hidden" name="id" value="${sessionScope.id }" />
@@ -37,7 +37,7 @@
                         <span class="oim-icon glyphicon glyphicon-earphone"></span>휴대전화
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=tel size=30 id="tel">
+                        <input type=text name=tel size=30 id="tel" placeholder="${vo.om_tel }">
                      </td>                  
                   </tr>
                   <tr>
@@ -45,7 +45,7 @@
                         <span class="oim-icon glyphicon glyphicon-lock"></span>새로운 비밀번호 입력 
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=pwd size=30 id="pwd"><br>	
+                        <input type="password" name=pwd size=30 id="pwd"><br>	
                         <h6 style="color:black; font-size:12px;">*비밀번호는 8~24글자 이내로 입력해 주세요.</h6>
                      </td>                  
                   </tr>
@@ -54,7 +54,7 @@
                         <span class="oim-icon glyphicon glyphicon-lock"></span>비밀번호 재입력
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=pwd_ok size=30 id="pwd_ok">
+                        <input type="password" name=pwd_ok size=30 id="pwd_ok">
                          <span class="help-block"><font name="check" size="2" color="red"></font> </span>
                         
                      </td>                  

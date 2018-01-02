@@ -176,47 +176,26 @@ public class MemberDAO {
   		
   	}
 
-	/*
-    		//회원탈퇴 
-    		public boolean OimDelete(String id, String pwd)
-    		{
-    			boolean bcheck=false;
-    			
-    			try {
-    				getConnection();
-    				
-    				//비밀번호 확인
-    				String sql="SELECT om_pwd FROM oim_member "
-    							+"WHERE om_id=?";
-    				ps=conn.prepareStatement(sql);
-    				ps.setString(1, id);
-    				ResultSet rs=ps.executeQuery();
-    				rs.next();
-    				String db_pwd=rs.getString(1);
-    				
-    				if(db_pwd.equals(pwd))
-    				{
-    					bcheck=true;
-    					
-    					//회원삭제
-    					sql="DELETE FROM oim_member "
-    							+"WHERE om_id=?";
-    					ps=conn.prepareStatement(sql);
-    					ps.setString(1, id);
-    					ps.executeUpdate();
-    					
-    				}
-    				
-    			}catch(Exception ex)
-    			{
-    				System.out.println(ex.getMessage());
-    			}
-    			finally
-    			{
-    				disConnection();
-    			}
-    			return bcheck;
-    		}*/
+	//마이페이지 홈
+  	public static MemberVO Oimmypagehome(String om_id)
+  	{
+  		MemberVO vo=new MemberVO();
+  		SqlSession session=ssf.openSession();
+  		try
+  		{
+  			vo=session.selectOne("Oimmypagehome",om_id);
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println("Oimmypagehome: "+ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		return vo;
+  	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
   	public static List<MeetingVO> TodayMeeting()

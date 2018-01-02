@@ -30,7 +30,7 @@ public class MainModel {
 			req.setAttribute("meetCount", meetCount);
 		}
 		//jsp로 전송
-		req.setAttribute("list", list);
+		req.setAttribute("list", list);     /*TodayMeeting 결과값*/
 		req.setAttribute("main_jsp","default.jsp");
 		return "main/main.jsp";
 	}
