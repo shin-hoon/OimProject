@@ -1,84 +1,94 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="com.qaboard.dao.*"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<jsp:useBean id="model" class="com.qaboard.model.qaboardModel"/>
-<%
-	model.qaboardContentData(request);
-
-%>
-
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel = "stylesheet" type = "text/css" href = "../css/bootstrap.min.css">
-<script type="text/javascript" src = "../js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src = "../js/bootstrap.mine.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <style type="text/css">
-
-	.jumbotron{
-	  height: 500px;
-	  background: #ededed;	
+	.row
+	{
+		margin: 0px auto;
+		width: 650px;
 	}
-	
-	td,th{
-		font-size:15px;
-	}
-	h3{
-		text-align: bold;
-	}
-</style>
+</style> -->
+<script type="text/javascript">
+	var i=0;
+	$(function(){
+		$('#delBtn').click(function(){
+			if(i==0)
+			{	
+				$('#delBtn').text("ì·¨ì†Œ");
+				$('#del').show();
+				i=1;		
+			}
+			else
+			{
+				$('#delBtn').text("ì‚­ì œ");
+				$('#del').hide();
+				i=0;
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="container">
-		<div class="row qnarow">
-		<div style="height:70px"></div>
-		<h3>»ó¼¼³»¿ë</h3>
+		<div class="row">
+			<h3>ìƒì„¸ë‚´ìš©</h3>
 			<table class="table table-hover">
 			  <tr>
-			  	<td width="20%" class="text-center warning qna-td">¹øÈ£</td>
+			  	<th width="20%" class="text-center warning qna-td">ë²ˆí˜¸</th>
 			  	<td width="30%" class="text-center qna-td">${vo.qa_no}</td>
-			  	<td width="20%" class="text-center warning qna-td">ÀÛ¼ºÀÏ</td>
+			  	<th width="20%" class="text-center warning qna-td">ì‘ì„±ì¼</th>
 			  	<td width="30%" class="text-center qna-td">
 			  	<fmt:formatDate value="${vo.qa_regdate }" pattern="yyyy-MM-dd"/>
 			  	</td>
 			  </tr>
 			  
 			  <tr>
-			  	<td width="20%" class="text-center warning qna-td">¾ÆÀÌµğ</td>
+			  	<th width="20%" class="text-center warning qna-td">ì•„ì´ë””</th>
 			  	<td width="30%" class="text-center qna-td">${vo.om_id }</td>
-			  	<td width="20%" class="text-center warning qna-td">Á¶È¸¼ö</td>
+			  	<th width="20%" class="text-center warning qna-td">ì¡°íšŒìˆ˜</th>
 			  	<td width="30%" class="text-center qna-td">${vo.qa_hit }</td>
 			  </tr>
 			  
 			  <tr>
-			  	<td width="20%" class="text-center warning qna-td">Á¦¸ñ</td>
+			  	<th width="20%" class="text-center warning qna-td">ì œëª©</th>
 			  	<td colspan="3" class="text-left qna-td">${vo.qa_subject }</td>
 			  </tr>
 			  
 			  <tr>
 			  	<td colspan="4" class="text-left qna-td" valign="top" height="200">
 			  	<pre>${vo.qa_content }</pre></td>
-			  	<!-- pre: ÀÖ´Â±×´ë·Î¸¦ Ãâ·ÂÇØÁÖ´Â ¿ªÇÒ -->
+			  	<!-- pre: ìˆëŠ”ê·¸ëŒ€ë¡œë¥¼ ì¶œë ¥í•´ì£¼ëŠ” ì—­í•  -->
 			  </tr>
-			  
-			</table>
-			<table class="table">
-				<tr>
-					<td class="text-right qna-td">
-						<a href="reply.jsp?no=${vo.qa_no }&page=${strpage} "class="btn btn-warning">´äº¯</a>
-						<!-- pno: »óÀ§°Ô½Ã¹° ³Ñ¹ö , page:ÇöÀç Á¶È¸ÇÏ°íÀÖ´Â page¼ö -->
-						<a href="update.jsp?no=${vo.qa_no }&page=${curpage}" class="btn btn-warning">¼öÁ¤</a>
-						<a href="delete.jsp?no=${vo.qa_no }&page=${strpage} "class="btn btn-warning">»èÁ¦</a>
-						<a href="list.jsp?page=${curpage}" class="btn btn-warning">¸ñ·Ï</a>
-						<!-- ¸ñ·ÏÀ¸·Î µ¹¾Æ°¥¶§ Á¶È¸ÇÏ´ø ÆäÀÌÁö¼ö·Î µ¹¾Æ°¡±â À§ÇÔ -->
-					</td>
-				</tr>
+				<table class="table">
+					<tr>
+						<td class="text-right">
+							<a href="uupdate.do?no=${vo.qa_no }&page=${page }" class="btn btn-warning">ìˆ˜ì •</a>&nbsp;
+							<a href="ddelete.do?no=${vo.qa_no }&page=${page }" class="btn btn-warning" id="delBtn">ì‚­ì œ</a>&nbsp;
+							<a href="llist.do?np=${vo.qa_no }page=${page }" class="btn btn-warning">ëª©ë¡</a>
+						</td>
+					</tr>
+				</table>
 			</table>
 		</div>
-	   </div>
-	 </body>
-	</html>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

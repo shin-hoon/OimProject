@@ -1,59 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="com.qaboard.dao.*"%>
-<jsp:useBean id="model" class="com.qaboard.model.qaboardModel"/>
-    
-<%
-	model.qaboardUpdateData(request);
-%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<link rel="stylesheet" href="css/style.css">
-<link rel = "stylesheet" type = "text/css" href = "../css/bootstrap.min.css">
-<script type="text/javascript" src = "../js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src = "../js/bootstrap.mine.js"></script>
-<title>»èÁ¦ÇÏ±â</title>
-<style type="text/css">
-	.qnarow{
-		margin: 0px auto;
-		width: 300px;
-	}
-	
-	.qna-th, .qna-td{
-		font-family: ¸¼Àº °íµñ;
-		font-size:15px;
-	}			
-</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="style/table.css">
 </head>
 <body>
-	<div class="container">
-		<div class="row qnarow">
-		<div style="height:70px"></div>
-		<h3>»èÁ¦ÇÏ±â</h3>
-			<form method=post action="delete_ok.jsp">
-			<table class="table table-hover">
-			  <tr>
-				<td class="text-left qna-td">
-					ºñ¹Ð¹øÈ£: <input type=password name=pwd size=13>
-					<!-- °ªÀ» ³Ñ±â±â À§ÇÑ hiddenÅ¸ÀÔÀÇ input -->
-					<input type="hidden" name=qa_no value="${vo.qa_no }">
-					<input type="hidden" name=page value="${strPage }">
-				</td>
-			  </tr>
-			  
-			  <tr>
-				<td class="text-left qna-td">
-					<input type=submit value=»èÁ¦ class="btn btn-warning">
-					<input type=button value=Ãë¼Ò class="btn btn-warning"
-					onclick="javascript:history.back()">
-					
-				</td>
-			  </tr>
-			</table>
-			</form>
-		</div>
-	</div>
+   <div id="news_area">
+    <center>
+       <h1 style="color:white;">ì‚­ì œí•˜ê¸°</h1>
+       <form method=post action="ddeleteok.do">
+       <table id="table_content" width=300>
+        <tr>
+         <th width="25%">ë¹„ë°€ë²ˆí˜¸</th>
+         <td width=75% align=left>
+          <input type=hidden name=qa_no value="${qa_no }">
+          <input type="password" name="qa_pwd" size=12>
+         </td>
+        </tr>
+        <tr>
+         <td colspan="2" align=center>
+          <input type=submit class="btn btn-info btn-xs" value="ì‚­ì œ">
+          <input type=button class="btn btn-info btn-xs" value="ì·¨ì†Œ"
+           onclick="javascript:history.back()"
+          >
+         </td>
+        </tr>
+       </table>
+       </form>
+    </center>
+   </div>
 </body>
 </html>
+
+
+
+
+

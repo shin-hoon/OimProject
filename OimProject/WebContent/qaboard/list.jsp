@@ -1,97 +1,38 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:useBean id="model" class="com.qaboard.model.qaboardModel"/>
-<%
-	model.dataBoardListData(request);
-	
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<link href="../css/bootstrap.min.css" rel="stylesheet">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-		<!-- Custom styles for this template -->
-		<link href="../css/owl.carousel.css" rel="stylesheet">
-		<link href="../css/owl.theme.default.min.css"  rel="stylesheet">
-		<link href="../css/animate.css" rel="stylesheet">
-		<link href="../css/style.css" rel="stylesheet">     <!-- ø©±‚±Ó¡ˆ ø¯∑° ≈€«√∏¥ø° ¿÷¥¯∞Õ -->
-		<link href="../css/oim_style.css" rel="stylesheet">
-		
-		<!-- «Ï¥ı ΩΩ∂Û¿ÃµÂø° « ø‰«— js -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-		<script src="../js/bootstrap.min.js"></script>
-		
-		<script src="//code.jquery.com/jquery-1.12.4.min.js"></script> 
-		
-		<!-- ≈¬±◊∏¿” √ﬂ∞° tab css  -->
-	    <link rel="stylesheet" type="text/css" href="../css/isotope.css" media="screen" /> <!-- ¥¿≥¶¿÷∞‘ ªÁ¡¯πËø≠ -->
-	    <link rel="stylesheet" href="../css/bootstrap.css">
-	    	<!-- √ﬂ∞°  tab js -->
-	  	<script src="../js/jquery.js"></script>
-	  	<script src="../js/jquery.isotope.min.js"></script> 
-	  	<script src="../js/main.js"> </script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<!-- ≥Î∑©ªˆ ≥◊∫ÒπŸ -->
-	<div class="add_section" >
-         <div class="container" style="line-height:30px;">
-               <li class="section-li" style="margin-left:10px;"><a href="#" style="text-decoration:none; color:white">»∏ø¯∞°¿‘</a></li>
-               <li class="section-li" style="margin-right:10px;"><a href="#" style="text-decoration:none; color:white">∑Œ±◊¿Œ</a></li>
-         </div>
-	</div>
-	
-<!--===ªÁ¿Ã∆Æ ∑Œ∞Ì ====-->
-	<div class="container oim-logo">
-		<div class="oim-logo-img">
-		<!-- ø¿¿” ∑Œ∞Ì ¿ÃπÃ¡ˆ -->
-			<img alt="ø¿¥√¿« ∏¿”" src="../img/oim.png" class="img-responsive">
-		</div>
-		
-		<!-- ∞Àªˆ√¢ -->
-		<div class="col-md-6 oim-sc">
-        	<div id="custom-search-input">
-        		<div class="input-group col-md-12">
-                    <input type="text" class="form-control input-lg" placeholder="∏¿”¿ª ¿‘∑¬«œººø‰" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-	</div>
-<!-- ªÁ¿Ã∆Æ ∑Œ∞Ì ≥° -->
-
-<!-- ¥‰∫Ø∞‘Ω√∆« -->
+<!-- ÎãµÎ≥ÄÍ≤åÏãúÌåê -->
 <div class="container">
    <div class="row">
-   <h3>πÆ¿« ∞‘Ω√∆«Q&A</h3>
+   <h3>Î¨∏Ïùò Í≤åÏãúÌåêQ&A</h3>
    <table class="table table-hover">
      <tr>
       <td class="text-left">
-       <a href="insert.jsp" class="btn btn-warning">ªı±€</a>
+       <a href="iinsert.do" class="btn btn-warning">ÏÉàÍ∏Ä</a>
       </td>
      </tr>
    </table>
    <table class="table table-hover">
-     <tr class="succcess">
-      <th width=10% class="text-center">π¯»£</th>
-      <th width=45% class="text-center">¡¶∏Ò</th>
-      <th width=15% class="text-center">¿Ã∏ß</th>
-      <th width=20% class="text-center">¿€º∫¿œ</th>
-      <th width=10% class="text-center">¡∂»∏ºˆ</th>
+     <tr class="success">
+      <th width=10% class="text-center">Î≤àÌò∏</th>
+      <th width=45% class="text-center">Ï†úÎ™©</th>
+      <th width=15% class="text-center">ÏïÑÏù¥Îîî</th>
+      <th width=20% class="text-center">ÏûëÏÑ±Ïùº</th>
+      <th width=10% class="text-center">Ï°∞ÌöåÏàò</th>
      </tr>
      <c:forEach var="vo" items="${list }">
       <tr>
        <td width=10% class="text-center">${vo.qa_no }</td>
        <td width=45% class="text-left">
-       	<a href="content.jsp?no=${vo.qa_no }&page=${curpage}">${vo.qa_subject }</a>
+       <a href="ccontent.do?no=${vo.qa_no }&page=${curpage}">${vo.qa_subject }</a>
        	<!-- 
        		content.do === DispatcherServlet === Model
        			request						request
@@ -109,17 +50,47 @@
      </c:forEach>
    </table>
    <table class="table">
-   	<tr>
-   	 <td class="text-left"></td>
-   	 <td class="text-right">
-   	  <a href="list.jsp?page=${curpage>1?curpage-1:curpage }" class="btn btn-warning">¿Ã¿¸</a>&nbsp;
-   	  <a href="list.jsp?page=${curpage<totalpage?curpage+1:curpage }"class="btn btn-warning">¥Ÿ¿Ω</a>&nbsp;&nbsp;
+     <tr>
+      <td class="text-left qna-td">
+       Search:
+       <select name="fs">
+        <option value="om_id">ÏïÑÏù¥Îîî</option>
+        <option value="qa_subject">Ï†úÎ™©</option>
+        <option value="qa_content">ÎÇ¥Ïö©</option>
+       </select>
+       <input type=text name="ss" size=13>
+       <input type=submit value="Ï∞æÍ∏∞" class="btn btn-info btn-xs">
+      </td>
+      <td class="text-left"></td>
+   	  <td class="text-right">
+   	  <a href="llist.do?page=${curpage<10?1:curpage-10 }" class="btn btn-warning btn-xs">‚óÄ‚óÄ</a>&nbsp;
+   	  <a href="llist.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-warning btn-xs">‚óÄ</a>&nbsp;
+   	  <fmt:parseNumber var="num" value="${curpage/10}" integerOnly="true"/>
+             <c:set var="num" value="${num<=0?1:num*10}"/>  
+             <c:forEach var="i"  begin="${num}" end="${num==1?num+8:num+9}">
+                <c:choose>
+                   <c:when test="${i > totalpage }"></c:when>
+                   <c:when test="${i==curpage}">
+                   <a href="llist.do?page=${i}">
+                      <b>(${i})</b>
+                      </a>
+                   </c:when>
+                   <c:when test="${i <= totalpage}">
+                      <a href="llist.do?page=${i }">
+                         <b>(${i})</b>
+                      </a>
+                   </c:when>
+                </c:choose>
+             </c:forEach>
+   	  <a href="llist.do?page=${curpage<totalpage?curpage+1:curpage }"class="btn btn-warning btn-xs">‚ñ∂</a>&nbsp;&nbsp;
+   	  <a href="llist.do?page=${totalpage}" class="btn btn-warning btn-xs">‚ñ∂‚ñ∂</a>
    	  ${curpage } page / ${totalpage } pages
-   	 </td>
-   	</tr>
-   </table>
+   	  </td>
+      
+     </tr>
+    </table>
+
    </div>
   </div>
-
 </body>
 </html>

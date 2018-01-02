@@ -16,7 +16,7 @@ import java.util.*;
  	qa_depth NUMBER DEFAULT 0
  */
 public class qaboardVO {
-	 private int qa_no; 
+	private int qa_no; 
 	 private String om_id;
 	 private String qa_subject;
 	 private String qa_content;

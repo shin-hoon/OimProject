@@ -1,2 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oim.qaboard.dao.qaboard-mapper">
+	<select id="boardListData" resultType="qaboardVO" parameterType="java.util.Map">
+	SELECT qa_no,qa_subject,om_id,qa_regdate,qa_hit,qa_group_tab,num
+	FROM (SELECT qa_no,qa_subject,om_id,qa_regdate,qa_hit,qa_group_tab,rownum as num
+	FROM (SELECT qa_no,qa_subject,om_id,qa_regdate,qa_hit,qa_group_tab
+	FROM qaboard ORDER BY qa_group_id DESC, qa_group_step ASC))
+	WHERE num BETWEEN ${start} AND #{end}
+	</select>
+	<select id="boardTotalPage" resultType="int">
+  	SELECT CEIL(COUNT(*)/10) FROM qaboard
+  	</select>
+  <insert id="boardInsert" parameterType="qaboardVO">
+   INSERT INTO qaboard(qa_no,om_id,qa_subject,qa_content,qa_pwd,qa_group_id)
+   VALUES(qaboard_qa_no_seq.nextval,#{om_id},#{qa_subject},#{qa_content},#{qa_pwd},(SELECT NVL(MAX(qa_group_id)+1,1) FROM qaboard))
+  </insert>
+  <select id="boardContentData" resultType="qaboardVO" parameterType="int">
+   SELECT qa_no,om_id,qa_subject,qa_content,qa_regdate,qa_hit
+   FROM qaboard
+   WHERE qa_no=#{qa_no}
+  </select>
+  <update id="boardHitIncrement" parameterType="int">
+    UPDATE qaboard SET
+    qa_hit=qa_hit+1
+    WHERE qa_no=#{qa_no}
+  </update>
+  <update id="boardUpdate" parameterType="qaboardVO">
+  	UPDATE qaboard SET
+  	om_id=#{om_id},qa_subject=#{qa_subject},
+  	qa_content=#{qa_content}
+  	WHERE qa_no=#{qa_no}
+  </update>
+  <select id="boardGetPwd" 
+      parameterType="int" resultType="String">
+    SELECT qa_pwd FROM qaboard
+    WHERE qa_no=#{qa_no}
+  </select>
+  <delete id="boardDelete" parameterType="int">
+    DELETE FROM qaboard
+    WHERE qa_no=#{qa_no}
+  </delete>
+</mapper>

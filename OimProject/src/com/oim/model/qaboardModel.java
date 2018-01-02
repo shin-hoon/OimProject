@@ -1,104 +1,141 @@
 package com.oim.model;
 
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oim.controller.Controller;
+import com.oim.controller.RequestMapping;
 import com.oim.qaboard.dao.qaboardDAO;
 import com.oim.qaboard.dao.qaboardVO;
 
+@Controller
+public class qaboardModel{
 
-public class qaboardModel {
-	public void dataBoardListData(HttpServletRequest req) { //목록가져오기
-		qaboardDAO dao = new qaboardDAO();
-		String page = req.getParameter("page");
+	@RequestMapping("llist.do")
+	public String ListModel(HttpServletRequest req, HttpServletResponse res) {
+		// TODO Auto-generated method stub
+		try {
+		String page=req.getParameter("page");
+		// req => 요청값 => 추가 (setAttribute())
 		if(page==null)
 			page="1";
-		
+		System.out.println("page="+page);
 		int curpage=Integer.parseInt(page);
-		List<qaboardVO> list = dao.boardListData(curpage);
-		req.setAttribute("list", list); //필요한 데이터는 setattribute로 값을 묶는다.
-		req.setAttribute("curpage", page);
-		req.setAttribute("totalpage", page);
-	}
-	public void qaboardInsert_ok(HttpServletRequest req, HttpServletResponse res)
-	{
-		try {
-		req.setCharacterEncoding("EUC-KR");
-		qaboardDAO dao=new qaboardDAO();
-		
-		qaboardVO vo=new qaboardVO();
-		String om_id = req.getParameter("om_id");
-		String qa_subject = req.getParameter("qa_subject");
-		String qa_content = req.getParameter("qa_content");
-		String qa_pwd = req.getParameter("qa_pwd");
-		
-				
-		vo.setOm_id(om_id);
-		vo.setQa_subject(qa_subject);
-		vo.setQa_content(qa_content);
-		vo.setQa_pwd(qa_pwd);
-		
-		dao.boardInsert(vo);
-		
-		res.sendRedirect("list.jsp");
-		
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-	public void qaboardTotalPage(HttpServletRequest req) {
-		String strPage = req.getParameter("page");
-		if(strPage==null)
-		   strPage="1";
-		int curpage = Integer.parseInt(strPage);
-		qaboardDAO dao = new qaboardDAO();
-		List<qaboardVO> list = dao.boardListData(curpage);
-		int totalpage=dao.boardTotalPage();
-		int count=dao.boardRowCount();
-		count=count-((curpage*10)-10);
+		int rowSize=10;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		List<qaboardVO> list=qaboardDAO.boardListData(map);
+		// list.jsp => 값 전송(req.setAttribute())
+		req.setAttribute("list", list);
 		req.setAttribute("curpage", curpage);
+		int totalpage=qaboardDAO.boardTotalPage();
 		req.setAttribute("totalpage", totalpage);
-		req.setAttribute("count", count);
-	}
-	public void qaboardContentData(HttpServletRequest req)
-	{
-		try
-		{
-			qaboardDAO dao=new qaboardDAO();
-			req.setCharacterEncoding("EUC-KR");
-			String qa_no=req.getParameter("no");
-			String curpage = req.getParameter("page");
-			System.out.println(curpage);
-			qaboardVO vo = dao.boardContentData("qa_content", Integer.parseInt(qa_no));
-			req.setAttribute("qa_no", qa_no);
-			req.setAttribute("vo",vo);
-			req.setAttribute("curpage",curpage);
+		req.setAttribute("main_jsp","../qaboard/list.jsp");
+		
 		}catch(Exception ex)
 		{
-			ex.printStackTrace();
+			System.out.println(ex.getMessage());
+		}
+		
+		return "main/main.jsp";
+	
+	}
+		@RequestMapping("iinsert.do")
+		public String InsertModel(HttpServletRequest req, HttpServletResponse res) throws Throwable {
+			// TODO Auto-generated method stub
+			
+			req.setAttribute("main_jsp","../qaboard/insert.jsp");
+			return "main/main.jsp";
+		}
+		@RequestMapping("iinsertok.do")
+		public String InsertOkModel(HttpServletRequest req, HttpServletResponse res) throws Throwable {
+			// TODO Auto-generated method stub
+			req.setCharacterEncoding("UTF-8");
+			String om_id=req.getParameter("om_id");
+			String qa_subject=req.getParameter("qa_subject");
+			String qa_content=req.getParameter("qa_content");
+			String qa_pwd=req.getParameter("qa_pwd");
+			qaboardVO vo=new qaboardVO();
+			vo.setOm_id(om_id);
+			vo.setQa_subject(qa_subject);
+			vo.setQa_content(qa_content);
+			vo.setQa_pwd(qa_pwd);
+			qaboardDAO.boardInsert(vo);
+			return "llist.do";
 		}
 
-	}
-	public void qaboardUpdateData(HttpServletRequest req)
-	{
-		qaboardDAO dao=new qaboardDAO();
-		String qa_no = req.getParameter("no");
-		String strpage = req.getParameter("page");
-		qaboardVO vo = dao.boardContentData("qa_update", Integer.parseInt(qa_no));
-		req.setAttribute("qa_no", qa_no);
-		req.setAttribute("strpage", strpage);
-		req.setAttribute("vo", vo);
+		@RequestMapping("ccontent.do")
+		public String ContentModel(HttpServletRequest req, HttpServletResponse res) throws Throwable {
+			String qa_no=req.getParameter("no");
+			String page=req.getParameter("page");
+			qaboardVO vo=qaboardDAO.boardContentData(Integer.parseInt(qa_no));
+			req.setAttribute("vo", vo);
+			req.setAttribute("page", page);
+			req.setAttribute("main_jsp","../qaboard/content.jsp");
+			return "main/main.jsp";
+		}
+		@RequestMapping("uupdate.do")
+		  public String UpdateModel(HttpServletRequest req,HttpServletResponse res)
+		  {
+			  String qa_no=req.getParameter("no");
+			  // DB연동
+			  qaboardVO vo=qaboardDAO.boardUpdateData(Integer.parseInt(qa_no));
+			  req.setAttribute("vo", vo);
+			  req.setAttribute("main_jsp", "../qaboard/update.jsp");
+			  return "main/main.jsp";
+		  }
 
-	}
-	
-	public void qaboardDelete(HttpServletRequest req)
-	{
-		String qa_no=req.getParameter("qa_no");
-		String strPage=req.getParameter("page");
-		req.setAttribute("qa_no", qa_no);
-		req.setAttribute("page", strPage);
-	}
-
+		@RequestMapping("uupdateok.do")
+		  public String UpdateOkModel(HttpServletRequest req,HttpServletResponse res)
+		  {
+			  try
+			  {
+				  req.setCharacterEncoding("UTF-8");
+				  // EUC-KR => UTF-8(o)
+				  // UTF-8  => EUC-KR(x)
+				  // UTF-8  => UTF-8(o)
+			  }catch(Exception ex) {}
+			  String qa_no=req.getParameter("qa_no");
+			  String om_id=req.getParameter("om_id");
+			  String qa_subject=req.getParameter("qa_subject");
+			  String qa_content=req.getParameter("qa_content");
+			  String qa_pwd=req.getParameter("qa_pwd");
+			  
+			  qaboardVO vo=new qaboardVO();
+			  vo.setQa_no(Integer.parseInt(qa_no));
+			  vo.setOm_id(om_id);
+			  vo.setQa_subject(qa_subject);
+			  vo.setQa_content(qa_content);
+			  vo.setQa_pwd(qa_pwd);
+			  //DB연동
+			  boolean bCheck=qaboardDAO.boardUpdate(vo);
+			  req.setAttribute("bCheck", bCheck);
+			  req.setAttribute("qa_no", qa_no);
+			  return "qaboard/update_ok.jsp";
+		  }
+		@RequestMapping("ddelete.do")
+		  public String board_delete(HttpServletRequest req,HttpServletResponse res)
+		  {
+			  String qa_no=req.getParameter("no");
+			  req.setAttribute("qa_no", qa_no);
+			  req.setAttribute("main_jsp", "../qaboard/delete.jsp");
+			  return "main/main.jsp";
+		  }
+		@RequestMapping("ddeleteok.do")
+		  public String board_delete_ok(HttpServletRequest req,HttpServletResponse res)
+		  {
+			  String qa_no=req.getParameter("qa_no");
+			  String qa_pwd=req.getParameter("qa_pwd");
+			  boolean bCheck=qaboardDAO.boardDelete(Integer.parseInt(qa_no), qa_pwd);
+			  req.setAttribute("bCheck", bCheck);
+			  return "qaboard/delete_ok.jsp";
+		  }
 }
