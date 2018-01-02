@@ -19,6 +19,7 @@ public class MainModel {
 	public String main_page(HttpServletRequest req, HttpServletResponse res){
 		
 		List<MeetingVO> list=MemberDAO.TodayMeeting();
+		List<MeetingVO> list2=MemberDAO.EventMeeting();
 		
 		
 		int meetCount=0;
@@ -32,6 +33,7 @@ public class MainModel {
 		}
 		//jsp·Î Àü¼Û
 		req.setAttribute("list", list);
+		req.setAttribute("list2", list2);
 		req.setAttribute("main_jsp","default.jsp");
 		return "main/main.jsp";
 	}

@@ -29,7 +29,7 @@
 </select>
 <select id="EventMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_subject,meet_cg FROM meeting	   
-	WHERE meet_cg='이벤트/파티'                  	
+	WHERE meet_subject LIKE '_초대이벤트_%'           	
 </select>
 <select id="tegMeeting" resultType="meetingVO">
 	SELECT meet_no, meet_poster,meet_cg, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start

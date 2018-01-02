@@ -211,36 +211,7 @@ public class MemberModel {
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//오늘의 모임 추천
-	@RequestMapping("Today_Meeting.do")
-	public String Today_Meeting(HttpServletRequest req,HttpServletResponse res) {
-		List<MeetingVO> list=MemberDAO.TodayMeeting();
-		req.setAttribute("list", list);
-		
-		req.setAttribute("main_jsp", "../../main/default.jsp");
-		return "main/main.jsp";
-		
-	}
-	
-	
-	
-	//초대이벤트
-	@RequestMapping("Event_Meeting.do")
-	public String Event_meeting(HttpServletRequest req, HttpServletResponse res)throws Throwable {
-		
-		req.setCharacterEncoding("UTF-8");
-		List<MeetingVO> list=MemberDAO.EventMeeting();
-		
-		
-		
-		req.setAttribute("list", list);
-		req.setAttribute("main_jsp", "../main/default.jsp");
-		return "main/main.jsp";
-		
-	}
-	
-	
-	//테그별 모임
+
 	
 	
 }

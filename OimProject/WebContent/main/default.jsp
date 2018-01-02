@@ -117,7 +117,7 @@ $(function(){
 				</div>
 				<div class="row">
 					<!-- about module -->
-					<c:forEach var="vo" items="${list }" begin="1" end="4">
+					<c:forEach var="vo" items="${list2 }" begin="1" end="4">
 						<div class="col-md-3 text-center">
 							<div class="mz-module">
 								<div class="mz-module-about caption">
