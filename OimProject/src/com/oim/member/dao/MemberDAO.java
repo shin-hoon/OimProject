@@ -223,12 +223,12 @@ public class MemberDAO {
   	
   	public static List<MeetingVO> EventMeeting()
   	{
-  		List<MeetingVO> list=new ArrayList<MeetingVO>();
+  		List<MeetingVO> list2=new ArrayList<MeetingVO>();
   		SqlSession session=ssf.openSession();
   		
   		try {
   			
-  			list=session.selectList("EventMeeting");
+  			list2=session.selectList("EventMeeting");
   			
   		}catch(Exception ex)
   		{
@@ -240,11 +240,32 @@ public class MemberDAO {
   				session.close();
   		}
   		
-  		return list;
+  		return list2;
   	}
-    		
-    		
-    		
+  	
+  	
+  	
+  	public static List<MeetingVO> HotMeeting()
+  	{
+  		List<MeetingVO> list4=new ArrayList<MeetingVO>();
+  		SqlSession session=ssf.openSession();
+  		
+  		try {
+  			
+  			list4=session.selectList("HotMeeting");
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println(ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  		return list4;
+  	}
     		
   }
       

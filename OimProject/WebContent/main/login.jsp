@@ -313,7 +313,7 @@ $(function(){
                   <td colspan="2" class="text-center" style="margin:auto; text-align:center;">
                   <button type="submit" value=joinok class="btn btn-mg btn-danger"> 회원가입
                   <span class="glyphicon glyphicon-ok" ></span></button>
-                  <button type="submit" value=joinok class="btn btn-mg oim_btn_gr"> 가입취소
+                  <button type="submit" value=joinok class="btn btn-mg oim_btn_gr" data-dismiss="modal"> 가입취소
                   <span class="glyphicon glyphicon-remove" ></span></button>
                   
                   </td>
@@ -350,7 +350,7 @@ $(function(){
                         </td>
                      </tr>
                      <tr>
-                        <td class="text-center" id="res_ok">
+                        <td class="text-center" id="res_ok"  data-dismiss="modal">
                      </tr>
                   </table>
                </div>
