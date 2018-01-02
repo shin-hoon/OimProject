@@ -1,74 +1,107 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel = "stylesheet" type = "text/css" href = "../css/bootstrap.min.css">
-<script type="text/javascript" src = "../js/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src = "../js/bootstrap.mine.js"></script>
 <style type="text/css">
-
-	.jumbotron{
-	  height: 500px;
-	  background: #ededed;	
-	}
-	
-	td,th{
-		font-size:15px;
-	}
+.row{
+   margin: 0px auto;
+   width:600px;
+}
 </style>
+<script type="text/javascript">
+$(function(){
+	$('#writeBtn').click(function(){
+		var om_id=$('#om_id').val();
+		if(om_id.trim()=="")
+		{
+			$('#om_id').focus();
+			return;
+		}
+		var qa_subject=$('#qa_subject').val();
+		if(qa_subject.trim()=="")
+		{
+			$('#qa_subject').focus();
+			return;
+		}
+		var qa_content=$('#qa_content').val();
+		if(qa_content.trim()=="")
+		{
+			$('#qa_content').focus();
+			return;
+		}
+		var qa_pwd=$('#qa_pwd').val();
+		if(qa_pwd.trim()=="")
+		{
+			$('#qa_pwd').focus();
+			return;
+		}
+		$('#frm').submit();
+
+	});
+});
+</script>
 </head>
 <body>
-	<div class="container">
-		<div class="row qnarow">
-		<div style="height:70px"></div>
-		<h3>±€µÓ∑œ</h3>
-		
-		<form method="post" action="insert_ok.jsp"> 
-		<%--includeµ«∏Èº≠ mainø° ∆˜«‘µ«æÓ ¿÷¿∏π«∑Œ ../»ƒ qna∑Œ µÈæÓ∞°æﬂ«—¥Ÿ! ¡÷¿««“ ∞Õ --%>
-			<table class="table table-hover">
-			  <tr>
-				<td width=20% class="text-right qna-td">æ∆¿Ãµ</td>
-				<td width=80% class="text-left qna-td">
-					<input type=text name=om_id size=13 id="name">
-				</td>
-			  </tr>
-			  
-			  <tr>
-				<td width=20% class="text-right qna-td" valign="top">¡¶∏Ò</td>
-				<td width=80% class="text-left qna-td">
-					<input type=text name=qa_subject size=50 id="subject">
-				</td>
-			  </tr>
-			  
-			  <tr>
-				<td width=20% class="text-right qna-td" valign="top">≥ªøÎ</td>
-				<td width=80% class="text-left qna-td">
-					<textarea rows="10" cols="55" name=qa_content id="content"></textarea>
-				</td>
-			  </tr>
-			  
-			  <tr>
-				<td width=20% class="text-right qna-td" valign="top">∫Òπ–π¯»£</td>
-				<td width=80% class="text-left qna-td">
-					<input type=password name=qa_pwd size=13 id="pwd">
-				</td>
-			  </tr>
-			  
-			  <tr>
-				<td colspan="2" class="text-center qna-td">
-					<input type="submit" class="btn btn-info btn-sm" value="±€æ≤±‚">
-					
-					<input type=button class="btn btn-danger btn-sm" value="√Îº“"
-					onclick="javascript:history.back()">
-				</td>
-			  </tr>
-			</table>
-		</form>
-		</div>
-	</div>
+<center>
+  <div class="container">
+    <div class="row">
+     <h3>Í∏ÄÏì∞Í∏∞</h3>
+     <form method="post" action="iinsertok.do" id=frm>
+     <table class="table table-hover">
+      <tr>
+       <td width=10% class="text-right">ÏïÑÏù¥Îîî</td>
+       <td width=90% class="text-left">
+        <input type=text class="input" size=13 name=om_id id="om_id">
+       </td>
+      </tr>
+      <tr>
+       <td width=15% class="text-right">Ï†úÎ™©</td>
+       <td width=85% class="text-left">
+        <input type=text class="input" size=45 name=qa_subject id="qa_subject">
+       </td>
+      </tr>
+      <tr>
+       <td width=15% class="text-right">ÎÇ¥Ïö©</td>
+       <td width=85% class="text-left">
+        <textarea rows="7" cols="50" name=qa_content id="qa_content"></textarea>
+       </td>
+      </tr>
+      <tr>
+       <td width=15% class="text-right">ÎπÑÎ∞ÄÎ≤àÌò∏</td>
+       <td width=85% class="text-left">
+        <input type="password" name=qa_pwd size=10 id="qa_pwd">
+       </td>
+      </tr>
+      <tr>
+       <td colspan="2" class="text-center">
+        <input type="submit" value="Í∏ÄÏì∞Í∏∞"
+         class="btn btn-warning btn-sm" id="writeBtn">
+         <!-- btn-xs , btn-sm , btn-md , btn-lg -->
+         <input type="button" value="Ï∑®ÏÜå"
+         class="btn btn-warning btn-sm"
+         onclick="javascript:history.back()"
+         >
+       </td>
+      </tr>
+     </table>
+     </form>
+    </div>
+  </div>
+  </center>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

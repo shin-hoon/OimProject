@@ -1,25 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR" import="com.qaboard.dao.*"%>
-
-    <jsp:useBean id="dao" class="com.qaboard.dao.qaboardDAO"></jsp:useBean>
-    
-<%
-	String qa_no=request.getParameter("qa_no");
-	String strpage=request.getParameter("page");
-	String qa_pwd=request.getParameter("qa_pwd");
-	int page2 = Integer.parseInt(strpage);
-	//ÀÌµ¿
-	boolean bCheck=dao.boardDelete(Integer.parseInt(qa_no), qa_pwd);
-	if(bCheck==false){
-	%>
-		<script>
-			alert("ºñ¹Ð¹øÈ£°¡ Æ²¸³´Ï´Ù!");
-			history.back();
-		</script>
-	<%
-		
-	}else{
-		response.sendRedirect("list.jsp?page="+page2);
-		
-	}
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:if test="${bCheck==true }">
+  <c:redirect url="llist.do"/>
+</c:if>
+<c:if test="${bCheck==false }">
+  <script>
+  alert("ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦½ë‹ˆë‹¤");
+  history.back();
+  </script>
+</c:if>

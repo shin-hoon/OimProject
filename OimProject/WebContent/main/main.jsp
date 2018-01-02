@@ -243,7 +243,7 @@ $( document ).ready( function() {
 		                  
 		                  	<ul class="board">
 		                     <li>공지사항</li>
-		                     <li>문의게시판(Q&A)</li>
+		                     <a href="llist.do"><li>문의게시판(Q&A)</li></a>
 		                     <li>자유게시판(소통)</li>
 		                  	</ul>
                </li>
