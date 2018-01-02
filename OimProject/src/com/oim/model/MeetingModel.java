@@ -370,4 +370,122 @@ public class MeetingModel {
     	return "member/meeting_update.jsp";
     }
     
+    @RequestMapping("meeting_search.do") //모임검색결과
+	public String meeting_search(HttpServletRequest req, HttpServletResponse res) throws Throwable{
+			req.setCharacterEncoding("UTF-8");
+			
+			String page=req.getParameter("page");
+			boolean first=false;
+			if(page==null) {
+				page="1";
+				first=true;
+			}
+			
+				int curpage=Integer.parseInt(page);
+				int rowSize=12;
+				int start= (rowSize*curpage)-(rowSize-1);
+				int end= rowSize*curpage;
+				int totalpage=0;
+				
+				String categoryTemp[]= req.getParameterValues("category"); //카테고리
+				String locTemp[]= req.getParameterValues("loc"); //지역
+				String weekTemp[]= req.getParameterValues("week"); //주중or주말
+				String priceTemp[]= req.getParameterValues("price");//참여비용
+				
+				
+				List<String> category= new ArrayList<String>();
+				List<String> loc= new ArrayList<String>();
+				List<String> week= new ArrayList<String>();
+				List<String> price= new ArrayList<String>();
+				
+				
+				String from=req.getParameter("from");//시작일 ~부터
+				String to=req.getParameter("to");//시작일 ~까지
+				
+				
+				if(categoryTemp!=null) {
+					for(String s:categoryTemp) {
+						category.add(s);
+						System.out.print("카테고리: "+s+" ");
+						}
+						System.out.println();
+					}
+					
+					if(locTemp!=null) {
+					for(String s:locTemp) {
+						loc.add(s);
+						System.out.print("지역: "+s+" ");
+					}
+						System.out.println();
+					}
+					
+					if(weekTemp!=null) {
+					for(String s:weekTemp) {
+						week.add(s);
+						System.out.print("주중or주말?: "+s+" ");
+					}
+					System.out.println();
+					}
+					
+					if(priceTemp!=null) {
+					for(String s:priceTemp) {
+						price.add(s);
+						System.out.print("참여비용: "+s+" ");
+					}
+					System.out.println();
+					}
+					
+					System.out.println(from);
+					System.out.println(to);
+					
+					Map map=new HashMap();
+					map.put("category", category);
+					map.put("loc", loc);
+					map.put("week", week);
+					map.put("price", price);
+					map.put("from", from);
+					map.put("to", to);
+					map.put("start", start);
+					map.put("end", end);
+					
+					List<MeetingVO> list=MeetingDAO.meetingFindData(map);
+					totalpage=MeetingDAO.meetingFindTotalPage(map);
+							
+					
+					//jsp로 전송
+					HttpSession session=req.getSession();
+					if(first==true) //최초로 실행했을때는 session에 저장한다.
+					{
+						session.setAttribute("category", category);
+						session.setAttribute("loc", loc);
+						session.setAttribute("week", week);
+						session.setAttribute("price", price);
+						session.setAttribute("from", from);
+						session.setAttribute("to", to);
+						
+						System.out.println("totalpage: "+totalpage);
+					}
+					else //페이지를 옮겨갈 경우에는 map에 메모리를 새로 할당해서 session에 저장된 검색결과를 넣는다.
+					{
+						map=new HashMap();
+						map.put("category", session.getAttribute("category"));
+						map.put("loc", session.getAttribute("loc"));
+						map.put("week", session.getAttribute("week"));
+						map.put("price", session.getAttribute("price"));
+						map.put("from", session.getAttribute("from"));
+						map.put("to", session.getAttribute("to"));
+						map.put("start", start);
+						map.put("end", end);
+						list=MeetingDAO.meetingFindData(map);
+						totalpage=MeetingDAO.meetingFindTotalPage(map);
+						System.out.println("totalpage: "+totalpage);
+					}
+					req.setAttribute("totalpage", totalpage);
+					req.setAttribute("curpage", curpage);
+			     	req.setAttribute("list", list);
+					req.setAttribute("main_jsp", "../meeting/meeting_find.jsp");
+		            
+		return "main/main.jsp";
+	}
+    
 }

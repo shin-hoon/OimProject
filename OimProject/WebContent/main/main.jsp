@@ -182,7 +182,7 @@ $( document ).ready( function() {
 		<!-- 검색창 -->
 		<div class="col-md-6 oim-sc">
         	<div id="custom-search-input">
-        	<form method="get" action="meeting_find.do">
+        	<form method="get" action="meeting_search.do">
         		<div class="input-group col-md-12">
                     <input type="text" class="form-control input-lg" name="searchText" placeholder="모임을 입력하세요" />
 
@@ -250,27 +250,21 @@ $( document ).ready( function() {
 				</ul>
 			<!-- 메뉴 오른쪽 -->
 				<ul class="nav navbar-nav navbar-right">
-					 <!-- 비활성화: 모임 개설 시에만 나타남 class="disabled" -->
 						<c:if test="${sessionScope.id!=null }">
 							<li>
 							 <a href="meeting_insert.do">모임 개설하기</a>
 							</li>
 						</c:if>
-						
-						<c:if test="${sessionScope.id==null }">
-							<li class="disabled">
-							<a href="#">모임 개설하기</a>
+						<c:if test="${sessionScope.id!=null && meetCount>0}">
+							 <li> 
+								<a href="Oim_meetpage.do">모임관리</a>
 							</li>
 						</c:if>
-					
-					<li> <!-- 비활성화: 모임 개설 시에만 나타남  class="disabled"-->
-						<a href="Oim_meetpage.do">모임관리</a>
-					</li>
-					<li>
 						<c:if test="${sessionScope.id!=null }">
-						<a href="Oim_mypage.do">마이페이지</a>
-						</c:if>
-					</li>
+						<li>
+							<a href="Oim_mypage.do">마이페이지</a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 		</div>
