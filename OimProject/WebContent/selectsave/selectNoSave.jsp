@@ -25,7 +25,7 @@
 					</div>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row selectBoard">
 			<div class="col-sm-3">
 				<span class="btn btn-warning border-trim">모임카테고리</span>
 
@@ -171,10 +171,12 @@
 				</span>
 			</div>
 		</div>
-			<div class="text-center col-lg-12 border-submit">
-				<input type="submit" class="btn btn-primary btn-sm outline" id="InsertBtn" value="검색저장"/>
-				<input type="hidden" id="id2" value="${id}">
-				<input type="hidden" name="saveNum" id="saveNum" value="${num}">
+			<div class="row">
+				<div class="text-center col-sm-12 border-submit">
+					<input type="submit" class="btn btn-primary btn-sm outline" id="InsertBtn" value="검색저장"/>
+					<input type="hidden" id="id2" value="${id}">
+					<input type="hidden" name="saveNum" id="saveNum" value="${num}">
+				</div>
 			</div>
 			</form>
 		</div>

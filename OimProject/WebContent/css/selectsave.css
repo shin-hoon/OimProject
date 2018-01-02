@@ -31,15 +31,18 @@
 	width: 100%;
 }
 .border-submit{
-	margin-top:15px;
 	padding : 15px;
 	border: 2px solid #dce2e7;
-	border-left: none;
-	border-right: none;
+	
 }
 .border-trim{
 	background-color:#fcbe03;
 	margin-bottom:5%;
+}
+.selectBoard{
+	border: 2px solid #dce2e7;
+	border-top: none;
+	border-bottom: none;
 }
 
 .input-group-addon.primary {
