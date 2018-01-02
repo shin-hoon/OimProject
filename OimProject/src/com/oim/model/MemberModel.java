@@ -177,6 +177,10 @@ public class MemberModel {
 
 		MemberVO vo=new MemberVO();
 		String re ="";
+		if(tel.trim().equals(""))
+		{
+			re="member/update_telfail.jsp";
+		}
 		
 		if(pwd.equals(pwd_ok))
 		{
@@ -195,7 +199,7 @@ public class MemberModel {
 		}
 		
 		return re;
-		//return "Oim_mypage.do";
+		
 	}
 	
 	@RequestMapping("Oim_Delete.do")
@@ -235,28 +239,6 @@ public class MemberModel {
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-	
-	
-	
-	//초대이벤트
-	/*@RequestMapping("Event_Meeting.do")
-	public String Event_meeting(HttpServletRequest req, HttpServletResponse res)throws Throwable {
-		
-		req.setCharacterEncoding("UTF-8");
-		List<MeetingVO> list=MemberDAO.EventMeeting();
-		
-		
-		
-		req.setAttribute("list", list);
-		req.setAttribute("main_jsp", "../main/default.jsp");
-		return "main/main.jsp";
-		
-	}*/
-	
-	
-	//테그별 모임
 
 	
 	

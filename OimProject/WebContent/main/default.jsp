@@ -258,6 +258,7 @@ $(function(){
 
 
 <!--========== HOT모임 시작===========-->
+<<<<<<< HEAD
       <section id="portfolio" class="light-bg">
          <div class="container">
          <div class="row">
@@ -358,6 +359,38 @@ $(function(){
          </div><!-- end container -->
       </section>
       
+=======
+		<section id="portfolio" class="light-bg">
+			<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<div class="section-title">
+						<h2>HOT 모임</h2>
+						<p>사용자들이 가장 많이 클릭한 모임입니다</p>
+					</div>
+				</div>
+			</div>
+			<div class="row row-0-gutter">
+				<c:forEach var="vo" items="${list4 }" begin="0" end="5">
+				<div class="col-md-4 col-0-gutter">
+					<div class="ot-portfolio-item">
+						<figure class="effect-bubba">
+							<img src="${vo.meet_poster }" class="img-responsive" height="100%" width="100%"/>
+							<figcaption>
+								<h2>${vo.meet_subject }</h2>
+								<p>클릭!!</p>
+								<a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}">View more</a>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+				</c:forEach>
+				
+			</div>
+			</div><!-- end container -->
+		</section>
+		
+>>>>>>> branch 'master' of https://github.com/OimWebProject/OimWeb.git
 <!--======== HOT모임 끝============-->
 </div>
 
