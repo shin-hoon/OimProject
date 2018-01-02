@@ -27,7 +27,8 @@ public class MainModel {
 		
 		if(om_id!=null) {
 			meetCount=ApplicationDAO.MyMeetingTotalPage(om_id);
-			req.setAttribute("meetCount", meetCount);
+			
+			session.setAttribute("meetCount", meetCount);
 		}
 		//jsp로 전송
 		req.setAttribute("list", list);     /*TodayMeeting 결과값*/
