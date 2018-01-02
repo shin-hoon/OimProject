@@ -1,6 +1,8 @@
 package com.oim.model;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oim.application.dao.ApplicationDAO;
+import com.oim.application.dao.ApplicationVO;
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
 import com.oim.meeting.dao.MeetingDAO;
@@ -144,7 +148,17 @@ public class MemberModel {
 		MemberVO vo=MemberDAO.Oimmypagehome(om_id);
 	
 		req.setAttribute("vo", vo);
+		
 	
+		
+		// 내가 신청한 모임 조회
+		List<ApplicationVO> Mylist = ApplicationDAO.ApplicationMyListData(om_id);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdf.format(date);
+		req.setAttribute("today", today);
+		req.setAttribute("Mylist", Mylist);
+		
 		req.setAttribute("main_jsp","../member/mypage.jsp");
 		return "main/main.jsp";
 	}

@@ -24,23 +24,24 @@
 			<c:forEach var="mvo" items="${mlist }">
 			<tr>
 				<td width=20% class="text-center">
-					<img src="${mvo.meet_poster }" style="width:55%; height:20%; margin:0%; margin-right:0%;">&nbsp;
+					<a href="meeting_detail.do?meet_no=${mvo.meet_no }">
+						<img src="${mvo.meet_poster }" style="width:60%; margin:0%; margin-right:0%;">
+					</a>
 				</td>
-                <td width=60% class="text-left vertical-align: Middle" style="vertical-align: Middle">
-					<span>${mvo.meet_subject }</span>
-					<c:if test="${mvo.meet_price==0 }">
-						<span class="label label-primary">무료</span><br>
-					</c:if>
-					<c:if test="${mvo.meet_price!=0 }">
-						<span class="label label-danger">유료</span><br>
-					</c:if>
-					<font class="oim_font" size=2px;>
-						<span class="glyphicon glyphicon-tree-deciduous">
-							개설일: <fmt:formatDate value="${mvo.meet_regdate }" pattern="yyyy-MM-dd"/>
-						</span>
-					</font><br>
-					<font class="oim_font" size=2px;><span class="glyphicon glyphicon-calendar">신청가능인원: ${mvo.meet_limit } / ${mvo.meet_total }</span></font><br>
-					<font class="oim_font" size=2px;><span class="glyphicon glyphicon-ok">모임기간: ${mvo.meet_start } ~ ${mvo.meet_end } </span></font>
+                <td width=60% class="text-left" style="line-height: 30px;">
+					<span><a href="meeting_detail.do?meet_no=${mvo.meet_no }">${mvo.meet_subject }</a>
+							<c:if test="${mvo.meet_price==0 }">
+								<span class="label label-primary">무료</span>
+							</c:if>
+							<c:if test="${mvo.meet_price!=0 }">
+								<span class="label label-danger">유료</span>
+							</c:if>
+					</span><br>
+					<span class="glyphicon glyphicon-tree-deciduous" style="margin-bottom: 10px;">
+						개설일 : <fmt:formatDate value="${mvo.meet_regdate }" pattern="yyyy-MM-dd"/>
+					</span><br>
+					<span class="glyphicon glyphicon-calendar" style="margin-bottom: 10px;">신청가능인원 : ${mvo.meet_limit } / ${mvo.meet_total }</span><br>
+					<span class="glyphicon glyphicon-ok">모임기간 : ${mvo.meet_start } ~ ${mvo.meet_end } </span><br>
 				</td>
 				<td width=20% class="text-center" style="vertical-align: middle">
 					<c:if test="${mvo.meet_end < today }">

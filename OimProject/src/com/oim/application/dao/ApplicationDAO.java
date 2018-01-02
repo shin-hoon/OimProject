@@ -131,11 +131,11 @@ public class ApplicationDAO {
 		}
 	}
 	
-	public static List<ApplicationVO> ApplicationMyListData(String om_aid){
+	public static List<ApplicationVO> ApplicationMyListData(String id){
 		List<ApplicationVO> list = new ArrayList<ApplicationVO>();
 		SqlSession session=ssf.openSession(); 
 		try {
-			list=session.selectList("ApplicationMyListData",om_aid);
+			list=session.selectList("ApplicationMyListData",id);
 			
 		}catch(Exception ex) {
 			System.out.println("ApplicationMyListData : "+ex.getMessage());
