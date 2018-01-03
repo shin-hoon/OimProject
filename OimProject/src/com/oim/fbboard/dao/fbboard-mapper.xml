@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oim.fbboard.dao.fbboard-mapper">
+    <select id="fbboardListData" resultType="fbBoardVO" parameterType="java.util.Map">
+    SELECT no,subject,om_id,regdate,hit,num
+    FROM (SELECT no,subject,om_id,regdate,hit,rownum as num
+    FROM (SELECT no,subject,om_id,regdate,hit 
+    FROM omfreeboard ORDER BY no DESC))
+    WHERE num BETWEEN #{start} AND #{end} 
+  </select>
+  <select id="fbboardTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/10) FROM omfreeboard
+  </select>
+  <select id="fbboardReplyCount" resultType="int" parameterType="int">
+    SELECT COUNT(*) FROM omreply
+    WHERE bno=#{bno}
+  </select>
+  <!-- 내용보기 -->
+  <update id="fbboardHitIncrement" parameterType="int">
+    UPDATE omfreeboard SET
+    hit=hit+1
+    WHERE no=#{no}
+  </update>
+  <select id="fbboardContentData" resultType="fbBoardVO" parameterType="int">
+    SELECT no,om_id,subject,content,regdate,hit
+    FROM omfreeboard
+    WHERE no=#{no}
+  </select>
+  <!-- 게시물 추가 -->
+  <insert id="fbboardInsert" parameterType="fbBoardVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+     SELECT NVL(MAX(no)+1,1) as no FROM omfreeboard
+    </selectKey>
+    INSERT INTO omfreeboard VALUES(#{no},
+    #{om_id},#{subject},#{content},#{pwd},
+    SYSDATE,0)
+  </insert>
+  <!-- 수정 -->
+  <update id="fbboardUpdate" parameterType="fbBoardVO">
+    UPDATE omfreeboard SET
+    om_id=#{om_id},subject=#{subject},
+    content=#{content}
+    WHERE no=#{no}
+  </update>
+  <!-- 삭제 -->
+  <select id="fbboardGetPwd" 
+      parameterType="int" resultType="String">
+    SELECT pwd FROM omfreeboard
+    WHERE no=#{no}
+  </select>
+  <delete id="fbboardReplyDelete" parameterType="int">
+    DELETE FROM omreply
+    WHERE bno=#{bno}
+  </delete>
+  <delete id="fbboardDelete" parameterType="int">
+    DELETE FROM omfreeboard
+    WHERE no=#{no}
+  </delete>
+  <!-- 댓글 1)목록 출력 -->
+  <select id="fbreplyListData" resultType="ReplyVO" parameterType="java.util.Map">
+    SELECT no,om_id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,TO_CHAR(regdate,'YYYY-MM-DD') as dbday2,group_tab,num
+    FROM (SELECT no,om_id,name,msg,regdate,group_tab,rownum as num 
+    FROM (SELECT no,om_id,name,msg,regdate,group_tab 
+    FROM omreply WHERE bno=#{bno} ORDER BY group_id DESC,group_step ASC))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <!-- 댓글 추가(새로운) -->
+ <insert id="fbreplyNewInsert" parameterType="replyVO">
+   <selectKey keyProperty="no" resultType="int" order="BEFORE">
+     SELECT NVL(MAX(no)+1,1) as no FROM omreply
+   </selectKey>
+   INSERT INTO omreply(no,bno,om_id,name,msg,group_id)
+   VALUES(#{no},#{bno},#{om_id},#{name},#{msg},
+   (SELECT NVL(MAX(group_id)+1,1) FROM omreply))
+  </insert>
+  
+  
+  <!-- 댓글 추가 -->
+  <select id="fbreplyGetParentInfo" resultType="replyVO" parameterType="int">
+    SELECT group_id,group_step,group_tab
+    FROM omreply
+    WHERE no=#{no}
+  </select>
+  <!-- 
+                     gi  gs  gt  depth
+        AAAAA         1   0   0    3
+          =>DDDDD     1   1   1
+          =>DDDDD     1   2   1
+          =>BBBBB     1   3   1
+          
+           =>CCCCC    1   4   2
+          
+   -->
+  <update id="fbreplyStepIncrement" parameterType="replyVO">
+    UPDATE omreply SET
+    group_step=group_step+1
+    WHERE group_id=#{group_id} AND group_step>#{group_step}
+  </update>
+  <insert id="fbreplyRepyInsert" parameterType="replyVO">
+    <selectKey keyProperty="no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(no)+1,1) as no FROM omreply 
+    </selectKey>
+   INSERT INTO omreply(no,bno,om_id,name,msg,group_id,group_step,group_tab,root,depth)
+   VALUES(#{no},#{bno},#{om_id},#{name},#{msg},#{group_id},#{group_step},#{group_tab},#{root},0)
+
+
+  </insert>
+  <update id="fbreplyDepthIncrement" parameterType="int">
+    UPDATE omreply SET 
+    depth=depth+1
+    WHERE no=#{no}
+  </update>
+  <!-- 댓글 수정 -->
+  <update id="fbreplyUpdate" parameterType="replyVO">
+    UPDATE omreply SET
+    msg=#{msg}
+    WHERE no=#{no}
+  </update>
+  <!-- 댓글 삭제 -->
+  <select id="fbreplyDeleteData" resultType="replyVO" parameterType="int">
+    SELECT depth,root FROM omreply
+    WHERE no=#{no}
+  </select>
+  <update id="fbreplyMsgUpdate" parameterType="int">
+    UPDATE omreply SET
+    msg='관리자가 삭제한 글입니다'
+    WHERE no=#{no}
+  </update>
+  <delete id="fbreplyDelete" parameterType="int">
+    DELETE FROM omreply
+    WHERE no=#{no}
+  </delete>
+  <!--               
+                    no  root depth
+        AAAAA        1    0    2
+          BBBBB      2    1    1
+           DDDDD     4    2    0
+          CCCCC      3    1    0
+   -->
+  <update id="fbreplyDepthDecrement" parameterType="int">
+    UPDATE omreply SET
+    depth=depth-1
+    WHERE no=#{no} 
+  </update>
+</mapper>
