@@ -64,27 +64,79 @@ $(function(){
 <div class="oim-Content">
     
 <!-- ====메인슬라이더=====-->
- <div id="carousel">
-    <div class="hideLeft">
-        <img src="https://s16.postimg.org/vklrwoxtx/cover9.jpg">
-    </div>
+ <div id="carousel" style="background-color:#0A0A2A;">
+	 <div class="hideLeft">
+	 	<figure class="effect-bubba">
+			<img src="https://s16.postimg.org/vklrwoxtx/cover9.jpg">
+			<figcaption>
+			<br>
+				<h2>금연하고싶은가..?그렇다면 여기로..</h2>
+				<p>클릭!!</p>
+				<a href="#"></a>
+			</figcaption>
+		</figure>
+	 </div>
+    
     <div class="prevLeftSecond">
-        <img src="https://s16.postimg.org/cgsggckzp/cover8.jpg">
+    	<figure class="effect-bubba">
+			<img src="https://s16.postimg.org/cgsggckzp/cover8.jpg">
+			<figcaption>
+				<h2>오늘의 모임</h2>
+				<p>클릭!!</p>
+				<a href="#"></a>
+			</figcaption>
+		</figure>
     </div>
+    
     <div class="prev">
-        <img src="https://s16.postimg.org/emmrauog5/cover7.jpg">
+    	<figure class="effect-bubba">
+			<img src="https://s16.postimg.org/emmrauog5/cover7.jpg">
+			<figcaption>
+				<h2>오늘의 모임</h2>
+				<p>클릭!!</p>
+				<a href="#"></a>
+			</figcaption>
+		</figure>
     </div>
     <div class="selected">
-        <img src="https://s16.postimg.org/9drqcz611/cover1.jpg">
+    	<figure class="effect-bubba">
+			<img src="https://s16.postimg.org/9drqcz611/cover1.jpg">
+			<figcaption>
+				<h2>오늘의 모임</h2>
+				<p>클릭!!</p>
+				<a href="#"></a>
+			</figcaption>
+		</figure>
     </div>
     <div class="next">
-        <img src="https://s16.postimg.org/pnhwfvgp1/cover6.jpg">
+    	<figure class="effect-bubba">
+			<img src="https://s16.postimg.org/pnhwfvgp1/cover6.jpg">
+			<figcaption>
+				<h2>오늘의 모임</h2>
+				<p>클릭!!</p>
+				<a href="#"></a>
+			</figcaption>
+		</figure>
     </div>
     <div class="nextRightSecond">
-        <img src="https://s16.postimg.org/edp6kxbnp/cover4.jpg">
+    	<figure class="effect-bubba">
+			<img src="https://s16.postimg.org/edp6kxbnp/cover4.jpg">
+			<figcaption>
+				<h2>오늘의 모임</h2>
+				<p>클릭!!</p>
+				<a href="#"></a>
+			</figcaption>
+		</figure>
     </div>
     <div class="hideRight">
-        <img src="https://s16.postimg.org/fij8qay4l/cover3.jpg">
+    	<figure class="effect-bubba">
+			<img src="https://s16.postimg.org/fij8qay4l/cover3.jpg">
+			<figcaption>
+				<h2>오늘의 모임</h2>
+				<p>클릭!!</p>
+				<a href="#"></a>
+			</figcaption>
+		</figure>
     </div>
 </div>
 <%-- <center style="margin-top: 20px">

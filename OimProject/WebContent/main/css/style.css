@@ -1,7 +1,8 @@
 #carousel {
-  height: 400px;
-  margin-top: 100px;
+  height: 600px;
+ /*  margin-top: 0px; */
   overflow: hidden;
+  padding:5%;
 }
 #carousel div {
   position: absolute;

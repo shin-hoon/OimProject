@@ -15,7 +15,7 @@ function moveToSelected(element) {
 
   $(selected).removeClass().addClass("selected");
 
-  $(prev).removeClass().addClass("prev");
+  $(prev).removeClass().addClass("prev").css('color','white');
   $(next).removeClass().addClass("next");
 
   $(nextSecond).removeClass().addClass("nextRightSecond");
