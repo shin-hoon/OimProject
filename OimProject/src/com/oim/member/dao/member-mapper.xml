@@ -27,19 +27,20 @@
 	SELECT om_tel,om_gender,om_regdate FROM oim_member where om_id=#{om_id}
 </select>
 <!-- 메인 데이터 -->
-<select id="TodayMeeting" resultType="MeetingVO">
+<select id="TodayMeeting" resultType="MeetingVO"><!-- 오늘의 모임 -->
 	SELECT meet_no, meet_poster, meet_charge,meet_subject,meet_cg,TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end
 	FROM meeting	                     	
 </select>
-<select id="EventMeeting" resultType="MeetingVO">
+<select id="EventMeeting" resultType="MeetingVO"><!-- 초대이벤트 -->
 	SELECT meet_no, meet_poster,meet_subject,meet_cg FROM meeting	   
 	WHERE meet_subject LIKE '_초대이벤트_%'           	
 </select>
-<select id="tegMeeting" resultType="meetingVO">
-	SELECT meet_no, meet_poster,meet_cg, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start
+<select id="tagMeeting" resultType="meetingVO"><!-- 태그모임 -->
+
+</select>
+<select id="HotMeeting" resultType="meetingVO"><!-- 핫모임 -->
+	SELECT meet_no,meet_poster,meet_subject
 	FROM meeting
-	<!-- <if>
-		
-	</if> -->
+	ORDER BY meet_hit DESC
 </select>
 </mapper>

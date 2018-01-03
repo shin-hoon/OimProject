@@ -4,9 +4,9 @@
 	<!-- 내가 개설한 모임조회 -->
 	<!-- 내가 개설한 모임 페이징기법 -->
 	<select id="MyMeetingList" resultType="MeetingVO" parameterType="java.util.Map">
-		SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate,num
-		FROM(SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate,rownum as num
-		FROM(SELECT meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate
+		SELECT meet_no, meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate,num
+		FROM(SELECT meet_no, meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate,rownum as num
+		FROM(SELECT meet_no, meet_poster, meet_subject,meet_start,meet_end,meet_price,meet_total,meet_limit,meet_hit,meet_regdate
 		FROM meeting WHERE om_id = #{om_hid} ORDER BY meet_no DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
@@ -47,9 +47,10 @@
 	</update>
 	<!-- 내가 신청한 모임 조회 -->
 	<select id="ApplicationMyListData" resultType="ApplicationVO" parameterType="String">
-		SELECT m.meet_poster, m.meet_subject, m.meet_total, m.meet_limit, m.om_id, m.om_tel, m.om_company, a.ac_regdate
-		FROM meeting m, application a
-		where a.om_id = #{om_aid}
+		SELECT mt.meet_no,mt.meet_poster, mt.meet_subject, mt.meet_start, mt.meet_end, mt.meet_loc, mt.meet_price, a.ac_regdate
+		FROM meeting mt, application a
+		WHERE a.om_id = #{id}
+		AND mt.meet_no = a.meet_no
 	</select>
   
 </mapper>

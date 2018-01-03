@@ -1,6 +1,8 @@
 package com.oim.model;
 
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oim.application.dao.ApplicationDAO;
+import com.oim.application.dao.ApplicationVO;
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
 import com.oim.meeting.dao.MeetingDAO;
@@ -144,7 +148,17 @@ public class MemberModel {
 		MemberVO vo=MemberDAO.Oimmypagehome(om_id);
 	
 		req.setAttribute("vo", vo);
+		
 	
+		
+		// 내가 신청한 모임 조회
+		List<ApplicationVO> Mylist = ApplicationDAO.ApplicationMyListData(om_id);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdf.format(date);
+		req.setAttribute("today", today);
+		req.setAttribute("Mylist", Mylist);
+		
 		req.setAttribute("main_jsp","../member/mypage.jsp");
 		return "main/main.jsp";
 	}
@@ -163,6 +177,10 @@ public class MemberModel {
 
 		MemberVO vo=new MemberVO();
 		String re ="";
+		if(tel.trim().equals(""))
+		{
+			re="member/update_telfail.jsp";
+		}
 		
 		if(pwd.equals(pwd_ok))
 		{
@@ -181,7 +199,7 @@ public class MemberModel {
 		}
 		
 		return re;
-		//return "Oim_mypage.do";
+		
 	}
 	
 	@RequestMapping("Oim_Delete.do")
@@ -221,28 +239,6 @@ public class MemberModel {
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-	
-	
-	
-	//초대이벤트
-	/*@RequestMapping("Event_Meeting.do")
-	public String Event_meeting(HttpServletRequest req, HttpServletResponse res)throws Throwable {
-		
-		req.setCharacterEncoding("UTF-8");
-		List<MeetingVO> list=MemberDAO.EventMeeting();
-		
-		
-		
-		req.setAttribute("list", list);
-		req.setAttribute("main_jsp", "../main/default.jsp");
-		return "main/main.jsp";
-		
-	}*/
-	
-	
-	//테그별 모임
 
 	
 	

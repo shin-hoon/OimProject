@@ -16,12 +16,34 @@ public class ApplicationVO {
 	private int meet_price;
 	private int meet_total;
 	private int meet_limit;
+	private String meet_start;
+	private String meet_end;
+	private String meet_loc;
 	
 	private String om_id;
 	private String om_name;
 	private String om_tel;
 	private String om_company;
 	
+	
+	public String getMeet_start() {
+		return meet_start;
+	}
+	public void setMeet_start(String meet_start) {
+		this.meet_start = meet_start;
+	}
+	public String getMeet_end() {
+		return meet_end;
+	}
+	public void setMeet_end(String meet_end) {
+		this.meet_end = meet_end;
+	}
+	public String getMeet_loc() {
+		return meet_loc;
+	}
+	public void setMeet_loc(String meet_loc) {
+		this.meet_loc = meet_loc;
+	}
 	public String getOm_name() {
 		return om_name;
 	}
