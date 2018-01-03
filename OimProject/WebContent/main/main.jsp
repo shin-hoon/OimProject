@@ -266,10 +266,10 @@ a#MOVE_TOP_BTN {
                <li class="boardmenu oim_ul">
                         <a href="#" >커뮤니티</a>
                         
-                           <ul class="board">
-                           <a href="ntlist.do"><li>공지사항</li></a>
-                           <a href="llist.do"><li>문의게시판(Q&A)</li></a>
-                           <a href="fblist.do"><li>자유게시판(소통)</li></a>
+                           <ul class="board oim_ul">
+                           <li><a href="ntlist.do">공지사항</a></li>
+                           <li><a href="llist.do">문의게시판(Q&A)</a></li>
+                           <li><a href="fblist.do">자유게시판(소통)</a></li>
                            </ul>
                </li>
             </ul>
