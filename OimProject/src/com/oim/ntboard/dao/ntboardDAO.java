@@ -1,18 +1,22 @@
-package com.oim.qaboard.dao;
+package com.oim.ntboard.dao;
 
-import java.io.*;
-import java.util.*;
-
+import java.io.Reader;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.oim.qaboard.dao.qaboardVO;
 
 
-public class qaboardDAO {
-	private static SqlSessionFactory ssf;
+
+
+
+public class ntboardDAO {
+private static SqlSessionFactory ssf;
 	
 	static
 	   {
@@ -27,13 +31,13 @@ public class qaboardDAO {
 			   ex.printStackTrace();
 		   }
 	   }
-	   public static List<qaboardVO> boardListData(Map map)
+	   public static List<ntboardVO> NtboardListData(Map map)
 	   {
 		   SqlSession session=ssf.openSession();
-		   List<qaboardVO> list=null;
+		   List<ntboardVO> list=null;
 		   try
 		   {
-		      list=session.selectList("boardListData",map);
+		      list=session.selectList("NtboardListData",map);
 		   }catch(Exception ex)
 		   {
 			   ex.printStackTrace();
@@ -44,8 +48,7 @@ public class qaboardDAO {
 		   }
 		   return list;
 	   }
-	   
-	   public static int boardTotalPage()
+	   public static int NtboardTotalPage()
 	   {
 		   int total=0;
 		   SqlSession session=null;
@@ -53,7 +56,7 @@ public class qaboardDAO {
 		   {
 			   // session : connection
 			   session=ssf.openSession(); //autocommit(false)
-			   total=session.selectOne("boardTotalPage");
+			   total=session.selectOne("NtboardTotalPage");
 		   }catch(Exception ex)
 		   {
 			   ex.printStackTrace();
@@ -66,12 +69,12 @@ public class qaboardDAO {
 		   }
 		   return total;
 	   }
-	   public static void boardInsert(qaboardVO vo)
+	   public static void NtboardInsert(ntboardVO vo)
 	   {
 		   SqlSession session=ssf.openSession(true);
 		   try
 		   {
-		      session.insert("boardInsert",vo);
+		      session.insert("NtboardInsert",vo);
 		   }catch(Exception ex)
 		   {
 			   ex.printStackTrace();
@@ -81,28 +84,23 @@ public class qaboardDAO {
 	         session.close();
 		   }
 	   }
-	   public static qaboardVO boardContentData(int no)
+	   public static ntboardVO NtboardContentData(int no)
 	   {
 		   SqlSession session=ssf.openSession();
-		   try {
-			
-			   
-			   session.update("boardHitIncrement",no);
-			   session.commit();
-		} catch (Exception e) {
-			System.out.println("boardContentData : " + e.getMessage());
-		}
-		   qaboardVO vo=session.selectOne("boardContentData",no);
+		   
+		   session.update("NtboardHitIncrement",no);
+		   session.commit();
+		   ntboardVO vo=session.selectOne("NtboardContentData",no);
 		   session.close();
 		   return vo;
 	   }
-	   public static qaboardVO boardUpdateData(int no)
+	   public static ntboardVO NtboardUpdateData(int no)
 	   {
-		   qaboardVO vo=new qaboardVO();
+		   ntboardVO vo=new ntboardVO();
 		   SqlSession session=ssf.openSession();
 		   try
 		   {
-			   vo=session.selectOne("boardContentData", no);
+			   vo=session.selectOne("NtboardContentData", no);
 		   }catch(Exception ex)
 		   {
 			   System.out.println(ex.getMessage());
@@ -114,45 +112,33 @@ public class qaboardDAO {
 		   }
 		   return vo;
 	   }
-	   public static boolean boardUpdate(qaboardVO vo)
+	   public static void NtboardUpdate(ntboardVO vo)
 	   {
-		   boolean bCheck=false;
 		   SqlSession session=ssf.openSession();
-		   try
-		   {
-			   String db_pwd=session.selectOne("boardGetPwd", vo.getQa_no());
-			   if(db_pwd.equals(vo.getQa_pwd()))
-			   {
-				   bCheck=true;
-				   session.update("boardUpdate",vo);
-				   session.commit();
-			   }
-			 
-		   }catch(Exception ex)
-		   {
-			   session.rollback();
-			   System.out.println(ex.getMessage());
-		   }
-		   finally
-		   {
-			   if(session!=null)
-				   session.close();
-		   }
-		   return bCheck;
+				 try
+				 {
+					 
+					 session.update("NtboardUpdate",vo);
+					 session.commit();
+				     session.rollback();
+				 }
+				 catch(Exception ex)
+				 {
+					 ex.printStackTrace();
+				 }
+				 finally
+				 {
+					 if(session!=null)
+					 session.close(); 
+				 }
 	   }
-	   public static boolean boardDelete(int no,String pwd)
+	   public static void NtboardDelete(int no)
 	   {
-		   boolean bCheck=false;
 		   SqlSession session=ssf.openSession();
 		   try
 		   {
-			   String db_pwd=session.selectOne("boardGetPwd", no);
-			   if(db_pwd.equals(pwd))
-			   {
-				   bCheck=true;
-				   session.delete("boardDelete",no);
+				   session.delete("NtboardDelete",no);
 				   session.commit();
-			   }
 			 
 		   }catch(Exception ex)
 		   {
@@ -164,6 +150,5 @@ public class qaboardDAO {
 			   if(session!=null)
 				   session.close();
 		   }
-		   return bCheck;
 	   }
 }

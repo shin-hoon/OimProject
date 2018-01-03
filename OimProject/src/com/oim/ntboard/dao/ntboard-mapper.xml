@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.oim.ntboard.dao.ntboard-mapper">
+	<select id="NtboardListData" resultType="ntboardVO" parameterType="java.util.Map">
+	SELECT nt_no,nt_subject,nt_regdate,nt_hit,num
+	FROM (SELECT nt_no,nt_subject,nt_regdate,nt_hit,rownum as num
+	FROM (SELECT nt_no,nt_subject,nt_regdate,nt_hit
+	FROM notice ORDER BY nt_no DESC))
+	WHERE num BETWEEN ${start} AND #{end}
+	</select>
+	<select id="NtboardTotalPage" resultType="int">
+  	SELECT CEIL(COUNT(*)/10) FROM notice
+  	</select>
+  <insert id="NtboardInsert" parameterType="ntboardVO">
+   INSERT INTO notice(nt_no,nt_subject,nt_content)
+   VALUES(notice_no_seq.nextval,#{nt_subject},#{nt_content})
+  </insert>
+  <select id="NtboardContentData" resultType="ntboardVO" parameterType="int">
+   SELECT nt_no,nt_subject,nt_content,nt_regdate,nt_hit
+   FROM notice
+   WHERE nt_no=#{nt_no}
+  </select>
+  <update id="NtboardHitIncrement" parameterType="int">
+    UPDATE notice SET
+    nt_hit=nt_hit+1
+    WHERE nt_no=#{nt_no}
+  </update>
+  <update id="NtboardUpdate" parameterType="ntboardVO">
+  	UPDATE notice SET
+  	nt_subject=#{nt_subject},
+  	nt_content=#{nt_content}
+  	WHERE nt_no=#{nt_no}
+  </update>
+  <delete id="NtboardDelete" parameterType="int">
+    DELETE FROM notice
+    WHERE nt_no=#{nt_no}
+  </delete>
+</mapper>

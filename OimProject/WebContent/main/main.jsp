@@ -242,7 +242,7 @@ $( document ).ready( function() {
 		                  <a href="#" >커뮤니티</a>
 		                  
 		                  	<ul class="board">
-		                     <li>공지사항</li>
+		                     <a href="ntlist.do"><li>공지사항</li></a>
 		                     <a href="llist.do"><li>문의게시판(Q&A)</li></a>
 		                     <li>자유게시판(소통)</li>
 		                  	</ul>
