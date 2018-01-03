@@ -19,7 +19,9 @@
           </span>
         </div>
 </div>
+	  
        <table class="table table-hover" style="margin:6%; width:100%; margin: 0px auto;">
+      
           <thead>
              <tr>
                 <th width=5% class="text-center">번호</th><!-- 열 -->
@@ -29,6 +31,7 @@
           </thead>
           <tbody>
           	<c:forEach var="mvo" items="${Mylist }" varStatus="status">
+          	 <form action="application_delete.do" method="post">
              <tr>
                 <td class="text-center" style="vertical-align:middle;"><c:out value="${status.count }"></c:out></td>
                 <td>
@@ -65,11 +68,15 @@
                 </td>
                 <td class="text-center" style="vertical-align:middle">
                    <input type=button class="btn btn-success btn-sm" value="신청확인" style="margin-bottom: 20px"><br>
-                   <input type=button class="btn btn-danger btn-sm" value="신청취소">
+                   <input type="submit" class="btn btn-danger btn-sm" value="신청취소">
+                   <input type="hidden" name="ac_no" value="${mvo.ac_no }" >
+                   <input type="hidden" name="meet_no" value="${mvo.meet_no }" >
                 </td>
              </tr>
+             </form>
              </c:forEach>
           </tbody>   
        </table>
+       
 </body>
 </html>

@@ -98,7 +98,25 @@ public class ApplicationModel {
       
         return "member/application_list.jsp";
     }
-
+   @RequestMapping("application_delete.do")
+   public String application_delete(HttpServletRequest req, HttpServletResponse res) {
+	   
+	   
+	   String meet_no= req.getParameter("meet_no");
+	   String ac_no = req.getParameter("ac_no");
+	   
+	   ApplicationVO vo = new ApplicationVO();
+	   vo.setMeet_no(Integer.parseInt(meet_no));
+	   vo.setAc_no(Integer.parseInt(ac_no));
+	   
+	   ApplicationDAO.ApplicationDelete(vo);
+	   
+	   
+	   System.out.println("meet_no : " + meet_no);
+	   System.out.println("ac_no : " + ac_no);
+	  
+	   return "Oim_mypage.do";
+   }
 }
 
 

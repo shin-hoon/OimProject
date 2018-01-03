@@ -146,5 +146,19 @@ public class ApplicationDAO {
 		}
 		return list;
 	}
-	
+	public static void ApplicationDelete (ApplicationVO vo) {
+		SqlSession session=ssf.openSession(); 
+		try {
+			session.delete("ApplicationDelete",vo.getAc_no());
+			session.update("ApplicationlimitDelete",vo.getMeet_no());
+			session.commit();
+		}catch(Exception ex) {
+			session.rollback();
+			System.out.println("ApplicationMyListData : "+ex.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+	}
 }
