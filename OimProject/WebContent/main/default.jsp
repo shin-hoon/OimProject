@@ -235,9 +235,10 @@ $(function(){
          
                <div class="row">
                  <nav id="filter" class="col-md-12 text-center">
-                   <ul>
-                     <li style=" list-style-type : none;"><a href="#" class="current btn-theme btn-small" data-filter="*" >All</a></li>
+                   <ul style="list-style:none;">
+                     <!-- <li style=" list-style-type : none;"><a href="#" class="current btn-theme btn-small" data-filter="*" >#ALL</a></li> -->
                      <li><a href="#" class="btn-theme btn-small" data-filter=".webdesign">#취업</a></li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".webdesign">#여가</a></li>
                      <li><a href="#" class="btn-theme btn-small" data-filter=".photography">#세미나</a></li>
                      <li><a href="#" class="btn-theme btn-small" data-filter=".print">#교육</a></li>
                    </ul>
@@ -246,11 +247,11 @@ $(function(){
                    <div class="row">
                      <div class="portfolio-items isotopeWrapper clearfix" id="3">
          
-                       <article class="col-md-4 isotopeItem webdesign">
+                       <article class="col-md-4 isotopeItem photography">
                          <div class="portfolio-item">
-                            <a href="#"><img src="${vo.meet_poster }"/></a>
+                           <img src="img/poster2.png" alt="tag이미지" />
                             <p></p>
-                            <p style="align:left">[${vo.meet_cg }]${vo.meet_start } </p>
+                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
                          </div>
                        </article>
          

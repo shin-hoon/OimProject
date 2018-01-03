@@ -93,6 +93,7 @@ section {
 ul {
 	padding-left: 0;
 	padding-top: 10px;	
+	
 }
 
 ul li {
@@ -115,6 +116,7 @@ section ul li:before {
 	content: "\f105";
 	padding-right: 7px;
 	color: #23AD21;
+	
 }
 
 /*--------------------

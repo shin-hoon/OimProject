@@ -1,6 +1,4 @@
 
-
-	
 	// portfolio
     if($('.isotopeWrapper').length){
 
@@ -14,15 +12,10 @@
             masonry: {
                 columnWidth: $container.width() / $resize
             }
-
-
             
         });
 
         $('#filter a').click(function(){
-
-
-
             $('#filter a').removeClass('current');
             $(this).addClass('current');
             var selector = $(this).attr('data-filter');
@@ -40,7 +33,6 @@
         
         $(window).smartresize(function(){
             $container.isotope({
-                // update columnWidth to a percentage of container width
                 masonry: {
                     columnWidth: $container.width() / $resize
                 }

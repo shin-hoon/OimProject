@@ -27,8 +27,11 @@
              </tr>
           </thead>
           <tbody>
+          
+          
+
              <tr>
-                <td class="text-center" style="vertical-align:middle;">번호</td>
+                <td class="text-center" style="vertical-align:middle;"><c:out value="${status.count }"></c:out></td><!-- 번호 -->
                 <td>
                    <div style="float:left; width:40%;">
                       <img src="img/img1.jpg" style="width:100%; height:100%; float:left; display:">
@@ -106,7 +109,7 @@
                    <input type=button class="btn btn-success btn-sm" value="신청확인">
                    <input type=button class="btn btn-danger btn-sm" value="신청취소">
                 </td>
-             </tr>
+             </tr> 
              
           </tbody>
           
