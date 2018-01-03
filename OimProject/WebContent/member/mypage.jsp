@@ -18,12 +18,22 @@
 
 .tab-pane { color:black;}
 
-/*테이블스타일: 선지우기*/
-table td:last-child {border-right:none;}
-table tr:last-child td {border-bottom:none;}
-/* 테이블스타일->선지우기  끝 */
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: black;
+  font-weight: bolder;
+  cursor: default;
+  background-color: #fcbe03!important;
+  opacity:0.8;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
 
-/*테이블 아이콘  */
+a{
+   color:black;
+} 
+
 .oim-icon{
    margin-right:2%;
    float:left;
@@ -48,9 +58,7 @@ ul li {
 	letter-spacing: 0.2px;
 	color: #444444;
 }
-body{
-	color: black;
-}
+
 </style>
 
 
@@ -69,7 +77,7 @@ body{
       <div class="tabtable" > 
         <ul class="nav nav-tabs" ><br>
           <li class="active"><a href="#tab1" data-toggle="tab">홈</a></li>
-          <li><a href="#tab2" data-toggle="tab">회원정보수정</a></li>
+          <li><a href="#tab2" data-toggle="tab">정보수정</a></li>
           <li><a href="#tab3" data-toggle="tab">신청내역</a></li>
           <li><a href="#tab4" data-toggle="tab">찜내역</a></li>
           <li><a href="#tab5" data-toggle="tab">회원탈퇴</a></li>

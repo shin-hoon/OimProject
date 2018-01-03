@@ -47,10 +47,20 @@
 	</update>
 	<!-- 내가 신청한 모임 조회 -->
 	<select id="ApplicationMyListData" resultType="ApplicationVO" parameterType="String">
-		SELECT mt.meet_no,mt.meet_poster, mt.meet_subject, mt.meet_start, mt.meet_end, mt.meet_loc, mt.meet_price, a.ac_regdate
+		SELECT mt.meet_no,mt.meet_poster, mt.meet_subject, mt.meet_start, mt.meet_end, mt.meet_loc, mt.meet_price, a.ac_regdate,a.ac_no
 		FROM meeting mt, application a
 		WHERE a.om_id = #{id}
 		AND mt.meet_no = a.meet_no
 	</select>
-  
+	
+  	<delete id="ApplicationDelete" parameterType="ApplicationVO">
+  		DELETE FROM application
+  		WHERE ac_no = #{ac_no}
+  	</delete>
+  	<!-- 모암신청삭제 신청제한인원 증가 -->
+	<update id="ApplicationlimitDelete" parameterType="int">
+		UPDATE meeting SET
+		meet_limit=meet_limit+1
+		WHERE meet_no=#{meet_no}
+	</update>
 </mapper>
