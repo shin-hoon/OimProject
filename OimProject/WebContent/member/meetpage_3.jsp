@@ -17,13 +17,7 @@
     <!-- 네이버 지도 -->
 	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&submodules=geocoder"></script>
 	 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&callback=CALLBACK_FUNCTION"></script>
-   
-       <style>
-        .meetingRow{
-            width: 1100px;
-            margin: 0 auto;
-        }
-    </style>
+
     
 <script type="text/javascript"> //해당모임 수정 하는 창 띄우기
 	$(function() {
@@ -47,9 +41,9 @@
 
 </head>
 <body>
-           	<h4><span class="oim-icon glyphicon glyphicon-user"></span>모임 수정</h4>
-               
-         <div class="container" style="margin-bottom: 50px;">
+         <div class="container" >
+         <div style="width:85%; margin:5%">
+         		<h4><span class="oim-icon glyphicon glyphicon-user"></span>모임 수정</h4>
                <select class="form-control selectBox" style="width:55%; margin-bottom:3%;">
 				<c:forEach var="vo" items="${mlist2}" varStatus="status">
 					<c:if test="${status.index eq 0 }">
@@ -68,12 +62,10 @@
 			});
 			
 			</script>
+			</div>
 			
-			
-		<div class="row meetingRow" style="border: 1px solid #ddd">
-		
-		
-  </div>
+		<div class="row meetingRow" style="border: 1px solid #ddd; width:85%; margin:5%;" >	
+  		</div>
 </div>
 
 </body>

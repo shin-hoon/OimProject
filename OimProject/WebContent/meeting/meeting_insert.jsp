@@ -62,7 +62,14 @@ $(function(){
 			alert("모임 상세내용을 입력해주세요!");
 			$('textarea[name="meet_detail"]').focus();
 			return false;
-		}
+		}else if(confirm("개설하시겠습니까?")){
+			
+			return true;
+		}else{
+			
+			return false;
+		}			
+
 	});
 });
 
@@ -236,14 +243,7 @@ $(function(){
                         </label>
                         
                         <div class="col-sm-12 searchArea" style="padding-left:0;">
-<!--                         	<ul class="nav nav-list searchList" style="padding:0; position:absolute; display:none; width:400px; z-index:20000; max-height:200px; overflow: scroll">
-                        		<li style=" padding:0; background-color:white"><a href="#">일반 링크</a></li>
-                        		<li style=" padding:0; background-color:white"><a href="#">일반 링크</a></li>
-                        		<li style=" padding:0; background-color:white"><a href="#">일반 링크</a></li>
-                        		<li style=" padding:0; background-color:white"><a href="#">일반 링크</a></li>
-                        		<li style=" padding:0; background-color:white"><a href="#">일반 링크</a></li>
-                        		<li style=" padding:0; background-color:white"><a href="#">일반 링크</a></li>
-                        	</ul> -->
+
                         </div>
                    </div>
                    

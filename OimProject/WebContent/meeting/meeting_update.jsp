@@ -1,16 +1,104 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
-<script type="text/javascript"> //Áö¿ª°Ë»ö
+    <!--DateTimePickerë§í¬-->
+      <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
+      <script type="text/javascript" src="js/moment.js"></script>
+      <script type="text/javascript" src="js/daterangepicker.js"></script>
+      
+    <!-- ë„¤ì´ë²„ ì§€ë„ -->
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&submodules=geocoder"></script>
+   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&callback=CALLBACK_FUNCTION"></script>
+   
+<script type="text/javascript"> //ëª¨ë‘ ì…ë ¥í•´ì•¼ ëª¨ì„ì„ ê°œì„¤í• ìˆ˜ìˆë‹¤.
 $(function(){
-	
-	$('#searchBtn').click(function(){
+	$('#submit').click(function(){
+		var meet_cg=$('input.meet_cg').val();
+		var meet_subject=$('input:text[name="meet_subject"]').val();
+		var meet_loc1=$('input:text[name="meet_loc1"]').val();
+		var meet_total=$('input:text[name="meet_total"]').val();
+		var meet_price=$('input:text[name="meet_price"]').val();
+		var meet_info=$('textarea[name="meet_info"]').val();
+		var meet_detail=$('textarea[name="meet_detail"]').val();
 		
+		if(meet_cg.trim()==""){
+			alert("ì¹´í…Œê³ ë¦¬ë¥¼ ì„ íƒí•´ì£¼ì„¸ìš”!");
+			$('input.btn-category').focus();
+			return false;
+		}else if(meet_subject.trim()==""){
+			alert("ëª¨ì„ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”!");
+			$('input:text[name="meet_subject"]').focus();
+			return false;
+		}else if(meet_loc1.trim()=="" && $('.noplace').is(":checked")==false){
+			alert("ì¥ì†Œë¥¼ ì •í•´ì£¼ì„¸ìš”!");
+			$('#searchText').focus();
+			return false;
+		}else if(meet_total.trim()==""){
+			alert("ì •ì›ì„ ì…ë ¥í•´ì£¼ì„¸ìš”!");
+			$('input:text[name="meet_total"]').focus();
+			return false;
+		}else if(meet_price.trim()=="" && $('input:radio[name="meet_charge"][value="ìœ ë£Œ"]').is(":checked")==true){
+			alert("ì°¸ì—¬ë¹„ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”!");
+			$('input:text[name="meet_price"]').focus();
+			return false;
+		}else if(meet_info.trim()==""){
+			alert("ëª¨ì„ ì†Œê°œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”!");
+			$('textarea[name="meet_info"]').focus();
+			return false;
+		}else if(meet_detail.trim()==""){
+			alert("ëª¨ì„ ìƒì„¸ë‚´ìš©ì„ ì…ë ¥í•´ì£¼ì„¸ìš”!");
+			$('textarea[name="meet_detail"]').focus();
+			return false;
+		}else if(confirm("ìˆ˜ì •í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")){
+			
+			return true;
+		}else{
+			
+			return false;
+		}
+	});
+});
+</script>
+<script type="text/javascript"> 
+				    	$(function(){
+			    			$('input:text[name="meet_total"]').keyup(function(){ //ëª¨ì„ì´ì›ê³¼ ì°¸ì—¬ë¹„ìš©ì€ ìˆ«ìë§Œ ì…ë ¥ë˜ê²Œ ë§Œë“¤ê¸°
+			    				$(this).val($(this).val().replace(/[^0-9]/g,""));
+			    				});
+			    			$('input:text[name="meet_price"]').keyup(function(){
+			    				$(this).val($(this).val().replace(/[^0-9]/g,""));
+			    				});
+
+				    		var chargeValue='${vo.meet_charge}'; 			
+	 						
+				    		if(chargeValue=="ë¬´ë£Œ"){
+				    			$('input:radio[name="meet_charge"][value="ë¬´ë£Œ"]').prop('checked', true);
+				    			$('input:text[name="meet_price"]').attr("readonly",true);
+				    		}else{
+				    			$('input:radio[name="meet_charge"][value="ìœ ë£Œ"]').prop('checked', true);
+				    		}
+				    		
+				    		$('input[name="meet_charge"]:radio').change(function(){ //ë¬´ë£Œ í´ë¦­í–ˆì„ë•ŒëŠ” 0ì›, ìœ ë£Œí´ë¦­í–ˆì„ë•ŒëŠ” ì§ì ‘ì…ë ¥
+				    			var type=$(this).val();
+				    			if(type == "ë¬´ë£Œ"){
+				    				$('input:text[name="meet_price"]').attr("value","0");
+				    				$('input:text[name="meet_price"]').attr("readonly",true);
+				    			}else{
+				    				$('input:text[name="meet_price"]').attr("value",'');
+				    				$('input:text[name="meet_price"]').attr("readonly",false);
+				    			}
+				    		});
+					   	});
+					</script>
+<script type="text/javascript">
+$(function(){
+	$('#searchBtn').click(function(){ //ì§€ì—­ê²€ìƒ‰ apiì´ìš©í•˜ì—¬ ajaxë¡œ ê²€ìƒ‰ê²°ê³¼ ë¶ˆëŸ¬ì˜¤ê¸°
 		var search=$('#searchText').val();
 		
  		$.ajax({
@@ -26,76 +114,29 @@ $(function(){
 	});
 });
 </script>
-
-<script type="text/javascript"> //À¯·á or ¹«·á ¶óµğ¿À¹öÆ° ÀÌº¥Æ®
-
-							 
-						    	$(function(){ //ÇØ´ç¸ğÀÓÀÌ ¹«·á¶ó¸é ¹«·á¿¡ Ã¼Å©°¡µÇ°í ¾Æ´Ï¶ó¸é À¯·á¿¡ Ã¼Å©°¡ µÈ´Ù
-						    		var chargeValue='${vo.meet_charge}';			
-			 						
-						    		if(chargeValue=="¹«·á"){
-						    			$('input:radio[name="meet_charge"][value="¹«·á"]').prop('checked', true);
-						    		}else{
-						    			$('input:radio[name="meet_charge"][value="À¯·á"]').prop('checked', true);
-						    		}
-						    		
-						    		
-						    		$('input[name="meet_charge"]:radio').change(function(){//¹«·á¸¦ Å¬¸¯ÇÏ¸é 0¿øÀÌ°í ¾Æ´Ï¸é °¡°İÀ» Á÷Á¢ÀÔ·ÂÇØ¾ßÇÑ´Ù.
-						    			var chargeType=$(this).val();
-						    			if(chargeType == "¹«·á"){
-						    				$('input:text[name="meet_price"]').val('0');
-						 	   		   		$('input:text[name="meet_price"]').attr("disabled",true);
-						    			}else{
-						    				$('input:text[name="meet_price"]').val('');
-											$('input:text[name="meet_price"]').attr("disabled",false);
-						    			}
-						    		});
-						    		
-						    		
-							   	});
-</script>
+    
 </head>
-<body>
-<form method="post" action="meeting_update_ok.do"> <!-- enctype="multipart/form-data" -->
+<body>	
+		
+		<form method="post" action="meeting_update_ok.do" id="meetingFrm" enctype="multipart/form-data">
 		<div class="col-sm-2">      
 		       <div class="col-sm-12 text-center" style="padding:0; height:170px; margin-top:10px;">
 		        
-		           <!-- <img src="https://static.onoffmix.com/images2/default/thumbnail_null.jpg" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
-		            alt="´ëÇ¥ÀÌ¹ÌÁö"> -->
-		            
-		            <img src="http://drive.google.com/uc?export=view&id=1IaPW70w3VoiKCDzMxd5PEPCf6zbWapQX"
-		            style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster" />
+		           <img src="${vo.meet_poster }" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
+		            alt="ëª¨ì„í”„ë¡œí•„">
+
 		           
 		         <script type="text/javascript"> 
-		         	$(function(){ //»çÁøº¯°æ ¹öÆ° Å¬¸¯ÇßÀ»¶§ fileÅ¸ÀÔÀÇ ¹öÆ° °­Á¦ Å¬¸¯ ÀÌº¥Æ® ¹ß»ı
+		         	$(function(){ //ì‚¬ì§„ë³€ê²½ ë²„íŠ¼ í´ë¦­í–ˆì„ë•Œ fileíƒ€ì…ì˜ ë²„íŠ¼ ê°•ì œ í´ë¦­ ì´ë²¤íŠ¸ ë°œìƒ
 		         		$('.profile').on('click',function(){
 		         			$('#upload').trigger('click');
 		         		});
-		         		
-/* 		         		function handleImgFileSelect(e){//»çÁø ¼±ÅÃÇßÀ»¶§ ¹Ì¸®º¸±â ±â´É
-		         			
-		         			var files=e.target.files;
-		         			var filesArr=Array.prototype.slice.call(files);
-		         			
-		         			filesArr.forEach(function(f){
-		         				
-		         				sel_file=f;
-		         				
-		         				var reader=new FileReader();
-		         				reader.onload=function(e){
-		         					$('#poster').attr("src",e.target.result);
-		         				}
-		         				reader.readAsDataURL(f);
-		         			});
-		         		}
-		         	
-		         		$('#upload').on('change',handleImgFileSelect); */
 		         	});
 		         </script>  
 		      </div>
 		      
 		      <div class="col-sm-12 text-center">
-		        <input style="margin: 10px" type="button" class="btn btn-primary profile" value="»çÁøº¯°æ">
+		        <input style="margin: 10px" type="button" class="btn btn-primary profile" value="ì‚¬ì§„ë³€ê²½">
 		        <input type="file" name="upload" id="upload" accept=".jpg, .jpeg, .png"
 		        style="display:none" onchange="document.getElementById('poster').src = window.URL.createObjectURL(this.files[0])">
 		        
@@ -108,13 +149,13 @@ $(function(){
         <table class="table table-hover">
            <tr>
             <td class="col-sm-2" style="border-top:0" >
-                <h5>Ä«Å×°í¸®/¸ğÀÓ¸í</h5>
+                <h5>ì¹´í…Œê³ ë¦¬/ëª¨ì„ëª…</h5>
             </td>      
                
                <td class="col-sm-9" style="vertical-align: middle; border-top:0">
                   
                   <script>
-                      $(function(){ //dropdown¹öÆ°À» selectÇü½ÄÀ¸·Î ¸¸µå´Â ½ºÅ©¸³Æ®ÄÚµå
+                      $(function(){ //dropdownë²„íŠ¼ì„ selectí˜•ì‹ìœ¼ë¡œ ë§Œë“œëŠ” ìŠ¤í¬ë¦½íŠ¸ì½”ë“œ
                         $('.dropdown-menu li > a').bind('click', function (e) {
                             var value = $(this).text();
                             $('input.btn-category').val(value);
@@ -123,46 +164,46 @@ $(function(){
                        });
                    </script>
                    
-                    <div class="btn-group" style="width:150px"> <!-- Ä«Å×°í¸® µå·Ó´Ù¿î ¸®½ºÆ® -->
+                    <div class="btn-group" style="width:150px">
                       <input type="button" class="btn btn-default btn-category" data-toggle=dropdown name="category" value="${vo.meet_cg }" style="width:80%;"/>
-					  <input type="hidden" class="meet_cg" name="${vo.meet_cg }"> <!--½ÇÁ¦ Ä«Å×°í¸® °ªÀÌ ´ã±â´Â ºÎºĞ  -->
+					  <input type="hidden" class="meet_cg" name="meet_cg" value="${vo.meet_cg }"> <!--ì‹¤ì œ ì¹´í…Œê³ ë¦¬ ê°’ì´ ë‹´ê¸°ëŠ” ë¶€ë¶„  -->
 
                       <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" style="width:20%; height:34px;">
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" style=" max-height:300px; overflow: scroll">
-                         <li><a >±³À°</a></li>
-                         <li><a >°­¿¬</a></li>
-                         <li><a >¼¼¹Ì³ª/ÄÁÆÛ·±½º</a></li>
-                         <li><a >¹®È­/¿¹¼ú</a></li>
-                         <li><a >¹æ¼Û/¿¬¿¹</a></li>
-                         <li><a >Ãë¹ÌÈ°µ¿</a></li>
-                         <li><a >¼Ò¸ğÀÓ/Ä£¸ñÇà»ç</a></li>
-                         <li><a >°ø¸ğÀü</a></li>
-                         <li><a >Àü½Ã/¹Ú¶÷È¸</a></li>
-                         <li><a >ÆĞ¼Ç/ºäÆ¼</a></li>
-                         <li><a >ÀÌº¥Æ®/ÆÄÆ¼</a></li>
-                         <li><a >¿©Çà</a></li>
-                         <li><a >ÈÄ¿ø±İ ¸ğ±İ</a></li>
-                         <li><a >±âÅ¸</a></li>
+                         <li><a href="#">êµìœ¡</a></li>
+                         <li><a href="#">ê°•ì—°</a></li>
+                         <li><a href="#">ì„¸ë¯¸ë‚˜/ì»¨í¼ëŸ°ìŠ¤</a></li>
+                         <li><a href="#">ë¬¸í™”/ì˜ˆìˆ </a></li>
+                         <li><a href="#">ë°©ì†¡/ì—°ì˜ˆ</a></li>
+                         <li><a href="#">ì·¨ë¯¸í™œë™</a></li>
+                         <li><a href="#">ì†Œëª¨ì„/ì¹œëª©í–‰ì‚¬</a></li>
+                         <li><a href="#">ê³µëª¨ì „</a></li>
+                         <li><a href="#">ì „ì‹œ/ë°•ëŒíšŒ</a></li>
+                         <li><a href="#">íŒ¨ì…˜/ë·°í‹°</a></li>
+                         <li><a href="#">ì´ë²¤íŠ¸/íŒŒí‹°</a></li>
+                         <li><a href="#">ì—¬í–‰</a></li>
+                         <li><a href="#">í›„ì›ê¸ˆ ëª¨ê¸ˆ</a></li>
+                         <li><a href="#">ê¸°íƒ€</a></li>
                       </ul>
                     </div>
                     
-                    	<input type="text" class="form-control" style="width: 460px; display:inline-block; " name="meet_subject" value="${vo.meet_subject }" placeholder="¸ğÀÓ¸íÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä.">
+                    	<input type="text" class="form-control" style="width: 460px; display:inline-block;" value="${vo.meet_subject }"  name="meet_subject" placeholder="ëª¨ì„ëª…ì„ ì…ë ¥í•´ì£¼ì„¸ìš”.">
 
                </td>  
            </tr>
            
               <tr>
             <td class="col-sm-2">
-                <h5>¸ğÀÓÀÏ½Ã</h5>
+                <h5>ëª¨ì„ì¼ì‹œ</h5>
             </td>      
                
                <td class="col-sm-9" style="vertical-align: middle">
                       
-                    <input type="text" class="form-control meet_date" name="meet_date" value="${vo.meet_start } ~ ${vo.meet_end }"/>
+                    <input type="text" class="form-control meet_date" name="meet_date" value="${vo.meet_start} ~ ${vo.meet_end}"/>
 
-                    <script type="text/javascript"> //datepicker ÇÑ±ÛÈ­
+                    <script type="text/javascript">
                     $(function() {
                         $('.meet_date').daterangepicker({ 
                             timePicker: true,
@@ -172,10 +213,10 @@ $(function(){
                             locale: {
                                 format:'YYYY-MM-DD HH:mm',
                                 separator:' ~ ',
-                                applyLabel:"È®ÀÎ",
-                                cancelLabel:"Ãë¼Ò",
-                                daysOfWeek:["ÀÏ","¿ù","È­","¼ö","¸ñ","±İ","Åä"],
-                                monthNames:["1¿ù","2¿ù","3¿ù","4¿ù","5¿ù","6¿ù","7¿ù","8¿ù","9¿ù","10¿ù","11¿ù","12¿ù"]
+                                applyLabel:"í™•ì¸",
+                                cancelLabel:"ì·¨ì†Œ",
+                                daysOfWeek:["ì¼","ì›”","í™”","ìˆ˜","ëª©","ê¸ˆ","í† "],
+                                monthNames:["1ì›”","2ì›”","3ì›”","4ì›”","5ì›”","6ì›”","7ì›”","8ì›”","9ì›”","10ì›”","11ì›”","12ì›”"]
                             }
                         });
                     });
@@ -185,7 +226,7 @@ $(function(){
            
                <tr>
             <td class="col-sm-2">
-                <h5>¸ğÀÓÀå¼Ò</h5>
+                <h5>ëª¨ì„ì¥ì†Œ</h5>
             </td>      
                
                <td class="col-sm-9">
@@ -193,21 +234,23 @@ $(function(){
                        <input type="text" class="form-control" name="meet_loc" id="searchText" style="width:400px">
                        
                        
-                       <input type="button" class="btn btn-default" id="searchBtn" value="°Ë»ö">
+                       <input type="button" class="btn btn-default" id="searchBtn" value="ê²€ìƒ‰">
                        
                         <label style="font-weight: normal">&nbsp;
-                          <input type="checkbox" class="noplace">Àå¼Ò¾øÀ½/¹ÌÁ¤
+                          <input type="checkbox" class="noplace">ì¥ì†Œì—†ìŒ/ë¯¸ì •
                           
-                          <!--Àå¼Ò ¹ÌÁ¤ Ã¼Å©ÇßÀ»¶§, ÇØÁ¦ÇßÀ»¶§ ÀÌº¥Æ® ¹ß»ı  -->
+                          <!--ì¥ì†Œ ë¯¸ì • ì²´í¬í–ˆì„ë•Œ, í•´ì œí–ˆì„ë•Œ ì´ë²¤íŠ¸ ë°œìƒ  -->
                           <script type="text/javascript">
                           	$(function(){
                           	  $(".noplace").change(function(){ 
-                          		 if($('.noplace').is(":checked")==true){ /*Àå¼Ò¹ÌÁ¤ Ã¼Å©ÇßÀ»¶§  */
+                          		 if($('.noplace').is(":checked")==true){ /*ì¥ì†Œë¯¸ì • ì²´í¬í–ˆì„ë•Œ  */
                           			$('.detailMap').css("display","none");
                           			$('#searchText').val('');
+                          			$('input:text[name="meet_loc1"]').val('');
+                          			$('input:text[name="meet_loc2"]').val('');
 									$('#searchText').attr("disabled",true);
 									$('#searchBtn').attr("disabled",true);
-                          		}else{									/*Àå¼Ò¹ÌÁ¤ ÇØÁ¦ÇßÀ»¶§ */
+                          		}else{									/*ì¥ì†Œë¯¸ì • í•´ì œí–ˆì„ë•Œ */
                           			$('.detailMap').css("display","block");
                           			$('#searchText').attr("disabled",false);
 									$('#searchBtn').attr("disabled",false);
@@ -225,15 +268,16 @@ $(function(){
                    <div class="detailMap" id="detailMap">
                    <div id="map" style="width:100%; height:300px; margin: 0 auto; z-index:10"></div>
                     
-                         <script> 
-                         var oimlocation = new naver.maps.LatLng('${vo.meet_lat}','${vo.meet_lng}');
-                         var utmk = naver.maps.TransCoord.fromLatLngToUTMK(oimlocation); // À§/°æµµ -> UTMK
+                         <script>
+
+                         
+ 						 var oimlocation = new naver.maps.LatLng('${vo.meet_lat}','${vo.meet_lng}');
+                         var utmk = naver.maps.TransCoord.fromLatLngToUTMK(oimlocation); // ìœ„/ê²½ë„ -> UTMK
                          var tm128 = naver.maps.TransCoord.fromUTMKToTM128(utmk);   // UTMK -> TM128
-                         
-                         
+ 						
                          map = new naver.maps.Map('map', {
-                             center:tm128, //ÁÂÇ¥ Ç¥½Ã
-                             zoom: 8, //ÁöµµÀÇ ÃÊ±â ÁÜ ·¹º§
+                             center:tm128, //ì¢Œí‘œ í‘œì‹œ
+                             zoom: 8, //ì§€ë„ì˜ ì´ˆê¸° ì¤Œ ë ˆë²¨
                              mapTypes: new naver.maps.MapTypeRegistry({
                                  'normal': naver.maps.NaverMapTypeOption.getNormalMap({
                                      projection: naver.maps.TM128Coord
@@ -248,28 +292,27 @@ $(function(){
                                      projection: naver.maps.TM128Coord
                                  })
                              }),
-                             
-                             minZoom: 1, //ÁöµµÀÇ ÃÖ¼Ò ÁÜ ·¹º§
-                             zoomControl: true, //ÁÜ ÄÁÆ®·ÑÀÇ Ç¥½Ã ¿©ºÎ
-                             zoomControlOptions: { //ÁÜ ÄÁÆ®·ÑÀÇ ¿É¼Ç
+                             minZoom: 1, //ì§€ë„ì˜ ìµœì†Œ ì¤Œ ë ˆë²¨
+                             zoomControl: true, //ì¤Œ ì»¨íŠ¸ë¡¤ì˜ í‘œì‹œ ì—¬ë¶€
+                             zoomControlOptions: { //ì¤Œ ì»¨íŠ¸ë¡¤ì˜ ì˜µì…˜
                              position: naver.maps.Position.TOP_RIGHT
                              }
                          });
                          
-                         marker = new naver.maps.Marker({ // Áöµµ¸¶Ä¿ »ı¼º
+                         marker = new naver.maps.Marker({ // ì§€ë„ë§ˆì»¤ ìƒì„±
                              map: map,
-                             position: tm128 //¸¶Ä¿Ç¥½Ã
+                             position: tm128 //ë§ˆì»¤í‘œì‹œ
                          });
                          
-                        map.setOptions("mapTypeControl", true); //Áöµµ À¯Çü ÄÁÆ®·ÑÀÇ Ç¥½Ã ¿©ºÎ
+                        map.setOptions("mapTypeControl", true); //ì§€ë„ ìœ í˜• ì»¨íŠ¸ë¡¤ì˜ í‘œì‹œ ì—¬ë¶€
 							
 
-                         // Áöµµ ÀÎÅÍ·¢¼Ç ¿É¼Ç
+                         // ì§€ë„ ì¸í„°ë™ì…˜ ì˜µì…˜
                          $("#interaction").on("click", function(e) {
                              e.preventDefault();
 
                              if (map.getOptions("draggable")) {
-                                 map.setOptions({ //Áöµµ ÀÎÅÍ·¢¼Ç ²ô±â
+                                 map.setOptions({ //ì§€ë„ ì¸í„°ë™ì…˜ ë„ê¸°
                                      draggable: false,
                                      pinchZoom: false,
                                      scrollWheel: false,
@@ -281,7 +324,7 @@ $(function(){
 
                                  $(this).removeClass("control-on");
                              } else {
-                                 map.setOptions({ //Áöµµ ÀÎÅÍ·¢¼Ç ÄÑ±â
+                                 map.setOptions({ //ì§€ë„ ì¸í„°ë™ì…˜ ì¼œê¸°
                                      draggable: true,
                                      pinchZoom: true,
                                      scrollWheel: true,
@@ -312,12 +355,12 @@ $(function(){
                              }
                          });
 
-                         //Áöµµ ÄÁÆ®·Ñ
+                         //ì§€ë„ ì»¨íŠ¸ë¡¤
                          $("#controls").on("click", function(e) {
                              e.preventDefault();
 
                              if (map.getOptions("scaleControl")) {
-                                 map.setOptions({ //¸ğµç Áöµµ ÄÁÆ®·Ñ ¼û±â±â
+                                 map.setOptions({ //ëª¨ë“  ì§€ë„ ì»¨íŠ¸ë¡¤ ìˆ¨ê¸°ê¸°
                                      scaleControl: false,
                                      logoControl: false,
                                      mapDataControl: false,
@@ -326,7 +369,7 @@ $(function(){
                                  });
                                  $(this).removeClass('control-on');
                              } else {
-                                 map.setOptions({ //¸ğµç Áöµµ ÄÁÆ®·Ñ º¸ÀÌ±â
+                                 map.setOptions({ //ëª¨ë“  ì§€ë„ ì»¨íŠ¸ë¡¤ ë³´ì´ê¸°
                                      scaleControl: true,
                                      logoControl: true,
                                      mapDataControl: true,
@@ -346,50 +389,49 @@ $(function(){
                             <span class="glyphicon glyphicon-map-marker"></span> 
                            </div>
                            
-                           <input type="text" class="form-control" name="meet_loc1" readonly="readonly"
-                           value="${vo.meet_loc }"/>
+                           <input type="text" class="form-control" name="meet_loc1" value="${vo.meet_loc }" readonly="readonly"/>
                           </div>
                           
-                          <input type="text" class="form-control" name="meet_loc2" placeholder="³ª¸ÓÁö ÁÖ¼Ò¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.">
+                          <input type="text" class="form-control" name="meet_loc2" placeholder="ë‚˜ë¨¸ì§€ ì£¼ì†Œë¥¼ ì…ë ¥í•´ ì£¼ì„¸ìš”.">
                 </div>      
                </td>  
            </tr>
 		    </table>
 		</div> 
       
-						    
       <div class="col-sm-12">
         <table class="table table-hover">
             <tr>
                 <td class="col-sm-2" style="vertical-align:middle;">
-                     <h5>À¯/¹«·á ¼±ÅÃ</h5>
+                     <h5>ìœ /ë¬´ë£Œ ì„ íƒ</h5>
                 </td>
                 <td class="col-sm-3" style="vertical-align:middle;">
                    		 <label class="radio-inline">
-                          <input type="radio" name="meet_charge" value="¹«·á">¹«·á
+                          <input type="radio" name="meet_charge" value="ë¬´ë£Œ">ë¬´ë£Œ
                         </label>
                         <label class="radio-inline">
-                          <input type="radio" name="meet_charge" value="À¯·á">À¯·á
+                          <input type="radio" name="meet_charge" value="ìœ ë£Œ">ìœ ë£Œ
                         </label>
-                        
                 </td>
                 
                  <td class="col-sm-7" style="vertical-align:middle;">
                     <table class="table table-bordered" style="margin-bottom:0">
                        <tr>
-                          <th class="text-center">¸ğÀÓÁ¤¿ø</th> 
-                          <th class="text-center">Âü°¡ºñ¿ë</th>
+                          <th class="text-center">ëª¨ì„ì •ì›</th> 
+                          <th class="text-center">ì°¸ê°€ë¹„ìš©</th>
                        </tr>
                        
                        <tr>
-                           <td class="form-inline text-center" valign="middle"><input type="text" class="form-control" name="meet_total" value="${vo.meet_total }">¸í</td>
-                           
+                           <td class="form-inline text-center" valign="middle">
+                           <input type="text" class="form-control" name="meet_total" value="${vo.meet_total}">ëª…
+                           </td>
                            
                            <td class="form-inline text-center" valign="middle">
     
-                             <input type="text" class="form-control" name="meet_price" value="${vo.meet_price }"/>¿ø
+                             <input type="text" class="form-control"  name="meet_price" value="${vo.meet_price }"/>ì›
                            </td>
                        </tr>
+                       
                     </table>
                 </td>
                 
@@ -400,56 +442,48 @@ $(function(){
             
             <tr>
                 <td class="col-sm-2" style="vertical-align:middle;">
-                    <h5>°£´ÜÇÑ ¸ğÀÓ¼Ò°³</h5>
+                    <h5>ê°„ë‹¨í•œ ëª¨ì„ì†Œê°œ</h5>
                 </td>
                 <td class="col-sm-10" colspan=2 style="padding:20px 0 20px 0">
-                    <textarea class="form-control" name="meet_info" rows="8" cols="40" placeholder="¸ğÀÓ ³»¿ëÀ» °£´ÜÈ÷ ¼Ò°³ÇØÁÖ¼¼¿ä!" style="width: 100%">${vo.meet_info }</textarea>
+            <textarea class="form-control" name="meet_info" rows="8" cols="40" placeholder="ëª¨ì„ ë‚´ìš©ì„ ê°„ë‹¨íˆ ì†Œê°œí•´ì£¼ì„¸ìš”!" style="width: 100%">${vo.meet_info }
+           </textarea>
                 </td>
             </tr>
             
             <tr>
                 <td colspan="3" class="col-sm-2">
-                    <h5>»ó¼¼ ³»¿ë</h5>
-                    <textarea class="form-control" name="meet_detail" rows="10" cols="45" style="width: 100%">${vo.meet_detail }</textarea>
+                    <h5>ìƒì„¸ ë‚´ìš©</h5>
+                    <textarea class="form-control" name="meet_detail" rows="10" cols="45" style="width: 100%">${vo.meet_detail }
+                    </textarea>
                 </td>
             </tr>
             
             <tr>
                 <td class="col-sm-2">
-                    <h5>½ÅÃ» ¹®ÀÇ ¿¬¶ôÃ³</h5>
+                    <h5>ì‹ ì²­ ë¬¸ì˜ ì—°ë½ì²˜</h5>
                 </td>
                 <td class="col-sm-10 form-inline" style="vertical-align: middle" colspan=2>
-                   <label class="control-label">ÀüÈ­¹øÈ£</label>
+                   <label class="control-label">ì „í™”ë²ˆí˜¸</label>
                    <input class="form-control" type="text" name="tel" size=15 value="${vo.om_tel }" disabled>
                    
-                    <!-- <select class="form-control" name=tel1 style="margin-left: 10px">
-						<option>010</option>
-						<option>011</option>
-						<option>017</option>
-					</select>
-					<input class="form-control" type="text" name="tel2" size=7>
-					<input class="form-control" type="text" name="tel3" size=7> -->
-               
-                   <label class="control-label" style="margin-left: 20px">ÀÌ¸ŞÀÏ</label>
-                     <input class="form-control" type="text" name="email1" size=10 style="margin-left: 10px">@
-                     <select class="form-control" name=email2>
-						<option>naver.com</option>
-						<option>gmail.com</option>
-						<option>hanmail.net</option>
-						<option>nate.com</option>
-					</select>
                 </td>
             </tr>
             
             <tr>
                 <td colspan="3" class="col-sm-12 text-center">
-                    <input type="submit" class="btn btn-primary" value="°³¼³¿Ï·á" style="width: 12%">
+                	<c:if test="${vo.meet_end < today }">
+                    <button class="btn btn-danger" disabled="disabled">ì¢…ë£Œëœ ëª¨ì„ì€ ìˆ˜ì •í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</button>
+                    </c:if>
+                    
+                    <c:if test="${vo.meet_end > today }">
+                    <input type="submit" id="submit" class="btn btn-primary" value="ìˆ˜ì •í•˜ê¸°" style="width:12%">
+                    </c:if>
                 </td>
             </tr>
         </table>
           
       </div>
         </form>
-	</div>
+
 </body>
 </html>

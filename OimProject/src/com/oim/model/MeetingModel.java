@@ -1,6 +1,7 @@
 package com.oim.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -392,9 +394,13 @@ public class MeetingModel {
     	String meet_no=req.getParameter("meet_no");
     	System.out.println(meet_no);
     	MeetingVO vo=MeetingDAO.meetingUpdate(Integer.parseInt(meet_no));
-    	
+    	Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String today = sdf.format(date);
+		
+		req.setAttribute("today", today); //오늘날짜
     	req.setAttribute("vo",vo);
-    	return "member/meeting_update.jsp";
+    	return "meeting/meeting_update.jsp";
     }
     
     @RequestMapping("meeting_search.do") //모임검색결과
