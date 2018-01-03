@@ -27,7 +27,21 @@ table tr:last-child td {border-bottom:none;}
 
 .tab-pane { color:black;}
 
-/*테이블 아이콘  */
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  color: black;
+  font-weight: bolder;
+  cursor: default;
+  background-color: #fcbe03!important;
+  opacity:0.8;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+
+a{
+   color:black;
+} 
 .oim-icon{
    margin-right:2%;
    float:left;
