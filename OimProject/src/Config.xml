@@ -8,6 +8,8 @@
 		<typeAlias type="com.oim.member.dao.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.oim.qaboard.dao.qaboardVO" alias="qaboardVO"/>
 		<typeAlias type="com.oim.ntboard.dao.ntboardVO" alias="ntboardVO"/>
+		<typeAlias type="com.oim.fbboard.dao.fbBoardVO" alias="fbBoardVO"/>
+		<typeAlias type="com.oim.fbboard.dao.replyVO" alias="replyVO"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -27,5 +29,6 @@
 		<mapper resource="com/oim/member/dao/member-mapper.xml"/>
 		<mapper resource="com/oim/qaboard/dao/qaboard-mapper.xml"/>
 		<mapper resource="com/oim/ntboard/dao/ntboard-mapper.xml"/>
+		<mapper resource="com/oim/fbboard/dao/fbboard-mapper.xml"/>
 	</mappers>
 </configuration>
