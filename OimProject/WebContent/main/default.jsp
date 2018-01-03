@@ -289,8 +289,6 @@ $(function(){
 			</div>
 			</div><!-- end container -->
 		</section>
-		
->>>>>>> branch 'master' of https://github.com/OimWebProject/OimWeb.git
 <!--======== HOT¸ðÀÓ ³¡============-->
 </div>
 
