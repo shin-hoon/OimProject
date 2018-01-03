@@ -73,7 +73,7 @@ $(function(){
 </head>
 <body>
 	 <div class="oim-mypage update">
-               <span class=" oim-icon glyphicon glyphicon-pencil"></span><h4 style="font-weight:bold;">회원정보 수정</h4>
+               <h4 style="font-weight:bold;"><span class=" oim-icon glyphicon glyphicon-pencil"></span>회원정보 수정</h4>
               
                   아이디로 사용되는 이메일은 변경하실 수 없습니다.
                   <br><br><br>

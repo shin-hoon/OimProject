@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="oim-mypage out">
-               <span class=" oim-icon glyphicon glyphicon-log-out"></span><h4 style="font-weight:bold;">회원탈퇴</h4>
+               <h4 style="font-weight:bold;"><span class=" oim-icon glyphicon glyphicon-log-out"></span>회원탈퇴</h4>
                
                <br>
                   안녕하세요. OIM입니다

@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="oim-mypage out">
-       <span class=" oim-icon glyphicon glyphicon-heart"></span><h4 style="font-weight:bold;">찜 내역</h4>
+       <h4 style="font-weight:bold;"><span class=" oim-icon glyphicon glyphicon-heart"></span>찜 내역</h4>
        <!-- 신청내역 찾기버튼 -->
         <div class="input-group" style="width:30%; float:right">
           <input type="text" class="form-control" placeholder="Search for...">
@@ -18,7 +18,7 @@
           </span>
         </div>
 </div>
-	<table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
+	<table class="table table-hover" style="margin:6%; width:90%; margin: 0px auto;">
           <thead>
              <tr>
                 <th width=10% class="text-center">번호</th><!-- 열 -->
