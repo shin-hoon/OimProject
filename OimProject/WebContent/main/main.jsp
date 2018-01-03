@@ -11,8 +11,8 @@
 		<!-- 기존 부트스트랩(항상가져오는 3줄)  -->
   		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-   		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-  		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+   		<!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> jquery 충돌나서 주석-->
+  		<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> jquery 충돌나서 주석-->
   	   
   		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -85,6 +85,25 @@ $( document ).ready( function() {
   } );
 </script>
 
+<!-- 탑버튼 -->
+<script>
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {/*스크롤위치에 따라 화면에서 맨 위로 올라가는 버튼을 나타내고 사라지도록 설정  */
+                $('#MOVE_TOP_BTN').fadeIn();
+            } else {
+                $('#MOVE_TOP_BTN').fadeOut();
+            }
+        });
+        
+        $("#MOVE_TOP_BTN").click(function() {
+            $('html, body').animate({
+                scrollTop : 0/* 애니메이션으로 클릭시 화면 맨 위로 이동하게 설정 */
+            }, 400);
+            return false;
+        });
+    });
+</script>
 <style>
 	.boardmenu a{cursor:pointer;}
 	.boardmenu .board{display:none;}
@@ -162,6 +181,16 @@ $( document ).ready( function() {
 }
 
 </style>
+<style>
+/*탑버튼  */
+a#MOVE_TOP_BTN {
+    position: fixed;   /*화면에 고정  */
+    right: 2%;
+    bottom: 50px;	/*버튼위치  */
+    display: none;/*  화면에서 숨김*/
+    z-index: 999;
+}
+</style> 
 
 
 
@@ -272,9 +301,9 @@ $( document ).ready( function() {
 	<jsp:include page="${main_jsp}"></jsp:include>
 	<!-- =====맨위로 올라가기 버튼======== -->
 		<p id="back-top">
-			<a href="#top"><i class="fa fa-angle-up"></i></a>
-		</p>
-	
+			<a id="MOVE_TOP_BTN" href="#"><i class="fa fa-angle-up"></i></a>
+		</p> 
+		
  	
 					
 	

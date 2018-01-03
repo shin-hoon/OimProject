@@ -6,11 +6,55 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원정보 수정</title>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
+//회원정보 일치 확인
 $(function(){
-	
+	$('#modify').click(function(){
+		var tel=$('#m2_tel').val();
+		var pwd=$('#m2_pwd').val();
+		var pwd_ok=$('#m2_pwd_ok').val();
+		
+		if(tel.trim()=="")
+		{
+			$('#m2_tel').focus();
+			return;
+		}
+		else if(pwd.trim()=="")
+		{
+			$('#m2_pwd').focus();
+			return;
+		}
+		else if(pwd_ok.trim()=="")
+		{
+			$('#m2_pwd_ok').focus();
+			return;
+		}
+		$.ajax({
+			type:'POST',
+	         url:'Oim_Update.do', 
+	         data:{"m2_tel":tel, "m2_pwd":pwd, "m2_pwd_ok":pwd_ok},
+	         success:function(response)
+	         {
+	        	 alert("수정되었습니다");
+	        	 location.href="Oim_mypage.do";
+	         }
+		});
+	});
+	$('#m2_pwd').keyup(function(){
+		  $('font[name=check]').text('');
+		 }); //#password.keyup
+
+		 $('#m2_pwd_ok').keyup(function(){
+		  if($('#m2_pwd').val()!=$('#m2_pwd_ok').val()){
+		   $('font[name=check]').text('');
+		   $('font[name=check]').html("<font color=red>"+"*비밀번호를 다시입력하세요.");
+		  }else{
+		   $('font[name=check]').text('');
+		   $('font[name=check]').html("<font color=blue>"+"*비밀번호가 일치합니다.");
+		  }
+		 }); //#check_password.keyup
 });
-</script> -->
+</script>
 </head>
 <body>
 	 <div class="oim-mypage update">
@@ -27,7 +71,7 @@ $(function(){
       </div>
              
          	<!-- 회원정보 테이블 -->
-            <form method="post" action="Oim_Update.do">
+            <!-- <form method="post" action="Oim_Update.do"> -->
                 <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
                   <tr>
                      <td width=30% class="text-right">
@@ -42,7 +86,7 @@ $(function(){
                         <span class="oim-icon glyphicon glyphicon-earphone"></span>휴대전화
                      </td>
                      <td width=70% class="text-center">
-                        <input type=text name=tel size=30 id="tel" placeholder="${vo.om_tel }">
+                        <input type=text name=tel size=30 id="m2_tel" placeholder="${vo.om_tel }">
                      </td>                  
                   </tr>
                   <tr>
@@ -50,7 +94,7 @@ $(function(){
                         <span class="oim-icon glyphicon glyphicon-lock"></span>새로운 비밀번호 입력 
                      </td>
                      <td width=70% class="text-center">
-                        <input type="password" name=pwd size=30 id="pwd"><br>	
+                        <input type="password" name=pwd size=30 id="m2_pwd"><br>	
                         <h6 style="color:black; font-size:12px;">*비밀번호는 8~24글자 이내로 입력해 주세요.</h6>
                      </td>                  
                   </tr>
@@ -59,18 +103,18 @@ $(function(){
                         <span class="oim-icon glyphicon glyphicon-lock"></span>비밀번호 재입력
                      </td>
                      <td width=70% class="text-center">
-                        <input type="password" name=pwd_ok size=30 id="pwd_ok">
+                        <input type="password" name=pwd_ok size=30 id="m2_pwd_ok">
                          <span class="help-block"><font name="check" size="2" color="red"></font> </span>
                         
                      </td>                  
                   </tr>
                   <tr>
                      <td colspan="2" class="text-center">
-                        <input type="submit" class="btn btn-info btn-sm" id="modify" value="수정하기">
+                        <input type="button" class="btn btn-info btn-sm" id="modify" value="수정하기">
                         <input type=button class="btn btn-danger btn-sm" value="취소" onclick="javascript:history.back()">
                      </td>
                     </tr>
                </table>
-            </form>
+            <!-- </form> -->
 </body>
 </html>

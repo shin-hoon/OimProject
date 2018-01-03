@@ -171,17 +171,12 @@ public class MemberModel {
 		HttpSession session = req.getSession();
 			
 		String id=(String)session.getAttribute("id");  
-		String tel=req.getParameter("tel");
-		String pwd =req.getParameter("pwd"); 	
-		String pwd_ok=req.getParameter("pwd_ok"); 
+		String tel=req.getParameter("m2_tel");
+		String pwd =req.getParameter("m2_pwd"); 	
+		String pwd_ok=req.getParameter("m2_pwd_ok"); 
 
 		MemberVO vo=new MemberVO();
 		String re ="";
-		if(tel.trim().equals(""))
-		{
-			re="member/update_telfail.jsp";
-		}
-		
 		if(pwd.equals(pwd_ok))
 		{
 			//사용자가 입력한 값->VO
