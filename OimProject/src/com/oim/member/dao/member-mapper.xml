@@ -29,7 +29,8 @@
 <!-- 메인 데이터 -->
 <select id="TodayMeeting" resultType="MeetingVO"><!-- 오늘의 모임 -->
 	SELECT meet_no, meet_poster, meet_charge,meet_subject,meet_cg,TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end
-	FROM meeting	                     	
+	FROM meeting	
+	ORDER BY meet_regdate DESC                     	
 </select>
 <select id="EventMeeting" resultType="MeetingVO"><!-- 초대이벤트 -->
 	SELECT meet_no, meet_poster,meet_subject,meet_cg FROM meeting	   
