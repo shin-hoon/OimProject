@@ -14,34 +14,27 @@
    		<!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> jquery 충돌나서 주석-->
   		<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> jquery 충돌나서 주석-->
   	   
-  		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<!-- 템플릿 css -->
-		<link href="css/owl.carousel.css" rel="stylesheet">
 		<link href="css/owl.theme.default.min.css"  rel="stylesheet">
-		<link href="css/animate.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<!-- <link href="css/owl.carousel.css" rel="stylesheet"> -->
+		<!-- <link href="css/animate.css" rel="stylesheet"> -->
+		
 		<!-- 우리가 추가한 css -->     
 		<link href="css/oim_style.css" rel="stylesheet">
-  		
-  		<!-- 슬라이드에 필요한 스크립트  -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
 		
 		<!-- 태그모임 추가 tab css  -->
 	    <link rel="stylesheet" type="text/css" href="css/isotope.css" media="screen" /> <!-- 느낌있게 사진배열 -->
-	    <link rel="stylesheet" href="css/bootstrap.css">
-  		
+	    
   		<!-- 모달   -->
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 		<script src="http://googledrive.com/host/0B-QKv6rUoIcGREtrRTljTlQ3OTg"></script>
 		<script src="http://googledrive.com/host/0B-QKv6rUoIcGeHd6VV9JczlHUjg"></script>
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> <!-- class="w3-table w3-hoverable" -->
+		<link rel="stylesheet" href="css/bootstrap.css">
 		
-		<!-- 비밀번호 확인 스트립 -->
-		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
 <title>Insert title here</title>
 <script>
@@ -89,7 +82,7 @@ $( document ).ready( function() {
 <script>
     $(function() {
         $(window).scroll(function() {
-            if ($(this).scrollTop() > 500) {/*스크롤위치에 따라 화면에서 맨 위로 올라가는 버튼을 나타내고 사라지도록 설정  */
+            if ($(this).scrollTop() > 1000) {/*스크롤위치에 따라 화면에서 맨 위로 올라가는 버튼을 나타내고 사라지도록 설정  */
                 $('#MOVE_TOP_BTN').fadeIn();
             } else {
                 $('#MOVE_TOP_BTN').fadeOut();
