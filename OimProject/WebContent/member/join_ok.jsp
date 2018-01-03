@@ -2,6 +2,6 @@
     pageEncoding="UTF-8" import="com.oim.member.dao.*"%>
 
 <script>
-alert("회원탈퇴가 완료되었습니다.");
+alert("회원가입이 완료되었습니다.");
 location.href="main.do";
 </script>

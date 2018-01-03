@@ -35,8 +35,23 @@ $(function(){
 	         data:{"m2_tel":tel, "m2_pwd":pwd, "m2_pwd_ok":pwd_ok},
 	         success:function(response)
 	         {
-	        	 alert("수정되었습니다");
-	        	 location.href="Oim_mypage.do";
+	        	 if(pwd.trim()!=(pwd_ok.trim()))
+	        	{
+	        		 alert("비밀번호를 다시 입력하세요.");
+	        		 $('#m2_pwd_ok').focus();
+	        		 return;
+	        	}
+	        	 else if(tel.trim().length<11)
+	        	{
+	        		 alert("핸드폰 번호 11자리를 입력해주세요"+"\n"+"ex)01012341234");
+					 $('#m2_tel').focus();
+	        	}
+	        	 else
+	        	{
+	        		 alert("수정되었습니다");
+		        	 location.href="Oim_mypage.do";
+
+	        	}
 	         }
 		});
 	});
