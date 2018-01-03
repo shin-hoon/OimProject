@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       
       
       
@@ -13,19 +13,19 @@
 
 
 <script type="text/javascript">
-/*caption¾È¿¡ pÅÂ±×ÀÇ ±ÛÀÚ¼ö°¡ ÀÏÁ¤¼öÄ¡ ÀÌ»óµÇ¸é ...À¸·Î Ç¥½ÃÇÏ´Â ½ºÅ©¸³Æ®*/
+/*captionì•ˆì— píƒœê·¸ì˜ ê¸€ìžìˆ˜ê°€ ì¼ì •ìˆ˜ì¹˜ ì´ìƒë˜ë©´ ...ìœ¼ë¡œ í‘œì‹œí•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸*/
 $(function(){
     $('div.caption p').each(function(){
     
-    var length=30; //±ÛÀÚ ÃÖ´ë±æÀÌ 30
-    var minlength=16; //Á¦¸ñ ±ÛÀÚ°¡ ÇÑÁÙ¿¡ 16Á¤µµµÊ
+    var length=30; //ê¸€ìž ìµœëŒ€ê¸¸ì´ 30
+    var minlength=16; //ì œëª© ê¸€ìžê°€ í•œì¤„ì— 16ì •ë„ë¨
    
-    $(this).each(function(){ //Á¦¸ñ±ÛÀÚ±æÀÌ°¡ 30À» ³Ñ´Â¼ø°£ºÎÅÍ ...À¸·Î Ã³¸®ÇÏ¶ó
+    $(this).each(function(){ //ì œëª©ê¸€ìžê¸¸ì´ê°€ 30ì„ ë„˜ëŠ”ìˆœê°„ë¶€í„° ...ìœ¼ë¡œ ì²˜ë¦¬í•˜ë¼
         if($(this).text().length >= length){
             $(this).text($(this).text().substr(0,length)+'...');
         }
 
-        if($(this).text().length <= minlength){ //Á¦¸ñÀÌ 1ÁÙÂ¥¸® ÀÏ¶§´Â <br>ÅÂ±×¸¦ Áà¼­ 2ÁÙÂ¥¸®¶û °°Àº Å©±â·Î ¸¸µé¾î¶ó 
+        if($(this).text().length <= minlength){ //ì œëª©ì´ 1ì¤„ì§œë¦¬ ì¼ë•ŒëŠ” <br>íƒœê·¸ë¥¼ ì¤˜ì„œ 2ì¤„ì§œë¦¬ëž‘ ê°™ì€ í¬ê¸°ë¡œ ë§Œë“¤ì–´ë¼ 
            $(this).html($(this).text()+'<br></br>');
        }
         
@@ -33,55 +33,84 @@ $(function(){
     }); 
 });
 </script>
+
+<script>
+      
+    	 $(document).ready(function() {
+			$("#content-slider").lightSlider({
+                loop:true,
+              	auto:true,
+                keyPress:true
+            });
+            $('#image-gallery').lightSlider({
+                gallery:true,
+                item:1,
+                thumbItem:9,
+                slideMargin: 0,
+                speed:500,
+                auto:true,
+                loop:true,
+                onSliderLoad: function() {
+                    $('#image-gallery').removeClass('cS-hidden');
+                }  
+            });
+		});
+    </script>
+<link rel="stylesheet" href="main/css/style.css">
 </head>
 
 <body>
-<!-- content³»¿ë °¨½Î´Â div -->
+<!-- contentë‚´ìš© ê°ì‹¸ëŠ” div -->
 <div class="oim-Content">
     
-<!-- ====¸ÞÀÎ½½¶óÀÌ´õ=====-->
-   <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
-      <div class="overlay"></div>
-         <ol class="carousel-indicators">
-            <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
-            <li data-target="#bs-carousel" data-slide-to="1"></li>
-            <li data-target="#bs-carousel" data-slide-to="2"></li>
-         </ol>
-      <!--½½¶óÀÌ´õ »çÁø-->
-         <div class="carousel-inner">
-            <div class="item slides active">
-                <div class="slide-1"></div>
-                  <div class="hero">
-                       <img src="img/3.png" class="img-responsive">
-                     </div>
-                </div>
-                <div class="item slides">
-                     <div class="slide-2"></div>
-                     <div class="hero">  
-                        <img src="img/1.png" class="img-responsive">      
-                     </div>
-                </div>
-                <div class="item slides">
-                     <div class="slide-3"></div>
-                     <div class="hero">     
-                        <img src="img/2.png" class="img-responsive">   
-                     </div>
-                </div>
-            </div> 
-      </div>
+<!-- ====ë©”ì¸ìŠ¬ë¼ì´ë”=====-->
+ <div id="carousel">
+    <div class="hideLeft">
+        <img src="https://s16.postimg.org/vklrwoxtx/cover9.jpg">
+    </div>
+    <div class="prevLeftSecond">
+        <img src="https://s16.postimg.org/cgsggckzp/cover8.jpg">
+    </div>
+    <div class="prev">
+        <img src="https://s16.postimg.org/emmrauog5/cover7.jpg">
+    </div>
+    <div class="selected">
+        <img src="https://s16.postimg.org/9drqcz611/cover1.jpg">
+    </div>
+    <div class="next">
+        <img src="https://s16.postimg.org/pnhwfvgp1/cover6.jpg">
+    </div>
+    <div class="nextRightSecond">
+        <img src="https://s16.postimg.org/edp6kxbnp/cover4.jpg">
+    </div>
+    <div class="hideRight">
+        <img src="https://s16.postimg.org/fij8qay4l/cover3.jpg">
+    </div>
+</div>
+<%-- <center style="margin-top: 20px">
+    <div class="RLbutton">
+      <button id="prev">Prev</button>
+      <button id="next">Next</button>
+    </div>
+</center> --%>
 
-<!--============¿À´ÃÀÇ¸ðÀÓ ¸ðÀÓ ==========-->
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src="main/js/index.js"></script>
+ 
+
+
+<!--============ì˜¤ëŠ˜ì˜ëª¨ìž„ ëª¨ìž„ ==========-->
       <div class="container" style="padding-top:70px; padding-bottom:70px;">
             <div class="col-lg-12 text-center">
                <div class="section-title">
-                  <h2>¿À´ÃÀÇ ¸ðÀÓ</h2>
-                  <p>¿À´Ã ¿Ã¶ó¿Â ÇÖÇÑ ¸ðÀÓÀ» ÃßÃµÇØ µå¸³´Ï´Ù</p>
+                  <h2>ì˜¤ëŠ˜ì˜ ëª¨ìž„</h2>
+                  <p>ì˜¤ëŠ˜ ì˜¬ë¼ì˜¨ í•«í•œ ëª¨ìž„ì„ ì¶”ì²œí•´ ë“œë¦½ë‹ˆë‹¤</p>
                </div>
                   <ul class="thumbnails">
                   <c:forEach var="vo" items="${list }" begin="1" end="8">
                       <div class="col-sm-3">
                          <div class="thumbnail">
-                            <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }" alt="¸¶°¨ÀÓ¹Ú"></a>
+                            <a href="meeting_detail.do?meet_no=${vo.meet_no}"><img src="${vo.meet_poster }" alt="ë§ˆê°ìž„ë°•"></a>
                              <div class="caption">
                                    <div>
                                  <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">${vo.meet_charge }</span></li>
@@ -89,8 +118,8 @@ $(function(){
                                   <p style="text-align:right; font-size:9pt;"><b>~${vo.meet_end }</b></p>
                                   </div>
                                  
-                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><p class="p_add">${vo.meet_subject }</p></a>
-                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="btn btn-primary" style="align:center;">¸ðÀÓ »ó¼¼ º¸±â</a>
+                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}"><p class="p_add">${vo.meet_subject }</p></a>
+                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}" class="btn btn-primary" style="align:center;">ëª¨ìž„ ìƒì„¸ ë³´ê¸°</a>
                               </div>
                          </div>
                       </div>
@@ -99,19 +128,19 @@ $(function(){
                     </ul>   
                </div>
            </div>
-<!--======== ¸¶°¨ÀÓ¹Ú ¸ðÀÓ ³¡============-->
+<!--======== ë§ˆê°ìž„ë°• ëª¨ìž„ ë============-->
 
 
 
-<!--====== ÃÊ´ëÀÌº¥Æ®====== -->
+<!--====== ì´ˆëŒ€ì´ë²¤íŠ¸====== -->
       <section id="about" class="light-bg">
          <div class="container">
             <div class="row">
                <div class="col-lg-12 text-center">
-               <!-- Å¸ÀÌÆ² -->
+               <!-- íƒ€ì´í‹€ -->
                   <div class="section-title">
-                     <h2>ÀÌº¥Æ®¿¡ ÃÊ´ëÇÕ´Ï´Ù</h2>
-                     <p>O!IMÀÌ ¼±ÅÃÇÑ ´Ù¾çÇÑ ÀÌº¥Æ®¿¡ ¿©·¯ºÐÀ» ÃÊ´ëÇÕ´Ï´Ù</p>
+                     <h2>ì´ë²¤íŠ¸ì— ì´ˆëŒ€í•©ë‹ˆë‹¤</h2>
+                     <p>O!IMì´ ì„ íƒí•œ ë‹¤ì–‘í•œ ì´ë²¤íŠ¸ì— ì—¬ëŸ¬ë¶„ì„ ì´ˆëŒ€í•©ë‹ˆë‹¤</p>
                   </div>
                </div>
             </div>
@@ -124,7 +153,7 @@ $(function(){
                            <img src="${vo.meet_poster }" style="widht:100px; height:200px;">
                            <p class="p_add" style="font-size:10pt; margin:1%;"><b>${vo.meet_subject }</b></p>
                         </div>
-                        <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="mz-module-button">ÀÌº¥Æ® º¸±â</a>
+                        <a href="meeting_detail.do?meet_no=${vo.meet_no}" class="mz-module-button">ì´ë²¤íŠ¸ ë³´ê¸°</a>
                      </div>
                   </div>
                </c:forEach>
@@ -134,20 +163,20 @@ $(function(){
       
 
 
-<!-- ============ ÅÂ±×¸ðÀÓ =========== -->
+<!-- ============ íƒœê·¸ëª¨ìž„ =========== -->
    
    <section id="portfolio" class="dark-bg" style="background-color:#424242;"> 
       <div class="container text-center">
          <div class="row">
-                <!--- tagº° ¸ðÀÓ ---->
+                <!--- tagë³„ ëª¨ìž„ ---->
            <section id="section-works" class="section appear clearfix">
              <div class="container">
          
                <div class="row mar-bot40">
                  <div class="col-md-offset-3 col-md-6 text-center">
                    <div class="section-title">
-                        <h2>#Tag ¸ðÀÓ</h2>
-                        <p>ÅÂ±×º°·Î ¸ðÀÓ ¸ð¾Æº¸±â</p>
+                        <h2>#Tag ëª¨ìž„</h2>
+                        <p>íƒœê·¸ë³„ë¡œ ëª¨ìž„ ëª¨ì•„ë³´ê¸°</p>
                      </div>
                  </div>
                </div>
@@ -156,9 +185,9 @@ $(function(){
                  <nav id="filter" class="col-md-12 text-center">
                    <ul>
                      <li style=" list-style-type : none;"><a href="#" class="current btn-theme btn-small" data-filter="*" >All</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".webdesign">#Ãë¾÷</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".photography">#¼¼¹Ì³ª</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".print">#±³À°</a></li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".webdesign">#ì·¨ì—…</a></li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".photography">#ì„¸ë¯¸ë‚˜</a></li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".print">#êµìœ¡</a></li>
                    </ul>
                  </nav>
                  <div class="col-md-12">
@@ -175,66 +204,66 @@ $(function(){
          
                        <article class="col-md-4 isotopeItem photography">
                          <div class="portfolio-item">
-                           <img src="img/poster2.png" alt="tagÀÌ¹ÌÁö" />
+                           <img src="img/poster2.png" alt="tagì´ë¯¸ì§€" />
                             <p></p>
-                            <p style="align:left">[¹«·á]ÇÃ¸®¸¶ÄÏ_2017.12.15.±Ý ¿ÀÀü 11½Ã~3½Ã </p>
+                            <p style="align:left">[ë¬´ë£Œ]í”Œë¦¬ë§ˆì¼“_2017.12.15.ê¸ˆ ì˜¤ì „ 11ì‹œ~3ì‹œ </p>
                          </div>
                        </article>
          
          
                        <article class="col-md-4 isotopeItem photography">
                          <div class="portfolio-item">
-                           <img src="img/poster3.png" alt="tagÀÌ¹ÌÁö" />
+                           <img src="img/poster3.png" alt="tagì´ë¯¸ì§€" />
                             <p></p>
-                            <p style="align:left">[¹«·á]ÇÃ¸®¸¶ÄÏ_2017.12.15.±Ý ¿ÀÀü 11½Ã~3½Ã </p>
+                            <p style="align:left">[ë¬´ë£Œ]í”Œë¦¬ë§ˆì¼“_2017.12.15.ê¸ˆ ì˜¤ì „ 11ì‹œ~3ì‹œ </p>
                          </div>
                        </article>
          
                        <article class="col-md-4 isotopeItem print">
                          <div class="portfolio-item">
-                           <img src="img/poster2.png" alt="tagÀÌ¹ÌÁö" />
+                           <img src="img/poster2.png" alt="tagì´ë¯¸ì§€" />
                             <p></p>
-                            <p style="align:left">[¹«·á]ÇÃ¸®¸¶ÄÏ_2017.12.15.±Ý ¿ÀÀü 11½Ã~3½Ã </p>
+                            <p style="align:left">[ë¬´ë£Œ]í”Œë¦¬ë§ˆì¼“_2017.12.15.ê¸ˆ ì˜¤ì „ 11ì‹œ~3ì‹œ </p>
                          </div>
                        </article>
          
                        <article class="col-md-4 isotopeItem photography">
                          <div class="portfolio-item">
-                           <img src="img/poster1.png" alt="tagÀÌ¹ÌÁö" />
+                           <img src="img/poster1.png" alt="tagì´ë¯¸ì§€" />
                             <p></p>
-                            <p style="align:left">[¹«·á]ÇÃ¸®¸¶ÄÏ_2017.12.15.±Ý ¿ÀÀü 11½Ã~3½Ã </p>
+                            <p style="align:left">[ë¬´ë£Œ]í”Œë¦¬ë§ˆì¼“_2017.12.15.ê¸ˆ ì˜¤ì „ 11ì‹œ~3ì‹œ </p>
                          </div>
                        </article>
          
                        <article class="col-md-4 isotopeItem webdesign">
                          <div class="portfolio-item">
-                           <img src="img/poster2.png" alt="tagÀÌ¹ÌÁö" />
+                           <img src="img/poster2.png" alt="tagì´ë¯¸ì§€" />
                             <p></p>
-                            <p style="align:left">[¹«·á]ÇÃ¸®¸¶ÄÏ_2017.12.15.±Ý ¿ÀÀü 11½Ã~3½Ã </p>
+                            <p style="align:left">[ë¬´ë£Œ]í”Œë¦¬ë§ˆì¼“_2017.12.15.ê¸ˆ ì˜¤ì „ 11ì‹œ~3ì‹œ </p>
                          </div>
                        </article>
          
                        <article class="col-md-4 isotopeItem print">
                          <div class="portfolio-item">
-                           <img src="img/poster3.png" alt="tagÀÌ¹ÌÁö" />
+                           <img src="img/poster3.png" alt="tagì´ë¯¸ì§€" />
                             <p></p>
-                            <p style="align:left">[¹«·á]ÇÃ¸®¸¶ÄÏ_2017.12.15.±Ý ¿ÀÀü 11½Ã~3½Ã </p>
+                            <p style="align:left">[ë¬´ë£Œ]í”Œë¦¬ë§ˆì¼“_2017.12.15.ê¸ˆ ì˜¤ì „ 11ì‹œ~3ì‹œ </p>
                          </div>
                        </article>
          
                        <article class="col-md-4 isotopeItem photography">
                          <div class="portfolio-item">
-                           <img src="img/poster2.png" alt="tagÀÌ¹ÌÁö" />
+                           <img src="img/poster2.png" alt="tagì´ë¯¸ì§€" />
                             <p></p>
-                            <p style="align:left">[¹«·á]ÇÃ¸®¸¶ÄÏ_2017.12.15.±Ý ¿ÀÀü 11½Ã~3½Ã </p>
+                            <p style="align:left">[ë¬´ë£Œ]í”Œë¦¬ë§ˆì¼“_2017.12.15.ê¸ˆ ì˜¤ì „ 11ì‹œ~3ì‹œ </p>
                          </div>
                        </article>
          
                        <article class="col-md-4 isotopeItem print">
                          <div class="portfolio-item">
-                           <img src="img/poster1.png" alt="tagÀÌ¹ÌÁö" />
+                           <img src="img/poster1.png" alt="tagì´ë¯¸ì§€" />
                             <p></p>
-                            <p style="align:left">[¹«·á]ÇÃ¸®¸¶ÄÏ_2017.12.15.±Ý ¿ÀÀü 11½Ã~3½Ã </p>
+                            <p style="align:left">[ë¬´ë£Œ]í”Œë¦¬ë§ˆì¼“_2017.12.15.ê¸ˆ ì˜¤ì „ 11ì‹œ~3ì‹œ </p>
                          </div>
                        </article>
                      </div>
@@ -247,17 +276,17 @@ $(function(){
          </div>
       </div>
    </section> 
-     <!-- Ãß°¡  tab js -->
+     <!-- ì¶”ê°€  tab js -->
      <script src="js/jquery.js"></script>
      <script src="js/jquery.isotope.min.js"></script> 
      <script src="js/main.js"> </script>
    
-<!-- ==========tagº° ¸ðÀÓ ³¡==========--->
+<!-- ==========tagë³„ ëª¨ìž„ ë==========--->
 
 
 
 
-<!--========== HOT¸ðÀÓ ½ÃÀÛ===========-->
+<!--========== HOTëª¨ìž„ ì‹œìž‘===========-->
 
           
 		<section id="portfolio" class="light-bg">
@@ -265,8 +294,8 @@ $(function(){
 			<div class="row">
 				<div class="col-lg-12 text-center">
 					<div class="section-title">
-						<h2>HOT ¸ðÀÓ</h2>
-						<p>»ç¿ëÀÚµéÀÌ °¡Àå ¸¹ÀÌ Å¬¸¯ÇÑ ¸ðÀÓÀÔ´Ï´Ù</p>
+						<h2>HOT ëª¨ìž„</h2>
+						<p>ì‚¬ìš©ìžë“¤ì´ ê°€ìž¥ ë§Žì´ í´ë¦­í•œ ëª¨ìž„ìž…ë‹ˆë‹¤</p>
 					</div>
 				</div>
 			</div>
@@ -278,8 +307,8 @@ $(function(){
 							<img src="${vo.meet_poster }" class="img-responsive" height="100%" width="100%"/>
 							<figcaption>
 								<h2>${vo.meet_subject }</h2>
-								<p>Å¬¸¯!!</p>
-								<a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}">View more</a>
+								<p>í´ë¦­!!</p>
+								<a href="meeting_detail.do?meet_no=${vo.meet_no}">View more</a>
 							</figcaption>
 						</figure>
 					</div>
@@ -289,7 +318,7 @@ $(function(){
 			</div>
 			</div><!-- end container -->
 		</section>
-<!--======== HOT¸ðÀÓ ³¡============-->
+<!--======== HOTëª¨ìž„ ë============-->
 </div>
 
 
