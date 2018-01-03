@@ -340,7 +340,7 @@ $(function(){
                   <div class="modal-body">
                   <table class="table table-hover" id="res_table">
                      <tr>
-                        <td class="text-left">
+                        <td class="text-left" style="text-align:center;">
                            ID:<input type="text" name="id" size=12 id="id">
                            <input type=button value="중복체크" class="btn btn-info btn-sm" id="checkBtn">
                         </td>
