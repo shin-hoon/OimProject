@@ -9,7 +9,7 @@
 <title>마이페이지</title>
 
 <!--tab pane 추가-->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script> 
+<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> --> 
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 
@@ -53,24 +53,7 @@ body{
 }
 </style>
 
-<script type="text/javascript">
-//회원정보 일치 확인
-$(function(){
- $('#pwd').keyup(function(){
-  $('font[name=check]').text('');
- }); //#password.keyup
 
- $('#pwd_ok').keyup(function(){
-  if($('#pwd').val()!=$('#pwd_ok').val()){
-   $('font[name=check]').text('');
-   $('font[name=check]').html("<font color=red>"+"*비밀번호를 다시입력하세요.");
-  }else{
-   $('font[name=check]').text('');
-   $('font[name=check]').html("<font color=blue>"+"*비밀번호가 일치합니다.");
-  }
- }); //#check_password.keyup
-});
-</script>
 </head>
 
 <body>

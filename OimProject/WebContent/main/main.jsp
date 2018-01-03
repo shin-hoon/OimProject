@@ -11,8 +11,8 @@
 		<!-- 기존 부트스트랩(항상가져오는 3줄)  -->
   		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-   		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-  		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+   		<!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
+  		<!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
   	   
   		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
