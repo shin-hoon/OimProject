@@ -41,6 +41,11 @@ $(function(){
 	        		 $('#m2_pwd_ok').focus();
 	        		 return;
 	        	}
+	        	 else if(tel.trim().length<11)
+	        	{
+	        		 alert("핸드폰 번호 11자리를 입력해주세요"+"\n"+"ex)01012341234");
+					 $('#m2_tel').focus();
+	        	}
 	        	 else
 	        	{
 	        		 alert("수정되었습니다");

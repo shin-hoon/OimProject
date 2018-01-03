@@ -57,7 +57,9 @@ public class MemberModel {
 		      vo.setOm_name(om_name);
 		      vo.setOm_birth(om_birth);
 		      vo.setOm_gender(om_gender);
-		      vo.setOm_tel(tel1+tel2+tel3);
+		      vo.setTel1(tel1);
+		      vo.setTel2(tel2);
+		      vo.setTel3(tel3);
 		      vo.setOm_company(om_company);
 
 		      System.out.println("아이디(Email):"+om_id);
@@ -155,6 +157,11 @@ public class MemberModel {
 			
 		String id=(String)session.getAttribute("id");  
 		String tel=req.getParameter("m2_tel");
+		
+		String tel1=tel.substring(0,3); 	
+		String tel2=tel.substring(3,7);	 	
+		String tel3=tel.substring(7,11);	
+			
 		String pwd =req.getParameter("m2_pwd"); 	
 		String pwd_ok=req.getParameter("m2_pwd_ok"); 
 
@@ -164,7 +171,12 @@ public class MemberModel {
 		{
 			//사용자가 입력한 값->VO
 			vo.setOm_id(id);
-			vo.setOm_tel(tel);
+			
+			vo.setTel1(tel1);
+			vo.setTel2(tel2);
+			vo.setTel3(tel3);
+			
+			
 			vo.setOm_pwd(pwd);
 			
 			//바뀐VO->DB저장
