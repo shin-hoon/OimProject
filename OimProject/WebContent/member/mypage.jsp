@@ -33,7 +33,9 @@
 a{
    color:black;
 } 
-
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Open Sans', sans-serif;
+}
 .oim-icon{
    margin-right:2%;
    float:left;
@@ -85,7 +87,7 @@ ul li {
          <div class="tab-content" style="border: 1px solid #eee; padding-bottom:150px;">
    
 		   <!-------- 마이페이지 홈 ---------->
-           <div class="tab-pane active" id="tab1"> 
+           <div class="tab-pane active" id="tab1" style="margin-bottom:10%;"> 
              <jsp:include page="mypage_1.jsp"></jsp:include>
           </div>
           

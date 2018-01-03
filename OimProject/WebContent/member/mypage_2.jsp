@@ -73,8 +73,8 @@ $(function(){
 </head>
 <body>
 	 <div class="oim-mypage update">
-               <span class=" oim-icon glyphicon glyphicon-pencil"></span><h4>회원정보 수정</h4>
-               <h6>
+               <span class=" oim-icon glyphicon glyphicon-pencil"></span><h4 style="font-weight:bold;">회원정보 수정</h4>
+              
                   아이디로 사용되는 이메일은 변경하실 수 없습니다.
                   <br><br><br>
                   <비밀번호 변경시 유의사항>
@@ -82,7 +82,7 @@ $(function(){
                   - 개인정보보호를 위해 최소 3개월 이내에는 정기적으로 비밀번호를 변경해 주시는 게 좋습니다.<br>
                   - 비밀번호는 쉬운번호나 타 사이트와 같을 경우 도용되기 쉽습니다.<br>
                   - 주민번호,전화번호,생일 등 개인정보와 연관된 문자나 숫자는 보안상 위험이 높으므로 사용을 자제해 주세요.<br>   
-               </h6>
+               
       </div>
              
          	<!-- 회원정보 테이블 -->

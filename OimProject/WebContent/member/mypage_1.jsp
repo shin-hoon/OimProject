@@ -10,7 +10,7 @@
 </head>
 <body>
 		<div class="oim-mypage home">
-            <span class="oim-icon glyphicon glyphicon-user"></span>${sessionScope.name }님의 마이페이지입니다
+            <span class="oim-icon glyphicon glyphicon-user"></span><h5 style="font-weight:bold;">${sessionScope.name }님의 마이페이지입니다</h5>
         </div>
          	<!-- 회원정보 테이블 -->
              <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">

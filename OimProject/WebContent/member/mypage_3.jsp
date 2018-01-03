@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="oim-mypage out">
-       <span class=" oim-icon glyphicon glyphicon-bookmark"></span><h4>신청내역</h4>
+       <span class=" oim-icon glyphicon glyphicon-bookmark"></span><h4 style="font-weight:bold;">신청내역</h4>
        <!-- 신청내역 찾기버튼 -->
         <div class="input-group" style="width:30%; float:right">
           <input type="text" class="form-control" placeholder="Search for...">

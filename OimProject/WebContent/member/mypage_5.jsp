@@ -9,8 +9,8 @@
 </head>
 <body>
 	<div class="oim-mypage out">
-               <span class=" oim-icon glyphicon glyphicon-log-out"></span><h4>회원탈퇴</h4>
-               <h6>
+               <span class=" oim-icon glyphicon glyphicon-log-out"></span><h4 style="font-weight:bold;">회원탈퇴</h4>
+               
                <br>
                   안녕하세요. OIM입니다
                   <br><br>
@@ -21,7 +21,7 @@
                   <br>
                   단, 공공적 성격의 게시물은 탈퇴 후에도 삭제되지 않고 게시물의 삭제를 원하시는 경우에는 반드시 삭제하신 후, 
                   회원탈퇴를 신청하시면 됩니다.
-               </h6>
+               
 	</div>
         <table class="table table-hover" style="margin:6%; width:70%; margin: 0px auto;">
            <form method="post" action="Oim_Delete.do">
