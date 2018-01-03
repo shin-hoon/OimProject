@@ -97,8 +97,8 @@ $(function(){
 		<div class="col-sm-2">      
 		       <div class="col-sm-12 text-center" style="padding:0; height:170px; margin-top:10px;">
 		        
-		           <img src="img/meetImg/121999.jpg" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
-		            alt="대표이미지">
+		           <img src="img/oim.png" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
+		            alt="모임프로필">
 
 		           
 		         <script type="text/javascript"> 

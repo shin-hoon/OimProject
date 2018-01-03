@@ -167,17 +167,14 @@
 		SELECT CEIL(COUNT(*)/12) FROM meeting
 	</select>
 	
-	<insert id="meetingInsertOK" parameterType="meetingVO"> <!--모임개설 완료 insert하기-->
-		<selectKey keyProperty="meet_no" resultType="int" order="BEFORE">
-			SELECT NVL(MAX(meet_no)+1,1) as meet_no FROM meeting
-		</selectKey>
+	<select id="getMeetingNumber" resultType="int"> <!--새로운 모임번호를 받아와서 이미지 파일명으로 사용하기위한 쿼리문  -->
+		SELECT NVL(MAX(meet_no)+1,1) as mno FROM meeting
+	</select>
+	
+	<insert id="meetingInsert" parameterType="MeetingVO"> <!--모임개설 완료 insert하기-->
 		INSERT INTO meeting VALUES(#{meet_no}, #{meet_charge}, #{meet_cg}, #{meet_poster}, #{om_id}, #{meet_subject}, #{meet_start}, #{meet_end},
 		#{meet_loc}, #{meet_total}, #{meet_limit}, #{meet_info}, #{meet_price}, 0, #{meet_detail}, #{meet_lat}, #{meet_lng}, SYSDATE, 0)
 	</insert>
-	
-	<select id="getMeetingNumber" resultType="int"> <!--새로운 모임번호를 받아와서 이미지 파일명으로 사용하기위한 쿼리문  -->
-		SELECT NVL(MAX(meet_no)+1,1) FROM meeting
-	</select>
 	
 	<select id="meetingDetailInfo" resultType="com.oim.member.dao.MemberVO" parameterType="String"> <!-- 모임신청 인원정보 불러오기 -->
 		SELECT om_tel, om_company 

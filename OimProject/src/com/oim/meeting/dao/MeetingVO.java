@@ -1,6 +1,9 @@
 package com.oim.meeting.dao;
 
 import java.util.Date;
+
+import com.oim.member.dao.MemberVO;
+
 import java.sql.*;
 
 public class MeetingVO {

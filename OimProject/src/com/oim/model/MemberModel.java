@@ -33,23 +33,6 @@ public class MemberModel {
 		
 		int count = MemberDAO.OimIdcheck(id);
 		
-		/*if()
-		{
-			
-		}*/
-
-		/*해야한다..
-		<%@ page language="java" contentType="text/html; charset=EUC-KR"
-			    pageEncoding="EUC-KR" import="com.sist.dao.*"%>
-			<%
-			   MemberDAO dao= new MemberDAO();
-			   String id=request.getParameter("id");
-			   int count=dao.memberIdcheck(id);
-			   request.setAttribute("count", count);
-			%>
-			${count }*/
-		
-		
 		return "main/idCheck_ok.jsp";
 	}
 	
@@ -90,7 +73,7 @@ public class MemberModel {
 	      {
 	    	  System.out.println("에러"+ex.getMessage());
 	      }
-	      return "main/main.jsp";
+	      return "member/join_ok.jsp";
 
 	}
 	
@@ -176,7 +159,7 @@ public class MemberModel {
 		String pwd_ok=req.getParameter("m2_pwd_ok"); 
 
 		MemberVO vo=new MemberVO();
-		String re ="";
+		
 		if(pwd.equals(pwd_ok))
 		{
 			//사용자가 입력한 값->VO
@@ -186,14 +169,9 @@ public class MemberModel {
 			
 			//바뀐VO->DB저장
 			MemberDAO.OimUpdate(vo);
-			re="member/update_ok.jsp";
-		}
-		else
-		{
-			re="member/update_fail.jsp";
 		}
 		
-		return re;
+		return "member/mypage_2.jsp";
 		
 	}
 	
