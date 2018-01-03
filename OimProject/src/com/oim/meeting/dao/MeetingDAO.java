@@ -114,14 +114,15 @@ public class MeetingDAO {
 	   }
 	
 	
-	public static void meetingInsertOk(MeetingVO vo) { //모임개설 insert
+	public static void meetingInsert(MeetingVO vo) { //모임개설 insert
 		
 		SqlSession session=ssf.openSession(true); //오토커밋 적용
 		try {
-			session.insert("meetingInsertOk",vo);
+			session.insert("meetingInsert",vo);
 			
 		}catch(Exception ex) {
-			System.out.println("meetingInsertOk: "+ex.getMessage());
+			System.out.println("meetingInsert: "+ex.getMessage());
+			ex.printStackTrace();
 		}finally {
 			if(session!=null) {
 				session.close();

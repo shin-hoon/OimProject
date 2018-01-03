@@ -334,20 +334,30 @@ public class MeetingModel {
 	    	vo.setMeet_total(Integer.parseInt(meet_total));
 	    	vo.setMeet_limit(Integer.parseInt(meet_limit));
 	    	vo.setMeet_price(Integer.parseInt(meet_price));
+	    	if(meet_lat==null && meet_lng==null){
+	    		vo.setMeet_lat("");
+		    	vo.setMeet_lng("");
+	    	}else {
 	    	vo.setMeet_lat(meet_lat);
 	    	vo.setMeet_lng(meet_lng);
+	    	}
 	    	vo.setMeet_info(meet_info);
 	    	vo.setMeet_detail(meet_detail);
 	    	
-//	    	MeetingDAO.meetingInsertOk(vo); //모임개설하기
-	    	System.out.println("모임 카테고리: "+meet_cg);
+	    	
+			// upload => insert.jsp의 input타입의 이름
+	    	int meet_no=MeetingDAO.getMeetingNumber();
+	    	vo.setMeet_no(meet_no);
+	    	String realname=Integer.toString(meet_no);
+			String filename = mr.getFilesystemName("upload");
+			
+			System.out.println("모임번호: "+meet_no);
+			System.out.println("모임 카테고리: "+meet_cg);
 	    	System.out.println("개설자ID: "+om_id);
 	    	System.out.println("모임 제목: "+meet_subject);
-	    	System.out.println("모임일시: "+meet_date);
 	    	System.out.println("시작날짜: "+meet_start);
 	    	System.out.println("종료날짜: "+meet_end);
-	    	System.out.println("주소: "+meet_loc1);
-	    	System.out.println("상세주소: "+meet_loc2);
+	    	System.out.println("주소: "+vo.getMeet_loc());
 	    	System.out.println("유/무료여부: "+meet_charge);
 	    	System.out.println("모임정원: "+meet_total);
 	    	System.out.println("참가비용: "+meet_price);
@@ -355,20 +365,19 @@ public class MeetingModel {
 	    	System.out.println("경도: "+meet_lng);
 	    	System.out.println("모임소개: "+meet_info);
 	    	System.out.println("상세내용: "+meet_detail);
-	    	
-			// upload => insert.jsp의 input타입의 이름
-	    	int meet_no=MeetingDAO.getMeetingNumber();
-	    	String realname=Integer.toString(meet_no);
-			String filename = mr.getFilesystemName("upload");
 
-			// 필수
+			// 파일저장
 			if (filename != null) {
 				File f = new File(path+"\\"+filename);
 				File f2 = new File(path+"\\"+realname+f.getName().substring(f.getName().indexOf('.')));
 
 				f.renameTo(f2);
 		    	vo.setMeet_poster("img/meetImg/"+f2.getName());
+		    	System.out.println("이미지경로:"+vo.getMeet_poster());
 			}
+			
+	    	MeetingDAO.meetingInsert(vo); //모임개설하기
+	    	
     	}catch(Exception ex) {
     		System.out.println("meeting_insert_ok: "+ex.getMessage());
     		ex.printStackTrace();
@@ -381,10 +390,8 @@ public class MeetingModel {
     @RequestMapping("meeting_update.do")
     public String meeting_Update(HttpServletRequest req, HttpServletResponse res) { //모임수정화면
     	String meet_no=req.getParameter("meet_no");
-    	
     	System.out.println(meet_no);
     	MeetingVO vo=MeetingDAO.meetingUpdate(Integer.parseInt(meet_no));
-    	
     	
     	req.setAttribute("vo",vo);
     	return "member/meeting_update.jsp";
