@@ -19,7 +19,7 @@
 					<input type="hidden" name="cst_no" value="${num}"/>
 					<div class="input-group" style="width:100%">
 						<input type="text" class="form-control"  
-							id="validate-text" placeholder="맞춤모임 이름을 입력해주세요.(최대15글자)"
+							id="validate-text" placeholder="맞춤모임 이름을 입력해주세요.(최대15글자) *필수입력"
 							name="cst_subject" maxlength="15" required>
 						<span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
 					</div>
