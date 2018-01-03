@@ -30,6 +30,7 @@ public class MeetingVO {
 	private String om_name;
 	private String om_tel;
 	
+	
 	public String getOm_name() {
 		return om_name;
 	}

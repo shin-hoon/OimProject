@@ -59,7 +59,7 @@ public class MeetingDAO {
 		return list;
 	}
 	
-	public static List<MeetingVO> meetingFindData(Map map){ //모임검색결과 필터링해서 뿌리기
+	public static List<MeetingVO> meetingFindData(Map map){ //체크박스 검색결과 필터링해서 뿌리기
 		
 		List<MeetingVO> list=new ArrayList<MeetingVO>();
 		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
@@ -76,7 +76,7 @@ public class MeetingDAO {
 		return list;
 	}
 	
-	public static int meetingFindTotalPage(Map map) { //검색결과 총 페이지수 구하기
+	public static int meetingFindTotalPage(Map map) { //체크박스 검색결과 총 페이지수 구하기
 		
 		int totalpage=0;
 		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
@@ -91,6 +91,38 @@ public class MeetingDAO {
 			}
 		}
 		return totalpage;
+	}
+	
+	public static List<MeetingVO> meetingSearchData(Map map){ //검색어 검색결과 필터링해서 뿌리기
+		
+		List<MeetingVO> list=new ArrayList<MeetingVO>();
+		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+		try {
+			list=session.selectList("meetingSearchData",map);
+			
+		}catch(Exception ex) {
+			System.out.println("meetingSearchData: "+ex.getMessage());
+		}finally {
+			if(session!=null)
+				session.close(); //커넥션을 반환한다.
+		}
+		return list;
+	}
+	
+	public static List<Map> meetingSearchTotalPage(String searchText){ //검색어 검색결과 총 페이지수 구하기
+		
+		List<Map> list=new ArrayList<Map>();
+		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
+		try {
+			list=session.selectList("meetingSearchTotalPage", searchText);
+			
+		}catch(Exception ex) {
+			System.out.println("meetingSearchTotalPage: "+ex.getMessage());
+		}finally {
+			if(session!=null)
+				session.close(); //커넥션을 반환한다.
+		}
+		return list;
 	}
 	
 	//dao

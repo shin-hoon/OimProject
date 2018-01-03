@@ -158,8 +158,7 @@
 </head>
 <body>
     
-<div class="jumbotron">
-  <div class="container text-left">
+  <div class="container text-left" style="margin-top:50px;">
   	<div class="row">  
   	<form method="post" action="meeting_find.do">
              <table class="table table-bordered "> <!-- 체크박스 테이블 시작 -->
@@ -346,9 +345,8 @@
              </form>
         </div>
  	</div>
-  </div>
   
-      <div class="container" style="padding-top:70px; padding-bottom:70px;">
+      <div class="container" style="margin-top:30px; margin-bottom:30px;">
       
             <div class="col-lg-12 text-left"> 
                   <ul class="thumbnails"><!-- 모임뿌려주기 div 시작 11-->

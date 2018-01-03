@@ -91,27 +91,22 @@
          			#{cg}
          		</foreach>
          	</if>
-         	
-         	
          	<if test="loc.size()!=0 and loc!=null">
          		AND REGEXP_LIKE(meet_loc,
          		<foreach collection="loc" item="lc" open="" close=")" separator="||">
          			#{lc}
          		</foreach>
          	</if>
-         	
          	<if test="week.size()!=0 and week!=null">
          		AND 
          	<foreach collection="week" item="wk" open="" close="" separator="OR">
          		REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'D'),#{wk})
          		</foreach>
          	</if>
-         	
           	<if test="price.size()!=0 and price!=null">
          		AND
          		<foreach collection="price" item="pr" index="index" open="" close="" separator="OR">
-         		<choose>
-         		          		
+         		<choose>      		
          			<when test='pr.equals("0")'>
          				meet_price = #{pr}  
          			</when>
@@ -135,18 +130,40 @@
          			<when test='pr.equals("990002")'>
          				meet_price <![CDATA[ >= ]]> #{pr} 
          			</when>
-         		
          			<otherwise>
          			</otherwise>
          		</choose>
          		</foreach>
          	</if>
-         	
          	<if test="(from!='' and to!='') and (from!=null and to!=null)">
          		AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
          	</if>
          	</where>
-		
+	</select>
+	
+	<select id="meetingSearchData" parameterType="java.util.Map" resultType="MeetingVO"> <!-- 검색어 입력했을때의 모임결과 보여주기 -->
+		 SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start, TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
+         FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as num
+         FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like
+         FROM meeting WHERE meet_cg LIKE '%'||#{searchText}||'%'
+         OR meet_subject LIKE '%'||#{searchText}||'%'
+         OR meet_info LIKE '%'||#{searchText}||'%'
+         OR meet_detail LIKE '%'||#{searchText}||'%'
+         ORDER BY meet_regdate DESC))
+         WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+    <resultMap id="pageMap" type="java.util.Map">
+        <result javaType="java.lang.Integer" column="total" property="total"/>
+		<result javaType="java.lang.Integer" column="totalpage" property="totalpage"/>
+	</resultMap> 
+
+	<select id="meetingSearchTotalPage" parameterType="String" resultMap="pageMap"> <!-- 검색어 입력했을때의 모임결과 보여주기 -->
+		 SELECT COUNT(*) as total,CEIL(COUNT(*)/12) as totalpage FROM meeting
+         WHERE meet_cg LIKE '%'||#{searchText}||'%'
+         OR meet_subject LIKE '%'||#{searchText}||'%'
+         OR meet_info LIKE '%'||#{searchText}||'%'
+         OR meet_detail LIKE '%'||#{searchText}||'%'
 	</select>
 	
 	<select id="meetingDetailData" resultType="MeetingVO" parameterType="int">

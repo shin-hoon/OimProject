@@ -181,10 +181,8 @@
 </head>
 <body>
     
-<div class="jumbotron">
-  <div class="container text-left">
+  <div class="container text-left" style="margin-top:50px">
   	<div class="row">  
-  	
   	<form method="post" action="meeting_find.do" id="mfrm">
              <table class="table table-bordered "> <!-- 체크박스 테이블 시작 -->
                  <tr>
@@ -370,9 +368,8 @@
              </form>
         </div>
  	</div>
-  </div>
   
-      <div class="container" style="padding-top:70px; padding-bottom:70px;">
+      <div class="container" style="margin-top:50px; margin-bottom:50px;">
       
             <div class="col-lg-12 text-left"> 
                   <ul class="thumbnails"><!-- 모임뿌려주기 div 시작 11-->
@@ -383,8 +380,9 @@
  				
                       <div class="col-sm-3">
                          <div class="thumbnail">
-                         <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }"></a>
-            			
+                         	<div style="width:100%; height:230px;">
+                         <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster }" style="width:100%; height:100%"></a>
+            				</div>
                              <div class="caption">
                                 <div class="col-sm-12" style="padding:0px;">
                                 
