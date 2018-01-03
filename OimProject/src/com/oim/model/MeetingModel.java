@@ -1,7 +1,6 @@
 package com.oim.model;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +14,10 @@ import com.oim.controller.RequestMapping;
 import com.oim.meeting.dao.MeetingDAO;
 import com.oim.meeting.dao.MeetingVO;
 import com.oim.member.dao.MemberVO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -208,7 +208,6 @@ public class MeetingModel {
     @RequestMapping("meeting_insert.do")//모임개설 입력화면
     public String meeting_insert(HttpServletRequest req, HttpServletResponse res) {
     	
-    	
     	HttpSession session=req.getSession();
     	MemberVO vo=MeetingDAO.meetingDetailInfo((String)session.getAttribute("id"));
     	
@@ -289,73 +288,94 @@ public class MeetingModel {
     }
     
     @RequestMapping("meeting_insert_ok.do") //모임개설완료
-    public String meeting_insertOK(HttpServletRequest req, HttpServletResponse res) throws Throwable{
+    public String meeting_insertOK(HttpServletRequest req, HttpServletResponse res){
 
-    	req.setCharacterEncoding("UTF-8");
-    	HttpSession session=req.getSession();
-    	String meet_cg=req.getParameter("meet_cg"); //카테고리
-    	/*String poster=req.getParameter("meet_poster");*/ //포스터
-     	String om_id=(String)session.getAttribute("id"); //id (로그인정보 세션에서 받아오기)
-    	String meet_subject=req.getParameter("meet_subject"); //제목
-    	String meet_date=req.getParameter("meet_date"); //모임날짜
-    	String meet_start=meet_date.substring(0, meet_date.indexOf("~")-1); //잘라서 시작날짜 나누기
-    	String meet_end=meet_date.substring(meet_date.indexOf("~")+2); //잘라서 종료날짜 나누기
-    	String meet_loc1=req.getParameter("meet_loc1"); //주소
-    	String meet_loc2=req.getParameter("meet_loc2"); ///상세주소
-    	String meet_charge=req.getParameter("meet_charge"); //유/무료 여부
-    	String meet_total=req.getParameter("meet_total"); //정원
-    	String meet_limit=req.getParameter("meet_total");//신청가능인원 => 처음 만들때 신청가능인원은 정원과 같다
-    	String meet_price=req.getParameter("meet_price"); //참여비용
-    	String meet_lat=req.getParameter("meet_lat");//위도
-    	String meet_lng=req.getParameter("meet_lng");//경도
-    	String meet_info=req.getParameter("meet_info"); //모임내용
-    	String meet_detail=req.getParameter("meet_detail"); //상세정보
-    	
-    	MeetingVO vo=new MeetingVO();
-    	vo.setMeet_cg(meet_cg);
-//    	vo.setMeet_poster(meet_poster);
-    	vo.setOm_id(om_id);
-    	vo.setMeet_subject(meet_subject);
-    	vo.setMeet_start(meet_start);
-    	vo.setMeet_end(meet_end);
-    	if(meet_loc1.equals("") && meet_loc2.equals("")) { //입력된 모임장소가 없을때
-    		vo.setMeet_loc("미정이거나 등록된 모임장소가 없습니다");
-    	}else {												//입력된 모임장소가 있을때
-    		vo.setMeet_loc(meet_loc1+" "+meet_loc2); 
+    	try {
+    		req.setCharacterEncoding("UTF-8"); // 한글 파일명을 고려하여 setcharencoding을 설정해준다.
+    		HttpSession session=req.getSession();
+			String path = "c:\\git\\OimWeb\\OimProject\\WebContent\\img\\meetImg"; // 경로명
+			int size = 1024 * 1024 * 100; // 100MB까지 가능으로 설정
+			String enctype = "UTF-8";
+			// 파일 업로드하는 라이브러리 (defaultfilerenamepolicy는 안붙여도되지만 붙여주는게 좋다)
+			MultipartRequest mr = new MultipartRequest(req, path, size, enctype, new DefaultFileRenamePolicy());
+			// DefaultFileRenamePolicy() : 파일명이 동일할때 파일명을 자동으로 변경
+			// Ex) a.jpg => a1.jpg => a2.jpg
+
+			// 파일의 값을 받아올 때 mr을 통해서 받아온다.
+	    	String meet_cg=mr.getParameter("meet_cg"); //카테고리
+	     	String om_id=(String)session.getAttribute("id"); //id (로그인정보 세션에서 받아오기)
+	    	String meet_subject=mr.getParameter("meet_subject"); //제목
+	    	String meet_date=mr.getParameter("meet_date"); //모임날짜
+	    	String meet_start=meet_date.substring(0, meet_date.indexOf("~")-1); //잘라서 시작날짜 나누기
+	    	String meet_end=meet_date.substring(meet_date.indexOf("~")+2); //잘라서 종료날짜 나누기
+	    	String meet_loc1=mr.getParameter("meet_loc1"); //주소
+	    	String meet_loc2=mr.getParameter("meet_loc2"); ///상세주소
+	    	String meet_charge=mr.getParameter("meet_charge"); //유/무료 여부
+	    	String meet_total=mr.getParameter("meet_total"); //정원
+	    	String meet_limit=mr.getParameter("meet_total");//신청가능인원 => 처음 만들때 신청가능인원은 정원과 같다
+	    	String meet_price=mr.getParameter("meet_price"); //참여비용
+	    	String meet_lat=mr.getParameter("meet_lat");//위도
+	    	String meet_lng=mr.getParameter("meet_lng");//경도
+	    	String meet_info=mr.getParameter("meet_info"); //모임내용
+	    	String meet_detail=mr.getParameter("meet_detail"); //상세정보
+	    	
+	    	MeetingVO vo=new MeetingVO();
+	    	vo.setMeet_cg(meet_cg);
+	    	vo.setOm_id(om_id);
+	    	vo.setMeet_subject(meet_subject);
+	    	vo.setMeet_start(meet_start);
+	    	vo.setMeet_end(meet_end);
+	    	if(meet_loc1.equals("") && meet_loc2.equals("")) { //입력된 모임장소가 없을때
+	    		vo.setMeet_loc("미정이거나 등록된 모임장소가 없습니다");
+	    	}else {												//입력된 모임장소가 있을때
+	    		vo.setMeet_loc(meet_loc1+" "+meet_loc2); 
+	    	}
+	    	vo.setMeet_charge(meet_charge);
+	    	vo.setMeet_total(Integer.parseInt(meet_total));
+	    	vo.setMeet_limit(Integer.parseInt(meet_limit));
+	    	vo.setMeet_price(Integer.parseInt(meet_price));
+	    	vo.setMeet_lat(meet_lat);
+	    	vo.setMeet_lng(meet_lng);
+	    	vo.setMeet_info(meet_info);
+	    	vo.setMeet_detail(meet_detail);
+	    	
+//	    	MeetingDAO.meetingInsertOk(vo); //모임개설하기
+	    	System.out.println("모임 카테고리: "+meet_cg);
+	    	System.out.println("개설자ID: "+om_id);
+	    	System.out.println("모임 제목: "+meet_subject);
+	    	System.out.println("모임일시: "+meet_date);
+	    	System.out.println("시작날짜: "+meet_start);
+	    	System.out.println("종료날짜: "+meet_end);
+	    	System.out.println("주소: "+meet_loc1);
+	    	System.out.println("상세주소: "+meet_loc2);
+	    	System.out.println("유/무료여부: "+meet_charge);
+	    	System.out.println("모임정원: "+meet_total);
+	    	System.out.println("참가비용: "+meet_price);
+	    	System.out.println("위도: "+meet_lat);
+	    	System.out.println("경도: "+meet_lng);
+	    	System.out.println("모임소개: "+meet_info);
+	    	System.out.println("상세내용: "+meet_detail);
+	    	
+			// upload => insert.jsp의 input타입의 이름
+	    	int meet_no=MeetingDAO.getMeetingNumber();
+	    	String realname=Integer.toString(meet_no);
+			String filename = mr.getFilesystemName("upload");
+
+			// 필수
+			if (filename != null) {
+				File f = new File(path+"\\"+filename);
+				File f2 = new File(path+"\\"+realname+f.getName().substring(f.getName().indexOf('.')));
+
+				f.renameTo(f2);
+		    	vo.setMeet_poster("img/meetImg/"+f2.getName());
+			}
+    	}catch(Exception ex) {
+    		System.out.println("meeting_insert_ok: "+ex.getMessage());
+    		ex.printStackTrace();
     	}
-    	vo.setMeet_charge(meet_charge);
-    	vo.setMeet_total(Integer.parseInt(meet_total));
-    	vo.setMeet_limit(Integer.parseInt(meet_limit));
-    	vo.setMeet_price(Integer.parseInt(meet_price));
-    	vo.setMeet_lat(meet_lat);
-    	vo.setMeet_lng(meet_lng);
-    	vo.setMeet_info(meet_info);
-    	vo.setMeet_detail(meet_detail);
-    	
-    	
-//    	MeetingDAO.meetingInsertOk(vo); //모임개설하기
-    	
-    	System.out.println("모임 카테고리: "+meet_cg);
-    	/*System.out.println("모임 포스터:" + poster);*/
-    	System.out.println("개설자ID: "+om_id);
-    	System.out.println("모임 제목: "+meet_subject);
-    	System.out.println("모임일시: "+meet_date);
-    	System.out.println("시작날짜: "+meet_start);
-    	System.out.println("종료날짜: "+meet_end);
-    	System.out.println("주소: "+meet_loc1);
-    	System.out.println("상세주소: "+meet_loc2);
-    	System.out.println("유/무료여부: "+meet_charge);
-    	System.out.println("모임정원: "+meet_total);
-    	System.out.println("참가비용: "+meet_price);
-    	System.out.println("위도: "+meet_lat);
-    	System.out.println("경도: "+meet_lng);
-    	System.out.println("모임소개: "+meet_info);
-    	System.out.println("상세내용: "+meet_detail);
-    	
     	
     	req.setAttribute("main_jsp","../meeting/meeting_insert_ok.jsp");
     	return "main/main.jsp";		
-    	
     }
     
     @RequestMapping("meeting_update.do")

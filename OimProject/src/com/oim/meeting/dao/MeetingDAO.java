@@ -129,6 +129,22 @@ public class MeetingDAO {
 		}
 	}
 	
+	public static int getMeetingNumber() { //이미지 저장할때 이름으로 쓰기위해 얻는 모임번호
+		
+		int meet_no=0;
+		SqlSession session=ssf.openSession();
+		try {
+			meet_no=session.selectOne("getMeetingNumber");
+		}catch(Exception ex) {
+			System.out.println("getMeetingNumber: "+ex.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+		return meet_no;
+	}
+	
 	public static MemberVO meetingDetailInfo(String om_id) { //모임개설화면에서 사용자 정보 보여주기
 		
 		MemberVO vo=new MemberVO();

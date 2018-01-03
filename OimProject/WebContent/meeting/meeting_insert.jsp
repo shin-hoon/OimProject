@@ -22,17 +22,54 @@
             width: 1100px;
             margin: 0 auto;
         }
-        
-
     </style>
-    
-    <script type="text/javascript">
+<script type="text/javascript"> //모두 입력해야 모임을 개설할수있다.
 $(function(){
-	
-	
-	
-	$('#searchBtn').click(function(){
+	$('#submit').click(function(){
+		var meet_cg=$('input.meet_cg').val();
+		var meet_subject=$('input:text[name="meet_subject"]').val();
+		var meet_loc1=$('input:text[name="meet_loc1"]').val();
+		var meet_total=$('input:text[name="meet_total"]').val();
+		var meet_price=$('input:text[name="meet_price"]').val();
+		var meet_info=$('textarea[name="meet_info"]').val();
+		var meet_detail=$('textarea[name="meet_detail"]').val();
 		
+		if(meet_cg.trim()==""){
+			alert("카테고리를 선택해주세요!");
+			$('input.btn-category').focus();
+			return false;
+		}else if(meet_subject.trim()==""){
+			alert("모임명을 입력해주세요!");
+			$('input:text[name="meet_subject"]').focus();
+			return false;
+		}else if(meet_loc1.trim()=="" && $('.noplace').is(":checked")==false){
+			alert("장소를 정해주세요!");
+			$('#searchText').focus();
+			return false;
+		}else if(meet_total.trim()==""){
+			alert("정원을 입력해주세요!");
+			$('input:text[name="meet_total"]').focus();
+			return false;
+		}else if(meet_price.trim()=="" && $('input:radio[name="meet_charge"][value="유료"]').is(":checked")==true){
+			alert("참여비용을 입력해주세요!");
+			$('input:text[name="meet_price"]').focus();
+			return false;
+		}else if(meet_info.trim()==""){
+			alert("모임 소개를 입력해주세요!");
+			$('textarea[name="meet_info"]').focus();
+			return false;
+		}else if(meet_detail.trim()==""){
+			alert("모임 상세내용을 입력해주세요!");
+			$('textarea[name="meet_detail"]').focus();
+			return false;
+		}
+	});
+});
+
+</script>
+<script type="text/javascript">
+$(function(){
+	$('#searchBtn').click(function(){ //지역검색 api이용하여 ajax로 검색결과 불러오기
 		var search=$('#searchText').val();
 		
  		$.ajax({
@@ -46,8 +83,6 @@ $(function(){
 		});
 		
 	});
-	
-	
 });
 </script>
     
@@ -58,40 +93,19 @@ $(function(){
          <h2 style="width: 1100px; margin:20px auto">개설하기</h2>
 		<div class="row meetingRow" style="border: 1px solid #ddd">
 		
-		<form method="post" action="meeting_insert_ok.do"> <!-- enctype="multipart/form-data" -->
+		<form method="post" action="meeting_insert_ok.do" id="meetingFrm" enctype="multipart/form-data">
 		<div class="col-sm-2">      
 		       <div class="col-sm-12 text-center" style="padding:0; height:170px; margin-top:10px;">
 		        
-		           <!-- <img src="https://static.onoffmix.com/images2/default/thumbnail_null.jpg" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
-		            alt="대표이미지"> -->
-		            
-		            <img src="http://drive.google.com/uc?export=view&id=1IaPW70w3VoiKCDzMxd5PEPCf6zbWapQX"
-		            style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster" />
+		           <img src="img/meetImg/121999.jpg" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
+		            alt="대표이미지">
+
 		           
 		         <script type="text/javascript"> 
 		         	$(function(){ //사진변경 버튼 클릭했을때 file타입의 버튼 강제 클릭 이벤트 발생
 		         		$('.profile').on('click',function(){
 		         			$('#upload').trigger('click');
 		         		});
-		         		
-/* 		         		function handleImgFileSelect(e){//사진 선택했을때 미리보기 기능
-		         			
-		         			var files=e.target.files;
-		         			var filesArr=Array.prototype.slice.call(files);
-		         			
-		         			filesArr.forEach(function(f){
-		         				
-		         				sel_file=f;
-		         				
-		         				var reader=new FileReader();
-		         				reader.onload=function(e){
-		         					$('#poster').attr("src",e.target.result);
-		         				}
-		         				reader.readAsDataURL(f);
-		         			});
-		         		}
-		         	
-		         		$('#upload').on('change',handleImgFileSelect); */
 		         	});
 		         </script>  
 		      </div>
@@ -207,6 +221,8 @@ $(function(){
                           		 if($('.noplace').is(":checked")==true){ /*장소미정 체크했을때  */
                           			$('.detailMap').css("display","none");
                           			$('#searchText').val('');
+                          			$('input:text[name="meet_loc1"]').val('');
+                          			$('input:text[name="meet_loc2"]').val('');
 									$('#searchText').attr("disabled",true);
 									$('#searchBtn').attr("disabled",true);
                           		}else{									/*장소미정 해제했을때 */
@@ -390,25 +406,36 @@ $(function(){
                            
                            
                            <td class="form-inline text-center" valign="middle">
-						<script type="text/javascript">
-				    	$(function(){	
-				    		$('input[name="meet_charge"]:radio').change(function(){
-				    			var type=$(this).val();
-				    			if(type == "무료"){
-				    				$('input:text[name="meet_price"]').val('0');
-				 	   		   		$('input:text[name="meet_price"]').attr("disabled",true);
-				    			}else{
-				    				$('input:text[name="meet_price"]').val('');
-									$('input:text[name="meet_price"]').attr("disabled",false);
-				    			}
-				    		});
-					   	});
-						    </script>
     
-                             <input type="text" class="form-control" name="meet_price"/>원
+                             <input type="text" class="form-control"  name="meet_price" value=""/>원
                            </td>
                        </tr>
+                       
                     </table>
+                    
+					<script type="text/javascript"> 
+				    	$(function(){
+			    			$('input:text[name="meet_total"]').keyup(function(){ //모임총원과 참여비용은 숫자만 입력되게 만들기
+			    				$(this).val($(this).val().replace(/[^0-9]/g,""));
+			    				});
+			    			$('input:text[name="meet_price"]').keyup(function(){
+			    				$(this).val($(this).val().replace(/[^0-9]/g,""));
+			    				});
+
+				    		$('input[name="meet_charge"]:radio').change(function(){ //무료 클릭했을때는 0원, 유료클릭했을때는 직접입력
+				    			var type=$(this).val();
+				    			if(type == "무료"){
+				    				$('input:text[name="meet_price"]').attr("value","0");
+				    				$('input:text[name="meet_price"]').attr("readonly",true);
+				    			}else{
+				    				$('input:text[name="meet_price"]').attr("value",'');
+				    				$('input:text[name="meet_price"]').attr("readonly",false);
+				    			}
+				    		});
+				    		
+				    		$('input:radio[name="meet_charge"][value="무료"]').trigger('click'); //디폴트로 무료에 클릭되게하기
+					   	});
+					</script>
                 </td>
                 
             </tr>
@@ -440,28 +467,20 @@ $(function(){
                    <label class="control-label">전화번호</label>
                    <input class="form-control" type="text" name="tel" size=15 value="${vo.om_tel }" disabled>
                    
-                    <!-- <select class="form-control" name=tel1 style="margin-left: 10px">
-						<option>010</option>
-						<option>011</option>
-						<option>017</option>
-					</select>
-					<input class="form-control" type="text" name="tel2" size=7>
-					<input class="form-control" type="text" name="tel3" size=7> -->
-               
-                   <label class="control-label" style="margin-left: 20px">이메일</label>
+                   <!-- <label class="control-label" style="margin-left: 20px">이메일</label>
                      <input class="form-control" type="text" name="email1" size=10 style="margin-left: 10px">@
                      <select class="form-control" name=email2>
 						<option>naver.com</option>
 						<option>gmail.com</option>
 						<option>hanmail.net</option>
 						<option>nate.com</option>
-					</select>
+					</select> -->
                 </td>
             </tr>
             
             <tr>
                 <td colspan="3" class="col-sm-12 text-center">
-                    <input type="submit" class="btn btn-primary" value="개설완료" style="width: 12%">
+                    <input type="submit" id="submit" class="btn btn-primary" value="개설완료" style="width:12%">
                 </td>
             </tr>
         </table>
