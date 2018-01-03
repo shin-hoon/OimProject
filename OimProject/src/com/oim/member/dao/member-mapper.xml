@@ -36,8 +36,25 @@
 	SELECT meet_no, meet_poster,meet_subject,meet_cg FROM meeting	   
 	WHERE meet_subject LIKE '_초대이벤트_%'           	
 </select>
-<select id="tagMeeting" resultType="meetingVO"><!-- 태그모임 -->
-
+<select id="StudyTagMeeting" resultType="meetingVO"><!-- 취업 태그모임 -->
+	SELECT meet_no, meet_poster,meet_charge,meet_subject
+	FROM meeting
+	WHERE meet_subject LIKE '%스터디%'
+</select>
+<select id="HobbyTagMeeting" resultType="meetingVO">
+	SELECT meet_no, meet_poster,meet_charge,meet_subject
+	FROM meeting
+	WHERE meet_subject LIKE '%취미%'
+</select>
+<select id="MuTagMeeting" resultType="meetingVO">
+	SELECT meet_no, meet_poster,meet_charge,meet_subject
+	FROM meeting
+	WHERE meet_cg LIKE '%전시%'
+</select>
+<select id="ProTagMeeting" resultType="meetingVO">
+	SELECT meet_no, meet_poster,meet_charge,meet_subject
+	FROM meeting
+	WHERE meet_subject LIKE '%it%'
 </select>
 <select id="HotMeeting" resultType="meetingVO"><!-- 핫모임 -->
 	SELECT meet_no,meet_poster,meet_subject

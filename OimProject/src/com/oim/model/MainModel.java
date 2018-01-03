@@ -20,7 +20,12 @@ public class MainModel {
 		
 		List<MeetingVO> list=MemberDAO.TodayMeeting();  //오늘의 모임
 		List<MeetingVO> list2=MemberDAO.EventMeeting();  // 초대이벤트
-		List<MeetingVO> list4=MemberDAO.HotMeeting();  //핫모임
+		List<MeetingVO> list3=MemberDAO.StudyTagMeeting();
+		List<MeetingVO> list4=MemberDAO.HobbyTagMeeting();
+		List<MeetingVO> list5=MemberDAO.MuTagMeeting();
+		List<MeetingVO> list6=MemberDAO.ProTagMeeting();
+		
+		List<MeetingVO> list7=MemberDAO.HotMeeting();  //핫모임
 		
 		int meetCount=0;
 		HttpSession session=req.getSession();
@@ -35,7 +40,11 @@ public class MainModel {
 		
 		req.setAttribute("list", list);     /*EventMeeting 결과값*/
 		req.setAttribute("list2", list2);   //오늘의모임
+		req.setAttribute("list3", list3);
 		req.setAttribute("list4", list4);
+		req.setAttribute("list5", list5);
+		req.setAttribute("list6", list6);
+		req.setAttribute("list7", list7);
 		req.setAttribute("main_jsp","default.jsp");
 		return "main/main.jsp";
 	}

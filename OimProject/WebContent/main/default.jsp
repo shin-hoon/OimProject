@@ -6,18 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      
-      
-      
-<title>Insert title here</title>
 
+<title>Insert title here</title>
 
 <script type="text/javascript">
 /*caption안에 p태그의 글자수가 일정수치 이상되면 ...으로 표시하는 스크립트*/
 $(function(){
     $('div.caption p').each(function(){
     
-    var length=30; //글자 최대길이 30
+    var length=25; //글자 최대길이 25
     var minlength=16; //제목 글자가 한줄에 16정도됨
    
     $(this).each(function(){ //제목글자길이가 30을 넘는순간부터 ...으로 처리하라
@@ -35,7 +32,6 @@ $(function(){
 </script>
 
 <script>
-      
     	 $(document).ready(function() {
 			$("#content-slider").lightSlider({
                 loop:true,
@@ -235,90 +231,64 @@ $(function(){
          
                <div class="row">
                  <nav id="filter" class="col-md-12 text-center">
-                   <ul style="list-style:none;">
+                   <ul>
                      <!-- <li style=" list-style-type : none;"><a href="#" class="current btn-theme btn-small" data-filter="*" >#ALL</a></li> -->
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".webdesign">#취업</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".webdesign">#여가</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".photography">#세미나</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".print">#교육</a></li>
+                     <li>
+                     	<a href="#" class="btn-theme btn-small" data-filter=".study">#스터디</a>
+                     </li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".hobby">#취미</a></li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".messe">#전시</a></li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".pro">#IT</a></li>
                    </ul>
                  </nav>
                  <div class="col-md-12">
                    <div class="row">
                      <div class="portfolio-items isotopeWrapper clearfix" id="3">
-         
-                       <article class="col-md-4 isotopeItem photography">
+                     
+         			  <c:forEach var="vo" items="${list3 }" begin="1" end="4">
+                       <article class="col-md-4 isotopeItem study">
                          <div class="portfolio-item">
-                           <img src="img/poster2.png" alt="tag이미지" />
-                            <p></p>
-                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+                         	<a href="meeting_detail.do?meet_no=${vo.meet_no}">
+                           <img src="${vo.meet_poster }"/>
+                           </a>
+                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
                          </div>
                        </article>
-         
-                       <article class="col-md-4 isotopeItem photography">
+                      </c:forEach>
+                      
+                      <c:forEach var="vo" items="${list4 }" begin="1" end="2">
+                       <article class="col-md-4 isotopeItem hobby">
                          <div class="portfolio-item">
-                           <img src="img/poster2.png" alt="tag이미지" />
-                            <p></p>
-                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+                           <a href="meeting_detail.do?meet_no=${vo.meet_no}">
+                           <img src="${vo.meet_poster }"/>
+                           </a>
+                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
                          </div>
                        </article>
-         
-         
-                       <article class="col-md-4 isotopeItem photography">
+                      </c:forEach>
+                      
+                      <c:forEach var="vo" items="${list5 }" begin="1" end="3">
+                       <article class="col-md-4 isotopeItem messe">
                          <div class="portfolio-item">
-                           <img src="img/poster3.png" alt="tag이미지" />
-                            <p></p>
-                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+                           <a href="meeting_detail.do?meet_no=${vo.meet_no}">
+                           <img src="${vo.meet_poster }"/>
+                           </a>
+                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
                          </div>
                        </article>
-         
-                       <article class="col-md-4 isotopeItem print">
+                      </c:forEach>
+                      
+                      <c:forEach var="vo" items="${list6 }" begin="1" end="3">
+                       <article class="col-md-4 isotopeItem pro">
                          <div class="portfolio-item">
-                           <img src="img/poster2.png" alt="tag이미지" />
-                            <p></p>
-                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+                           <a href="meeting_detail.do?meet_no=${vo.meet_no}">
+                           <img src="${vo.meet_poster }"/>
+                           </a>
+                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
                          </div>
                        </article>
+                      </c:forEach>
          
-                       <article class="col-md-4 isotopeItem photography">
-                         <div class="portfolio-item">
-                           <img src="img/poster1.png" alt="tag이미지" />
-                            <p></p>
-                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-                         </div>
-                       </article>
-         
-                       <article class="col-md-4 isotopeItem webdesign">
-                         <div class="portfolio-item">
-                           <img src="img/poster2.png" alt="tag이미지" />
-                            <p></p>
-                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-                         </div>
-                       </article>
-         
-                       <article class="col-md-4 isotopeItem print">
-                         <div class="portfolio-item">
-                           <img src="img/poster3.png" alt="tag이미지" />
-                            <p></p>
-                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-                         </div>
-                       </article>
-         
-                       <article class="col-md-4 isotopeItem photography">
-                         <div class="portfolio-item">
-                           <img src="img/poster2.png" alt="tag이미지" />
-                            <p></p>
-                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-                         </div>
-                       </article>
-         
-                       <article class="col-md-4 isotopeItem print">
-                         <div class="portfolio-item">
-                           <img src="img/poster1.png" alt="tag이미지" />
-                            <p></p>
-                            <p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-                         </div>
-                       </article>
                      </div>
                      
                    </div>
@@ -353,13 +323,13 @@ $(function(){
 				</div>
 			</div>
 			<div class="row row-0-gutter">
-				<c:forEach var="vo" items="${list4 }" begin="0" end="5">
+				<c:forEach var="vo" items="${list7 }" begin="0" end="5">
 				<div class="col-md-4 col-0-gutter">
 					<div class="ot-portfolio-item">
 						<figure class="effect-bubba">
 							<img src="${vo.meet_poster }" class="img-responsive" height="100%" width="100%"/>
 							<figcaption>
-								<h2>${vo.meet_subject }</h2>
+								<h2 style="margin:13%;">${vo.meet_subject }</h2>
 								<p>클릭!!</p>
 								<a href="meeting_detail.do?meet_no=${vo.meet_no}">View more</a>
 							</figcaption>

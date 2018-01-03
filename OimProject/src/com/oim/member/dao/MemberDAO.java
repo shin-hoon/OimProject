@@ -245,14 +245,36 @@ public class MemberDAO {
   	
   	
   	
-  	public static List<MeetingVO> HotMeeting()
+  	public static List<MeetingVO> StudyTagMeeting()
+  	{
+  		List<MeetingVO> list3=new ArrayList<MeetingVO>();
+  		SqlSession session=ssf.openSession();
+  		
+  		try {
+  			
+  			list3=session.selectList("StudyTagMeeting");
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println(ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  		return list3;
+  	}
+  	
+  	public static List<MeetingVO> HobbyTagMeeting()
   	{
   		List<MeetingVO> list4=new ArrayList<MeetingVO>();
   		SqlSession session=ssf.openSession();
   		
   		try {
   			
-  			list4=session.selectList("HotMeeting");
+  			list4=session.selectList("HobbyTagMeeting");
   			
   		}catch(Exception ex)
   		{
@@ -265,6 +287,72 @@ public class MemberDAO {
   		}
   		
   		return list4;
+  	}
+  	
+  	public static List<MeetingVO> MuTagMeeting()
+  	{
+  		List<MeetingVO> list5=new ArrayList<MeetingVO>();
+  		SqlSession session=ssf.openSession();
+  		
+  		try {
+  			
+  			list5=session.selectList("MuTagMeeting");
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println(ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  		return list5;
+  	}
+  	
+  	public static List<MeetingVO> ProTagMeeting()
+  	{
+  		List<MeetingVO> list6=new ArrayList<MeetingVO>();
+  		SqlSession session=ssf.openSession();
+  		
+  		try {
+  			
+  			list6=session.selectList("ProTagMeeting");
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println(ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  		return list6;
+  	}
+  	
+  	public static List<MeetingVO> HotMeeting()
+  	{
+  		List<MeetingVO> list7=new ArrayList<MeetingVO>();
+  		SqlSession session=ssf.openSession();
+  		
+  		try {
+  			
+  			list7=session.selectList("HotMeeting");
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println(ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  		return list7;
   	}
     		
   }
