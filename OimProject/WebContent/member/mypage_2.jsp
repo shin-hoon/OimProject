@@ -35,8 +35,18 @@ $(function(){
 	         data:{"m2_tel":tel, "m2_pwd":pwd, "m2_pwd_ok":pwd_ok},
 	         success:function(response)
 	         {
-	        	 alert("수정되었습니다");
-	        	 location.href="Oim_mypage.do";
+	        	 if(pwd.trim()!=(pwd_ok.trim()))
+	        	{
+	        		 alert("비밀번호를 다시 입력하세요.");
+	        		 $('#m2_pwd_ok').focus();
+	        		 return;
+	        	}
+	        	 else
+	        	{
+	        		 alert("수정되었습니다");
+		        	 location.href="Oim_mypage.do";
+
+	        	}
 	         }
 		});
 	});
