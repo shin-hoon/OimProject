@@ -226,6 +226,21 @@ public class MeetingDAO {
 			}
 		}
 	}
+	
+	public static void meetingDelete(String meet_no) {
+		
+		SqlSession session=ssf.openSession(true);
+		try {
+			session.update("meetingDelete",meet_no);
+		}catch(Exception ex) {
+			System.out.println("meetingDelete: "+ex.getMessage());
+			ex.printStackTrace();
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+	}
 
 //	   public MeetingDAO() { //데이터  파싱에서 DB에 insert하는 용도로 작성한 임시코드
 //	      try {

@@ -29,8 +29,15 @@ public class MeetingVO {
 	private int rownum;
 	private String om_name;
 	private String om_tel;
+	private int likeCount;
 	
 	
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
 	public String getOm_name() {
 		return om_name;
 	}
