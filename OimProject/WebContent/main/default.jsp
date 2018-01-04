@@ -261,7 +261,7 @@ $(function(){
                  </div>
                </div>
          <!-- /////////////////////////////////////// -->
-         <div class="row">
+         <!--<div class="row">
                  <nav id="filter" class="col-md-12 text-center">
                    <ul>
 
@@ -277,7 +277,7 @@ $(function(){
                      <li><a href="#" class="btn-theme btn-small" data-filter=".pro">#IT</a></li>
                    </ul>
                  </nav>
-          		<!--<div class="col-md-12">
+          		<div class="col-md-12">
 			          <div class="row">
 			            <div class="portfolio-items isotopeWrapper clearfix" id="3">
 			
