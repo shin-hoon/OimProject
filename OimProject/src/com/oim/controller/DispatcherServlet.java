@@ -45,8 +45,13 @@ public class DispatcherServlet extends HttpServlet {
 						// rm.value() = main.do
 						String jsp = (String)m.invoke(obj, request,response); //invoke : 호출하는 역할
 						//가변 매개변수 : Object... (invoke에 커서 갖다대면 알게됨ㅋㅋ) => 가변데이터형 (데이터수 무상관)
-						RequestDispatcher rd = request.getRequestDispatcher(jsp);
-						rd.forward(request, response);
+						String ext=jsp.substring(jsp.lastIndexOf(".")+1);
+						if(ext.equals("jsp")) {
+							RequestDispatcher rd = request.getRequestDispatcher(jsp);
+							rd.forward(request, response);
+						}else {
+							response.sendRedirect(jsp);
+						}
 						return; //service메소드 종료
 					}
 				}

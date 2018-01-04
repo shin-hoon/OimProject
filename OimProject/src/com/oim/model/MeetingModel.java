@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
+import com.oim.meeting.dao.MeetReplyDAO;
+import com.oim.meeting.dao.MeetReplyVO;
 import com.oim.meeting.dao.MeetingDAO;
 import com.oim.meeting.dao.MeetingVO;
 import com.oim.member.dao.MemberVO;
@@ -176,13 +178,21 @@ public class MeetingModel {
 	
     @RequestMapping("meeting_detail.do")
     public String meeting_detail(HttpServletRequest req, HttpServletResponse res) {
-       String meet_no = req.getParameter("meet_no");
+       String no = req.getParameter("meet_no");
+       int meet_no = Integer.parseInt(no);
        
-       MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
+       HttpSession session = req.getSession();
        
+       
+       MeetingVO vo = MeetingDAO.meetingDetailData(meet_no);
+       
+       List<MeetReplyVO> list = MeetReplyDAO.replyListData(meet_no);
+       String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+       
+       req.setAttribute("today", today);
+       req.setAttribute("list", list);
        req.setAttribute("vo", vo);
        
-
        req.setAttribute("main_jsp", "../meeting/meeting_detail.jsp");
        return "main/main.jsp";
     }
