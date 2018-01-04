@@ -281,20 +281,6 @@ public class MeetingModel {
     	return "meeting/loc_search.jsp";
     }
     
-//    public static void main(String args[]) {
-//    	 File file = new File("c:\\git\\OimWeb\\OimProject\\WebContent\\img\\meetImg\\121999.jpg");
-//         
-//         if( file.exists() ){
-//             if(file.delete()){
-//                 System.out.println("파일삭제 성공");
-//             }else{
-//                 System.out.println("파일삭제 실패");
-//             }
-//         }else{
-//             System.out.println("파일이 존재하지 않습니다.");
-//         }
-//    }
-    
     @RequestMapping("meeting_insert_ok.do") //모임개설완료
     public String meeting_insertOK(HttpServletRequest req, HttpServletResponse res){
 
@@ -471,21 +457,21 @@ public class MeetingModel {
 	    	vo.setMeet_info(meet_info);
 	    	vo.setMeet_detail(meet_detail);
 	    	
-			System.out.println("모임번호: "+meet_no);
-			System.out.println("모임 카테고리: "+meet_cg);
-			System.out.println("모임 사진이름: "+meet_poster);
-	    	System.out.println("모임 제목: "+meet_subject);
-	    	System.out.println("시작날짜: "+meet_start);
-	    	System.out.println("종료날짜: "+meet_end);
-	    	System.out.println("주소: "+vo.getMeet_loc());
-	    	System.out.println("유/무료여부: "+meet_charge);
-	    	System.out.println("모임정원: "+meet_total);
-	    	System.out.println("모임신청가능인원: "+meet_limit);
-	    	System.out.println("참가비용: "+meet_price);
-	    	System.out.println("위도: "+meet_lat);
-	    	System.out.println("경도: "+meet_lng);
-	    	System.out.println("모임소개: "+meet_info);
-	    	System.out.println("상세내용: "+meet_detail);
+//			System.out.println("모임번호: "+meet_no);
+//			System.out.println("모임 카테고리: "+meet_cg);
+//			System.out.println("모임 사진이름: "+meet_poster);
+//	    	System.out.println("모임 제목: "+meet_subject);
+//	    	System.out.println("시작날짜: "+meet_start);
+//	    	System.out.println("종료날짜: "+meet_end);
+//	    	System.out.println("주소: "+vo.getMeet_loc());
+//	    	System.out.println("유/무료여부: "+meet_charge);
+//	    	System.out.println("모임정원: "+meet_total);
+//	    	System.out.println("모임신청가능인원: "+meet_limit);
+//	    	System.out.println("참가비용: "+meet_price);
+//	    	System.out.println("위도: "+meet_lat);
+//	    	System.out.println("경도: "+meet_lng);
+//	    	System.out.println("모임소개: "+meet_info);
+//	    	System.out.println("상세내용: "+meet_detail);
 	    	
 	    	if(meet_reposter!="") { //모임사진을 수정했을시에만 원래있던사진을 삭제 후 저장한다.
 				File dfile = new File(path+"\\"+meet_poster); //저장되어있던 사진은 삭제한다.
@@ -507,11 +493,11 @@ public class MeetingModel {
 
 					f.renameTo(f2);
 			    	vo.setMeet_poster("img/meetImg/"+f2.getName());
-			    	System.out.println("이미지경로:"+vo.getMeet_poster());
+//			    	System.out.println("이미지경로:"+vo.getMeet_poster());
 				}
 	    	}else {
 	    		vo.setMeet_poster(meet_reposter);
-		    	System.out.println("이미지경로:"+vo.getMeet_poster());
+//		    	System.out.println("이미지경로:"+vo.getMeet_poster());
 	    	}
 
 	    	MeetingDAO.meetingUpdate(vo);

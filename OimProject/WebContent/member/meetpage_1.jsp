@@ -7,7 +7,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-
+<script type="text/javascript">
+$(function(){ //삭제시 알림창 띄우기
+	$(".deleteTr input").click(function(){
+		if(confirm("정말 이 모임을 삭제하시겠습니까?")){
+			return true;
+		}else{
+			return false;
+		}
+	});
+});
+</script>
 </head>
 <body>
 <div>
@@ -20,28 +30,29 @@
 				<th style="color:#2E2E2E;">내가 개설한 모임</th><!-- 열 -->
 			</tr>
 		</thead>
+		
 		<tbody>
 			<c:forEach var="mvo" items="${mlist }">
-			<tr>
+			<form method="post" action="meeting_delete.do">
+			<tr class="deleteTr">
 				<td width=20% class="text-center">
 					<a href="meeting_detail.do?meet_no=${mvo.meet_no }">
 						<img src="${mvo.meet_poster }" style="width:60%; margin:0%; margin-right:0%;">
 					</a>
 				</td>
-                <td width=60% class="text-left" style="line-height: 30px;">
-					<span><a href="meeting_detail.do?meet_no=${mvo.meet_no }">${mvo.meet_subject }</a>
+                <td width=60% class="text-left" style="line-height:30px;">
+					<span><a href="meeting_detail.do?meet_no=${mvo.meet_no }"><b style="font-size:15px;">${mvo.meet_subject }</b></a>
 							<c:if test="${mvo.meet_price==0 }">
-								<span class="label label-primary">무료</span>
+								<span class="label label-success">무료</span>
 							</c:if>
 							<c:if test="${mvo.meet_price!=0 }">
 								<span class="label label-danger">유료</span>
 							</c:if>
 					</span><br>
-					<span class="glyphicon glyphicon-tree-deciduous" style="margin-bottom: 10px;">
-						개설일 : <fmt:formatDate value="${mvo.meet_regdate }" pattern="yyyy-MM-dd"/>
+					<span class="glyphicon glyphicon-tree-deciduous" style="margin-bottom: 10px;"> 개설일: <fmt:formatDate value="${mvo.meet_regdate }" pattern="yyyy-MM-dd"/>
 					</span><br>
-					<span class="glyphicon glyphicon-calendar" style="margin-bottom: 10px;">신청가능인원 : ${mvo.meet_limit } / ${mvo.meet_total }</span><br>
-					<span class="glyphicon glyphicon-ok">모임기간 : ${mvo.meet_start } ~ ${mvo.meet_end } </span><br>
+					<span class="glyphicon glyphicon-calendar" style="margin-bottom: 10px;"> 신청가능인원: ${mvo.meet_limit } / ${mvo.meet_total }</span><br>
+					<span class="glyphicon glyphicon-ok"> 모임기간: ${mvo.meet_start } ~ ${mvo.meet_end } </span><br>
 				</td>
 				<td width=20% class="text-center" style="vertical-align: middle">
 					<c:if test="${mvo.meet_end < today }">
@@ -50,8 +61,11 @@
 					<c:if test="${mvo.meet_end > today }">
 						<h4><span class="label label-info">진행중</span></h4>
 					</c:if>
+					<a href="meeting_delete.do?meet_no=" id=></a>
+					<input type="submit"  style="margin-top:5px" value="모임삭제" class="btn btn-danger btn-sm">
 				</td>
 			</tr>
+			</form>
 			</c:forEach>
             <tr>
 	            <td colspan="4" class="text-center">
