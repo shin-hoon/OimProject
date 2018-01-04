@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script type="text/javascript">
 $(function(){ //삭제시 알림창 띄우기
 	$(".deleteTr input").click(function(){
@@ -68,11 +69,41 @@ $(function(){ //삭제시 알림창 띄우기
 			</form>
 			</c:forEach>
             <tr>
-	            <td colspan="4" class="text-center">
-	            	
-	            	<a href="Oim_meetpage.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-default btn-sm">이전</a>
-            		<a href="Oim_meetpage.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-default btn-sm">다음</a>
-            		${curpage } page / ${totalpage } pages
+	            <td colspan="4" class="text-center" align="center">
+	              <ul class="pagination">
+			       <%-- <a href="list.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-primary">이전</a>&nbsp;
+			       <a href="list.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-info">다음</a>&nbsp;&nbsp; --%>
+			       <c:choose>
+			        <c:when test="${curpage>block }">
+			          <li><a href="Oim_meetpage.do?page=1">|◀</a></li>
+			          <li><a href="Oim_meetpage.do?page=${fromPage-1 }">◀</a></li>
+			        </c:when>
+			        <c:otherwise>
+			          <li><span style="color:gray">|◀</span></li>   
+			          <li><span style="color:gray">◀</span></li>
+			        </c:otherwise>
+			       </c:choose>
+			       <c:forEach var="i" begin="${fromPage }" end="${toPage }">
+			        <c:if test="${i==curpage }">
+			          <li class="active"><a>${i}</a></li>
+			        </c:if>
+			        <c:if test="${i!=curpage }">
+			          <li><a href="Oim_meetpage.do?page=${i}">${i}</a></li>
+			        </c:if>
+			       </c:forEach>
+			       <c:choose>
+			       <c:when test="${toPage<totalpage }">
+			          <li><a href="Oim_meetpage.do?page=${toPage+1 }" >▶</a></li>
+			          <li><a href="Oim_meetpage.do?page=${totalpage }" >▶|</a></li>
+			        </c:when>
+			        <c:otherwise>
+			          <li><span style="color:gray">▶</span></li>
+			          <li><span style="color:gray">▶|</span></li>
+			        </c:otherwise>
+			       </c:choose>
+			       </ul>
+			       <br>
+			       ${curpage } page / ${totalpage } pages
 	            </td>
             </tr>
 		</tbody>

@@ -60,7 +60,20 @@ public class ApplicationModel {
       req.setAttribute("mlist", mlist);
       req.setAttribute("today", today);
       
-      totalpage=ApplicationDAO.MyMeetingTotalPage(id);
+		int block=10;
+		int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
+	    int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝
+		
+		req.setAttribute("curpage", curpage);
+		totalpage=ApplicationDAO.MyMeetingTotalPage(id);
+		if(toPage>totalpage)
+			toPage=totalpage;
+		req.setAttribute("block", block);
+		req.setAttribute("fromPage", fromPage);
+		req.setAttribute("toPage", toPage);
+      
+      
+     
       req.setAttribute("totalpage", totalpage);
       req.setAttribute("curpage", curpage);
       //System.out.println(totalpage);

@@ -173,7 +173,7 @@
 </script>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-   <div class="container" style="border: 1px solid #999;">
+   <div class="container" style="border: 1px solid #999; width: 60%" >
    	
         <div class="row">
         <input type="hidden" id="meet_no" name="meet_no" value="${vo.meet_no }"/>
@@ -256,7 +256,7 @@
                 </ul>
               </div>
             </nav>
-            <div style="padding-left: 5%; padding-right: 5%;">
+            <div style="padding-left: 10%; padding-right: 10%;">
                 <div class="detailContent" id="detailContent" style="margin-bottom: 100px">
                     <h3 class="webFont">상세내용</h3>
                     <div class="eventDescription">
