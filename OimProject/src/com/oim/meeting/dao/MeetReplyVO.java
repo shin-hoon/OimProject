@@ -12,9 +12,35 @@ public class MeetReplyVO {
 	private int regroup_id;
 	private int regroup_step;
 	private int regroup_tab;
-	private int root;
-	private int depth;
+	private int reply_root;
+	private int reply_depth;
+	private String dbday;
+	private String dbday2;
 	
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
+	public String getDbday2() {
+		return dbday2;
+	}
+	public void setDbday2(String dbday2) {
+		this.dbday2 = dbday2;
+	}
+	public int getReply_root() {
+		return reply_root;
+	}
+	public void setReply_root(int reply_root) {
+		this.reply_root = reply_root;
+	}
+	public int getReply_depth() {
+		return reply_depth;
+	}
+	public void setReply_depth(int reply_depth) {
+		this.reply_depth = reply_depth;
+	}
 	public int getMeet_no() {
 		return meet_no;
 	}
@@ -69,17 +95,6 @@ public class MeetReplyVO {
 	public void setRegroup_tab(int regroup_tab) {
 		this.regroup_tab = regroup_tab;
 	}
-	public int getRoot() {
-		return root;
-	}
-	public void setRoot(int root) {
-		this.root = root;
-	}
-	public int getDepth() {
-		return depth;
-	}
-	public void setDepth(int depth) {
-		this.depth = depth;
-	}
+
 	
 }

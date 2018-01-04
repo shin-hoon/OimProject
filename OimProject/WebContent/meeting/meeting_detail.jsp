@@ -14,6 +14,8 @@
 <link rel="stylesheet" type = "text/css" href="meeting/shadow/css/shadowbox.css">
 <script type="text/javascript" src="meeting/shadow/js/shadowbox.js"></script>
 
+
+
 <!--메뉴클릭시 화면 스크롤-->
 <script type="text/javascript">
     $(document).ready(function() {
@@ -105,7 +107,7 @@
    }
     .right-detail{
       width: 90%;
-        height: 330px;
+      height: 440px;
       margin: 0px auto;
    }
     .detailContent img{
@@ -139,6 +141,36 @@
         line-height: 35px
     }
 </style>
+<script type="text/javascript">
+	$(function() {
+		var i = 0;
+		$('.meet_reply_reply').click(function() {
+			var no = $(this).attr("value");
+			if(i==0){
+				$(this).text("취소");
+				$('#in'+no).show();
+				i=1;
+			}else{
+				$(this).text("댓글");
+				$('#in'+no).hide();
+				i=0;
+			}
+		});
+		var u = 0;
+		$('.meet_reply_update').click(function() {
+			var no = $(this).attr("value");
+			if(i==0){
+				$(this).text("취소");
+				$('#up'+no).show();
+				i=1;
+			}else{
+				$(this).text("수정");
+				$('#up'+no).hide();
+				i=0;
+			}
+		});
+	});
+</script>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
    <div class="container" style="border: 1px solid #999;">
@@ -374,41 +406,87 @@
              </div>
                 <div class="detailComment" id="detailComment" style="margin-bottom: 100px">
                    <h3 class="webFont">댓글보기</h3>
-                       <table class="table">
-                           <tr style="height: 30px;">
-                               <td class="text-center id" width="20%" id="id">임기스칸</td>
-                               <td class="text-left reply" width="80%" id="reply">임도진은 뭐하는 사람인가요?</td>
-                           </tr>
-                           <tr style="height: 30px;">
-                               <td class="text-center id" width="20%" id="id">임기스칸</td>
-                               <td class="text-left reply" width="80%" id="reply">임도진은 뭐하는 사람인가요?</td>
-                           </tr>
-                           <tr style="height: 30px;">
-                               <td class="text-center id" width="20%" id="id">임기스칸</td>
-                               <td class="text-left reply" width="80%" id="reply">임도진은 뭐하는 사람인가요?</td>
-                           </tr>
-                           <tr style="height: 30px;">
-                               <td class="text-center id" width="20%" id="id">임기스칸</td>
-                               <td class="text-left reply" width="80%" id="reply">임도진은 뭐하는 사람인가요?</td>
-                           </tr>
-                           <tr style="height: 30px;">
-                               <td class="text-center id" width="20%" id="id">임기스칸</td>
-                               <td class="text-left reply" width="80%" id="reply">임도진은 뭐하는 사람인가요?</td>
-                           </tr>
-                           <tr style="height: 30px;">
-                               <td class="text-center id" width="20%" id="id">임기스칸</td>
-                               <td class="text-left reply" width="80%" id="reply">임도진은 뭐하는 사람인가요?</td>
-                           </tr>
-                           <tr style="height: 30px;">
-                               <td class="text-center id" width="20%" id="id">임기스칸</td>
-                               <td class="text-left reply" width="80%" id="reply">임도진은 뭐하는 사람인가요?</td>
-                           </tr>
-                       </table>
+                   	<center>
+						<table class="table" width="80%">
+							<c:forEach var="rvo" items="${list }">
+								<tr>
+									<td align="left">
+										<c:if test="${rvo.regroup_tab>0 }">
+											<c:forEach var="i" begin="1" end="${rvo.regroup_tab }">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											</c:forEach>
+											<img alt="" src="meeting/image/re.gif" width="15px" height="15px">
+										</c:if>
+										${rvo.om_name }(${rvo.dbday }) &nbsp;
+										<c:if test="${rvo.dbday2==today }">
+											<sup><img src="meeting/image/new.gif" height="25px" width="40px" style="padding-top:5px;"></sup>
+										</c:if>
+										<br>
+										<c:if test="${rvo.regroup_tab>0 }">
+											<c:forEach var="i" begin="1" end="${rvo.regroup_tab }">
+												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											</c:forEach>
+										</c:if>
+										${rvo.reply_msg }
+										
+									</td>
+									<td align="right">
+										<c:if test="${sessionScope.id!=null }">
+											<c:if test="${rvo.reply_root==0}">
+												<a class="meet_reply_reply" value="${rvo.reply_no }">댓글</a>&nbsp; |
+											</c:if>
+											<c:if test="${sessionScope.id==rvo.om_id }">
+												 <a class="meet_reply_update" value="${rvo.reply_no }">수정</a>&nbsp; |
+												 <a href="meet_reply_delete.do?reply_no=${rvo.reply_no }&meet_no=${vo.meet_no}">삭제</a>&nbsp;
+											</c:if>
+											
+											
+										</c:if>
+									</td>
+								</tr>
+								<tr id="in${rvo.reply_no }" style="display:none;">
+									<td colspan="2">
+										<form action="meet_reply_reply_insert.do" method="post">
+											<input type="hidden" name="meet_no" value="${vo.meet_no }">
+											<input type="hidden" name="preply_no" value="${rvo.reply_no }">
+											<textarea rows="3" cols="80" style="float: left" name="reply_msg"></textarea>
+											<input type="submit" value="댓글달기" style="height: 50px">
+										</form>
+									</td>
+								</tr>
+								<tr id="up${rvo.reply_no }" style="display:none;">
+									<td colspan="2">
+										<form action="meet_reply_update.do" method="post">
+											<input type="hidden" name="meet_no" value="${vo.meet_no }">
+											<input type="hidden" name="reply_no" value="${rvo.reply_no }">
+											<textarea rows="3" cols="80" style="float: left" name="reply_msg">${rvo.reply_msg }</textarea>
+											<input type="submit" value="수정하기" style="height: 50px">
+										</form>
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
+						</center>
+					</div>
+					<c:if test="${sessionScope.id!=null }">
+						<table class="table" width="100%">
+							<tr>
+								<td>
+									<form action="meet_reply_new_insert.do" method="post">
+										<input type="hidden" name="meet_no" value="${vo.meet_no }">
+										<textarea rows="3" cols="100" style="float: left" name="reply_msg"></textarea>
+										<input type="submit" value="댓글달기" style="height: 50px">
+									</form>
+								</td>
+							</tr>
+						</table>
+					</c:if>
+					               
                 </div>
             </div>
         </div>
         
-    </div>
+
     
        <!--<a id="MOVE_TOP_BTN" class="btn-primary" href="#">TOP</a>-->
         <div class="smallnav" id="main-nav">

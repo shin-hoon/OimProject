@@ -2,6 +2,74 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.oim.meeting.dao.meetreply-mapper">
-
-
+	<!-- 댓글 조회-->
+	<select id="replyListData" resultType="MeetReplyVO" parameterType="int">
+		SELECT reply_no, om_id, om_name ,reply_msg, TO_CHAR(reply_regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,
+		TO_CHAR(reply_regdate,'YYYY-MM-DD') as dbday2, regroup_tab, reply_root
+		FROM meeting_reply
+		WHERE meet_no=#{meet_no}
+		ORDER BY regroup_id DESC, regroup_step ASC
+	</select>
+	
+	<!-- 댓글 추가(새로운) -->
+	<insert id="replyNewInsert" parameterType="MeetReplyVO">
+		<selectKey keyProperty="reply_no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(reply_no)+1,1) as reply_no FROM meeting_reply
+		</selectKey>
+		INSERT INTO meeting_reply(reply_no,meet_no,om_id,om_name,reply_msg,regroup_id)
+		VALUES(#{reply_no},#{meet_no},#{om_id},#{om_name},#{reply_msg},
+		(SELECT NVL(MAX(regroup_id)+1,1) FROM meeting_reply))
+	</insert>
+	
+	<!-- 대댓글 추가 -->
+	<select id="replyGetParentInfo" resultType="MeetReplyVO" parameterType="int">
+		SELECT regroup_id,regroup_step,regroup_tab
+		FROM meeting_reply
+		WHERE reply_no=#{reply_no}
+	</select>
+	<update id="replyStepIncrement" parameterType="MeetReplyVO">
+		UPDATE meeting_reply SET
+		regroup_step=regroup_step+1 <!-- step을 1씩 증가 시켜서 최신순이 제일 먼저 올라올 수 있도록 -->
+		WHERE regroup_id=#{regroup_id} 
+		AND regroup_step>#{regroup_step}
+	</update>
+	<insert id="replyReplyInsert" parameterType="MeetReplyVO">
+		<selectKey keyProperty="reply_no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(reply_no)+1,1) as reply_no FROM meeting_reply
+		</selectKey>
+		INSERT INTO meeting_reply 
+		VALUES(#{reply_no},#{meet_no},#{om_id},#{om_name},#{reply_msg},
+		SYSDATE,#{regroup_id},#{regroup_step},#{regroup_tab},#{reply_root},0)
+	</insert>
+	<update id="replyDepthIncrement" parameterType="int">
+		UPDATE meeting_reply SET
+		reply_depth=reply_depth+1
+		WHERE reply_no=#{reply_no}
+	</update>
+	<!-- 댓글 수정 -->
+	<update id="replyUpdate" parameterType="MeetReplyVO">
+		UPDATE meeting_reply SET
+		reply_msg = #{reply_msg}
+		WHERE reply_no = #{reply_no}
+	</update>
+	<!-- 댓글 삭제 -->
+	<select id="replyDeleteData" resultType="MeetReplyVO" parameterType="int">
+		SELECT reply_depth,reply_root FROM meeting_reply
+		WHERE reply_no=#{reply_no}
+	</select>
+	<update id="replyMsgUpdate" parameterType="int" >
+		UPDATE meeting_reply SET
+		reply_msg='관리자가 삭제한 글입니다.'
+		WHERE reply_no=#{reply_no}
+	</update>
+	<delete id="replyDelete" parameterType="int">
+		DELETE FROM meeting_reply
+		WHERE reply_no=#{reply_no}
+	</delete>
+	<update id="replyDepthDecrement" parameterType="int">
+		UPDATE meeting_reply SET
+		reply_depth=reply_depth-1
+		WHERE reply_no=#{reply_no}
+	</update>
+	
 </mapper>
