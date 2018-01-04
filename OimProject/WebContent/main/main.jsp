@@ -141,7 +141,7 @@ $( document ).ready( function() {
    text-align: center;
    background-color:#ffffff ;
    width: 100%;
-   z-index:20;    /*로그인,회원가입 모달이 안보여서 잠시 낮출게여*/
+   z-index:5000;    
    margin:0px;
    padding:0px;
 }
