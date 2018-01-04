@@ -345,20 +345,20 @@ public class MeetingModel {
 	    	String realname=Integer.toString(meet_no);
 			String filename = mr.getFilesystemName("upload");
 			
-			System.out.println("모임번호: "+meet_no);
-			System.out.println("모임 카테고리: "+meet_cg);
-	    	System.out.println("개설자ID: "+om_id);
-	    	System.out.println("모임 제목: "+meet_subject);
-	    	System.out.println("시작날짜: "+meet_start);
-	    	System.out.println("종료날짜: "+meet_end);
-	    	System.out.println("주소: "+vo.getMeet_loc());
-	    	System.out.println("유/무료여부: "+meet_charge);
-	    	System.out.println("모임정원: "+meet_total);
-	    	System.out.println("참가비용: "+meet_price);
-	    	System.out.println("위도: "+meet_lat);
-	    	System.out.println("경도: "+meet_lng);
-	    	System.out.println("모임소개: "+meet_info);
-	    	System.out.println("상세내용: "+meet_detail);
+//			System.out.println("모임번호: "+meet_no);
+//			System.out.println("모임 카테고리: "+meet_cg);
+//	    	System.out.println("개설자ID: "+om_id);
+//	    	System.out.println("모임 제목: "+meet_subject);
+//	    	System.out.println("시작날짜: "+meet_start);
+//	    	System.out.println("종료날짜: "+meet_end);
+//	    	System.out.println("주소: "+vo.getMeet_loc());
+//	    	System.out.println("유/무료여부: "+meet_charge);
+//	    	System.out.println("모임정원: "+meet_total);
+//	    	System.out.println("참가비용: "+meet_price);
+//	    	System.out.println("위도: "+meet_lat);
+//	    	System.out.println("경도: "+meet_lng);
+//	    	System.out.println("모임소개: "+meet_info);
+//	    	System.out.println("상세내용: "+meet_detail);
 
 			// 파일저장
 			if (filename != null) {

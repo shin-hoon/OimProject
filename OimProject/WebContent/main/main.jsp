@@ -226,6 +226,26 @@ a#MOVE_TOP_BTN {
                          $('#searchClick').trigger('click');
                       });
                    });
+                      
+                      $(function () {
+                  		$('#sBtn').click(function(){
+                  			var cgLeng=$('input[name=category]:checkbox:checked').length;
+                  			var locLeng=$('input[name=loc]:checkbox:checked').length;
+                  			var wkLeng=$('input[name=week]:checkbox:checked').length;
+                  			var pcLeng=$('input[name=price]:checkbox:checked').length;
+                  			
+                  			var start= $("input:text[name='from']").val();
+                  			var end= $("input:text[name='to']").val();
+                  			
+                  			if(cgLeng==0 && locLeng==0 && wkLeng==0 && pcLeng==0 && (start=="" || end=="")){
+                  				alert("검색사항을 최소 1개이상 선택하세요!");
+                  				return false;
+                  			}else{
+                  				return true;
+                  			}
+                  		});
+                      });
+                  		
                 </script>
             </div>
         </div>

@@ -329,7 +329,7 @@
                  
                  <tr>
                  	<td colspan=2 class="text-center">
-                    <input type="submit" class="btn btn-primary" value="검색하기">
+                    <input type="submit" class="btn btn-primary" value="검색하기" id="sBtn">
                     </td>
                  </tr>
              </table> <!-- 체크박스 테이블 끝 -->
