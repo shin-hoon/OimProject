@@ -28,17 +28,8 @@ public class MainModel {
 		List<MeetingVO> list6=MemberDAO.ProTagMeeting();
 		List<MeetingVO> list7=MemberDAO.HotMeeting();  //핫모임
 		List<MeetingVO> list8=MemberDAO.MainSlider();//메인 슬라이더 
-		int meetCount=0;
-		HttpSession session=req.getSession();
-		String om_id=(String)session.getAttribute("id");
 		
-		if(om_id!=null) {
-			meetCount=ApplicationDAO.MyMeetingTotalPage(om_id);
-			
-			session.setAttribute("meetCount", meetCount);
-		}
 		//jsp로 전송
-		
 		req.setAttribute("list", list);     /*EventMeeting 결과값*/
 		req.setAttribute("list2", list2);   //오늘의모임
 		req.setAttribute("list3", list3);

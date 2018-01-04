@@ -89,6 +89,8 @@ public class MemberModel {
 		String pwd= req.getParameter("pwd");
 		
 		int count=MemberDAO.OimLogincheck(id);  //	1)아이디 존재 여부 확인
+		int meetCount=0; //개설한 모임갯수
+		
 		
 		MemberVO vo=new MemberVO();
 		if(count==0)  		
@@ -102,6 +104,8 @@ public class MemberModel {
 			if(pwd.equals(vo.getOm_pwd()))  //비밀번호 까지 같다면
 			{
 				vo.setCount(3);  //					count=3
+				meetCount=ApplicationDAO.MyMeetingTotalPage(id); //개설한 모임갯수도 세션에 같이저장(모임관리 띄우기 or 숨기기 위함)
+				session.setAttribute("meetCount", meetCount);
 				session.setAttribute("id", id);
 				session.setAttribute("name", vo.getOm_name());
 			}
@@ -113,7 +117,6 @@ public class MemberModel {
 		req.setAttribute("count", vo.getCount());
 		
 		return "member/login_ok.jsp";
-		
 	}
 	
 	@RequestMapping("Oim_Logout.do")

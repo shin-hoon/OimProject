@@ -88,7 +88,6 @@ $(function(){
             }
             else
             {
-               
                //location.href="main.do";
                history.go(0);
             }
