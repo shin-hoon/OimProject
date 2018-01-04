@@ -105,16 +105,37 @@ $( document ).ready( function() {
 <style>
  .oim_ul>li>a:hover {
    color: #fcbe03!important;
+   text-decoration:none;
+   text-weight:bolder;
 } 
 .footer {
   font-family: "Open Sans",sans-serif;
   bottom: 0;
   width: 100%;
-  height: 170px;
+  height: 180px;
   background-color: gray;
  
 }
 
+.footer_li {
+	margin:0;
+	padding:0 2%;
+	display:inline;
+	color:white;
+	font-size:15px;
+	
+}
+.footer_li >a:visited{
+	color:white;
+	text-decoration:none;
+}
+.footer_li >a:link{
+	color:white;
+	text-decoration:none;
+}
+.li_2{
+	padding:0 1%;
+} 
  /* 흰색 네비바  */
 .oim-nb {
    text-align: center;
@@ -327,11 +348,34 @@ a#MOVE_TOP_BTN {
    
 <!-- =======푸터 ========-->
       <footer class="footer" style="position:relative; bottom:0;">
+      
           <div class="container text-center">
-          	<div>
-          	
-          	</div>
-                <span style="color:white;">오늘의  모임 </span>
+          	<ul class="oim_ul">
+       			<li class="footer_li"><a href="#">what we do</a></li>
+       			<li class="footer_li"><a href="#">our work</a></li>
+       			<li class="footer_li"><a href="#">company</a></li>
+       			<li class="footer_li"><a href="#">contact</a></li>
+         	</ul>
+         	<ul class="oim_ul">
+         		<li class="footer_li li_2"><a href="#">
+                  <i class="fa fa-twitter footer_i"></i>
+                </a></li>
+                <li class="footer_li li_2"><a href="#">
+                  <i class="fa fa-facebook"></i>
+                </a></li>
+                <li class="footer_li li_2"><a href="#">
+                  <i class="fa fa-linkedin"></i>
+                </a></li>
+                 <li class="footer_li li_2"><a href="#">
+                  <i class="fa fa-google"></i>
+                </a></li>
+                 <li class="footer_li li_2"><a href="#">
+                  <i class="fa fa-instagram"></i>
+                </a></li>
+         	
+         	</ul>
+         	<br>
+         	<span class="copyright" style="color:#fcbe03;">Copyright © Oim Website 2018</span>
           </div>
          </footer>
        
