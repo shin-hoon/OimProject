@@ -42,27 +42,27 @@
 </select>
 <select id="EventMeeting" resultType="MeetingVO"><!-- 초대이벤트 -->
 	SELECT meet_no, meet_poster,meet_subject,meet_cg FROM meeting	   
-	WHERE meet_subject LIKE '_초대이벤트_%'           	
+	WHERE meet_subject LIKE '%'||'초대이벤트'||'%'           	
 </select>
 <select id="StudyTagMeeting" resultType="MeetingVO"><!-- 취업 태그모임 -->
 	SELECT meet_no, meet_poster,meet_charge,meet_subject
 	FROM meeting
-	WHERE meet_subject LIKE '%스터디%'
+	WHERE meet_subject LIKE '%'||'스터디'||'%'
 </select>
 <select id="HobbyTagMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_charge,meet_subject
 	FROM meeting
-	WHERE meet_subject LIKE '%취미%'
+	WHERE meet_subject LIKE '%'||'취미'||'%'
 </select>
 <select id="MuTagMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_charge,meet_subject
 	FROM meeting
-	WHERE meet_cg LIKE '%전시%'
+	WHERE meet_cg LIKE '%'||'전시'||'%'
 </select>
 <select id="ProTagMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_charge,meet_subject
 	FROM meeting
-	WHERE meet_subject LIKE '%it%'
+	WHERE UPPER(meet_subject) LIKE '%'||UPPER('it')||'%'
 </select>
 <select id="HotMeeting" resultType="MeetingVO"><!-- 핫모임 -->
 	SELECT meet_no,meet_poster,meet_subject

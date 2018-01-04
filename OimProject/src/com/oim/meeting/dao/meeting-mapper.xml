@@ -6,7 +6,7 @@
 		 SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start, TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
          FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as num
          FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like
-         FROM meeting ORDER BY meet_regdate DESC))
+         FROM meeting ORDER BY meet_start DESC))
          WHERE num BETWEEN #{start} AND #{end}            	
 	</select>
 	
@@ -148,7 +148,7 @@
          FROM meeting WHERE UPPER(meet_cg) LIKE '%'||UPPER(#{searchText})||'%'
          OR UPPER(meet_subject) LIKE '%'||UPPER(#{searchText})||'%'
          OR UPPER(meet_info) LIKE '%'||UPPER(#{searchText})||'%'
-         ORDER BY meet_regdate DESC))
+         ORDER BY meet_start DESC))
          WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -213,8 +213,35 @@
    		WHERE meet_no=#{meet_no}
    	</update>
    	
-   	<delete id="meetingDelete" parameterType="String">
+   	<delete id="meetingDelete" parameterType="int">
    		DELETE FROM meeting
    		WHERE meet_no=#{meet_no}
    	</delete>
+   	<insert id="likeInsert" parameterType="LikeVO"><!--찜하기-->
+   		INSERT INTO basket VALUES(
+		(SELECT NVL(MAX(basket_no)+1,1)
+		FROM basket),#{om_id},#{meet_no})
+   	</insert>
+	<select id="likeCount" resultType="int" parameterType="LikeVO"><!--찜저장 -->
+		SELECT COUNT(*) FROM basket
+		WHERE om_id=#{om_id} AND meet_no=#{meet_no}
+	</select>
+	<select id="likeListData" resultType="LikeVO" parameterType="String"><!--찜목록보기 -->
+		SELECT basket_no,meet_no FROM basket
+		WHERE om_id=#{om_id}
+	</select>
+	<delete id="likeDelete" parameterType="int"><!--찜삭제 -->
+		DELETE FROM basket
+		WHERE basket_no=#{basket_no}
+	</delete>
+	<update id="likeIncrement" parameterType="LikeVO"><!--해당모임 찜 횟수 증가-->
+		UPDATE meeting SET
+		meet_like=meet_like+1
+		WHERE meet_no=#{meet_no}
+	</update>
+	<update id="likeDecrement" parameterType="LikeVO"><!--해당모임 찜 횟수 감소-->
+		UPDATE meeting SET
+		meet_like=meet_like-1
+		WHERE meet_no=#{meet_no}
+	</update>
 </mapper>

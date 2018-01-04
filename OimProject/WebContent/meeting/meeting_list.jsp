@@ -17,6 +17,31 @@
     <script type="text/javascript" src="js/bootstrap-datepicker.kr.js"></script>
 <script>
     
+    $(function(){
+    	
+    	<c:forEach var="vo" items='${list }' varStatus="status">
+    		$('.likeGroup${vo.meet_no} .likeInsertBtn').click(function(){
+    			$(this).removeClass("btn-default");
+				$(this).addClass("btn-primary");
+    			
+				var meet_no=$('.likeGroup${vo.meet_no} span').attr("no-data");
+				var meet_like=$('.likeGroup${vo.meet_no} span').attr("like-data");
+				
+				$('.likeGroup${vo.meet_no} span').text(parseInt(meet_like)+1);
+		
+				$.ajax({
+    				type:"POST",
+    				url:"like_insert.do",
+    				data:{"meet_no":meet_no},
+    				success:function(res)
+    				{
+    					
+    				}
+    			});
+    		});
+    	</c:forEach>
+    	});
+    
     /*caption안에 p태그의 글자수가 일정수치 이상되면 ...으로 표시하는 스크립트*/
     $(function(){
         $('div.caption p').each(function(){
@@ -351,7 +376,7 @@
 
                   <h2>모임</h2>
 					
- 				<c:forEach var="vo" items="${list }">
+ 				<c:forEach var="vo" items="${list }" varStatus="status">
  				
                       <div class="col-sm-3">
                          <div class="thumbnail">
@@ -383,21 +408,23 @@
 	                              	  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><p class="p_add">${vo.meet_subject }</p></a>    
                                   </div>
                                   </div>
-                                  		
+                                  	
+                                  	<div class="likeGroup${vo.meet_no}" style="display:hidden">
                                     <c:choose>
                                   	<c:when test="${sessionScope.id!=null && vo.likeCount==0 }">
-                                  		<a href="like_insert.do?meet_no=${vo.meet_no}" class="btn btn-primary" style="width:20%;">♡</a>
-                                  		<span class="likeNumber">${vo.meet_like }</span>
+                                  		<input type="button" class="btn btn-default likeInsertBtn" style="width:20%;" value="♡">
+                                  		<span class="likeNumber1" no-data="${vo.meet_no}" like-data="${vo.meet_like }">${vo.meet_like }</span>
                                   	</c:when>
                                   	<c:when test="${sessionScope.id!=null && vo.likeCount!=0 }">
-                                  		<a href="like_insert.do?meet_no=${vo.meet_no}" class="btn btn-primary disabled" style="width:20%;">♡</a>
-                                  		<span class="likeNumber">${vo.meet_like }</span>
+                                  		<a href="like_delete.do?meet_no=${vo.meet_no}" id="likeDeletetBtn" class="btn btn-primary" style="width:20%;">♡</a>
+                                  		<span class="likeNumber2">${vo.meet_like }</span>
                                   	</c:when>
                                   	<c:otherwise>
                                   		<input type="button" class="btn btn-primary" onclick="alert('로그인 후 이용해주세요.');" value="♡" style="width:20%;"/>
-                                  		<span class="likeNumber">${vo.meet_like }</span>
+                                  		<span class="likeNumber3">${vo.meet_like }</span>
                                   	</c:otherwise>
                                   </c:choose>  
+                                  
                                   
                                   <c:if test="${vo.meet_limit eq 0}"> <!-- 신청가능 인원이 0일때 버튼 비활성화 후 정원도달 출력 -->
                                   	<a href="#" class="btn btn-primary disabled" style="float:right; width:50%;">정원도달</a>
@@ -408,6 +435,7 @@
                                   onMouseOver="this.innerHTML='신청하기'" 
                                   onMouseOut="this.innerHTML='${vo.meet_limit}명 신청가능'">${vo.meet_limit}명 신청가능</a>
                                   </c:if>
+                                  </div>
                               </div>
                               
                               <fmt:parseNumber var="percent" value="${(vo.meet_total-vo.meet_limit)/vo.meet_total*100}" integerOnly="true"/>
