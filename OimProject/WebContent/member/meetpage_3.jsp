@@ -46,21 +46,14 @@
          		<h4><span class="oim-icon glyphicon glyphicon-user"></span>모임 수정</h4>
                <select class="form-control selectBox" style="width:55%; margin-bottom:3%;">
 				<c:forEach var="vo" items="${mlist2}" varStatus="status">
-					<c:if test="${status.index eq 0 }">
-						<option id="option" data-no="${vo.meet_no }" class="option1">${vo.meet_subject }</option>
-					</c:if>
-					<c:if test="${status.index ne 0 }">
-						<option id="option" data-no="${vo.meet_no }">${vo.meet_subject }</option>
-					</c:if>	
+						<option id="option" data-no="${vo.meet_no }">${vo.meet_subject }</option>	
 				</c:forEach>
 			</select>
 			<script type="text/javascript"> //첫번째 요소 자동클릭 이벤트
 			$(function(){
-				
-				$('.option1').trigger('click');
+				$('.selectBox option:eq(0)').trigger('click');
 				$('.selectBox').change();
 			});
-			
 			</script>
 			</div>
 			

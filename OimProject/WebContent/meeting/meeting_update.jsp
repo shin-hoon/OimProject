@@ -110,7 +110,6 @@ $(function(){
 				$('.searchArea').html(res);
 			}
 		});
-		
 	});
 });
 </script>
@@ -269,14 +268,21 @@ $(function(){
                    <div id="map" style="width:100%; height:300px; margin: 0 auto; z-index:10"></div>
                     
                          <script>
-
-                         d
- 						 var oimlocation = new naver.maps.LatLng('${vo.meet_lat}','${vo.meet_lng}');
-                         var utmk = naver.maps.TransCoord.fromLatLngToUTMK(oimlocation); // 위/경도 -> UTMK
-                         var tm128 = naver.maps.TransCoord.fromUTMKToTM128(utmk);   // UTMK -> TM128
- 						
+                         var latLeng='${vo.meet_lat}'.length;
+                         var resultLocation="";
+                         
+                         if(latLeng>6){
+                        	 var oimlocation = new naver.maps.LatLng('${vo.meet_lat}','${vo.meet_lng}');
+                             var utmk = naver.maps.TransCoord.fromLatLngToUTMK(oimlocation); // 위/경도 -> UTMK
+                             var tm128 = naver.maps.TransCoord.fromUTMKToTM128(utmk);   // UTMK -> TM128
+     						 resultLocation=tm128;	 
+                         }else{
+                        	 resultLocation=new naver.maps.Point('${vo.meet_lat}','${vo.meet_lng}');
+                         }
+                         
+ 						 
                          map = new naver.maps.Map('map', {
-                             center:tm128, //좌표 표시
+                             center:resultLocation, //좌표 표시
                              zoom: 8, //지도의 초기 줌 레벨
                              mapTypes: new naver.maps.MapTypeRegistry({
                                  'normal': naver.maps.NaverMapTypeOption.getNormalMap({
@@ -301,7 +307,7 @@ $(function(){
                          
                          marker = new naver.maps.Marker({ // 지도마커 생성
                              map: map,
-                             position: tm128 //마커표시
+                             position: resultLocation //마커표시
                          });
                          
                         map.setOptions("mapTypeControl", true); //지도 유형 컨트롤의 표시 여부

@@ -26,6 +26,7 @@
 <script type="text/javascript"> //모두 입력해야 모임을 개설할수있다.
 $(function(){
 	$('#submit').click(function(){
+		var meet_poster=$('input:file[name="upload"]').val();
 		var meet_cg=$('input.meet_cg').val();
 		var meet_subject=$('input:text[name="meet_subject"]').val();
 		var meet_loc1=$('input:text[name="meet_loc1"]').val();
@@ -34,7 +35,11 @@ $(function(){
 		var meet_info=$('textarea[name="meet_info"]').val();
 		var meet_detail=$('textarea[name="meet_detail"]').val();
 		
-		if(meet_cg.trim()==""){
+		if(meet_poster.trim()==""){
+			alert("사진을 등록해주세요!");
+			$('.profile').focus();
+			return false;
+		}else if(meet_cg.trim()==""){
 			alert("카테고리를 선택해주세요!");
 			$('input.btn-category').focus();
 			return false;
