@@ -40,6 +40,7 @@
     
     /*체크박스 이벤트 스크립트*/
     $(function () {
+    
 		<c:forEach var="cg" items="${sessionScope.category}" varStatus="listidx"> //체크된것을 유지하기 위해 jstl과 jquery를 혼용함
 			$("input:checkbox[name='category']:checkbox[value='${cg}']").prop('checked', true);
 		</c:forEach>
@@ -121,12 +122,6 @@
         }
         init();
     });
-    
-    /* $('.page_a').click(function(){
-    	var url=$(this).attr("value");
-    	location.href=url;
-    	$('#mfrm').submit();
-    }); */
 });
     
     
@@ -361,7 +356,7 @@
                  
                  <tr>
                  	<td colspan=2 class="text-center">
-                    <input type="submit" class="btn btn-primary" value="검색하기">
+                    <input type="submit" class="btn btn-primary" value="검색하기" id="sBtn">
                     </td>
                  </tr>
              </table> <!-- 체크박스 테이블 끝 -->
