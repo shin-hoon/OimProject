@@ -9,7 +9,7 @@
 
 <!-- 네이버 map -->
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=zo4zP_T_AlgKWbxHbxzw&callback=CALLBACK_FUNCTION"></script>
-
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&submodules=geocoder"></script>
 <!-- Box shadow -->
 <link rel="stylesheet" type = "text/css" href="meeting/shadow/css/shadowbox.css">
 <script type="text/javascript" src="meeting/shadow/js/shadowbox.js"></script>
@@ -268,124 +268,125 @@
                   <h3 class="webFont">지도보기</h3>
                    <div id="map" style="width:100%;height:600px; margin: 0 auto;"></div>
                     
-                        <script>
-
-                        var oimlocation = new naver.maps.LatLng('${vo.meet_lat}', '${vo.meet_lng}'), //지도의 초기 중심 좌표
-                            map = new naver.maps.Map('map', {
-                                center: oimlocation.destinationPoint(0, 500),
-                                zoom: 8, //지도의 초기 줌 레벨
-                                minZoom: 1, //지도의 최소 줌 레벨
-                                zoomControl: true, //줌 컨트롤의 표시 여부
-                                zoomControlOptions: { //줌 컨트롤의 옵션
-                                position: naver.maps.Position.TOP_RIGHT
-                                }
-                            }),
-                            
-                            marker = new naver.maps.Marker({ // 지도마커 생성
-                                map: map,
-                                position: oimlocation
-                            });
-                            
-                            map.setOptions("mapTypeControl", true); //지도 유형 컨트롤의 표시 여부
+                       <script type="text/javascript">
+                       var latLeng='${vo.meet_lat}'.length;
+                       var resultLocation="";
+                       
+                       if(latLeng>6){
+                      	    var oimlocation = new naver.maps.LatLng('${vo.meet_lat}','${vo.meet_lng}');
+                            var utmk = naver.maps.TransCoord.fromLatLngToUTMK(oimlocation); // 위/경도 -> UTMK
+                            var tm128 = naver.maps.TransCoord.fromUTMKToTM128(utmk);   // UTMK -> TM128
+   						 	resultLocation=tm128;	 
+                       }else{
+                      	 	resultLocation=new naver.maps.Point('${vo.meet_lat}','${vo.meet_lng}');
+                       }
+                         
+                         map = new naver.maps.Map('map', {
+                             center:resultLocation, //좌표 표시
+                             zoom: 8, //지도의 초기 줌 레벨
+                             mapTypes: new naver.maps.MapTypeRegistry({
+                                 'normal': naver.maps.NaverMapTypeOption.getNormalMap({
+                                     projection: naver.maps.TM128Coord
+                                 }),
+                                 'terrain': naver.maps.NaverMapTypeOption.getTerrainMap({
+                                     projection: naver.maps.TM128Coord
+                                 }),
+                                 'satellite': naver.maps.NaverMapTypeOption.getSatelliteMap({
+                                     projection: naver.maps.TM128Coord
+                                 }),
+                                 'hybrid': naver.maps.NaverMapTypeOption.getHybridMap({
+                                     projection: naver.maps.TM128Coord
+                                 })
+                             }),
+                             minZoom: 1, //지도의 최소 줌 레벨
+                             zoomControl: true, //줌 컨트롤의 표시 여부
+                             zoomControlOptions: { //줌 컨트롤의 옵션
+                             position: naver.maps.Position.TOP_RIGHT
+                             }
+                         });
+                         
+                         marker = new naver.maps.Marker({ // 지도마커 생성
+                             map: map,
+                             position: resultLocation //마커표시
+                         });
+                         
+                        map.setOptions("mapTypeControl", true); //지도 유형 컨트롤의 표시 여부
 							
-                            // 마커의 정보창 표시
-                            var contentString = [
-                                '<div class="iw_inner" style="padding:10px;">',
-                                '   	<h3><img src="meeting/image/place.png" style="height: 30px; width: 30px;">모임장소</h3>',
-                                '		<p>${vo.meet_loc }</p>',
-                                '</div>'
-                            ].join('');
 
-	                        var infowindow = new naver.maps.InfoWindow({
-	                            content: contentString
-	                        });
-							
-	                        naver.maps.Event.addListener(marker, "click", function(e) {
-	                            if (infowindow.getMap()) {
-	                                infowindow.close();
-	                            } else {
-	                                infowindow.open(map, marker);
-	                            }
-	                        });
-	
-	                        infowindow.open(map, marker);
+                         // 지도 인터랙션 옵션
+                         $("#interaction").on("click", function(e) {
+                             e.preventDefault();
 
-                            // 지도 인터랙션 옵션
-                            $("#interaction").on("click", function(e) {
-                                e.preventDefault();
+                             if (map.getOptions("draggable")) {
+                                 map.setOptions({ //지도 인터랙션 끄기
+                                     draggable: false,
+                                     pinchZoom: false,
+                                     scrollWheel: false,
+                                     keyboardShortcuts: false,
+                                     disableDoubleTapZoom: true,
+                                     disableDoubleClickZoom: true,
+                                     disableTwoFingerTapZoom: true
+                                 });
 
-                                if (map.getOptions("draggable")) {
-                                    map.setOptions({ //지도 인터랙션 끄기
-                                        draggable: false,
-                                        pinchZoom: false,
-                                        scrollWheel: false,
-                                        keyboardShortcuts: false,
-                                        disableDoubleTapZoom: true,
-                                        disableDoubleClickZoom: true,
-                                        disableTwoFingerTapZoom: true
-                                    });
+                                 $(this).removeClass("control-on");
+                             } else {
+                                 map.setOptions({ //지도 인터랙션 켜기
+                                     draggable: true,
+                                     pinchZoom: true,
+                                     scrollWheel: true,
+                                     keyboardShortcuts: true,
+                                     disableDoubleTapZoom: false,
+                                     disableDoubleClickZoom: false,
+                                     disableTwoFingerTapZoom: false
+                                 });
 
-                                    $(this).removeClass("control-on");
-                                } else {
-                                    map.setOptions({ //지도 인터랙션 켜기
-                                        draggable: true,
-                                        pinchZoom: true,
-                                        scrollWheel: true,
-                                        keyboardShortcuts: true,
-                                        disableDoubleTapZoom: false,
-                                        disableDoubleClickZoom: false,
-                                        disableTwoFingerTapZoom: false
-                                    });
+                                 $(this).addClass("control-on");
+                             }
+                         });
+                         $("#min-max-zoom").on("click", function(e) {
+                             e.preventDefault();
 
-                                    $(this).addClass("control-on");
-                                }
-                            });
-                            $("#min-max-zoom").on("click", function(e) {
-                                e.preventDefault();
+                             if (map.getOptions("minZoom") === 10) {
+                                 map.setOptions({
+                                     minZoom: 1,
+                                     maxZoom: 14
+                                 });
+                                 $(this).val(this.name + ': 1 ~ 14');
+                             } else {
+                                 map.setOptions({
+                                     minZoom: 10,
+                                     maxZoom: 12
+                                 });
+                                 $(this).val(this.name + ': 10 ~ 12');
+                             }
+                         });
 
-                                if (map.getOptions("minZoom") === 10) {
-                                    map.setOptions({
-                                        minZoom: 1,
-                                        maxZoom: 14
-                                    });
-                                    $(this).val(this.name + ': 1 ~ 14');
-                                } else {
-                                    map.setOptions({
-                                        minZoom: 10,
-                                        maxZoom: 12
-                                    });
-                                    $(this).val(this.name + ': 10 ~ 12');
-                                }
-                            });
+                         //지도 컨트롤
+                         $("#controls").on("click", function(e) {
+                             e.preventDefault();
 
-                            //지도 컨트롤
-                            $("#controls").on("click", function(e) {
-                                e.preventDefault();
+                             if (map.getOptions("scaleControl")) {
+                                 map.setOptions({ //모든 지도 컨트롤 숨기기
+                                     scaleControl: false,
+                                     logoControl: false,
+                                     mapDataControl: false,
+                                     zoomControl: false,
+                                     mapTypeControl: false
+                                 });
+                                 $(this).removeClass('control-on');
+                             } else {
+                                 map.setOptions({ //모든 지도 컨트롤 보이기
+                                     scaleControl: true,
+                                     logoControl: true,
+                                     mapDataControl: true,
+                                     zoomControl: true,
+                                     mapTypeControl: true
+                                 });
+                                 $(this).addClass('control-on');
+                             }
+                         });
 
-                                if (map.getOptions("scaleControl")) {
-                                    map.setOptions({ //모든 지도 컨트롤 숨기기
-                                        scaleControl: false,
-                                        logoControl: false,
-                                        mapDataControl: false,
-                                        zoomControl: false,
-                                        mapTypeControl: false
-                                    });
-                                    $(this).removeClass('control-on');
-                                } else {
-                                    map.setOptions({ //모든 지도 컨트롤 보이기
-                                        scaleControl: true,
-                                        logoControl: true,
-                                        mapDataControl: true,
-                                        zoomControl: true,
-                                        mapTypeControl: true
-                                    });
-                                    $(this).addClass('control-on');
-                                }
-                            });
-
-                            
-                            var map = new naver.maps.Map('map', mapOptions);
-                            
+                         var map = new naver.maps.Map('map', mapOptions);
                         </script>
                         <h4 class="place" id="place"><img src="meeting/image/place.png" style="height: 20px; width: 20px;">&emsp;모임 장소 : ${vo.meet_loc }</h4>
                 </div>

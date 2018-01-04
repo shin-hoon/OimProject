@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script type="text/javascript">
 $(function(){ //삭제시 알림창 띄우기
-	$(".deleteTr input").click(function(){
+	$("#deleteTr a").click(function(){
 		if(confirm("정말 이 모임을 삭제하시겠습니까?")){
 			return true;
 		}else{
@@ -34,8 +34,7 @@ $(function(){ //삭제시 알림창 띄우기
 		
 		<tbody>
 			<c:forEach var="mvo" items="${mlist }">
-			<form method="post" action="meeting_delete.do">
-			<tr class="deleteTr">
+			<tr>
 				<td width=20% class="text-center">
 					<a href="meeting_detail.do?meet_no=${mvo.meet_no }">
 						<img src="${mvo.meet_poster }" style="width:60%; margin:0%; margin-right:0%;">
@@ -55,18 +54,16 @@ $(function(){ //삭제시 알림창 띄우기
 					<span class="glyphicon glyphicon-calendar" style="margin-bottom: 10px;"> 신청가능인원: ${mvo.meet_limit } / ${mvo.meet_total }</span><br>
 					<span class="glyphicon glyphicon-ok"> 모임기간: ${mvo.meet_start } ~ ${mvo.meet_end } </span><br>
 				</td>
-				<td width=20% class="text-center" style="vertical-align: middle">
+				<td width=20% class="text-center" id="deleteTr" style="vertical-align: middle">
 					<c:if test="${mvo.meet_end < today }">
 						<h4><span class="label label-default">모임종료</span></h4>
 					</c:if>
 					<c:if test="${mvo.meet_end > today }">
 						<h4><span class="label label-info">진행중</span></h4>
 					</c:if>
-					<a href="meeting_delete.do?meet_no=" id=></a>
-					<input type="submit"  style="margin-top:5px" value="모임삭제" class="btn btn-danger btn-sm">
+					<a href="meeting_delete.do?meet_no=${mvo.meet_no }" class="btn btn-danger btn-sm" style="margin-top:5px">모임삭제</a>
 				</td>
 			</tr>
-			</form>
 			</c:forEach>
             <tr>
 	            <td colspan="4" class="text-center" align="center">

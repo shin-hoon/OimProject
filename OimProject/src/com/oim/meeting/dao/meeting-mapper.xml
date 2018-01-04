@@ -212,4 +212,9 @@
    		meet_limit=#{meet_limit},meet_info=#{meet_info},meet_detail=#{meet_detail},meet_lat=#{meet_lat},meet_lng=#{meet_lng}
    		WHERE meet_no=#{meet_no}
    	</update>
+   	
+   	<delete id="meetingDelete" parameterType="String">
+   		DELETE FROM meeting
+   		WHERE meet_no=#{meet_no}
+   	</delete>
 </mapper>

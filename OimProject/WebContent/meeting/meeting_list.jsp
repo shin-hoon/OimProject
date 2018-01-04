@@ -383,10 +383,21 @@
 	                              	  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><p class="p_add">${vo.meet_subject }</p></a>    
                                   </div>
                                   </div>
-                                
-                                  
-                                  <a href="#" class="btn btn-primary" style="width:20%;">♡</a> 
-                                  <span class="likeNumber">${vo.meet_like }</span>
+                                  		
+                                    <c:choose>
+                                  	<c:when test="${sessionScope.id!=null && vo.likeCount==0 }">
+                                  		<a href="like_insert.do?meet_no=${vo.meet_no}" class="btn btn-primary" style="width:20%;">♡</a>
+                                  		<span class="likeNumber">${vo.meet_like }</span>
+                                  	</c:when>
+                                  	<c:when test="${sessionScope.id!=null && vo.likeCount!=0 }">
+                                  		<a href="like_insert.do?meet_no=${vo.meet_no}" class="btn btn-primary disabled" style="width:20%;">♡</a>
+                                  		<span class="likeNumber">${vo.meet_like }</span>
+                                  	</c:when>
+                                  	<c:otherwise>
+                                  		<input type="button" class="btn btn-primary" onclick="alert('로그인 후 이용해주세요.');" value="♡" style="width:20%;"/>
+                                  		<span class="likeNumber">${vo.meet_like }</span>
+                                  	</c:otherwise>
+                                  </c:choose>  
                                   
                                   <c:if test="${vo.meet_limit eq 0}"> <!-- 신청가능 인원이 0일때 버튼 비활성화 후 정원도달 출력 -->
                                   	<a href="#" class="btn btn-primary disabled" style="float:right; width:50%;">정원도달</a>

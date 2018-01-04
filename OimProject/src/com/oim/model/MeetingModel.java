@@ -574,4 +574,13 @@ public class MeetingModel {
 		return "main/main.jsp";
 	}
     
+    @RequestMapping("meeting_delete.do")
+    public String meeting_delete(HttpServletRequest req, HttpServletResponse res) {
+    	
+    	String meet_no=req.getParameter("meet_no");
+    	MeetingDAO.meetingDelete(meet_no);
+    	
+ 
+    	return "Oim_meetpage.do";
+    }
 }
