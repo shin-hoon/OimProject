@@ -5,6 +5,7 @@
 	<typeAliases>
 		<typeAlias type="com.oim.meeting.dao.MeetingVO" alias="MeetingVO"/>
 		<typeAlias type="com.oim.meeting.dao.MeetReplyVO" alias="MeetReplyVO"/>
+		<typeAlias type="com.oim.meeting.dao.LikeVO" alias="LikeVO"/>
 		<typeAlias type="com.oim.application.dao.ApplicationVO" alias="ApplicationVO"/>
 		<typeAlias type="com.oim.member.dao.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.oim.qaboard.dao.qaboardVO" alias="qaboardVO"/>

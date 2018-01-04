@@ -212,7 +212,7 @@ public class MeetingDAO {
 		return vo;
 	}
 	
-	public static void meetingUpdate(MeetingVO vo) {
+	public static void meetingUpdate(MeetingVO vo) { //모임수정창 데이터
 		
 		SqlSession session=ssf.openSession(true);
 		try {
@@ -227,7 +227,7 @@ public class MeetingDAO {
 		}
 	}
 	
-	public static void meetingDelete(String meet_no) {
+	public static void meetingDelete(int meet_no) { //모임삭제
 		
 		SqlSession session=ssf.openSession(true);
 		try {
@@ -241,6 +241,75 @@ public class MeetingDAO {
 			}
 		}
 	}
+	
+	public static int likeCount(LikeVO vo) { //찜저장
+		   int count=0;
+		   SqlSession session=ssf.openSession();
+		   try {
+			   count=session.selectOne("likeCount",vo);
+		   }catch(Exception ex) {
+			   System.out.println(ex.getMessage());
+		   }finally {
+			   if(session!=null)
+				   session.close();
+		   }
+		   
+		   return count;
+	   }
+	   
+	   public static void likeInsert(LikeVO vo) { //찜하기
+		   SqlSession session=ssf.openSession();
+		   try {
+			   session.insert("likeInsert",vo);
+			   session.update("likeIncrement",vo);
+			   session.commit();
+		   }catch(Exception ex) {
+			   session.rollback();
+			   System.out.println(ex.getMessage());
+		   }finally {
+			   if(session!=null)
+				   session.close();
+		   }
+	   }
+	   
+	   //ORM(Object Relation Mapper) => ex)Mybatis
+	   //DAO DTO(Data Transfer Object) -> VO와 같다(Value Object) Service
+	   public static List<LikeVO> likeListData(String id){ //찜목록
+		   List<LikeVO> list=
+				   new ArrayList<LikeVO>();
+		   SqlSession session=ssf.openSession();
+		   try{
+			   
+			list=session.selectList("likeListData",id);
+			
+		   }catch(Exception ex){
+			   
+			   System.out.println(ex.getMessage());
+			   
+		   }finally{
+			   if(session!=null) {
+				   session.close();
+			   }
+		   }
+		   return list;
+	   }
+	   public static void likeDelete(int no) { //찜삭제
+		   
+		   SqlSession session=ssf.openSession(true);
+		   try{
+			   
+			session.delete("likeDelete",no);
+			
+		   }catch(Exception ex){
+			   
+			   System.out.println(ex.getMessage());
+			   
+		   }finally{
+			   if(session!=null) {
+				   session.close();
+			   }
+		   }
+	   }
 
 //	   public MeetingDAO() { //데이터  파싱에서 DB에 insert하는 용도로 작성한 임시코드
 //	      try {

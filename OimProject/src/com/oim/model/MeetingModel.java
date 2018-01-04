@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
+import com.oim.meeting.dao.LikeVO;
 import com.oim.meeting.dao.MeetReplyDAO;
 import com.oim.meeting.dao.MeetReplyVO;
 import com.oim.meeting.dao.MeetingDAO;
@@ -46,10 +47,19 @@ public class MeetingModel {
 		Map map=new HashMap();
 		map.put("start", start);
 		map.put("end", end);
-		
+		HttpSession session=req.getSession();
+		String om_id=(String)session.getAttribute("id");
 		List<MeetingVO> list=MeetingDAO.meetingListData(map);
 		totalpage=MeetingDAO.meetingTotalPage();
 		
+		for(MeetingVO vo:list) {
+			  if(om_id!=null) {
+				  LikeVO lvo=new LikeVO();
+				  lvo.setOm_id(om_id);
+				  lvo.setMeet_no(vo.getMeet_no());
+				  vo.setLikeCount(MeetingDAO.likeCount(lvo));
+			  }
+		}
 		//jsp·Î Àü¼Û
 		req.setAttribute("totalpage", totalpage);
 		req.setAttribute("curpage", curpage);
@@ -578,9 +588,53 @@ public class MeetingModel {
     public String meeting_delete(HttpServletRequest req, HttpServletResponse res) {
     	
     	String meet_no=req.getParameter("meet_no");
-    	MeetingDAO.meetingDelete(meet_no);
+    	MeetingDAO.meetingDelete(Integer.parseInt(meet_no));
     	
  
     	return "Oim_meetpage.do";
     }
+    
+    @RequestMapping("like_insert.do")
+	public String like_insert(HttpServletRequest req, HttpServletResponse res){
+		
+		HttpSession session=req.getSession();
+		String meet_no=req.getParameter("meet_no");
+		String om_id=(String)session.getAttribute("id");
+		LikeVO vo=new LikeVO();
+		vo.setMeet_no(Integer.parseInt(meet_no));
+		vo.setOm_id(om_id);
+		MeetingDAO.likeInsert(vo);
+		
+		return "";
+	}
+	
+	@RequestMapping("like_list.do")
+	public String jjim_like(HttpServletRequest req, HttpServletResponse res) {
+		
+		HttpSession session=req.getSession();
+		String om_id=(String)session.getAttribute("id");
+		List<LikeVO> list=MeetingDAO.likeListData(om_id);
+		List<MeetingVO> mList=new ArrayList<MeetingVO>();
+		for(LikeVO lvo:list) {
+			MeetingVO vo=MeetingDAO.meetingDetailData(lvo.getMeet_no());
+			mList.add(vo);
+		}
+		
+		req.setAttribute("count", mList.size());
+		req.setAttribute("list", list);
+		req.setAttribute("mList", mList);
+		req.setAttribute("main_jsp", "jjim.jsp");
+		return "main/main.jsp";
+	}
+	
+	@RequestMapping("like_delete.do")
+	public String jjim_delete(HttpServletRequest req, HttpServletResponse res) {
+		
+		String[] num=req.getParameterValues("delnum");
+		for(String n:num) {
+			MeetingDAO.likeDelete(Integer.parseInt(n));
+		}
+		
+		return "jjim_like.do";
+	}
 }
