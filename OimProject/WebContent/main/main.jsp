@@ -107,10 +107,12 @@ $( document ).ready( function() {
    color: #fcbe03!important;
 } 
 .footer {
+  font-family: "Open Sans",sans-serif;
   bottom: 0;
   width: 100%;
-  height: 70px;
+  height: 170px;
   background-color: gray;
+ 
 }
 
  /* 흰색 네비바  */
@@ -306,7 +308,10 @@ a#MOVE_TOP_BTN {
 <!-- =======푸터 ========-->
       <footer class="footer" style="position:relative; bottom:0;">
           <div class="container text-center">
-                <p>오늘의  모임 </p>
+          	<div>
+          	
+          	</div>
+                <span style="color:white;">오늘의  모임 </span>
           </div>
          </footer>
        
