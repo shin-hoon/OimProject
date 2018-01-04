@@ -1,5 +1,7 @@
 package com.oim.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +14,6 @@ import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
 import com.oim.ntboard.dao.ntboardDAO;
 import com.oim.ntboard.dao.ntboardVO;
-import com.oim.qaboard.dao.qaboardDAO;
 
 
 
@@ -35,6 +36,10 @@ public class ntboardModel {
 		map.put("start", start);
 		map.put("end", end);
 		List<ntboardVO> list=ntboardDAO.NtboardListData(map);
+		
+		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        req.setAttribute("today", today);
+        
 		int block=5;
 		int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
 	    int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝

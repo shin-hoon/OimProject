@@ -6,8 +6,14 @@ public class ntboardVO {
 	private String nt_content;
 	private Date nt_regdate;
 	private int nt_hit;
+	private String dbday;
 	
-	
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	public int getNt_no() {
 		return nt_no;
 	}

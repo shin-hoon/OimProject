@@ -35,25 +35,18 @@
        <td width=10% class="text-center">${vo.qa_no }</td>
        <td width=45% class="text-left">
         
-       <c:if test="{${today==dbday}">
+      	 <a href="ccontent.do?no=${vo.qa_no }&page=${curpage}">${vo.qa_subject }</a>
+      	 
+       <c:if test="${today==vo.dbday}">
           <sup>
-           <img src="qaboard/image/new.gif">
+           <img src="qaboard/image/new.gif" width=30 height=30>
           </sup>
 		</c:if>
-       
-       <a href="ccontent.do?no=${vo.qa_no }&page=${curpage}">${vo.qa_subject }</a>
-       	<!-- 
-       		content.do === DispatcherServlet === Model
-       			request						request
-       			=======
-       			no : 10
-       			page : 1
-       	 -->
+		
        </td>
        <td width=15% class="text-center">${vo.om_id }</td>
        <td width=20% class="text-center">
-        <fmt:formatDate value="${vo.qa_regdate }" 
-               pattern="yyyy-MM-dd"/></td>
+        ${vo.dbday }</td>
        <td width=10% class="text-center">${vo.qa_hit }</td>
       </tr>
      </c:forEach>

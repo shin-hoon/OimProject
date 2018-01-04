@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.oim.ntboard.dao.ntboard-mapper">
 	<select id="NtboardListData" resultType="ntboardVO" parameterType="java.util.Map">
-	SELECT nt_no,nt_subject,nt_regdate,nt_hit,num
+	SELECT nt_no,nt_subject,TO_CHAR(nt_regdate,'YYYY-MM-DD') as dbday,nt_hit,num
 	FROM (SELECT nt_no,nt_subject,nt_regdate,nt_hit,rownum as num
 	FROM (SELECT nt_no,nt_subject,nt_regdate,nt_hit
 	FROM notice ORDER BY nt_no DESC))

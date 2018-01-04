@@ -28,6 +28,14 @@ public class qaboardVO {
 	 private int qa_group_tab;
 	 private int qa_root;
 	 private int qa_depth;
+	 private String dbday;
+	 
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	public int getQa_no() {
 		return qa_no;
 	}

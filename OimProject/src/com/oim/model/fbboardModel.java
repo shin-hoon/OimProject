@@ -39,6 +39,11 @@ public class fbboardModel {
 			String id=(String)session.getAttribute("id");
 			session.setAttribute("id", id);
 		  List<fbBoardVO> list=fbBoardDAO.fbboardListData(map);
+		  
+		  String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+	      req.setAttribute("today", today);
+		  
+		  
 		  int block=5;
 		  int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
 		  int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝

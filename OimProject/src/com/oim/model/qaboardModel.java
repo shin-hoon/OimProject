@@ -39,13 +39,13 @@ public class qaboardModel{
 		map.put("end", end);
 		String om_id=(String)session.getAttribute("id");
 		
-		qaboardVO vo=new qaboardVO();
+		
 		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        String dbday=vo.getQa_regdate().toString();
         req.setAttribute("today", today);
-        req.setAttribute("dbday", dbday);
-
+        
+        
 		List<qaboardVO> list=qaboardDAO.boardListData(map);
+		System.out.println("1");
 		int block=5;
 		int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
 	    int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝
@@ -63,10 +63,11 @@ public class qaboardModel{
 		req.setAttribute("fromPage", fromPage);
 		req.setAttribute("toPage", toPage);
 		req.setAttribute("totalpage", totalpage);
+		
 		req.setAttribute("main_jsp","../qaboard/list.jsp");
 		}catch(Exception ex)
 		{
-			System.out.println(ex.getMessage());
+			System.out.println("list : "+ex.getMessage());
 		}
 		
 		return "main/main.jsp";

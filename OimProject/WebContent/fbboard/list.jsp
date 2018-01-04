@@ -35,18 +35,15 @@
        <td width=10% class="text-center">${vo.no }</td>
        <td width=45% class="text-left">
        <a href="fbcontent.do?no=${vo.no }&page=${curpage}">${vo.subject }</a>
-       	<!-- 
-       		content.do === DispatcherServlet === Model
-       			request						request
-       			=======
-       			no : 10
-       			page : 1
-       	 -->
+       	<c:if test="${today==vo.dbday}">
+          <sup>
+           <img src="fbboard/image/new.gif" width=30 height=30>
+          </sup>
+		</c:if>
        </td>
        <td width=15% class="text-center">${vo.om_id }</td>
        <td width=20% class="text-center">
-        <fmt:formatDate value="${vo.regdate }" 
-               pattern="yyyy-MM-dd"/></td>
+        ${vo.dbday }</td>
        <td width=10% class="text-center">${vo.hit }</td>
       </tr>
      </c:forEach>

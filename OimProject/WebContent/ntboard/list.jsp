@@ -34,17 +34,16 @@
        <td width=15% class="text-center">${vo.nt_no }</td>
        <td width=45% class="text-left">
        <a href="ntcontent.do?no=${vo.nt_no }&page=${curpage}">${vo.nt_subject }</a>
-       	<!-- 
-       		content.do === DispatcherServlet === Model
-       			request						request
-       			=======
-       			no : 10
-       			page : 1
-       	 -->
+       
+       <c:if test="${today==vo.dbday}">
+          <sup>
+           <img src="ntboard/image/new.gif" width=30 height=30>
+          </sup>
+		</c:if>
+		
        </td>
        <td width=25% class="text-center">
-        <fmt:formatDate value="${vo.nt_regdate }" 
-               pattern="yyyy-MM-dd"/></td>
+        ${vo.dbday }</td>
        <td width=15% class="text-center">${vo.nt_hit }</td>
       </tr>
      </c:forEach>
