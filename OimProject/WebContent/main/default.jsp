@@ -261,20 +261,23 @@ $(function(){
                  </div>
                </div>
          <!-- /////////////////////////////////////// -->
-         <!-- <div class="row">
+         <div class="row">
                  <nav id="filter" class="col-md-12 text-center">
                    <ul>
+
                      <li><a href="#" class="current btn-theme btn-small" data-filter="*" >#ALL</a></li>
                      
+
                      <li>
-                     	<a href="#" class="btn-theme btn-small" data-filter=".webdesign">#스터디</a>
+                     	<a href="#" class="current btn-theme btn-small" data-filter=".study">#스터디</a>
+
                      </li>
                      <li><a href="#" class="btn-theme btn-small" data-filter=".photography">#취미</a></li>
                      <li><a href="#" class="btn-theme btn-small" data-filter=".print">#전시</a></li>
                      <li><a href="#" class="btn-theme btn-small" data-filter=".pro">#IT</a></li>
                    </ul>
                  </nav>
-          		<div class="col-md-12">
+          		<!--<div class="col-md-12">
 			          <div class="row">
 			            <div class="portfolio-items isotopeWrapper clearfix" id="3">
 			
@@ -369,7 +372,7 @@ $(function(){
                    <div class="row">
                      <div class="portfolio-items isotopeWrapper clearfix" id="3">
                      
-         			  <c:forEach var="vo" items="${list3 }" begin="1" end="4">
+         			  <c:forEach var="vo" items="${list3 }" begin="1" end="5">
                        <article class="col-md-4 isotopeItem study">
                          <div class="portfolio-item">
                          	<a href="meeting_detail.do?meet_no=${vo.meet_no}">

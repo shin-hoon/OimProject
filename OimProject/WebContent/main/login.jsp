@@ -27,6 +27,15 @@
    outline:0;
    
 }
+#login{
+ z-index:9999;
+}
+.fade{
+ z-index:9998;
+}
+#join{
+ z-index:9999;
+}
 </style>
 
 

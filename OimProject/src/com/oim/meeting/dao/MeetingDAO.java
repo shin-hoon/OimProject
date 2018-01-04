@@ -195,15 +195,15 @@ public class MeetingDAO {
 		return vo;
 	}
 	
-	public static MeetingVO meetingUpdate(int meet_no) {
+	public static MeetingVO meetingUpdate(int meet_no) { //모임수정창 정보
 		
 		MeetingVO vo=new MeetingVO();
 		SqlSession session=ssf.openSession();
 		
 		try {
-			vo=session.selectOne("meetingUpdate",meet_no);
+			vo=session.selectOne("meetingUpdateData",meet_no);
 		}catch(Exception ex) {
-			System.out.println("meetingUpdate: "+ex.getMessage());
+			System.out.println("meetingUpdateData: "+ex.getMessage());
 		}finally {
 			if(session!=null)
 				session.close();
