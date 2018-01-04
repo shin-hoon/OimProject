@@ -150,8 +150,6 @@ public class MeetingModel {
 						session.setAttribute("price", price);
 						session.setAttribute("from", from);
 						session.setAttribute("to", to);
-						
-						System.out.println("totalpage: "+totalpage);
 					}
 					else //페이지를 옮겨갈 경우에는 map에 메모리를 새로 할당해서 session에 저장된 검색결과를 넣는다.
 					{
@@ -166,7 +164,6 @@ public class MeetingModel {
 						map.put("end", end);
 						list=MeetingDAO.meetingFindData(map);
 						totalpage=MeetingDAO.meetingFindTotalPage(map);
-						System.out.println("totalpage: "+totalpage);
 					}
 					req.setAttribute("totalpage", totalpage);
 					req.setAttribute("curpage", curpage);
@@ -194,8 +191,6 @@ public class MeetingModel {
     public String meeting_payment(HttpServletRequest req, HttpServletResponse res) {
     	String meet_no = req.getParameter("meet_no");
     	String om_id = req.getParameter("om_id");
-    	//System.out.println(om_id);
-    	//System.out.println("meet_no:"+meet_no);
     	MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
     	MemberVO vo2 = MeetingDAO.meetingDetailInfo(om_id);
     	
@@ -221,9 +216,6 @@ public class MeetingModel {
     
     @RequestMapping("loc_search.do")//모임장소 지역검색
     public String loc_search(HttpServletRequest req, HttpServletResponse res) {
-    		
-    		System.out.println("검색");
-
     	    String clientId="_meOdew7lewhDIHb1HpK";//애플리케이션 클라이언트 아이디값";
 	        String clientSecret="T7NOHRhl3A";//애플리케이션 클라이언트 시크릿값";
 	        String search=req.getParameter("search");
@@ -392,7 +384,6 @@ public class MeetingModel {
     @RequestMapping("meeting_update.do")
     public String meeting_Update(HttpServletRequest req, HttpServletResponse res) { //모임수정화면
     	String meet_no=req.getParameter("meet_no");
-    	System.out.println(meet_no);
     	MeetingVO vo=MeetingDAO.meetingUpdate(Integer.parseInt(meet_no));
     	Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

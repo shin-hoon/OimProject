@@ -270,7 +270,7 @@ $(function(){
                     
                          <script>
 
-                         
+                         d
  						 var oimlocation = new naver.maps.LatLng('${vo.meet_lat}','${vo.meet_lng}');
                          var utmk = naver.maps.TransCoord.fromLatLngToUTMK(oimlocation); // 위/경도 -> UTMK
                          var tm128 = naver.maps.TransCoord.fromUTMKToTM128(utmk);   // UTMK -> TM128
