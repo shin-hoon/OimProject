@@ -145,9 +145,9 @@
 		 SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start, TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
          FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as num
          FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like
-         FROM meeting WHERE meet_cg LIKE '%'||#{searchText}||'%'
-         OR meet_subject LIKE '%'||#{searchText}||'%'
-         OR meet_info LIKE '%'||#{searchText}||'%'
+         FROM meeting WHERE UPPER(meet_cg) LIKE '%'||UPPER(#{searchText})||'%'
+         OR UPPER(meet_subject) LIKE '%'||UPPER(#{searchText})||'%'
+         OR UPPER(meet_info) LIKE '%'||UPPER(#{searchText})||'%'
          ORDER BY meet_regdate DESC))
          WHERE num BETWEEN #{start} AND #{end}
 	</select>
@@ -159,9 +159,9 @@
 
 	<select id="meetingSearchTotalPage" parameterType="String" resultMap="pageMap"> <!-- 검색어 입력했을때의 모임결과 보여주기 -->
 		 SELECT COUNT(*) as total,CEIL(COUNT(*)/12) as totalpage FROM meeting
-         WHERE meet_cg LIKE '%'||#{searchText}||'%'
-         OR meet_subject LIKE '%'||#{searchText}||'%'
-         OR meet_info LIKE '%'||#{searchText}||'%'
+         WHERE UPPER(meet_cg) LIKE '%'||UPPER(#{searchText})||'%'
+         OR UPPER(meet_subject) LIKE '%'||UPPER(#{searchText})||'%'
+         OR UPPER(meet_info) LIKE '%'||UPPER(#{searchText})||'%'
 	</select>
 	
 	<select id="meetingDetailData" resultType="MeetingVO" parameterType="int">
@@ -205,7 +205,11 @@
       WHERE o.om_id=m.om_id AND m.meet_no=#{meet_no}              
    	</select>
    	
-   	<update id="meetingUpdate" parameterType="int">
-   		
+   	<update id="meetingUpdate" parameterType="MeetingVO">
+   		UPDATE meeting SET
+   		meet_cg=#{meet_cg},meet_charge=#{meet_charge},meet_poster=#{meet_poster},meet_subject=#{meet_subject},
+   		meet_start=#{meet_start},meet_end=#{meet_end},meet_loc=#{meet_loc},meet_total=#{meet_total},
+   		meet_limit=#{meet_limit},meet_info=#{meet_info},meet_detail=#{meet_detail},meet_lat=#{meet_lat},meet_lng=#{meet_lng}
+   		WHERE meet_no=#{meet_no}
    	</update>
 </mapper>

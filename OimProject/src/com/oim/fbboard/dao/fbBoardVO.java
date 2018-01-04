@@ -10,7 +10,14 @@ public class fbBoardVO {
 	private Date regdate;
 	private int hit;
 	private int count;
+	private String dbday;
 	
+	public String getDbday() {
+		return dbday;
+	}
+	public void setDbday(String dbday) {
+		this.dbday = dbday;
+	}
 	public int getCount() {
 		return count;
 	}

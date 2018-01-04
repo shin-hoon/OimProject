@@ -12,13 +12,15 @@
 <!-- 답변게시판 -->
 <div class="container">
    <div class="row">
-   <h3>문의 게시판Q&A</h3>
+   <h3>공지 사항</h3>
    <table class="table table-hover">
+   <c:if test="${sessionScope.om_id != null && sessionScope.om_id=='admin'}">
      <tr>
       <td class="text-left">
        <a href="ntinsert.do" class="btn btn-warning">새글</a>
       </td>
      </tr>
+   </c:if>  
    </table>
    <table class="table table-hover">
      <tr class="success">
@@ -32,17 +34,16 @@
        <td width=15% class="text-center">${vo.nt_no }</td>
        <td width=45% class="text-left">
        <a href="ntcontent.do?no=${vo.nt_no }&page=${curpage}">${vo.nt_subject }</a>
-       	<!-- 
-       		content.do === DispatcherServlet === Model
-       			request						request
-       			=======
-       			no : 10
-       			page : 1
-       	 -->
+       
+       <c:if test="${today==vo.dbday}">
+          <sup>
+           <img src="ntboard/image/new.gif" width=30 height=30>
+          </sup>
+		</c:if>
+		
        </td>
        <td width=25% class="text-center">
-        <fmt:formatDate value="${vo.nt_regdate }" 
-               pattern="yyyy-MM-dd"/></td>
+        ${vo.dbday }</td>
        <td width=15% class="text-center">${vo.nt_hit }</td>
       </tr>
      </c:forEach>
@@ -59,31 +60,36 @@
        <input type=submit value="찾기" class="btn btn-info btn-xs">
       </td>
       <td class="text-left"></td>
-   	  <td class="text-right">
-   	  <a href="ntlist.do?page=${curpage<10?1:curpage-10 }" class="btn btn-warning btn-xs">◀◀</a>&nbsp;
-   	  <a href="ntlist.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-warning btn-xs">◀</a>&nbsp;
-   	  <fmt:parseNumber var="num" value="${curpage/10}" integerOnly="true"/>
-             <c:set var="num" value="${num<=0?1:num*10}"/>  
-             <c:forEach var="i"  begin="${num}" end="${num==1?num+8:num+9}">
-                <c:choose>
-                   <c:when test="${i > totalpage }"></c:when>
-                   <c:when test="${i==curpage}">
-                   <a href="ntlist.do?page=${i}">
-                      <b>(${i})</b>
-                      </a>
-                   </c:when>
-                   <c:when test="${i <= totalpage}">
-                      <a href="ntlist.do?page=${i }">
-                         <b>(${i})</b>
-                      </a>
-                   </c:when>
-                </c:choose>
-             </c:forEach>
-   	  <a href="ntlist.do?page=${curpage<totalpage?curpage+1:curpage }"class="btn btn-warning btn-xs">▶</a>&nbsp;&nbsp;
-   	  <a href="ntlist.do?page=${totalpage}" class="btn btn-warning btn-xs">▶▶</a>
-   	  ${curpage } page / ${totalpage } pages
-   	  </td>
-      
+      <td class="text-right">
+   	  <c:choose>
+        <c:when test="${curpage>block }">
+          <a href="ntlist.do?page=1" class="btn btn-warning btn-xs">◀◀</a>
+          <a href="ntlist.do?page=${fromPage-1 }" class="btn btn-warning btn-xs">◀</a>
+        </c:when>
+        <c:otherwise>
+          <span style="color:white" class="btn btn-warning btn-xs">◀◀</span>   
+          <span style="color:white" class="btn btn-warning btn-xs">◀</span>
+        </c:otherwise>
+       </c:choose>
+       <c:forEach var="i" begin="${fromPage }" end="${toPage }">
+        <c:if test="${i==curpage }">
+          [${i }]
+        </c:if>
+        <c:if test="${i!=curpage }">
+          [<a href="ntlist.do?page=${i }">${i }</a>]
+        </c:if>
+       </c:forEach>
+       <c:choose>
+       <c:when test="${toPage<allpage }">
+          <a href="ntlist.do?page=${toPage+1 }" class="btn btn-warning btn-xs">▶</a>
+          <a href="ntlist.do?page=${allpage }" class="btn btn-warning btn-xs">▶▶</a>
+        </c:when>
+        <c:otherwise>
+          <span style="color:white" class="btn btn-warning btn-xs">▶</span>
+          <span style="color:white" class="btn btn-warning btn-xs">▶▶</span>
+        </c:otherwise>
+       </c:choose>
+      </td>
      </tr>
     </table>
 

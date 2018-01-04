@@ -368,7 +368,8 @@ $(function(){
                          
                          var map = new naver.maps.Map('map', mapOptions);
                         </script>
-                        
+							<input type="hidden" name="meet_lat" value=""> <!--위도값을 넘기기위한 input 태그  -->
+                        	<input type="hidden" name="meet_lng" value=""> <!--경도값을 넘기기위한 input 태그  -->
                           <div class="input-group" style="margin: 15px 0 15px 0">
                            <div class="input-group-addon">
                             <span class="glyphicon glyphicon-map-marker"></span> 

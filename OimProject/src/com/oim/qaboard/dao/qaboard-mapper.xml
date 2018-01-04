@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.oim.qaboard.dao.qaboard-mapper">
 	<select id="boardListData" resultType="qaboardVO" parameterType="java.util.Map">
-	SELECT qa_no,qa_subject,om_id,qa_regdate,qa_hit,qa_group_tab,num
+	SELECT qa_no,qa_subject,om_id,TO_CHAR(qa_regdate,'YYYY-MM-DD') as dbday,qa_hit,qa_group_tab,num
 	FROM (SELECT qa_no,qa_subject,om_id,qa_regdate,qa_hit,qa_group_tab,rownum as num
 	FROM (SELECT qa_no,qa_subject,om_id,qa_regdate,qa_hit,qa_group_tab
 	FROM qaboard ORDER BY qa_group_id DESC, qa_group_step ASC))

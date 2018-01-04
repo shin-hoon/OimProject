@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.oim.fbboard.dao.fbboard-mapper">
     <select id="fbboardListData" resultType="fbBoardVO" parameterType="java.util.Map">
-    SELECT no,subject,om_id,regdate,hit,num
+    SELECT no,subject,om_id,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num
     FROM (SELECT no,subject,om_id,regdate,hit,rownum as num
     FROM (SELECT no,subject,om_id,regdate,hit 
     FROM omfreeboard ORDER BY no DESC))

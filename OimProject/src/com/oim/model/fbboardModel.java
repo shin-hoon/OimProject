@@ -19,6 +19,7 @@ import com.oim.fbboard.dao.replyVO;
 
 
 
+
 @Controller
 public class fbboardModel {
 	@RequestMapping("fblist.do")
@@ -34,14 +35,31 @@ public class fbboardModel {
 		  Map map=new HashMap();
 		  map.put("start", start);
 		  map.put("end", end);
-		  
+		  HttpSession session= req.getSession();
+			String id=(String)session.getAttribute("id");
+			session.setAttribute("id", id);
 		  List<fbBoardVO> list=fbBoardDAO.fbboardListData(map);
+		  
+		  String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+	      req.setAttribute("today", today);
+		  
+		  
+		  int block=5;
+		  int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
+		  int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝
+		  
 		  for(fbBoardVO vo:list)
 		  {
 			  vo.setCount(fbBoardDAO.fbboardReplyCount(vo.getNo()));
 		  }
-		  
+		  int allpage=fbBoardDAO.fbboardTotalPage();
 		  int totalpage=fbBoardDAO.fbboardTotalPage();
+		  if(toPage>allpage)
+			toPage=allpage;
+			req.setAttribute("block", block);
+			req.setAttribute("allpage", allpage);
+			req.setAttribute("fromPage", fromPage);
+			req.setAttribute("toPage", toPage);
 		  req.setAttribute("curpage", curpage);
 		  req.setAttribute("totalpage", totalpage);
 		  req.setAttribute("list",list);
@@ -67,6 +85,9 @@ public class fbboardModel {
 		  map.put("start", start);
 		  map.put("end", end);
 		  map.put("bno", Integer.parseInt(no));
+		  
+			String id=(String)session.getAttribute("id");
+			session.setAttribute("id", id);
 		  List<replyVO> list=fbBoardDAO.fbreplyListData(map);
 		  String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		  req.setAttribute("list", list);
@@ -167,7 +188,7 @@ public class fbboardModel {
 		  fbBoardDAO.fbreplyDelete(Integer.parseInt(no));
 		  return "fbcontent.do?no="+bno;
 	  }
-	  @RequestMapping("board_delete.do")
+	  @RequestMapping("fbdelete.do")
 	  public String board_deleteModel(HttpServletRequest req,HttpServletResponse res)
 	  {
 		  String no=req.getParameter("no");
@@ -175,7 +196,7 @@ public class fbboardModel {
 		  req.setAttribute("main_jsp", "../fbboard/delete.jsp");
 		  return "main/main.jsp";
 	  }
-	  @RequestMapping("board_delete_ok.do")
+	  @RequestMapping("fbdeleteok.do")
 	  public String board_delete_okModel(HttpServletRequest req,HttpServletResponse res)
 	  {
 		  String no=req.getParameter("no");
@@ -184,13 +205,13 @@ public class fbboardModel {
 		  req.setAttribute("bCheck", bCheck);
 		  return "fbboard/delete_ok.jsp";
 	  }
-	  @RequestMapping("board_insert.do")
+	  @RequestMapping("fbinsert.do")
 	  public String board_insertModel(HttpServletRequest req,HttpServletResponse res)
 	  {
 		  req.setAttribute("main_jsp", "../fbboard/insert.jsp");
 		  return "main/main.jsp";
 	  }
-	  @RequestMapping("board_insert_ok.do")
+	  @RequestMapping("fbinsertok.do")
 	  public String board_insert_okModel(HttpServletRequest req,HttpServletResponse res)
 	  {
 		  try
@@ -214,7 +235,7 @@ public class fbboardModel {
 		  fbBoardDAO.fbboardInsert(vo);
 		  return "fblist.do";
 	  }
-	  @RequestMapping("board_update.do")
+	  @RequestMapping("fbupdate.do")
 	  public String board_updateModel(HttpServletRequest req,HttpServletResponse res)
 	  {
 		  String no=req.getParameter("no");
@@ -224,7 +245,7 @@ public class fbboardModel {
 		  req.setAttribute("main_jsp", "../fbboard/update.jsp");
 		  return "main/main.jsp";
 	  }
-	  @RequestMapping("board_update_ok.do")
+	  @RequestMapping("fbupdateok.do")
 	  public String board_update_okModel(HttpServletRequest req,HttpServletResponse res)
 	  {
 		  try
