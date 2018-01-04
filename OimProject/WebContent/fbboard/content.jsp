@@ -47,37 +47,39 @@ $(function(){
 </script>
 </head>
 <body>
-  <div id="news_area">
+  <div id="news_area" class="container">
     <center>
-       <h1 style="color:white;">내용보기</h1>
-       <table id="table_content" width=700>
+       <h3>상세내용</h1>
+       <table id="table_content" width=700 class="table table-hover">
         <tr>
-         <th width=20%>번호</th>
-         <td width=30% align=center>${vo.no }</td>
-         <th width=20%>작성일</th>
-         <td width=30% align=center>
+         <th width=20% class="text-center warning qna-td">번호</th>
+         <td width=30% align=center class="text-center qna-td">${vo.no }</td>
+         <th width=20% class="text-center warning qna-td">작성일</th>
+         <td width=30% align=center class="text-center qna-td">
            <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
          </td>
         </tr>
         <tr>
-         <th width=20%>이름</th>
-         <td width=30% align=center>${vo.om_id }</td>
-         <th width=20%>조회수</th>
-         <td width=30% align=center>${vo.hit }</td>
+         <th width=20% class="text-center warning qna-td">아이디</th>
+         <td width=30% align=center class="text-center qna-td">${vo.om_id }</td>
+         <th width=20% class="text-center warning qna-td">조회수</th>
+         <td width=30% align=center class="text-center qna-td">${vo.hit }</td>
         </tr>
         <tr>
-         <th width=20%>제목</th>
-         <td colspan="3" align=left>${vo.subject }</td>
+         <th width=20% class="text-center warning qna-td">제목</th>
+         <td colspan="3" align=left class="text-center qna-td">${vo.subject }</td>
         </tr>
         <tr>
-          <td colspan="4" align="left" valign="top"
-            height="100">${vo.content }</td>
+          <td colspan="4" valign="top" class="text-left qna-td"
+            height="200"><pre>${vo.content }</pre></td>
         </tr>
         <tr>
           <td colspan="4" align="right">
-            <a href="fbupdate.do?no=${vo.no }">수정</a>&nbsp;
-            <a href="fbdelete.do?no=${vo.no }">삭제</a>&nbsp;
-           <a href="fblist.do">목록</a>
+          <c:if test="${sessionScope.id != null || sessionScope.id=='admin'}">
+            <a href="fbupdate.do?no=${vo.no }" class="btn btn-warning">수정</a>&nbsp;
+            <a href="fbdelete.do?no=${vo.no }" class="btn btn-warning">삭제</a>&nbsp;
+          </c:if>
+           <a href="fblist.do" class="btn btn-warning">목록</a>
           </td>
         </tr>
        </table>
@@ -111,8 +113,8 @@ $(function(){
              <span><pre>${rvo.msg }</pre></span>
             </td>
             <td align=right>
-             <c:if test="${sessionScope.id!=null }">
-              <c:if test="${sessionScope.id==rvo.om_id }">
+             <c:if test="${sessionScope.id!=null || sessionScope.id=='admin'}">
+              <c:if test="${sessionScope.id==rvo.om_id or sessionScope.id=='admin'}">
                └<a class="reply_update" value="${rvo.no }">수정</a>&nbsp;
                └<a href="reply_delete.do?no=${rvo.no }&bno=${vo.no}">삭제</a>
               </c:if>&nbsp;

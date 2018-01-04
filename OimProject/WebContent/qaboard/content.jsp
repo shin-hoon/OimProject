@@ -71,8 +71,10 @@
 				<table class="table">
 					<tr>
 						<td class="text-right">
-							<a href="uupdate.do?no=${vo.qa_no }&page=${page }" class="btn btn-warning">수정</a>&nbsp;
+							<c:if test="${sessionScope.om_id != null}">
+							<a href="uupdate.do?no=${vo.qa_no }&page=${page }" class="btn btn-warning">수정</a>&nbsp;							
 							<a href="ddelete.do?no=${vo.qa_no }&page=${page }" class="btn btn-warning" id="delBtn">삭제</a>&nbsp;
+							</c:if>
 							<a href="llist.do?np=${vo.qa_no }page=${page }" class="btn btn-warning">목록</a>
 						</td>
 					</tr>

@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
@@ -34,11 +35,24 @@ public class ntboardModel {
 		map.put("start", start);
 		map.put("end", end);
 		List<ntboardVO> list=ntboardDAO.NtboardListData(map);
+		int block=5;
+		int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
+	    int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝
+		HttpSession session= req.getSession();
+		String om_id=(String)session.getAttribute("id");
+		session.setAttribute("om_id", om_id);
 		// list.jsp => 값 전송(req.setAttribute())
 		req.setAttribute("list", list);
 		req.setAttribute("curpage", curpage);
 		int totalpage=ntboardDAO.NtboardTotalPage();
+		int allpage=ntboardDAO.NtboardTotalPage();
+		if(toPage>allpage)
+			toPage=allpage;
 		req.setAttribute("totalpage", totalpage);
+		req.setAttribute("block", block);
+		req.setAttribute("allpage", allpage);
+		req.setAttribute("fromPage", fromPage);
+		req.setAttribute("toPage", toPage);
 		req.setAttribute("main_jsp","../ntboard/list.jsp");
 		
 		}catch(Exception ex)
@@ -73,6 +87,9 @@ public class ntboardModel {
 		String nt_no=req.getParameter("no");
 		String page=req.getParameter("page");
 		ntboardVO vo=ntboardDAO.NtboardContentData(Integer.parseInt(nt_no));
+		HttpSession session= req.getSession();
+		String om_id=(String)session.getAttribute("id");
+		session.setAttribute("om_id", om_id);
 		req.setAttribute("vo", vo);
 		req.setAttribute("page", page);
 		req.setAttribute("main_jsp","../ntboard/content.jsp");

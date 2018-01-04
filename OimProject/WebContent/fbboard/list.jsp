@@ -12,13 +12,15 @@
 <!-- 답변게시판 -->
 <div class="container">
    <div class="row">
-   <h3>문의 게시판Q&A</h3>
+   <h3>자유 게시판(소통)</h3>
    <table class="table table-hover">
+   <c:if test="${sessionScope.id != null || sessionScope.id=='admin'}">
      <tr>
       <td class="text-left">
        <a href="fbinsert.do" class="btn btn-warning">새글</a>
       </td>
      </tr>
+   </c:if>
    </table>
    <table class="table table-hover">
      <tr class="success">
@@ -63,29 +65,35 @@
       </td>
       <td class="text-left"></td>
    	  <td class="text-right">
-   	  <a href="fblist.do?page=${curpage<10?1:curpage-10 }" class="btn btn-warning btn-xs">◀◀</a>&nbsp;
-   	  <a href="fblist.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-warning btn-xs">◀</a>&nbsp;
-   	  <fmt:parseNumber var="num" value="${curpage/10}" integerOnly="true"/>
-             <c:set var="num" value="${num<=0?1:num*10}"/>  
-             <c:forEach var="i"  begin="${num}" end="${num==1?num+8:num+9}">
-                <c:choose>
-                   <c:when test="${i > totalpage }"></c:when>
-                   <c:when test="${i==curpage}">
-                   <a href="fblist.do?page=${i}">
-                      <b>(${i})</b>
-                      </a>
-                   </c:when>
-                   <c:when test="${i <= totalpage}">
-                      <a href="fblist.do?page=${i }">
-                         <b>(${i})</b>
-                      </a>
-                   </c:when>
-                </c:choose>
-             </c:forEach>
-   	  <a href="fblist.do?page=${curpage<totalpage?curpage+1:curpage }"class="btn btn-warning btn-xs">▶</a>&nbsp;&nbsp;
-   	  <a href="fblist.do?page=${totalpage}" class="btn btn-warning btn-xs">▶▶</a>
-   	  ${curpage } page / ${totalpage } pages
-   	  </td>
+   	  <c:choose>
+        <c:when test="${curpage>block }">
+          <a href="fblist.do?page=1" class="btn btn-warning btn-xs">◀◀</a>
+          <a href="fblist.do?page=${fromPage-1 }" class="btn btn-warning btn-xs">◀</a>
+        </c:when>
+        <c:otherwise>
+          <span style="color:white" class="btn btn-warning btn-xs">◀◀</span>   
+          <span style="color:white" class="btn btn-warning btn-xs">◀</span>
+        </c:otherwise>
+       </c:choose>
+       <c:forEach var="i" begin="${fromPage }" end="${toPage }">
+        <c:if test="${i==curpage }">
+          [${i }]
+        </c:if>
+        <c:if test="${i!=curpage }">
+          [<a href="fblist.do?page=${i }">${i }</a>]
+        </c:if>
+       </c:forEach>
+       <c:choose>
+       <c:when test="${toPage<allpage }">
+          <a href="fblist.do?page=${toPage+1 }" class="btn btn-warning btn-xs">▶</a>
+          <a href="fblist.do?page=${allpage }" class="btn btn-warning btn-xs">▶▶</a>
+        </c:when>
+        <c:otherwise>
+          <span style="color:white" class="btn btn-warning btn-xs">▶</span>
+          <span style="color:white" class="btn btn-warning btn-xs">▶▶</span>
+        </c:otherwise>
+       </c:choose>
+      </td>
       
      </tr>
     </table>

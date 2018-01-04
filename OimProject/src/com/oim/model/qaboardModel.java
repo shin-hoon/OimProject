@@ -1,17 +1,21 @@
 package com.oim.model;
 
 import java.io.PrintWriter;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
 import com.oim.qaboard.dao.qaboardDAO;
 import com.oim.qaboard.dao.qaboardVO;
+
 
 @Controller
 public class qaboardModel{
@@ -21,6 +25,7 @@ public class qaboardModel{
 		// TODO Auto-generated method stub
 		try {
 		String page=req.getParameter("page");
+		HttpSession session= req.getSession();
 		// req => 요청값 => 추가 (setAttribute())
 		if(page==null)
 			page="1";
@@ -32,14 +37,33 @@ public class qaboardModel{
 		Map map=new HashMap();
 		map.put("start", start);
 		map.put("end", end);
+		String om_id=(String)session.getAttribute("id");
+		
+		qaboardVO vo=new qaboardVO();
+		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String dbday=vo.getQa_regdate().toString();
+        req.setAttribute("today", today);
+        req.setAttribute("dbday", dbday);
+
 		List<qaboardVO> list=qaboardDAO.boardListData(map);
+		int block=5;
+		int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
+	    int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝
+	   
 		// list.jsp => 값 전송(req.setAttribute())
 		req.setAttribute("list", list);
 		req.setAttribute("curpage", curpage);
+		session.setAttribute("om_id", om_id);
 		int totalpage=qaboardDAO.boardTotalPage();
+		int allpage=qaboardDAO.boardTotalPage();
+		if(toPage>allpage)
+			toPage=allpage;
+		req.setAttribute("block", block);
+		req.setAttribute("allpage", allpage);
+		req.setAttribute("fromPage", fromPage);
+		req.setAttribute("toPage", toPage);
 		req.setAttribute("totalpage", totalpage);
 		req.setAttribute("main_jsp","../qaboard/list.jsp");
-		
 		}catch(Exception ex)
 		{
 			System.out.println(ex.getMessage());
@@ -76,7 +100,10 @@ public class qaboardModel{
 		public String ContentModel(HttpServletRequest req, HttpServletResponse res) throws Throwable {
 			String qa_no=req.getParameter("no");
 			String page=req.getParameter("page");
+			HttpSession session= req.getSession();
 			qaboardVO vo=qaboardDAO.boardContentData(Integer.parseInt(qa_no));
+			String om_id=(String)session.getAttribute("id");
+			session.setAttribute("om_id", om_id);
 			req.setAttribute("vo", vo);
 			req.setAttribute("page", page);
 			req.setAttribute("main_jsp","../qaboard/content.jsp");
@@ -124,6 +151,7 @@ public class qaboardModel{
 		@RequestMapping("ddelete.do")
 		  public String board_delete(HttpServletRequest req,HttpServletResponse res)
 		  {
+			  
 			  String qa_no=req.getParameter("no");
 			  req.setAttribute("qa_no", qa_no);
 			  req.setAttribute("main_jsp", "../qaboard/delete.jsp");
@@ -132,8 +160,10 @@ public class qaboardModel{
 		@RequestMapping("ddeleteok.do")
 		  public String board_delete_ok(HttpServletRequest req,HttpServletResponse res)
 		  {
+			  HttpSession session= req.getSession();
 			  String qa_no=req.getParameter("qa_no");
 			  String qa_pwd=req.getParameter("qa_pwd");
+			  String om_id=(String)session.getAttribute("om_id");
 			  boolean bCheck=qaboardDAO.boardDelete(Integer.parseInt(qa_no), qa_pwd);
 			  req.setAttribute("bCheck", bCheck);
 			  return "qaboard/delete_ok.jsp";

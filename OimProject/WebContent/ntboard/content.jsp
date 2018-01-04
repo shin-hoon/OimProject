@@ -69,8 +69,10 @@
             <table class="table">
                <tr>
                   <td class="text-right">
+                  <c:if test="${sessionScope.om_id != null && sessionScope.om_id=='admin'}">
                      <a href="ntupdate.do?no=${vo.nt_no }&page=${page }" class="btn btn-warning">수정</a>&nbsp;
                      <a href="ntdelete.do?no=${vo.nt_no }&page=${page }" class="btn btn-warning" id="delBtn">삭제</a>&nbsp;
+                  </c:if>
                      <a href="ntlist.do?np=${vo.nt_no }page=${page }" class="btn btn-warning">목록</a>
                   </td>
                </tr>
