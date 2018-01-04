@@ -86,7 +86,6 @@
           });
        });
 </script>
-
 <!--meeting_detail/CSS-->
 <style type="text/css">
     .row{
@@ -107,7 +106,7 @@
    }
     .right-detail{
       width: 90%;
-      height: 440px;
+      height: 400px;
       margin: 0px auto;
    }
     .detailContent img{
@@ -173,6 +172,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+	<div style="height: 20px"></div>
    <div class="container" style="border: 1px solid #999; width: 60%" >
    	
         <div class="row">
@@ -192,7 +193,7 @@
             </div>
             <div class="left col-xs-3" style="border-right: 1px solid #999;">
                 <div class="left-detail">
-                    <img src="${vo.meet_poster }" style="height:50%; width:100%; border: 2px solid #999;">
+                    <img src="${vo.meet_poster }" style="height:180px; width:180px; border: 2px solid #999;">
                     <img src="meeting/image/facebook.png" style="height:25px; width:25px; margin: 3px;">
                     <img src="meeting/image/instagram.png" style="height:25px; width:25px; margin: 3px;">
                     <img src="meeting/image/twitter.png" style="height:25px; width:25px; margin: 3px;">
@@ -256,15 +257,15 @@
                 </ul>
               </div>
             </nav>
-            <div style="padding-left: 10%; padding-right: 10%;">
-                <div class="detailContent" id="detailContent" style="margin-bottom: 100px">
+            <div style="padding-left: 7%; padding-right: 7%;">
+                <div class="detailContent" id="detailContent" style="margin-bottom: 100px;  padding-top: 20px;">
                     <h3 class="webFont">상세내용</h3>
                     <div class="eventDescription">
                         ${vo.meet_detail }
                     </div>
                 </div>
                 
-                <div class="detailMap" id="detailMap" style="margin-bottom: 100px">
+                <div class="detailMap" id="detailMap" style="margin-bottom: 100px;  padding-top: 20px;">
                   <h3 class="webFont">지도보기</h3>
                    <div id="map" style="width:100%;height:600px; margin: 0 auto;"></div>
                     
@@ -312,6 +313,28 @@
                          
                         map.setOptions("mapTypeControl", true); //지도 유형 컨트롤의 표시 여부
 							
+                        
+                        // 마커의 정보창 표시
+                        var contentString = [
+                            '<div class="iw_inner" style="padding:10px;">',
+                            '      <h3><img src="meeting/image/place.png" style="height: 30px; width: 30px;">모임장소</h3>',
+                            '      <p>${vo.meet_loc }</p>',
+                            '</div>'
+                        ].join('');
+
+                       var infowindow = new naver.maps.InfoWindow({
+                           content: contentString
+                       });
+                 
+                       naver.maps.Event.addListener(marker, "click", function(e) {
+                           if (infowindow.getMap()) {
+                               infowindow.close();
+                           } else {
+                               infowindow.open(map, marker);
+                           }
+                       });
+
+                       infowindow.open(map, marker);
 
                          // 지도 인터랙션 옵션
                          $("#interaction").on("click", function(e) {
@@ -386,12 +409,12 @@
                              }
                          });
 
-                         var map = new naver.maps.Map('map', mapOptions);
+                         var map = new naver.maps.Map('map', mapOptions)
                         </script>
                         <h4 class="place" id="place"><img src="meeting/image/place.png" style="height: 20px; width: 20px;">&emsp;모임 장소 : ${vo.meet_loc }</h4>
                 </div>
                 
-                <div class="detailcancle" id="detailcancle" style="margin-bottom: 100px">
+                <div class="detailcancle" id="detailcancle" style="margin-bottom: 80px;  padding-top: 20px;">
                 <h3>참여신청/취소 안내</h3>
                 <div class="box" style="border: 1px solid #999;">
                         <ul style="list-style: none; line-height: 50px;">
@@ -405,10 +428,10 @@
                         </ul>
                 </div>
              </div>
-                <div class="detailComment" id="detailComment" style="margin-bottom: 100px">
+                <div class="detailComment" id="detailComment" style="padding-top: 20px;">
                    <h3 class="webFont">댓글보기</h3>
                    	<center>
-						<table class="table" width="80%">
+						<table class="table" width="80%" style="background-color:#F0F8FF; padding 10px;">
 							<c:forEach var="rvo" items="${list }">
 								<tr>
 									<td align="left">
@@ -436,7 +459,7 @@
 											<c:if test="${rvo.reply_root==0}">
 												<a class="meet_reply_reply" value="${rvo.reply_no }">댓글</a>&nbsp; |
 											</c:if>
-											<c:if test="${sessionScope.id==rvo.om_id }">
+											<c:if test="${sessionScope.id==rvo.om_id ||sessionScope.id=='admin'}">
 												 <a class="meet_reply_update" value="${rvo.reply_no }">수정</a>&nbsp; |
 												 <a href="meet_reply_delete.do?reply_no=${rvo.reply_no }&meet_no=${vo.meet_no}">삭제</a>&nbsp;
 											</c:if>
@@ -450,8 +473,8 @@
 										<form action="meet_reply_reply_insert.do" method="post">
 											<input type="hidden" name="meet_no" value="${vo.meet_no }">
 											<input type="hidden" name="preply_no" value="${rvo.reply_no }">
-											<textarea rows="3" cols="80" style="float: left" name="reply_msg"></textarea>
-											<input type="submit" value="댓글달기" style="height: 50px">
+											<textarea class="form-control" rows="2" cols="20" style="float: left; width: 88%" name="reply_msg"></textarea>
+											<input type="submit" value="댓글달기" class="btn btn-primary" style="height: 53px; width: 12%; text-align: center;">
 										</form>
 									</td>
 								</tr>
@@ -460,8 +483,9 @@
 										<form action="meet_reply_update.do" method="post">
 											<input type="hidden" name="meet_no" value="${vo.meet_no }">
 											<input type="hidden" name="reply_no" value="${rvo.reply_no }">
-											<textarea rows="3" cols="80" style="float: left" name="reply_msg">${rvo.reply_msg }</textarea>
-											<input type="submit" value="수정하기" style="height: 50px">
+											<textarea class="form-control" rows="2" cols="20" style="float: left; width: 88%" name="reply_msg"></textarea>
+											<input type="submit" value="수정하기" class="btn btn-primary" 
+											style="height: 53px; width: 12%; text-align: center;">
 										</form>
 									</td>
 								</tr>
@@ -475,10 +499,12 @@
 								<td>
 									<form action="meet_reply_new_insert.do" method="post">
 										<input type="hidden" name="meet_no" value="${vo.meet_no }">
-										<textarea rows="3" cols="100" style="float: left" name="reply_msg"></textarea>
-										<input type="submit" value="댓글달기" style="height: 50px">
+										<textarea class="form-control" id="txta" rows="2" cols="20" style="float: left; width: 88%" name="reply_msg"></textarea>
+										<input type="submit" value="댓글달기" id="txtbt" class="btn btn-primary" 
+										style="height: 53px; width: 12%; text-align: center;">
 									</form>
 								</td>
+
 							</tr>
 						</table>
 					</c:if>
@@ -491,7 +517,7 @@
     
        <!--<a id="MOVE_TOP_BTN" class="btn-primary" href="#">TOP</a>-->
         <div class="smallnav" id="main-nav">
-            <ul class="small" style="list-style: none">
+            <ul class="small" style="list-style: none; margin-bottom: 100px;">
                 <li class="scroll-link" data-id="detailContent">모임상세 정보</li>
                 <li class="scroll-link" data-id="detailMap">지도보기</li>
                 <li class="scroll-link" data-id="detailcancle">참여신청/취소 안내</li>

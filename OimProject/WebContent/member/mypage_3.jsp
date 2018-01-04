@@ -7,6 +7,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>신청 내역</title>
+<script type="text/javascript">
+	$(function() {
+		$('#sub').click(function() {
+			var result=confirm("삭제하시겠습니까?");
+			if(result){
+			   return true;
+			}else{
+			   return false;
+			}
+		})
+	});
+
+</script>
 </head>
 <body>
 <div class="oim-mypage out">
@@ -68,7 +81,7 @@
                 </td>
                 <td class="text-center" style="vertical-align:middle">
                    <input type=button class="btn btn-success btn-sm" value="신청확인" style="margin-bottom: 20px"><br>
-                   <input type="submit" class="btn btn-danger btn-sm" value="신청취소">
+                   <input type="submit" id="sub" class="btn btn-danger btn-sm" value="신청취소">
                    <input type="hidden" name="ac_no" value="${mvo.ac_no }" >
                    <input type="hidden" name="meet_no" value="${mvo.meet_no }" >
                 </td>
