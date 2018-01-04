@@ -32,12 +32,12 @@ $(function(){
      $(".image").click(function(){
  	   //alert("1");
  	   var no=$(this).attr("value");
- 	    $('#a'+1).text("${list8[0].meet_subject}");
- 	  	$('#a'+2).text("${list8[1].meet_subject}");
- 	 	$('#a'+3).text("${list8[2].meet_subject}");
- 		$('#a'+4).text("${list8[3].meet_subject}");
+ 	    $('#a'+6).text("${list8[5].meet_subject}");
+ 	  	$('#a'+4).text("${list8[3].meet_subject}");
+ 	 	$('#a'+2).text("${list8[1].meet_subject}");
+ 		$('#a'+1).text("${list8[0].meet_subject}");
+ 		$('#a'+3).text("${list8[2].meet_subject}");
  		$('#a'+5).text("${list8[4].meet_subject}");
- 		$('#a'+6).text("${list8[5].meet_subject}");
  		$('#a'+7).text("${list8[6].meet_subject}");
  	   for(i=1;i<=7;i++)
  	   {
@@ -73,10 +73,14 @@ $(function(){
             });
 		}); 
     </script>
+    <style type="text/css">
+    .slider_text{
+    	margin:3%;
+    	font-color:#ffffff;
+    }
+    </style>
 <link rel="stylesheet" href="main/css/style.css">
-
 </head>
-
 <body>
 <!-- content내용 감싸는 div -->
 <div class="oim-Content">
@@ -85,59 +89,72 @@ $(function(){
  <div id="carousel" style="background-color:#0A0A2A;" data-ride="carousel">
 	 <div class="hideLeft image" value="1">
 	 	<figure class="effect-bubba">
-			<img src="main/no1.jpg">
+			<img src="${list8[5].meet_poster }">
 				<figcaption>
 					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
 				</figcaption>
 		</figure>
-		<a href="meeting_detail.do?meet_no=${list8[0].meet_no}"><h4 id="a1" align="center"></h4></a>
+		<div class="silder_text">
+			<a href="meeting_detail.do?meet_no=${list8[5].meet_no}"><h4 id="a1" align="center"></h4></a>
+		</div>
+		
 	 </div>
     
     <div class="prevLeftSecond image" value="2">
 	    <figure class="effect-bubba">
-	    	<img src="${list8[1].meet_poster }">
+	    	<img src="${list8[3].meet_poster }">
 				<figcaption>
 					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
 				</figcaption>
 		</figure>
-		<a href="meeting_detail.do?meet_no=${list8[1].meet_no}"><h4 id="a2" align="center"></h4></a>
+		<div class="silder_text">
+			<a href="meeting_detail.do?meet_no=${list8[3].meet_no}"><h4 id="a2" align="center"></h4></a>
+		</div>
     </div>
     
     <div class="prev image" value="3">
+    	<figure class="effect-bubba">
+    		<img src="${list8[1].meet_poster }">
+				<figcaption>
+					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+				</figcaption>
+		</figure>
+		<div class="silder_text">
+			<a href="meeting_detail.do?meet_no=${list8[1].meet_no}"><h4 id="a3" align="center"></h4></a>
+		</div>
+    </div>
+    <div class="selected image" value="4">
+    	<figure class="effect-bubba">
+    		<img src="${list8[0].meet_poster }">
+				<figcaption>
+					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+				</figcaption>
+		</figure>
+		<div class="silder_text">
+			<a href="meeting_detail.do?meet_no=${list8[0].meet_no}"><h4 id="a4" align="center"></h4></a>
+		</div>
+    </div>
+    <div class="next image" value="5">
     	<figure class="effect-bubba">
     		<img src="${list8[2].meet_poster }">
 				<figcaption>
 					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
 				</figcaption>
 		</figure>
-		<a href="meeting_detail.do?meet_no=${list8[2].meet_no}"><h4 id="a3" align="center"></h4></a>
-    </div>
-    <div class="selected image" value="4">
-    	<figure class="effect-bubba">
-    		<img src="${list8[3].meet_poster }">
-				<figcaption>
-					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
-				</figcaption>
-		</figure>
-		<a href="meeting_detail.do?meet_no=${list8[3].meet_no}"><h4 id="a4" align="center"></h4></a>
-    </div>
-    <div class="next image" value="5">
-    	<figure class="effect-bubba">
-    		<img src="${list8[4].meet_poster }">
-				<figcaption>
-					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
-				</figcaption>
-		</figure>
-		<a href="meeting_detail.do?meet_no=${list8[4].meet_no}"><h4 id="a5" align="center"></h4></a>
+		<div class="silder_text">
+			<a href="meeting_detail.do?meet_no=${list8[2].meet_no}"><h4 id="a5" align="center"></h4></a>
+		</div>
     </div>
     <div class="nextRightSecond image" value="6">
-    <figure class="effect-bubba">
-    	<img src="${list8[5].meet_poster }">
+    	<figure class="effect-bubba">
+    	<img src="${list8[4].meet_poster }">
 			<figcaption>
-			<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+				<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
 			</figcaption>
-			</figure>
-		<a href="meeting_detail.do?meet_no=${list8[5].meet_no}"><h4 id="a6" align="center"></h4></a>
+		</figure>
+		<div class="silder_text">
+			<a href="meeting_detail.do?meet_no=${list8[4].meet_no}"><h4 id="a6" align="center"></h4></a>
+		</div>
     </div>
     <div class="hideRight image" value="7">
     	<figure class="effect-bubba">
@@ -146,7 +163,9 @@ $(function(){
 					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
 				</figcaption>
 		</figure>
-		<a href="meeting_detail.do?meet_no=${list8[6].meet_no}"><h4 id="a7" align="center" sytle="font-color:#ffffff;"></h4></a>
+		<div class="silder_text">
+			<a href="meeting_detail.do?meet_no=${list8[6].meet_no}"><h4 id="a7" align="center"></h4></a>
+		</div>
     </div>
 </div>
 <%-- <center style="margin-top: 20px">
