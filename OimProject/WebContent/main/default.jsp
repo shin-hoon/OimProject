@@ -28,6 +28,27 @@ $(function(){
         
     });
     }); 
+     $(".image").click(function(){
+ 	   //alert("1");
+ 	   var no=$(this).attr("value");
+ 	   
+ 	   $('#a1').text("금연");
+ 	  $('#a'+2).text("노래감상동아리");
+ 	 $('#a'+3).text("영어스터디");
+ 	$('#a'+4).text("코딩동아리");
+ 	$('#a'+5).text("마이페이지");
+ 	$('#a'+6).text("수학스터디");
+ 	$('#a'+7).text("여행가자!");
+ 	   for(i=1;i<=7;i++)
+ 	   {
+ 		   if(no!=i)
+ 			{
+ 			  $('#a'+i).text("");
+ 			}
+ 	   }
+    }); 
+ 
+
 });
 </script>
 
@@ -36,8 +57,10 @@ $(function(){
 			$("#content-slider").lightSlider({
                 loop:true,
               	auto:true,
-                keyPress:true
+                keyPress:true,
+                interval: 2000
             });
+			
             $('#image-gallery').lightSlider({
                 gallery:true,
                 item:1,
@@ -50,7 +73,9 @@ $(function(){
                     $('#image-gallery').removeClass('cS-hidden');
                 }  
             });
-		});
+           
+           
+		}); 
     </script>
 <link rel="stylesheet" href="main/css/style.css">
 </head>
@@ -60,20 +85,21 @@ $(function(){
 <div class="oim-Content">
     
 <!-- ====메인슬라이더=====-->
- <div id="carousel" style="background-color:#0A0A2A;">
-	 <div class="hideLeft">
+ <div id="carousel" style="background-color:#0A0A2A;" data-ride="carousel">
+	 <div class="hideLeft image" value="1">
 	 	<figure class="effect-bubba">
-			<img src="https://s16.postimg.org/vklrwoxtx/cover9.jpg">
+			<img src="main/no1.jpg">
 			<figcaption>
 			<br>
-				<h2>금연하고싶은가..?그렇다면 여기로..</h2>
+				<h2></h2>
 				<p>클릭!!</p>
 				<a href="#"></a>
 			</figcaption>
 		</figure>
+		<h3 id="a1" align="center"></h3>
 	 </div>
     
-    <div class="prevLeftSecond">
+    <div class="prevLeftSecond image" value="2">
     	<figure class="effect-bubba">
 			<img src="https://s16.postimg.org/cgsggckzp/cover8.jpg">
 			<figcaption>
@@ -82,9 +108,10 @@ $(function(){
 				<a href="#"></a>
 			</figcaption>
 		</figure>
+		<h3 id="a2"></h3>
     </div>
     
-    <div class="prev">
+    <div class="prev image" value="3">
     	<figure class="effect-bubba">
 			<img src="https://s16.postimg.org/emmrauog5/cover7.jpg">
 			<figcaption>
@@ -93,8 +120,9 @@ $(function(){
 				<a href="#"></a>
 			</figcaption>
 		</figure>
+		<h3 id="a3"></h3>
     </div>
-    <div class="selected">
+    <div class="selected image" value="4">
     	<figure class="effect-bubba">
 			<img src="https://s16.postimg.org/9drqcz611/cover1.jpg">
 			<figcaption>
@@ -103,8 +131,9 @@ $(function(){
 				<a href="#"></a>
 			</figcaption>
 		</figure>
+		<h3 id="a4"></h3>
     </div>
-    <div class="next">
+    <div class="next image" value="5">
     	<figure class="effect-bubba">
 			<img src="https://s16.postimg.org/pnhwfvgp1/cover6.jpg">
 			<figcaption>
@@ -113,8 +142,9 @@ $(function(){
 				<a href="#"></a>
 			</figcaption>
 		</figure>
+		<h3 id="a5"></h3>
     </div>
-    <div class="nextRightSecond">
+    <div class="nextRightSecond image" value="6">
     	<figure class="effect-bubba">
 			<img src="https://s16.postimg.org/edp6kxbnp/cover4.jpg">
 			<figcaption>
@@ -123,8 +153,9 @@ $(function(){
 				<a href="#"></a>
 			</figcaption>
 		</figure>
+		<h3 id="a6"></h3>
     </div>
-    <div class="hideRight">
+    <div class="hideRight image" value="7">
     	<figure class="effect-bubba">
 			<img src="https://s16.postimg.org/fij8qay4l/cover3.jpg">
 			<figcaption>
@@ -133,6 +164,7 @@ $(function(){
 				<a href="#"></a>
 			</figcaption>
 		</figure>
+		<h3 id="a7"></h3>
     </div>
 </div>
 <%-- <center style="margin-top: 20px">
@@ -228,14 +260,106 @@ $(function(){
                      </div>
                  </div>
                </div>
-         
-               <div class="row">
+         <!-- /////////////////////////////////////// -->
+         <!-- <div class="row">
                  <nav id="filter" class="col-md-12 text-center">
                    <ul>
-                     <!-- <li style=" list-style-type : none;"><a href="#" class="current btn-theme btn-small" data-filter="*" >#ALL</a></li> -->
+                     <li><a href="#" class="current btn-theme btn-small" data-filter="*" >#ALL</a></li>
+                     
                      <li>
-                     	<a href="#" class="btn-theme btn-small" data-filter=".study">#스터디</a>
+                     	<a href="#" class="btn-theme btn-small" data-filter=".webdesign">#스터디</a>
                      </li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".photography">#취미</a></li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".print">#전시</a></li>
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".pro">#IT</a></li>
+                   </ul>
+                 </nav>
+          		<div class="col-md-12">
+			          <div class="row">
+			            <div class="portfolio-items isotopeWrapper clearfix" id="3">
+			
+			              <article class="col-md-4 isotopeItem webdesign">
+			                <div class="portfolio-item">
+			                	<img src="img/poster1.png" alt="tag이미지" />
+			                	<p></p>
+			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                </div>
+			              </article>
+			
+			              <article class="col-md-4 isotopeItem photography">
+			                <div class="portfolio-item">
+			                  <img src="img/poster2.png" alt="tag이미지" />
+			                	<p></p>
+			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                </div>
+			              </article>
+			
+			
+			              <article class="col-md-4 isotopeItem photography">
+			                <div class="portfolio-item">
+			                  <img src="img/poster3.png" alt="tag이미지" />
+			                	<p></p>
+			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                </div>
+			              </article>
+			
+			              <article class="col-md-4 isotopeItem print">
+			                <div class="portfolio-item">
+			                  <img src="img/poster2.png" alt="tag이미지" />
+			                	<p></p>
+			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                </div>
+			              </article>
+			
+			              <article class="col-md-4 isotopeItem photography">
+			                <div class="portfolio-item">
+			                  <img src="img/poster1.png" alt="tag이미지" />
+			                	<p></p>
+			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                </div>
+			              </article>
+			
+			              <article class="col-md-4 isotopeItem webdesign">
+			                <div class="portfolio-item">
+			                  <img src="img/poster2.png" alt="tag이미지" />
+			                	<p></p>
+			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                </div>
+			              </article>
+			
+			              <article class="col-md-4 isotopeItem print">
+			                <div class="portfolio-item">
+			                  <img src="img/poster3.png" alt="tag이미지" />
+			                	<p></p>
+			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                </div>
+			              </article>
+			
+			              <article class="col-md-4 isotopeItem photography">
+			                <div class="portfolio-item">
+			                  <img src="img/poster2.png" alt="tag이미지" />
+			                	<p></p>
+			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                </div>
+			              </article>
+			
+			              <article class="col-md-4 isotopeItem print">
+			                <div class="portfolio-item">
+			                  <img src="img/poster1.png" alt="tag이미지" />
+			                	<p></p>
+			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
+			                </div>
+			              </article>
+			            </div>
+			          </div>
+			        </div>
+			      </div> -->
+			      <!-- ////////////////////////////////////////////////////// -->
+              <div class="row">
+                 <nav id="filter" class="col-md-12 text-center">
+                   <ul>
+                     <!-- <li><a href="#" class="current btn-theme btn-small" data-filter="*" >#ALL</a></li>  -->
+                     <li><a href="#" class="btn-theme btn-small" data-filter=".study">#스터디</a></li>
                      <li><a href="#" class="btn-theme btn-small" data-filter=".hobby">#취미</a></li>
                      <li><a href="#" class="btn-theme btn-small" data-filter=".messe">#전시</a></li>
                      <li><a href="#" class="btn-theme btn-small" data-filter=".pro">#IT</a></li>
@@ -256,7 +380,7 @@ $(function(){
                        </article>
                       </c:forEach>
                       
-                      <c:forEach var="vo" items="${list4 }" begin="1" end="2">
+                      <c:forEach var="vo" items="${list4 }" begin="10" end="12">
                        <article class="col-md-4 isotopeItem hobby">
                          <div class="portfolio-item">
                            <a href="meeting_detail.do?meet_no=${vo.meet_no}">
@@ -267,7 +391,7 @@ $(function(){
                        </article>
                       </c:forEach>
                       
-                      <c:forEach var="vo" items="${list5 }" begin="1" end="3">
+                      <c:forEach var="vo" items="${list5 }" begin="1" end="2">
                        <article class="col-md-4 isotopeItem messe">
                          <div class="portfolio-item">
                            <a href="meeting_detail.do?meet_no=${vo.meet_no}">
@@ -278,7 +402,7 @@ $(function(){
                        </article>
                       </c:forEach>
                       
-                      <c:forEach var="vo" items="${list6 }" begin="1" end="3">
+                      <c:forEach var="vo" items="${list6 }" begin="3" end="4">
                        <article class="col-md-4 isotopeItem pro">
                          <div class="portfolio-item">
                            <a href="meeting_detail.do?meet_no=${vo.meet_no}">
@@ -293,7 +417,7 @@ $(function(){
                      
                    </div>
                  </div>
-               </div>
+               </div> 
              </div>
            </section>
          </div>
