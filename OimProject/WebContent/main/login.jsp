@@ -33,6 +33,9 @@
 .fade{
  z-index:9998;
 }
+#join{
+ z-index:9999;
+}
 </style>
 
 
