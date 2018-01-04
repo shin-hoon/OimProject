@@ -195,7 +195,7 @@ public class MeetingDAO {
 		return vo;
 	}
 	
-	public static MeetingVO meetingUpdate(int meet_no) { //모임수정창 정보
+	public static MeetingVO meetingUpdateData(int meet_no) { //모임수정창 정보
 		
 		MeetingVO vo=new MeetingVO();
 		SqlSession session=ssf.openSession();
@@ -211,8 +211,22 @@ public class MeetingDAO {
 		
 		return vo;
 	}
+	
+	public static void meetingUpdate(MeetingVO vo) {
+		
+		SqlSession session=ssf.openSession(true);
+		try {
+			session.update("meetingUpdate",vo);
+		}catch(Exception ex) {
+			System.out.println("meetingUpdate: "+ex.getMessage());
+			ex.printStackTrace();
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+	}
 
-	   
 //	   public MeetingDAO() { //데이터  파싱에서 DB에 insert하는 용도로 작성한 임시코드
 //	      try {
 //	         Class.forName("oracle.jdbc.driver.OracleDriver");

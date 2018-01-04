@@ -56,8 +56,5 @@ $(function(){
                         		data-loc="${vo.meet_loc}" data-lat="${vo.meet_lat}" data-lng="${vo.meet_lng}">${vo.meet_loc}</a></li>
                         	</c:forEach>
                         	</ul>
-                        	
-                        	<input type="hidden" name="meet_lat" value=""> <!--위도값을 넘기기위한 input 태그  -->
-                        	<input type="hidden" name="meet_lng" value=""> <!--경도값을 넘기기위한 input 태그  -->
 </body>
 </html>

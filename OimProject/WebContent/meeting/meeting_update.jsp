@@ -23,10 +23,17 @@ $(function(){
 		var meet_cg=$('input.meet_cg').val();
 		var meet_subject=$('input:text[name="meet_subject"]').val();
 		var meet_loc1=$('input:text[name="meet_loc1"]').val();
+		var meet_pretotal=$('input:hidden[name="meet_pretotal"]').val();
 		var meet_total=$('input:text[name="meet_total"]').val();
+		var meet_limit=$('input:text[name="meet_limit"]').val();
 		var meet_price=$('input:text[name="meet_price"]').val();
 		var meet_info=$('textarea[name="meet_info"]').val();
 		var meet_detail=$('textarea[name="meet_detail"]').val();
+		
+		
+		if($('#poster').attr("src")=='${vo.meet_poster }'){ //사진 수정을 안할시 meet_poster를 공백으로 전송한다.
+ 			$('input:hidden[name="meet_poster"]').attr("value","");
+ 		}
 		
 		if(meet_cg.trim()==""){
 			alert("카테고리를 선택해주세요!");
@@ -41,7 +48,7 @@ $(function(){
 			$('#searchText').focus();
 			return false;
 		}else if(meet_total.trim()==""){
-			alert("정원을 입력해주세요!");
+			alert("모임정원을 입력해주세요!");
 			$('input:text[name="meet_total"]').focus();
 			return false;
 		}else if(meet_price.trim()=="" && $('input:radio[name="meet_charge"][value="유료"]').is(":checked")==true){
@@ -56,8 +63,19 @@ $(function(){
 			alert("모임 상세내용을 입력해주세요!");
 			$('textarea[name="meet_detail"]').focus();
 			return false;
+		}else if(meet_total<'${vo.meet_total}'-'${vo.meet_limit}'){
+			alert("모임정원이 현재 신청인원보다 적습니다! (현재 신청인원: ${vo.meet_limit}명)");
+			$('input:text[name="meet_total"]').focus();
+			return false;
 		}else if(confirm("수정하시겠습니까?")){
 			
+			if(meet_pretotal < meet_total){
+				$('input:text[name="meet_limit"]').attr("value",parseInt(meet_limit)+(parseInt(meet_total)-parseInt(meet_pretotal)));
+				alert($('input:text[name="meet_limit"]').val());
+			}else if(meet_pretotal > meet_total){
+				$('input:text[name="meet_limit"]').attr("value",parseInt(meet_limit)-(parseInt(meet_pretotal)-parseInt(meet_total)));
+				alert($('input:text[name="meet_limit"]').val());
+			}
 			return true;
 		}else{
 			
@@ -116,20 +134,21 @@ $(function(){
     
 </head>
 <body>	
-		
 		<form method="post" action="meeting_update_ok.do" id="meetingFrm" enctype="multipart/form-data">
 		<div class="col-sm-2">      
 		       <div class="col-sm-12 text-center" style="padding:0; height:170px; margin-top:10px;">
 		        
+		        	<input type="hidden" name="meet_no" value="${vo.meet_no}">
 		           <img src="${vo.meet_poster }" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
 		            alt="모임프로필">
-
+					<input type="hidden" name="meet_poster" value="${vo.meet_poster }">
 		           
 		         <script type="text/javascript"> 
 		         	$(function(){ //사진변경 버튼 클릭했을때 file타입의 버튼 강제 클릭 이벤트 발생
 		         		$('.profile').on('click',function(){
 		         			$('#upload').trigger('click');
 		         		});
+	
 		         	});
 		         </script>  
 		      </div>
@@ -389,7 +408,8 @@ $(function(){
                          
                          var map = new naver.maps.Map('map', mapOptions);
                         </script>
-                        
+	                        <input type="hidden" name="meet_lat" value="${vo.meet_lat}"> <!--위도값을 넘기기위한 input 태그  -->
+	                        <input type="hidden" name="meet_lng" value="${vo.meet_lng}"> <!--경도값을 넘기기위한 input 태그  -->
                           <div class="input-group" style="margin: 15px 0 15px 0">
                            <div class="input-group-addon">
                             <span class="glyphicon glyphicon-map-marker"></span> 
@@ -411,7 +431,7 @@ $(function(){
                 <td class="col-sm-2" style="vertical-align:middle;">
                      <h5>유/무료 선택</h5>
                 </td>
-                <td class="col-sm-3" style="vertical-align:middle;">
+                <td class="col-sm-2" style="vertical-align:middle;">
                    		 <label class="radio-inline">
                           <input type="radio" name="meet_charge" value="무료">무료
                         </label>
@@ -420,21 +440,25 @@ $(function(){
                         </label>
                 </td>
                 
-                 <td class="col-sm-7" style="vertical-align:middle;">
+                 <td class="col-sm-8" style="vertical-align:middle;">
                     <table class="table table-bordered" style="margin-bottom:0">
                        <tr>
-                          <th class="text-center">모임정원</th> 
+                          <th class="text-center">모임정원</th>
+                           <th class="text-center">현재 신청가능인원</th>
                           <th class="text-center">참가비용</th>
                        </tr>
                        
                        <tr>
                            <td class="form-inline text-center" valign="middle">
-                           <input type="text" class="form-control" name="meet_total" value="${vo.meet_total}">명
+    	                       <input type="text" class="form-control" style="width:150px" name="meet_total" value="${vo.meet_total}">명
+                           	   <input type="hidden" name="meet_pretotal" value="${vo.meet_total}">
                            </td>
-                           
+                           <td class="form-inline text-center" valign="middle">
+	                           <input type="text" class="form-control" style="width:150px" name="meet_limit" value="${vo.meet_limit}" readonly/>명
+                           </td>
                            <td class="form-inline text-center" valign="middle">
     
-                             <input type="text" class="form-control"  name="meet_price" value="${vo.meet_price }"/>원
+                             <input type="text" class="form-control" style="width:150px" name="meet_price" value="${vo.meet_price }"/>원
                            </td>
                        </tr>
                        
@@ -477,12 +501,12 @@ $(function(){
             
             <tr>
                 <td colspan="3" class="col-sm-12 text-center">
-                	<c:if test="${vo.meet_end < today }">
+                	<%-- <c:if test="${vo.meet_end < today }">
                     <button class="btn btn-danger" disabled="disabled">종료된 모임은 수정할 수 없습니다.</button>
-                    </c:if>
-                    
+                    </c:if> --%>
+                    <input type="submit" id="submit" class="btn btn-primary" value="수정하기" style="width:12%"> 
                     <c:if test="${vo.meet_end > today }">
-                    <input type="submit" id="submit" class="btn btn-primary" value="수정하기" style="width:12%">
+                   
                     </c:if>
                 </td>
             </tr>

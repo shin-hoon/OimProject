@@ -281,6 +281,20 @@ public class MeetingModel {
     	return "meeting/loc_search.jsp";
     }
     
+//    public static void main(String args[]) {
+//    	 File file = new File("c:\\git\\OimWeb\\OimProject\\WebContent\\img\\meetImg\\121999.jpg");
+//         
+//         if( file.exists() ){
+//             if(file.delete()){
+//                 System.out.println("파일삭제 성공");
+//             }else{
+//                 System.out.println("파일삭제 실패");
+//             }
+//         }else{
+//             System.out.println("파일이 존재하지 않습니다.");
+//         }
+//    }
+    
     @RequestMapping("meeting_insert_ok.do") //모임개설완료
     public String meeting_insertOK(HttpServletRequest req, HttpServletResponse res){
 
@@ -321,8 +335,10 @@ public class MeetingModel {
 	    	vo.setMeet_end(meet_end);
 	    	if(meet_loc1.equals("") && meet_loc2.equals("")) { //입력된 모임장소가 없을때
 	    		vo.setMeet_loc("미정이거나 등록된 모임장소가 없습니다");
-	    	}else {												//입력된 모임장소가 있을때
-	    		vo.setMeet_loc(meet_loc1+" "+meet_loc2); 
+	    	}else if(!(meet_loc1.equals("")) && !(meet_loc2.equals(""))){//주소 , 상세주소 둘다 입력되어있을때
+	    		vo.setMeet_loc(meet_loc1+" "+meet_loc2);
+	    	}else { //하나만 입력되어있을때
+	    		vo.setMeet_loc(meet_loc1);
 	    	}
 	    	vo.setMeet_charge(meet_charge);
 	    	vo.setMeet_total(Integer.parseInt(meet_total));
@@ -384,7 +400,7 @@ public class MeetingModel {
     @RequestMapping("meeting_update.do")
     public String meeting_Update(HttpServletRequest req, HttpServletResponse res) { //모임수정화면
     	String meet_no=req.getParameter("meet_no");
-    	MeetingVO vo=MeetingDAO.meetingUpdate(Integer.parseInt(meet_no));
+    	MeetingVO vo=MeetingDAO.meetingUpdateData(Integer.parseInt(meet_no));
     	Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String today = sdf.format(date);
@@ -392,6 +408,118 @@ public class MeetingModel {
 		req.setAttribute("today", today); //오늘날짜
     	req.setAttribute("vo",vo);
     	return "meeting/meeting_update.jsp";
+    }
+    
+    @RequestMapping("meeting_update_ok.do") //모임수정완료
+    public String meeting_update_ok(HttpServletRequest req, HttpServletResponse res) {
+    	
+    	try {
+    		req.setCharacterEncoding("UTF-8"); // 한글 파일명을 고려하여 setcharencoding을 설정해준다.
+			String path = "c:\\git\\OimWeb\\OimProject\\WebContent\\img\\meetImg"; // 경로명
+			int size = 1024 * 1024 * 100; // 100MB까지 가능으로 설정
+			String enctype = "UTF-8";
+			// 파일 업로드하는 라이브러리 (defaultfilerenamepolicy는 안붙여도되지만 붙여주는게 좋다)
+			MultipartRequest mr = new MultipartRequest(req, path, size, enctype, new DefaultFileRenamePolicy());
+			// DefaultFileRenamePolicy() : 파일명이 동일할때 파일명을 자동으로 변경
+			// Ex) a.jpg => a1.jpg => a2.jpg
+
+			// 파일의 값을 받아올 때 mr을 통해서 받아온다.
+			String meet_no=mr.getParameter("meet_no");
+	    	String meet_cg=mr.getParameter("meet_cg"); //카테고리
+	    	String meet_reposter=mr.getParameter("meet_poster");
+	    	String meet_poster=meet_reposter.substring(meet_reposter.lastIndexOf("/")+1);
+	    	String meet_subject=mr.getParameter("meet_subject"); //제목
+	    	String meet_date=mr.getParameter("meet_date"); //모임날짜
+	    	String meet_start=meet_date.substring(0, meet_date.indexOf("~")-1); //잘라서 시작날짜 나누기
+	    	String meet_end=meet_date.substring(meet_date.indexOf("~")+2); //잘라서 종료날짜 나누기
+	    	String meet_loc1=mr.getParameter("meet_loc1"); //주소
+	    	String meet_loc2=mr.getParameter("meet_loc2"); ///상세주소
+	    	String meet_charge=mr.getParameter("meet_charge"); //유/무료 여부
+	    	String meet_total=mr.getParameter("meet_total"); //정원
+	    	String meet_limit=mr.getParameter("meet_limit"); //현재 신청가능인원
+	    	String meet_price=mr.getParameter("meet_price"); //참여비용
+	    	String meet_lat=mr.getParameter("meet_lat");//위도
+	    	String meet_lng=mr.getParameter("meet_lng");//경도
+	    	String meet_info=mr.getParameter("meet_info"); //모임내용
+	    	String meet_detail=mr.getParameter("meet_detail"); //상세정보
+	    	
+	    	MeetingVO vo=new MeetingVO();
+	    	vo.setMeet_no(Integer.parseInt(meet_no));
+	    	vo.setMeet_cg(meet_cg);
+	    	vo.setMeet_subject(meet_subject);
+	    	vo.setMeet_start(meet_start);
+	    	vo.setMeet_end(meet_end);
+	    	
+	    	if(meet_loc1.equals("") && meet_loc2.equals("")) { //입력된 모임장소가 없을때
+	    		vo.setMeet_loc("미정이거나 등록된 모임장소가 없습니다");
+	    	}else if(!(meet_loc1.equals("")) && !(meet_loc2.equals(""))){//주소 , 상세주소 둘다 입력되어있을때
+	    		vo.setMeet_loc(meet_loc1+" "+meet_loc2);
+	    	}else {//하나만 입력되어있을때
+	    		vo.setMeet_loc(meet_loc1);
+	    	}
+	    	vo.setMeet_charge(meet_charge);
+	    	vo.setMeet_total(Integer.parseInt(meet_total));
+	    	vo.setMeet_limit(Integer.parseInt(meet_limit));
+	    	vo.setMeet_price(Integer.parseInt(meet_price));
+	    	if(meet_lat==null && meet_lng==null){
+	    		vo.setMeet_lat("");
+		    	vo.setMeet_lng("");
+	    	}else {
+		    	vo.setMeet_lat(meet_lat);
+		    	vo.setMeet_lng(meet_lng);
+	    	}
+	    	vo.setMeet_info(meet_info);
+	    	vo.setMeet_detail(meet_detail);
+	    	
+			System.out.println("모임번호: "+meet_no);
+			System.out.println("모임 카테고리: "+meet_cg);
+			System.out.println("모임 사진이름: "+meet_poster);
+	    	System.out.println("모임 제목: "+meet_subject);
+	    	System.out.println("시작날짜: "+meet_start);
+	    	System.out.println("종료날짜: "+meet_end);
+	    	System.out.println("주소: "+vo.getMeet_loc());
+	    	System.out.println("유/무료여부: "+meet_charge);
+	    	System.out.println("모임정원: "+meet_total);
+	    	System.out.println("모임신청가능인원: "+meet_limit);
+	    	System.out.println("참가비용: "+meet_price);
+	    	System.out.println("위도: "+meet_lat);
+	    	System.out.println("경도: "+meet_lng);
+	    	System.out.println("모임소개: "+meet_info);
+	    	System.out.println("상세내용: "+meet_detail);
+	    	
+	    	if(meet_reposter!="") { //모임사진을 수정했을시에만 원래있던사진을 삭제 후 저장한다.
+				File dfile = new File(path+"\\"+meet_poster); //저장되어있던 사진은 삭제한다.
+				if( dfile.exists() ){
+		             if(dfile.delete()){
+		                 System.out.println("파일삭제 성공");
+		             }else{
+		                 System.out.println("파일삭제 실패");
+		             }
+		         }else{
+		             System.out.println("파일이 존재하지 않습니다.");
+		         }
+				
+				String realname=meet_no; //삭제후 등록한 새로운 파일을 생성한다.
+				String filename = mr.getFilesystemName("upload");
+				if (filename != null) {
+					File f = new File(path+"\\"+filename);
+					File f2 = new File(path+"\\"+realname+f.getName().substring(f.getName().indexOf('.')));
+
+					f.renameTo(f2);
+			    	vo.setMeet_poster("img/meetImg/"+f2.getName());
+			    	System.out.println("이미지경로:"+vo.getMeet_poster());
+				}
+	    	}else {
+	    		vo.setMeet_poster(meet_reposter);
+		    	System.out.println("이미지경로:"+vo.getMeet_poster());
+	    	}
+
+	    	MeetingDAO.meetingUpdate(vo);
+    	}catch(Exception ex) {
+    		System.out.println(ex.getMessage());
+    		ex.printStackTrace();
+    	}
+    	return "Oim_meetpage.do";
     }
     
     @RequestMapping("meeting_search.do") //모임검색결과
