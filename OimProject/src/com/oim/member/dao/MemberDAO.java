@@ -198,6 +198,29 @@ public class MemberDAO {
   	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
+  	public static List<MeetingVO> MainSlider()
+  	{
+  		List<MeetingVO> list8=new ArrayList<MeetingVO>();
+  		SqlSession session=ssf.openSession();
+  		
+  		try {
+  			
+  			list8=session.selectList("MainSlider");
+  			
+  		}catch(Exception ex)
+  		{
+  			System.out.println(ex.getMessage());
+  		}
+  		finally
+  		{
+  			if(session!=null)
+  				session.close();
+  		}
+  		
+  		return list8;
+  	}
+  	
+  	
   	public static List<MeetingVO> TodayMeeting()
   	{
   		List<MeetingVO> list=new ArrayList<MeetingVO>();

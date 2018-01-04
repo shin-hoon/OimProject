@@ -25,20 +25,20 @@ $(function(){
         if($(this).text().length <= minlength){ //제목이 1줄짜리 일때는 <br>태그를 줘서 2줄짜리랑 같은 크기로 만들어라 
            $(this).html($(this).text()+'<br></br>');
        }
-        
     });
     }); 
+    
+    //메인 화면 슬라이드 이미지를 클릭하면 밑에 모임 제목이 뜬다
      $(".image").click(function(){
  	   //alert("1");
  	   var no=$(this).attr("value");
- 	   
- 	   $('#a1').text("금연");
- 	  $('#a'+2).text("노래감상동아리");
- 	 $('#a'+3).text("영어스터디");
- 	$('#a'+4).text("코딩동아리");
- 	$('#a'+5).text("마이페이지");
- 	$('#a'+6).text("수학스터디");
- 	$('#a'+7).text("여행가자!");
+ 	    $('#a'+1).text("${list8[0].meet_subject}");
+ 	  	$('#a'+2).text("${list8[1].meet_subject}");
+ 	 	$('#a'+3).text("${list8[2].meet_subject}");
+ 		$('#a'+4).text("${list8[3].meet_subject}");
+ 		$('#a'+5).text("${list8[4].meet_subject}");
+ 		$('#a'+6).text("${list8[5].meet_subject}");
+ 		$('#a'+7).text("${list8[6].meet_subject}");
  	   for(i=1;i<=7;i++)
  	   {
  		   if(no!=i)
@@ -47,8 +47,6 @@ $(function(){
  			}
  	   }
     }); 
- 
-
 });
 </script>
 
@@ -58,7 +56,7 @@ $(function(){
                 loop:true,
               	auto:true,
                 keyPress:true,
-                interval: 2000
+                interval: 1000
             });
 			
             $('#image-gallery').lightSlider({
@@ -73,11 +71,10 @@ $(function(){
                     $('#image-gallery').removeClass('cS-hidden');
                 }  
             });
-           
-           
 		}); 
     </script>
 <link rel="stylesheet" href="main/css/style.css">
+
 </head>
 
 <body>
@@ -89,82 +86,67 @@ $(function(){
 	 <div class="hideLeft image" value="1">
 	 	<figure class="effect-bubba">
 			<img src="main/no1.jpg">
-			<figcaption>
-			<br>
-				<h2></h2>
-				<p>클릭!!</p>
-				<a href="#"></a>
-			</figcaption>
+				<figcaption>
+					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+				</figcaption>
 		</figure>
-		<h3 id="a1" align="center"></h3>
+		<a href="meeting_detail.do?meet_no=${list8[0].meet_no}"><h4 id="a1" align="center"></h4></a>
 	 </div>
     
     <div class="prevLeftSecond image" value="2">
-    	<figure class="effect-bubba">
-			<img src="https://s16.postimg.org/cgsggckzp/cover8.jpg">
-			<figcaption>
-				<h2>오늘의 모임</h2>
-				<p>클릭!!</p>
-				<a href="#"></a>
-			</figcaption>
+	    <figure class="effect-bubba">
+	    	<img src="${list8[1].meet_poster }">
+				<figcaption>
+					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+				</figcaption>
 		</figure>
-		<h3 id="a2"></h3>
+		<a href="meeting_detail.do?meet_no=${list8[1].meet_no}"><h4 id="a2" align="center"></h4></a>
     </div>
     
     <div class="prev image" value="3">
     	<figure class="effect-bubba">
-			<img src="https://s16.postimg.org/emmrauog5/cover7.jpg">
-			<figcaption>
-				<h2>오늘의 모임</h2>
-				<p>클릭!!</p>
-				<a href="#"></a>
-			</figcaption>
+    		<img src="${list8[2].meet_poster }">
+				<figcaption>
+					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+				</figcaption>
 		</figure>
-		<h3 id="a3"></h3>
+		<a href="meeting_detail.do?meet_no=${list8[2].meet_no}"><h4 id="a3" align="center"></h4></a>
     </div>
     <div class="selected image" value="4">
     	<figure class="effect-bubba">
-			<img src="https://s16.postimg.org/9drqcz611/cover1.jpg">
-			<figcaption>
-				<h2>오늘의 모임</h2>
-				<p>클릭!!</p>
-				<a href="#"></a>
-			</figcaption>
+    		<img src="${list8[3].meet_poster }">
+				<figcaption>
+					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+				</figcaption>
 		</figure>
-		<h3 id="a4"></h3>
+		<a href="meeting_detail.do?meet_no=${list8[3].meet_no}"><h4 id="a4" align="center"></h4></a>
     </div>
     <div class="next image" value="5">
     	<figure class="effect-bubba">
-			<img src="https://s16.postimg.org/pnhwfvgp1/cover6.jpg">
-			<figcaption>
-				<h2>오늘의 모임</h2>
-				<p>클릭!!</p>
-				<a href="#"></a>
-			</figcaption>
+    		<img src="${list8[4].meet_poster }">
+				<figcaption>
+					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+				</figcaption>
 		</figure>
-		<h3 id="a5"></h3>
+		<a href="meeting_detail.do?meet_no=${list8[4].meet_no}"><h4 id="a5" align="center"></h4></a>
     </div>
     <div class="nextRightSecond image" value="6">
-    	<figure class="effect-bubba">
-			<img src="https://s16.postimg.org/edp6kxbnp/cover4.jpg">
+    <figure class="effect-bubba">
+    	<img src="${list8[5].meet_poster }">
 			<figcaption>
-				<h2>오늘의 모임</h2>
-				<p>클릭!!</p>
-				<a href="#"></a>
+			<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
 			</figcaption>
-		</figure>
-		<h3 id="a6"></h3>
+			</figure>
+		<a href="meeting_detail.do?meet_no=${list8[5].meet_no}"><h4 id="a6" align="center"></h4></a>
     </div>
     <div class="hideRight image" value="7">
     	<figure class="effect-bubba">
-			<img src="https://s16.postimg.org/fij8qay4l/cover3.jpg">
-			<figcaption>
-				<h2>오늘의 모임</h2>
-				<p>클릭!!</p>
-				<a href="#"></a>
-			</figcaption>
+    		<img src="${list8[6].meet_poster }">
+				<figcaption>
+					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+				</figcaption>
 		</figure>
-		<h3 id="a7"></h3>
+		<a href="meeting_detail.do?meet_no=${list8[6].meet_no}"><h4 id="a7" align="center" sytle="font-color:#ffffff;"></h4></a>
     </div>
 </div>
 <%-- <center style="margin-top: 20px">
@@ -260,103 +242,7 @@ $(function(){
                      </div>
                  </div>
                </div>
-         <!-- /////////////////////////////////////// -->
-         <!--<div class="row">
-                 <nav id="filter" class="col-md-12 text-center">
-                   <ul>
-
-                     <li><a href="#" class="current btn-theme btn-small" data-filter="*" >#ALL</a></li>
-                     
-
-                     <li>
-                     	<a href="#" class="current btn-theme btn-small" data-filter=".study">#스터디</a>
-
-                     </li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".photography">#취미</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".print">#전시</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".pro">#IT</a></li>
-                   </ul>
-                 </nav>
-          		<div class="col-md-12">
-			          <div class="row">
-			            <div class="portfolio-items isotopeWrapper clearfix" id="3">
-			
-			              <article class="col-md-4 isotopeItem webdesign">
-			                <div class="portfolio-item">
-			                	<img src="img/poster1.png" alt="tag이미지" />
-			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-			                </div>
-			              </article>
-			
-			              <article class="col-md-4 isotopeItem photography">
-			                <div class="portfolio-item">
-			                  <img src="img/poster2.png" alt="tag이미지" />
-			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-			                </div>
-			              </article>
-			
-			
-			              <article class="col-md-4 isotopeItem photography">
-			                <div class="portfolio-item">
-			                  <img src="img/poster3.png" alt="tag이미지" />
-			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-			                </div>
-			              </article>
-			
-			              <article class="col-md-4 isotopeItem print">
-			                <div class="portfolio-item">
-			                  <img src="img/poster2.png" alt="tag이미지" />
-			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-			                </div>
-			              </article>
-			
-			              <article class="col-md-4 isotopeItem photography">
-			                <div class="portfolio-item">
-			                  <img src="img/poster1.png" alt="tag이미지" />
-			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-			                </div>
-			              </article>
-			
-			              <article class="col-md-4 isotopeItem webdesign">
-			                <div class="portfolio-item">
-			                  <img src="img/poster2.png" alt="tag이미지" />
-			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-			                </div>
-			              </article>
-			
-			              <article class="col-md-4 isotopeItem print">
-			                <div class="portfolio-item">
-			                  <img src="img/poster3.png" alt="tag이미지" />
-			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-			                </div>
-			              </article>
-			
-			              <article class="col-md-4 isotopeItem photography">
-			                <div class="portfolio-item">
-			                  <img src="img/poster2.png" alt="tag이미지" />
-			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-			                </div>
-			              </article>
-			
-			              <article class="col-md-4 isotopeItem print">
-			                <div class="portfolio-item">
-			                  <img src="img/poster1.png" alt="tag이미지" />
-			                	<p></p>
-			                	<p style="align:left">[무료]플리마켓_2017.12.15.금 오전 11시~3시 </p>
-			                </div>
-			              </article>
-			            </div>
-			          </div>
-			        </div>
-			      </div> -->
+       
 			      <!-- ////////////////////////////////////////////////////// -->
               <div class="row">
                  <nav id="filter" class="col-md-12 text-center">
@@ -415,9 +301,7 @@ $(function(){
                          </div>
                        </article>
                       </c:forEach>
-         
                      </div>
-                     
                    </div>
                  </div>
                </div> 

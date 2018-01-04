@@ -26,7 +26,15 @@
 <select id="Oimmypagehome" resultType="MemberVO" parameterType="String"> <!-- 마이페이지 홈  -->
 	SELECT om_tel,om_gender,om_regdate FROM oim_member where om_id=#{om_id}
 </select>
+
+
+
 <!-- 메인 데이터 -->
+<select id="MainSlider" resultType="MeetingVO">
+	SELECT meet_no, meet_poster, meet_subject, meet_like
+	FROM meeting
+	ORDER BY meet_like DESC
+</select>
 <select id="TodayMeeting" resultType="MeetingVO"><!-- 오늘의 모임 -->
 	SELECT meet_no, meet_poster, meet_charge,meet_subject,meet_cg,TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end
 	FROM meeting	
@@ -36,27 +44,27 @@
 	SELECT meet_no, meet_poster,meet_subject,meet_cg FROM meeting	   
 	WHERE meet_subject LIKE '_초대이벤트_%'           	
 </select>
-<select id="StudyTagMeeting" resultType="meetingVO"><!-- 취업 태그모임 -->
+<select id="StudyTagMeeting" resultType="MeetingVO"><!-- 취업 태그모임 -->
 	SELECT meet_no, meet_poster,meet_charge,meet_subject
 	FROM meeting
 	WHERE meet_subject LIKE '%스터디%'
 </select>
-<select id="HobbyTagMeeting" resultType="meetingVO">
+<select id="HobbyTagMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_charge,meet_subject
 	FROM meeting
 	WHERE meet_subject LIKE '%취미%'
 </select>
-<select id="MuTagMeeting" resultType="meetingVO">
+<select id="MuTagMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_charge,meet_subject
 	FROM meeting
 	WHERE meet_cg LIKE '%전시%'
 </select>
-<select id="ProTagMeeting" resultType="meetingVO">
+<select id="ProTagMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_charge,meet_subject
 	FROM meeting
 	WHERE meet_subject LIKE '%it%'
 </select>
-<select id="HotMeeting" resultType="meetingVO"><!-- 핫모임 -->
+<select id="HotMeeting" resultType="MeetingVO"><!-- 핫모임 -->
 	SELECT meet_no,meet_poster,meet_subject
 	FROM meeting
 	ORDER BY meet_hit DESC
