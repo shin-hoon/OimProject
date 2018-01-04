@@ -31,6 +31,7 @@ $(function(){
     //메인 화면 슬라이드 이미지를 클릭하면 밑에 모임 제목이 뜬다
      $(".image").click(function(){
  	   //alert("1");
+ 	   
  	   var no=$(this).attr("value");
  	    $('#a'+6).text("${list8[5].meet_subject}");
  	  	$('#a'+4).text("${list8[3].meet_subject}");
@@ -39,14 +40,28 @@ $(function(){
  		$('#a'+3).text("${list8[2].meet_subject}");
  		$('#a'+5).text("${list8[4].meet_subject}");
  		$('#a'+7).text("${list8[6].meet_subject}");
+ 		
+ 		$('#l'+6).text("${list8[5].meet_like}");
+ 	  	$('#l'+4).text("${list8[3].meet_like}");
+ 	 	$('#l'+2).text("${list8[1].meet_like}");
+ 		$('#l'+1).text("${list8[0].meet_like}");
+ 		$('#l'+3).text("${list8[2].meet_like}");
+ 		$('#l'+5).text("${list8[4].meet_like}");
+ 		$('#l'+7).text("${list8[6].meet_like}");
+ 		
+ 
+ 		
  	   for(i=1;i<=7;i++)
  	   {
  		   if(no!=i)
  			{
  			  $('#a'+i).text("");
+ 			 $('#l'+i).text("");
  			}
  	   }
-    }); 
+    });
+   
+    
 });
 </script>
 
@@ -76,7 +91,7 @@ $(function(){
     <style type="text/css">
     .slider_text{
     	margin:3%;
-    	font-color:#ffffff;
+    	font-color:red;
     }
     </style>
 <link rel="stylesheet" href="main/css/style.css">
@@ -87,20 +102,21 @@ $(function(){
     
 <!-- ====메인슬라이더=====-->
  <div id="carousel" style="background-color:#0A0A2A;" data-ride="carousel">
-	 <div class="hideLeft image" value="1">
+ 	
+ 		
+	 <div class="hideLeft image" value="6">
 	 	<figure class="effect-bubba">
 			<img src="${list8[5].meet_poster }">
 				<figcaption>
-					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+					<h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
 				</figcaption>
 		</figure>
 		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[5].meet_no}"><h4 id="a1" align="center"></h4></a>
+			<a href="meeting_detail.do?meet_no=${list8[5].meet_no}"><h4 id="a6" align="center"></h4></a>
 		</div>
-		
 	 </div>
     
-    <div class="prevLeftSecond image" value="2">
+    <div class="prevLeftSecond image" value="4">
 	    <figure class="effect-bubba">
 	    	<img src="${list8[3].meet_poster }">
 				<figcaption>
@@ -108,11 +124,11 @@ $(function(){
 				</figcaption>
 		</figure>
 		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[3].meet_no}"><h4 id="a2" align="center"></h4></a>
+			<a href="meeting_detail.do?meet_no=${list8[3].meet_no}"><h4 id="a4" align="center"></h4></a>
 		</div>
     </div>
     
-    <div class="prev image" value="3">
+    <div class="prev image" value="2">
     	<figure class="effect-bubba">
     		<img src="${list8[1].meet_poster }">
 				<figcaption>
@@ -120,10 +136,10 @@ $(function(){
 				</figcaption>
 		</figure>
 		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[1].meet_no}"><h4 id="a3" align="center"></h4></a>
+			<a href="meeting_detail.do?meet_no=${list8[1].meet_no}"><h4 id="a2" align="center"></h4></a>
 		</div>
     </div>
-    <div class="selected image" value="4">
+    <div class="selected image" value="1">
     	<figure class="effect-bubba">
     		<img src="${list8[0].meet_poster }">
 				<figcaption>
@@ -131,10 +147,10 @@ $(function(){
 				</figcaption>
 		</figure>
 		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[0].meet_no}"><h4 id="a4" align="center"></h4></a>
+			<a href="meeting_detail.do?meet_no=${list8[0].meet_no}"><h4 id="a1" align="center"></h4></a>
 		</div>
     </div>
-    <div class="next image" value="5">
+    <div class="next image" value="3">
     	<figure class="effect-bubba">
     		<img src="${list8[2].meet_poster }">
 				<figcaption>
@@ -142,10 +158,10 @@ $(function(){
 				</figcaption>
 		</figure>
 		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[2].meet_no}"><h4 id="a5" align="center"></h4></a>
+			<a href="meeting_detail.do?meet_no=${list8[2].meet_no}"><h4 id="a3" align="center"></h4></a>
 		</div>
     </div>
-    <div class="nextRightSecond image" value="6">
+    <div class="nextRightSecond image" value="5">
     	<figure class="effect-bubba">
     	<img src="${list8[4].meet_poster }">
 			<figcaption>
@@ -153,7 +169,7 @@ $(function(){
 			</figcaption>
 		</figure>
 		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[4].meet_no}"><h4 id="a6" align="center"></h4></a>
+			<a href="meeting_detail.do?meet_no=${list8[4].meet_no}"><h4 id="a5" align="center"></h4></a>
 		</div>
     </div>
     <div class="hideRight image" value="7">
@@ -263,8 +279,6 @@ $(function(){
                      </div>
                  </div>
                </div>
-       
-			      <!-- ////////////////////////////////////////////////////// -->
               <div class="row">
                  <nav id="filter" class="col-md-12 text-center">
                    <ul>
