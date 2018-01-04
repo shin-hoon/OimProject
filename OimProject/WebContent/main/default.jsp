@@ -191,7 +191,9 @@ $(function(){
                   <c:forEach var="vo" items="${list }" begin="1" end="8">
                       <div class="col-sm-3">
                          <div class="thumbnail">
-                            <a href="meeting_detail.do?meet_no=${vo.meet_no}"><img src="${vo.meet_poster }" alt="마감임박"></a>
+                         	<div style="width:100%; height:230px;">
+                            	<a href="meeting_detail.do?meet_no=${vo.meet_no}"><img src="${vo.meet_poster }" alt="마감임박" style="width:100%; height:100%;"></a>
+                            </div>
                              <div class="caption">
                                    <div>
                                  <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">${vo.meet_charge }</span></li>
@@ -357,7 +359,7 @@ $(function(){
 				<div class="col-md-4 col-0-gutter">
 					<div class="ot-portfolio-item">
 						<figure class="effect-bubba">
-							<img src="${vo.meet_poster }" class="img-responsive" height="100%" width="100%"/>
+							<img src="${vo.meet_poster }" class="img-responsive" style="height:350px;"/>
 							<figcaption>
 								<h2 style="margin:13%;">${vo.meet_subject }</h2>
 								<p>클릭!!</p>
