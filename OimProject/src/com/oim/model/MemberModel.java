@@ -43,13 +43,13 @@ public class MemberModel {
 	    	  MemberVO vo=new MemberVO();
 	    	  req.setCharacterEncoding("UTF-8");
 		      String om_id=req.getParameter("om_id");
-		      String om_pwd=req.getParameter("om_pwd");
+		      String om_pwd=req.getParameter("password");
 		      String om_name=req.getParameter("om_name");
 		      String om_birth=req.getParameter("om_birth");
 		      String om_gender=req.getParameter("om_gender");
-		      String tel1=req.getParameter("tel1");
-		      String tel2=req.getParameter("tel2");
-		      String tel3=req.getParameter("tel3");
+		      String om_tel1=req.getParameter("tel1");
+		      String om_tel2=req.getParameter("tel2");
+		      String om_tel3=req.getParameter("tel3");
 		      String om_company=req.getParameter("om_company");;
 		     
 		      vo.setOm_id(om_id);
@@ -57,9 +57,9 @@ public class MemberModel {
 		      vo.setOm_name(om_name);
 		      vo.setOm_birth(om_birth);
 		      vo.setOm_gender(om_gender);
-		      vo.setTel1(tel1);
-		      vo.setTel2(tel2);
-		      vo.setTel3(tel3);
+		      vo.setTel1(om_tel1);
+		      vo.setTel2(om_tel2);
+		      vo.setTel3(om_tel3);
 		      vo.setOm_company(om_company);
 
 		      System.out.println("¾ÆÀÌµð(Email):"+om_id);
