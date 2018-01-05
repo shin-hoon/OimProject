@@ -22,6 +22,15 @@ public class SelectListVO {
     private Date meet_regdate;  // 등록날짜
     private int meet_hit;  // 조회수
     private int rownum;  // 총 칼럼수
+    private int likeCount;
+	
+	
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
     
     
 	public int getRownum() {

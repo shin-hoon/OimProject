@@ -74,12 +74,12 @@ $(function(){
 <body>
 	 <div class="oim-mypage update">
                <h4 style="font-weight:bold;"><span class=" oim-icon glyphicon glyphicon-pencil"></span>회원정보 수정</h4>
-              
-                  아이디로 사용되는 이메일은 변경하실 수 없습니다.
+              아이디는 회원가입시 지정한 아이디 외에 다른 아이디로 변경 하실 수 없습니다.
+                  
                   <br><br><br>
                   <비밀번호 변경시 유의사항>
                   <br><br>
-                  - 개인정보보호를 위해 최소 3개월 이내에는 정기적으로 비밀번호를 변경해 주시는 게 좋습니다.<br>
+                  - 개인정보보호를 위해 최소 3개월 이내에는 정기적으로 비밀번호를 변경해 주시는것이 좋습니다.<br>
                   - 비밀번호는 쉬운번호나 타 사이트와 같을 경우 도용되기 쉽습니다.<br>
                   - 주민번호,전화번호,생일 등 개인정보와 연관된 문자나 숫자는 보안상 위험이 높으므로 사용을 자제해 주세요.<br>   
                
@@ -102,7 +102,7 @@ $(function(){
                      </td>
                      <td width=70% class="text-center">
                         <input type=text name=tel size=30 id="m2_tel" placeholder="${vo.om_tel }">
-                        <h6 style="color:black; font-size:12px;">*전화번호에 '-'없이 입력해주세요.</h6>
+                        <h6 style="color:#0101DF; font-size:12px;">*전화번호에 '-'없이 입력해주세요.</h6>
                      </td>                  
                   </tr>
                   <tr>
@@ -111,7 +111,7 @@ $(function(){
                      </td>
                      <td width=70% class="text-center">
                         <input type="password" name=pwd size=30 id="m2_pwd"><br>	
-                        <h6 style="color:black; font-size:12px;">*비밀번호는 8~24글자 이내로 입력해 주세요.</h6>
+                        <h6 style="color:#0101DF; font-size:12px;">*비밀번호는 8~24글자 이내로 입력해 주세요.</h6>
                      </td>                  
                   </tr>
                   <tr>

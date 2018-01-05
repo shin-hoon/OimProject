@@ -20,12 +20,17 @@ $(function(){
     
     $('.studyBtn').click(function(){
        $('.study').show();
+       $('.messeBtn').css("background-color","#EEE").css("color","#555");
     });
     $('.hobbyBtn').click(function(){
         $('.hobby').show();
      });
+    $('.messeBtn').hover(function(){
+    	$('.messeBtn').css("background-color","#fcbe03").css("color","white");
+    })
     $('.messeBtn').click(function(){
         $('.messe').show();
+        $('.messeBtn').css("background-color","#fcbe03").css("color","white");
      });
     $('.proBtn').click(function(){
         $('.pro').show();
@@ -124,7 +129,7 @@ nav#filter a {
 	color:#555;
 	
 }
-nav#filter a:hover, nav#filter a.current {
+nav#filter a:hover, nav#filter a:focus {
 	background-color: #fcbe03;
 	color:white;
 	font-weight: bold;
@@ -291,8 +296,8 @@ nav#filter a:hover, nav#filter a.current {
                   <div class="col-md-3 text-center">
                      <div class="mz-module">
                         <div class="mz-module-about caption">
-                           <img src="${vo.meet_poster }" style="width:100%; height:100%;">
-                           <p class="p_add" style="font-size:10pt; margin:1%;"><b>${vo.meet_subject }</b></p>
+                           <a href="meeting_detail.do?meet_no=${vo.meet_no}"><img src="${vo.meet_poster }" style="width:100%; height:100%;"></a>
+                           <p class="p_add" style="color:#1C1C1C; font-size:10pt; margin:1%; text-align:center;"><b>${vo.meet_subject }</b></p>
                         </div>
                         <a href="meeting_detail.do?meet_no=${vo.meet_no}" class="mz-module-button">이벤트 보기</a>
                      </div>

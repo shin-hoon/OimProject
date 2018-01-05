@@ -189,7 +189,7 @@ public class qaboardModel{
 				  String page=req.getParameter("page");
 				  String qa_subject=req.getParameter("qa_subject");
 				  String qa_content=req.getParameter("qa_content");
-				  String qa_pwd=req.getParameter("get_pwd");
+				  String qa_pwd=req.getParameter("qa_pwd");
 				  HttpSession session=req.getSession();
 				  String om_id=(String)session.getAttribute("id");
 				  

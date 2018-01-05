@@ -135,6 +135,77 @@ $(function(){
             }
          });
       });
+      $('#joinok').click(function(){
+         var om_id=$('#om_id').val();
+         var password=$('#password').val();
+         var check_password=$('#check_password').val();
+         var om_name=$('#om_name').val();
+         var om_birth=$('#om_birth').val();
+         var om_gender=$('#om_gender').val();
+         var tel1=$('#tel1').val();
+         var tel2=$('#tel2').val();
+         var tel3=$('#tel3').val();
+         var om_company=$('#om_company').val();
+         
+         if(om_id.trim()=="")
+          {
+            alert("아이디를 입력하세요");
+          }
+         else if(password.trim()=="")
+          {
+            alert("비밀번호를 입력하세요");
+            $('#password').focus();
+            return;
+          }
+         else if(check_password.trim()=="")
+          {
+            alert("비밀번호확인을 입력하세요");
+            $('#check_password').focus();
+            return;
+          }
+         else if(om_name.trim()=="")
+          {
+            alert("이름을 입력하세요");
+            $('#om_name').focus();
+            return;
+          }
+         else if(om_birth.trim()=="")
+           {
+             alert("생년월일을 입력하세요");
+             return;
+           }
+         else if(om_gender.trim()=="")
+           {
+             alert("성별을 입력하세요");
+             
+           }
+         else if(tel1.trim()=="" || tel2.trim()=="" || tel3.trim()=="")
+           {
+             alert("전화번호를 입력하세요");
+             $('#tel2').focus();
+             return;
+           }
+         else if(om_company.trim()=="")
+           {
+             alert("소속명을 입력하세요");
+             $('#om_company').focus();
+             return;
+           }
+         else{
+            $.ajax({
+                  type:'POST',
+                     url:'Oim_Join.do', 
+                     data:{"om_id":om_id, "password":password, "om_name":om_name, "om_birth":om_birth,"om_gender":om_gender, "tel1":tel1, "tel2":tel2, "tel3":tel3, "om_company":om_company },
+                     success:function(response)
+                     {
+                        alert("회원가입이 완료되었습니다");
+                        location.href="main.do";
+                     }
+                     });
+         }
+        
+      })
+      
    });
    function ok(om_id){
       parent.frm.om_id.value=om_id;
@@ -262,7 +333,7 @@ $(function(){
                <tr>
                   <td width=20%>아이디<br><span>(E-mail)</span></td>
                   <td width=80%>
-                  <input type="text" name="om_id" size=30 value="" required readonly>
+                  <input type="text" name="om_id" size=30 value="" required readonly id="om_id">
                   
                   <input type="button" value="중복체크" class="btn btn-sm btn-primary" id="idcheck" data-toggle="modal" data-target="#idcheck-modal">
                   <span class="help-block">이메일을 입력하세요</span>
@@ -285,52 +356,50 @@ $(function(){
                <tr>
                   <td width=20% class="text-right">이름</td>
                   <td width=80% class="text-left">
-                  <input type="text" name=om_name size=15>
+                  <input type="text" name=om_name size=15 id="om_name">
                   </td>
                </tr>
                <tr>
                   <td width=20% class="text-right">생년월일</td>
                   <td width=80% class="text-left">
-                  <input type="date" name=om_birth size=20>
+                  <input type="date" name=om_birth size=20 id="om_birth">
                   </td>
                </tr>
                <tr>
                   <td width=20% class="text-right">성별</td>
                   <td width=80% class="text-left">
-                  <input type="radio" name=om_gender value="여자" checked>여자
+                  <input type="radio" name=om_gender value="여자" checked id="om_gender">여자
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  <input type="radio" name=om_gender value="남자">남자
+                  <input type="radio" name=om_gender value="남자" id="om_gender">남자
                   </td>
                </tr>
                <tr>
                   <td width=20% class="text-right">전화번호</td>
                   <td width=80% class="text-left">
-                  <select name=tel1 style="height:30px;">
+                  <select name=tel1 style="height:30px;" id="tel1">
                      <option>010</option>
                      <option>011</option>
                      <option>017</option>
                   </select> -
-                  <input type="text" name=tel2 size=7> -
-                  <input type="text" name=tel3 size=7>
+                  <input type="text" name=tel2 size=7 id="tel2"> -
+                  <input type="text" name=tel3 size=7 id="tel3">
                   </td>
                </tr>
                <tr>
                   <td width=20% class="text-right">소속명</td>
                   <td width=80% class="text-left">
-                  <input type="text" name=om_company size=20>
+                  <input type="text" name=om_company size=20 id="om_company">
                   </td>
                </tr>
                <tr>
                   <td colspan="2" class="text-center" style="margin:auto; text-align:center;">
-                  <button type="submit" value=joinok class="btn btn-mg btn-danger"> 회원가입
+                  <button type="button" value=joinok class="btn btn-mg btn-danger" id="joinok"> 회원가입
                   <span class="glyphicon glyphicon-ok" ></span></button>
                   <button type="submit" value=joinok class="btn btn-mg oim_btn_gr" data-dismiss="modal"> 가입취소
                   <span class="glyphicon glyphicon-remove" ></span></button>
-                  
                   </td>
                </tr>
                </table>
-               </form>
             </div>
          </div>
          </div>
