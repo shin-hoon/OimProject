@@ -34,7 +34,22 @@
       <tr class="active">
        <td width=10% class="text-center">${vo.qa_no }</td>
        <td width=45% class="text-left">
-      	 <a href="ccontent.do?no=${vo.qa_no }&page=${curpage}">${vo.qa_subject }</a>
+       <c:if test="${vo.qa_group_tab>0 }">
+       	<c:forEach begin="0" end="${vo.qa_group_tab }">
+		        		&nbsp;&nbsp;
+       	</c:forEach>
+       		<img src="qaboard/image/re.gif">
+       </c:if>
+       <c:choose>
+        <c:when test="${msg==vo.qa_subject }">
+        	<span style="color:#999">${vo.qa_subject }</span>
+        </c:when>
+        <c:otherwise>
+        	<a href="ccontent.do?no=${vo.qa_no }&page=${curpage}">${vo.qa_subject }</a>
+        </c:otherwise>
+       </c:choose>
+       
+      
       	 
        <c:if test="${today==vo.dbday}">
           <sup>

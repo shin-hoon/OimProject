@@ -238,8 +238,23 @@ public class qaboardDAO {
 				   session.close();
 		   }
 	   }
-	   
-	   
-	   
-	   
+	  /* public static void qareplyDelete(int pno)
+	   {
+		   
+		   SqlSession session=ssf.openSession(true);
+		 
+		   try
+		   {
+		      session.update("qareplyDelete", pno);
+		  
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+		      session.close();
+		   }
+		
+	   }*/
 }

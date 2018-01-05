@@ -53,14 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     qa_group_step=qa_group_step+1
     WHERE qa_group_id=#{qa_group_id} AND qa_group_step>#{qa_group_step}
   </update>
-  <insert id="qareplyRepyInsert" parameterType="qaboardVO">
-   <!--  <selectKey keyProperty="qa_no" resultType="int" order="BEFORE">
-      SELECT NVL(MAX(qa_no)+1,1) as qa_no FROM qaboard 
-    </selectKey> -->
-	<!-- INSERT INTO qaboard
-	VALUES(#{qa_no},#{om_id},#{qa_subject},
-	#{qa_content},#{qa_pwd},SYSDATE,0,#{qa_group_id},
-	#{qa_group_step},#{qa_group_tab},#{qa_root},0) -->	
+  <insert id="qareplyRepyInsert" parameterType="qaboardVO">	
 	INSERT INTO qaboard(qa_no,om_id,qa_subject,qa_content,qa_pwd,qa_group_id,qa_group_step,qa_group_tab,qa_root)
 	VALUES(qaboard_qa_no_seq.nextval,#{om_id},#{qa_subject},#{qa_content},#{qa_pwd},#{qa_group_id},#{qa_group_step},#{qa_group_tab},#{qa_root})
   </insert>
@@ -69,4 +62,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     qa_depth=qa_depth+1
     WHERE qa_no=#{qa_no}
   </update>
+<!--   <update id="qareplyDelete"  parameterType="int">
+    UPDATE qaBoard SET
+	qa_subject='관리자가 삭제한 게시물입니다.',qa_content='관리자가 삭제한 게시물입니다.'
+	WHERE qa_no=#{qa_no}
+  </update> -->
 </mapper>

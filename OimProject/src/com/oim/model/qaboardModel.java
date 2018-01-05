@@ -23,6 +23,7 @@ public class qaboardModel{
 	public String ListModel(HttpServletRequest req, HttpServletResponse res) {
 		// TODO Auto-generated method stub
 		try {
+		
 		String page=req.getParameter("page");
 		HttpSession session= req.getSession();
 		// req => 요청값 => 추가 (setAttribute())
@@ -185,6 +186,7 @@ public class qaboardModel{
 			  {
 				  req.setCharacterEncoding("UTF-8");
 			  }catch(Exception ex){}
+	  
 				  String pno=req.getParameter("pno");
 				  String page=req.getParameter("page");
 				  String qa_subject=req.getParameter("qa_subject");
@@ -193,6 +195,7 @@ public class qaboardModel{
 				  HttpSession session=req.getSession();
 				  String om_id=(String)session.getAttribute("id");
 				  
+  
 				  // DB연동 
 				  qaboardVO pvo=qaboardDAO.qareplyGetParentInfo(Integer.parseInt(pno));
 				  qaboardVO vo=new qaboardVO();
@@ -200,7 +203,7 @@ public class qaboardModel{
 				  vo.setQa_subject(qa_subject);
 				  vo.setQa_content(qa_content);
 				  vo.setQa_pwd(qa_pwd);
-			
+				  
 				  vo.setQa_group_id(pvo.getQa_group_id());
 				  vo.setQa_group_step(pvo.getQa_group_step()+1);
 				  vo.setQa_group_tab(pvo.getQa_group_tab()+1);
@@ -211,6 +214,8 @@ public class qaboardModel{
 				  qaboardDAO.qareplyRepyInsert(vo);
 				  // depth증가
 				  qaboardDAO.qareplyDepthIncrement(Integer.parseInt(pno));
+				
+				  
 				  // 전송 
 				  //req.setAttribute("bno", bno);
 			  return "llist.do?no="+pno;
