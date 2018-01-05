@@ -71,12 +71,12 @@
           $('#apply').click(function(){
         	 
         	 var meet_no = $('#meet_no').attr("value");
-        	 var om_id = $('#om_id').attr("value")
-        	 if(om_id.trim()==""){
+        	 var om_id2 = $('#om_id2').attr("value");
+        	 if(om_id2.trim()==""){
         		 alert("로그인 후 이용해주세요.")
         	 }else{
         		 Shadowbox.open({
-                     content:"meeting_payment.do?meet_no="+meet_no+"&om_id="+om_id,		
+                     content:"meeting_payment.do?meet_no="+meet_no+"&om_id="+om_id2,		
                      player:'iframe',
                      title:'신청내역확인',
                      width:1200,
@@ -208,7 +208,7 @@ $(function(){
    	
         <div class="row">
         <input type="hidden" id="meet_no" name="meet_no" value="${vo.meet_no }"/>
-        <input type="hidden" id="om_id" name="om_id" value="${sessionScope.id}"/>
+        <input type="hidden" id="om_id2" name="om_id2" value="${sessionScope.id}"/>
             <div class="top col-xs-12" style="vertical-align: middle;">
                <c:if test="${vo.meet_price==0 }">
                   <span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>
