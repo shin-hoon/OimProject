@@ -102,6 +102,7 @@ $(function(){
                      </td>
                      <td width=70% class="text-center">
                         <input type=text name=tel size=30 id="m2_tel" placeholder="${vo.om_tel }">
+                        <h6 style="color:black; font-size:12px;">*전화번호에 '-'없이 입력해주세요.</h6>
                      </td>                  
                   </tr>
                   <tr>
