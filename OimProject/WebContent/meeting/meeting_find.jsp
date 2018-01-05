@@ -21,11 +21,7 @@
 $(function(){
 	<c:forEach var="vo" items='${list }' varStatus="status">
 		$('.likeGroup${vo.meet_no} .likeInsertBtn').click(function(){
-			$(this).removeClass("btn-default");
-			$(this).addClass("btn-primary");
-			
 			var meet_no=$('.likeGroup${vo.meet_no} span.likeNumber1').attr("no-data");
-			var meet_like=$('.likeGroup${vo.meet_no} span.likeNumber1').attr("like-data");
 			
 			$('.likeGroup${vo.meet_no} span.likeNumber1').text(parseInt(meet_like)+1);
 	
@@ -41,12 +37,7 @@ $(function(){
 		});
 		
 		$('.likeGroup${vo.meet_no} .likeDeleteBtn').click(function(){
-			
-			$(this).removeClass("btn-primary");
-			$(this).addClass("btn-default");
-			
 			var meet_no=$('.likeGroup${vo.meet_no} span.likeNumber2').attr("no-data");
-			var meet_like=$('.likeGroup${vo.meet_no} span.likeNumber2').attr("like-data");
 			
 			$('.likeGroup${vo.meet_no} span.likeNumber2').text(parseInt(meet_like)-1);
 	

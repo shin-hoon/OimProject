@@ -227,11 +227,11 @@ public class MeetingDAO {
 		}
 	}
 	
-	public static void meetingDelete(int meet_no) { //모임삭제
+	public static void meetingDelete(MeetingVO vo) { //모임삭제
 		
-		SqlSession session=ssf.openSession(true);
+		SqlSession session=ssf.openSession();
 		try {
-			session.update("meetingDelete",meet_no);
+			session.update("meetingDelete",vo);
 		}catch(Exception ex) {
 			System.out.println("meetingDelete: "+ex.getMessage());
 			ex.printStackTrace();
@@ -261,7 +261,7 @@ public class MeetingDAO {
 		   SqlSession session=ssf.openSession();
 		   try {
 			   session.insert("likeInsert",vo);
-			   session.update("likeIncrement",vo);
+			   session.update("likeIncrement",vo.getMeet_no());
 			   session.commit();
 		   }catch(Exception ex) {
 			   session.rollback();
@@ -300,7 +300,7 @@ public class MeetingDAO {
 			   
 			   
 			session.delete("likeDelete",vo);
-			session.update("likeDecrement",vo);
+			session.update("likeDecrement",vo.getMeet_no());
 			session.commit();
 		   }catch(Exception ex){
 			   session.rollback();

@@ -20,14 +20,8 @@
     $(function(){
     	<c:forEach var="vo" items='${list }' varStatus="status">
     		$('.likeGroup${vo.meet_no} .likeInsertBtn').click(function(){
-    			$(this).removeClass("btn-default");
-				$(this).addClass("btn-primary");
-    			
 				var meet_no=$('.likeGroup${vo.meet_no} span.likeNumber1').attr("no-data");
-				var meet_like=$('.likeGroup${vo.meet_no} span.likeNumber1').attr("like-data");
 				
-				$('.likeGroup${vo.meet_no} span.likeNumber1').text(parseInt(meet_like)+1);
-		
 				$.ajax({
     				type:"POST",
     				url:"like_insert.do",
@@ -39,16 +33,9 @@
     			});
     		});
     		
-			$('.likeGroup${vo.meet_no} .likeDeleteBtn').click(function(){
-    			
-    			$(this).removeClass("btn-primary");
-				$(this).addClass("btn-default");
-    			
+			$('.likeGroup${vo.meet_no} .likeDeleteBtn').click(function(){	
 				var meet_no=$('.likeGroup${vo.meet_no} span.likeNumber2').attr("no-data");
-				var meet_like=$('.likeGroup${vo.meet_no} span.likeNumber2').attr("like-data");
-				
-				$('.likeGroup${vo.meet_no} span.likeNumber2').text(parseInt(meet_like)-1);
-		
+			
 				$.ajax({
     				type:"POST",
     				url:"like_delete.do",
@@ -434,11 +421,11 @@
                                     <c:choose>
                                   	<c:when test="${sessionScope.id!=null && vo.likeCount==0 }">
                                   		<input type="button" class="btn btn-default likeInsertBtn" style="width:20%;" value="♡">
-                                  		<span class="likeNumber1" no-data="${vo.meet_no}" like-data="${vo.meet_like }">${vo.meet_like }</span>
+                                  		<span class="likeNumber1" no-data="${vo.meet_no}">${vo.meet_like }</span>
                                   	</c:when>
                                   	<c:when test="${sessionScope.id!=null && vo.likeCount!=0 }">
                                   		<input type="button" class="btn btn-primary likeDeleteBtn" style="width:20%;" value="♡">
-                                  		<span class="likeNumber2" no-data="${vo.meet_no}" like-data="${vo.meet_like }">${vo.meet_like }</span>
+                                  		<span class="likeNumber2" no-data="${vo.meet_no}">${vo.meet_like }</span>
                                   	</c:when>
                                   	<c:otherwise>
                                   		<input type="button" class="btn btn-primary" onclick="alert('로그인 후 이용해주세요.');" value="♡" style="width:20%;"/>
