@@ -36,6 +36,9 @@
 #join{
  z-index:9999;
 }
+#idcheck-modal{
+ z-index:9999;
+}
 </style>
 
 
