@@ -20,12 +20,17 @@ $(function(){
     
     $('.studyBtn').click(function(){
        $('.study').show();
+       $('.messeBtn').css("background-color","#EEE").css("color","#555");
     });
     $('.hobbyBtn').click(function(){
         $('.hobby').show();
      });
+    $('.messeBtn').hover(function(){
+    	$('.messeBtn').css("background-color","#fcbe03").css("color","white");
+    })
     $('.messeBtn').click(function(){
         $('.messe').show();
+        $('.messeBtn').css("background-color","#fcbe03").css("color","white");
      });
     $('.proBtn').click(function(){
         $('.pro').show();
@@ -124,7 +129,7 @@ nav#filter a {
 	color:#555;
 	
 }
-nav#filter a:hover, nav#filter a.current {
+nav#filter a:hover, nav#filter a:focus {
 	background-color: #fcbe03;
 	color:white;
 	font-weight: bold;
