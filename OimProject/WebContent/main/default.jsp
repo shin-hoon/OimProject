@@ -322,7 +322,7 @@ nav#filter a:hover, nav#filter a:focus {
                  <div class="col-md-offset-3 col-md-6 text-center">
                    <div class="section-title">
                         <h2>#Tag 모임</h2>
-                        <p>태그별로 모임 모아보기</p>
+                        <p>태그별로 모임을 한눈에 볼 수 있습니다</p>
                      </div>
                  </div>
                </div>
