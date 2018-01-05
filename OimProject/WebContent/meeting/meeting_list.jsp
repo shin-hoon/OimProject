@@ -18,16 +18,15 @@
 <script>
     
     $(function(){
-    	
     	<c:forEach var="vo" items='${list }' varStatus="status">
     		$('.likeGroup${vo.meet_no} .likeInsertBtn').click(function(){
     			$(this).removeClass("btn-default");
 				$(this).addClass("btn-primary");
     			
-				var meet_no=$('.likeGroup${vo.meet_no} span').attr("no-data");
-				var meet_like=$('.likeGroup${vo.meet_no} span').attr("like-data");
+				var meet_no=$('.likeGroup${vo.meet_no} span.likeNumber1').attr("no-data");
+				var meet_like=$('.likeGroup${vo.meet_no} span.likeNumber1').attr("like-data");
 				
-				$('.likeGroup${vo.meet_no} span').text(parseInt(meet_like)+1);
+				$('.likeGroup${vo.meet_no} span.likeNumber1').text(parseInt(meet_like)+1);
 		
 				$.ajax({
     				type:"POST",
@@ -35,11 +34,33 @@
     				data:{"meet_no":meet_no},
     				success:function(res)
     				{
-    					
+    					$('div.container').html(res);
     				}
     			});
     		});
-    	</c:forEach>
+    		
+			$('.likeGroup${vo.meet_no} .likeDeleteBtn').click(function(){
+    			
+    			$(this).removeClass("btn-primary");
+				$(this).addClass("btn-default");
+    			
+				var meet_no=$('.likeGroup${vo.meet_no} span.likeNumber2').attr("no-data");
+				var meet_like=$('.likeGroup${vo.meet_no} span.likeNumber2').attr("like-data");
+				
+				$('.likeGroup${vo.meet_no} span.likeNumber2').text(parseInt(meet_like)-1);
+		
+				$.ajax({
+    				type:"POST",
+    				url:"like_delete.do",
+    				data:{"meet_no":meet_no},
+    				success:function(res)
+    				{
+    					$('div.container').html(res);
+    				}
+    			});
+    		});
+        	</c:forEach>
+
     	});
     
     /*caption안에 p태그의 글자수가 일정수치 이상되면 ...으로 표시하는 스크립트*/
@@ -416,8 +437,8 @@
                                   		<span class="likeNumber1" no-data="${vo.meet_no}" like-data="${vo.meet_like }">${vo.meet_like }</span>
                                   	</c:when>
                                   	<c:when test="${sessionScope.id!=null && vo.likeCount!=0 }">
-                                  		<a href="like_delete.do?meet_no=${vo.meet_no}" id="likeDeletetBtn" class="btn btn-primary" style="width:20%;">♡</a>
-                                  		<span class="likeNumber2">${vo.meet_like }</span>
+                                  		<input type="button" class="btn btn-primary likeDeleteBtn" style="width:20%;" value="♡">
+                                  		<span class="likeNumber2" no-data="${vo.meet_no}" like-data="${vo.meet_like }">${vo.meet_like }</span>
                                   	</c:when>
                                   	<c:otherwise>
                                   		<input type="button" class="btn btn-primary" onclick="alert('로그인 후 이용해주세요.');" value="♡" style="width:20%;"/>

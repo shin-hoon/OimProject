@@ -293,15 +293,17 @@ public class MeetingDAO {
 		   }
 		   return list;
 	   }
-	   public static void likeDelete(int no) { //Âò»èÁ¦
+	   public static void likeDelete(LikeVO vo) { //Âò»èÁ¦
 		   
-		   SqlSession session=ssf.openSession(true);
+		   SqlSession session=ssf.openSession();
 		   try{
 			   
-			session.delete("likeDelete",no);
-			
-		   }catch(Exception ex){
 			   
+			session.delete("likeDelete",vo);
+			session.update("likeDecrement",vo);
+			session.commit();
+		   }catch(Exception ex){
+			   session.rollback();
 			   System.out.println(ex.getMessage());
 			   
 		   }finally{

@@ -230,9 +230,10 @@
 		SELECT basket_no,meet_no FROM basket
 		WHERE om_id=#{om_id}
 	</select>
-	<delete id="likeDelete" parameterType="int"><!--찜삭제 -->
+	<delete id="likeDelete" parameterType="LikeVO"><!--찜삭제 -->
 		DELETE FROM basket
-		WHERE basket_no=#{basket_no}
+		WHERE om_id=#{om_id}
+		AND meet_no=#{meet_no}
 	</delete>
 	<update id="likeIncrement" parameterType="LikeVO"><!--해당모임 찜 횟수 증가-->
 		UPDATE meeting SET

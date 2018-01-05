@@ -73,7 +73,8 @@ public class MeetingModel {
 	@RequestMapping("meeting_find.do") //모임검색결과
 	public String meeting_find(HttpServletRequest req, HttpServletResponse res) throws Throwable{
 			req.setCharacterEncoding("UTF-8");
-			
+			HttpSession session=req.getSession();
+			String om_id= (String)session.getAttribute("id");
 			String page=req.getParameter("page");
 			boolean first=false;
 			if(page==null) {
@@ -149,11 +150,18 @@ public class MeetingModel {
 					map.put("end", end);
 					
 					List<MeetingVO> list=MeetingDAO.meetingFindData(map);
+					for(MeetingVO vo:list) {
+						  if(om_id!=null) {
+							  LikeVO lvo=new LikeVO();
+							  lvo.setOm_id(om_id);
+							  lvo.setMeet_no(vo.getMeet_no());
+							  vo.setLikeCount(MeetingDAO.likeCount(lvo));
+						  }
+					}
 					totalpage=MeetingDAO.meetingFindTotalPage(map);
 							
 					
 					//jsp로 전송
-					HttpSession session=req.getSession();
 					if(first==true) //최초로 실행했을때는 session에 저장한다.
 					{
 						session.setAttribute("category", category);
@@ -175,6 +183,14 @@ public class MeetingModel {
 						map.put("start", start);
 						map.put("end", end);
 						list=MeetingDAO.meetingFindData(map);
+						for(MeetingVO vo:list) {
+							  if(om_id!=null) {
+								  LikeVO lvo=new LikeVO();
+								  lvo.setOm_id(om_id);
+								  lvo.setMeet_no(vo.getMeet_no());
+								  vo.setLikeCount(MeetingDAO.likeCount(lvo));
+							  }
+						}
 						totalpage=MeetingDAO.meetingFindTotalPage(map);
 					}
 					req.setAttribute("totalpage", totalpage);
@@ -553,12 +569,20 @@ public class MeetingModel {
 					
 					//jsp로 전송
 					HttpSession session=req.getSession();
+					String om_id=(String)session.getAttribute("id");
 					if(first==true) //최초로 실행했을때는 session에 저장한다.
 					{
 						map.put("searchText", searchText);
 						session.setAttribute("searchText", searchText);
 						list=MeetingDAO.meetingSearchData(map);
-						
+						for(MeetingVO vo:list) {
+							  if(om_id!=null) {
+								  LikeVO lvo=new LikeVO();
+								  lvo.setOm_id(om_id);
+								  lvo.setMeet_no(vo.getMeet_no());
+								  vo.setLikeCount(MeetingDAO.likeCount(lvo));
+							  }
+						}
 						mlist=MeetingDAO.meetingSearchTotalPage(searchText);
 						total=(int)mlist.get(0).get("total");
 						totalpage=(int)mlist.get(0).get("totalpage");
@@ -570,7 +594,14 @@ public class MeetingModel {
 						map.put("start", start);
 						map.put("end", end);
 						list=MeetingDAO.meetingSearchData(map);
-						
+						for(MeetingVO vo:list) {
+							  if(om_id!=null) {
+								  LikeVO lvo=new LikeVO();
+								  lvo.setOm_id(om_id);
+								  lvo.setMeet_no(vo.getMeet_no());
+								  vo.setLikeCount(MeetingDAO.likeCount(lvo));
+							  }
+						}
 						mlist=MeetingDAO.meetingSearchTotalPage(searchText);
 						total=(int)mlist.get(0).get("total");
 						totalpage=(int)mlist.get(0).get("totalpage");
@@ -594,7 +625,7 @@ public class MeetingModel {
     	return "Oim_meetpage.do";
     }
     
-    @RequestMapping("like_insert.do")
+    @RequestMapping("like_insert.do") //하트모양 클릭해서 찜 했을때
 	public String like_insert(HttpServletRequest req, HttpServletResponse res){
 		
 		HttpSession session=req.getSession();
@@ -605,10 +636,10 @@ public class MeetingModel {
 		vo.setOm_id(om_id);
 		MeetingDAO.likeInsert(vo);
 		
-		return "";
+		return "meeting/like_insert_ok.jsp";
 	}
 	
-	@RequestMapping("like_list.do")
+	@RequestMapping("like_list.do") 
 	public String jjim_like(HttpServletRequest req, HttpServletResponse res) {
 		
 		HttpSession session=req.getSession();
@@ -627,14 +658,17 @@ public class MeetingModel {
 		return "main/main.jsp";
 	}
 	
-	@RequestMapping("like_delete.do")
+	@RequestMapping("like_delete.do") //하트모양 클릭해서 찜 지웠을때
 	public String jjim_delete(HttpServletRequest req, HttpServletResponse res) {
 		
-		String[] num=req.getParameterValues("delnum");
-		for(String n:num) {
-			MeetingDAO.likeDelete(Integer.parseInt(n));
-		}
+		HttpSession session=req.getSession();
+		String om_id=(String)session.getAttribute("id");
+		String meet_no=req.getParameter("meet_no");
+		LikeVO vo=new LikeVO();
+		vo.setOm_id(om_id);
+		vo.setMeet_no(Integer.parseInt(meet_no));
+		MeetingDAO.likeDelete(vo);
 		
-		return "jjim_like.do";
+		return "meeting/like_delete_ok.jsp";
 	}
 }
