@@ -25,9 +25,9 @@
          	
          	
          	<if test="loc.size()!=0 and loc!=null">
-         		AND REGEXP_LIKE(meet_loc,
-         		<foreach collection="loc" item="lc" open="" close=")" separator="||">
-         			#{lc}
+         		AND
+         		<foreach collection="loc" item="lc" open="(" close=")" separator="OR">
+         			REGEXP_LIKE(meet_loc, #{lc})
          		</foreach>
          	</if>
          	
