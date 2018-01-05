@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
+import com.oim.meeting.dao.LikeVO;
+import com.oim.meeting.dao.MeetingDAO;
+import com.oim.meeting.dao.MeetingVO;
 import com.oim.select.*;
 
 @Controller
@@ -28,7 +31,7 @@ public class SelectSaveModel {
 	   
 	   if(page==null)		page="1";
 	   if(saveNum==null)	saveNum="1";
-	   if(id == null) id = "null";
+	   /*if(id == null) id = "null";*/
 	   int curpage=Integer.parseInt(page);
 	   int num=Integer.parseInt(saveNum);
 	   
@@ -40,13 +43,32 @@ public class SelectSaveModel {
 	   if(view == 0) {
 		   List<SelectListVO> list=dao.meetingList(curpage);
 		   totalpage = dao.TotalPage();
+		   
+		   for(SelectListVO vo:list) {
+				  if(id!=null) {
+					  LikeVO lvo=new LikeVO();
+					  lvo.setOm_id(id);
+					  lvo.setMeet_no(vo.getMeet_no());
+					  vo.setLikeCount(MeetingDAO.likeCount(lvo));
+				  }
+			}
+		   
 		   req.setAttribute("list", list);
 	   }
 	   else {
 		   List<SelectListVO> list = dao.saveList(id,curpage,view);
 		   List<SelectSaveVO> checkBox = dao.saveCheckBox(id,num);
-		   
 		   totalpage = dao.saveTotalPage(id,curpage,view);
+		   
+		   for(SelectListVO vo:list) {
+				  if(id!=null) {
+					  LikeVO lvo=new LikeVO();
+					  lvo.setOm_id(id);
+					  lvo.setMeet_no(vo.getMeet_no());
+					  vo.setLikeCount(MeetingDAO.likeCount(lvo));
+				  }
+			}
+		   
 		   req.setAttribute("list", list);
 		   req.setAttribute("checkBox", checkBox);
 	   }

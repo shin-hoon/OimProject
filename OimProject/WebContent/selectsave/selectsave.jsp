@@ -16,6 +16,47 @@
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="css/selectsave.css">
 	<script type="text/javascript" src="js/selectsave.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			<c:forEach var="vo" items='${list }'>
+    		$('.likeGroup${vo.meet_no} .likeInsertBtn').click(function(){
+    			
+				var meet_no=$('.likeGroup${vo.meet_no} span.likeNumber1').attr("no-data");
+				
+		
+				$.ajax({
+    				type:"POST",
+    				url:"like_insert.do",
+    				data:{"meet_no":meet_no},
+    				success:function(res)
+    				{
+    					$('.selectBoard').html(res);
+    					/* $('div.container').html(res); */
+    					/* location.href = "selectsave.do?saveNum=${num}&page=${curpage}"; */
+    				}
+    			});
+    		});
+    		
+			$('.likeGroup${vo.meet_no} .likeDeleteBtn').click(function(){
+    			
+				var meet_no=$('.likeGroup${vo.meet_no} span.likeNumber2').attr("no-data");
+				
+				$.ajax({
+    				type:"POST",
+    				url:"like_delete.do",
+    				data:{"meet_no":meet_no},
+    				success:function(res)
+    				{
+    					$('.selectBoard').html(res);
+    					/* $('div.container').html(res); */
+    					/* location.href = "selectsave.do?saveNum=${num}&page=${curpage}"; */
+    				}
+    			});
+    		});
+        	</c:forEach>
+
+		});
+	</script>
 </head>
 <body>
 	<div class="container" style="margin-top:30px;">
@@ -359,7 +400,9 @@
 				<c:forEach var="vo" items="${list}" >
 						<div class="col-sm-3">
 						<div class="thumbnail">
-							<a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster}" ></a>
+						<div style="width:100%; height:230px;">
+							<a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}"><img src="${vo.meet_poster}" style="width:100%;height:100%;"></a>
+							</div>
 							<div class="caption">
 								<div>
 									<li class="li_add">
@@ -384,9 +427,60 @@
 								<p class="p_add" style="height:22px;overflow:hidden;">
 									${vo.meet_subject }
 								</p>
-								<p align="center">
+								<%-- <p align="center">
 									<a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="btn btn-primary btn-block">신청하기</a>
-								</p>
+								</p> --%>
+								
+								<div class="likeGroup${vo.meet_no}" style="display:hidden;text-align:left;">
+                                    <c:choose>
+                                  	<c:when test="${sessionScope.id!=null && vo.likeCount==0 }">
+                                  		<input type="button" class="btn btn-default likeInsertBtn" style="width:20%;" value="♡">
+                                  		<span class="likeNumber1" no-data="${vo.meet_no}" >${vo.meet_like }</span>
+                                  	</c:when>
+                                  	<c:when test="${sessionScope.id!=null && vo.likeCount!=0 }">
+                                  		<input type="button" class="btn btn-primary likeDeleteBtn" style="width:20%;" value="♡">
+                                  		<span class="likeNumber2" no-data="${vo.meet_no}">${vo.meet_like }</span>
+                                  	</c:when>
+                                  	<c:otherwise>
+                                  		<input type="button" class="btn btn-primary" onclick="alert('로그인 후 이용해주세요.');" value="♡" style="width:20%;"/>
+                                  		<span class="likeNumber3">${vo.meet_like }</span>
+                                  	</c:otherwise>
+                                  </c:choose>  
+                                  
+                                  
+                                  <c:if test="${vo.meet_limit eq 0}"> <!-- 신청가능 인원이 0일때 버튼 비활성화 후 정원도달 출력 -->
+                                  	<a href="#" class="btn btn-primary disabled" style="float:right; width:50%;">정원도달</a>
+                                  </c:if>
+                                  
+                                  <c:if test="${vo.meet_limit ne 0}"> <!-- 신청가능 인원이 존재할때 몇명 신청가능한지 표시 -->
+                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}&page=${curpage}" class="btn btn-primary" style="float:right; width:50%;"
+                                  onMouseOver="this.innerHTML='신청하기'" 
+                                  onMouseOut="this.innerHTML='${vo.meet_limit}명 신청가능'">${vo.meet_limit}명 신청가능</a>
+                                  </c:if>
+                                  </div>
+                                  
+                                  <fmt:parseNumber var="percent" value="${(vo.meet_total-vo.meet_limit)/vo.meet_total*100}" integerOnly="true"/>
+                              <div class="progress" style="margin-top:10px;margin-bottom:0px;height:10px;"> <!-- 얼마나 신청했는지 %값 계산해서 progress bar형태로 표시 -->
+                              	  
+                              	  <c:if test="${percent >= 0 && percent <= 30}">
+                                  <div class="progress-bar progress-bar-success" role="progressbar" style="width:${percent}%"></div>
+                                  </c:if>
+                                  
+                              	  <c:if test="${percent > 30 && percent <= 80}">
+                                  <div class="progress-bar progress-bar-primary" role="progressbar" style="width:${percent}%"></div>
+                                  </c:if>
+                                  
+                              	  <c:if test="${percent > 80}">
+                              	  <div class="progress-bar progress-bar-danger" role="progressbar" style="width:${percent}%"></div>
+                              	  </c:if>
+                              	  
+                              	  
+                            </div>
+								
+								
+								
+								
+								
 							</div>
 						</div>
 					</div>
