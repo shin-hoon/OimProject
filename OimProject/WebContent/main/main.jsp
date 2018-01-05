@@ -103,6 +103,9 @@ $( document ).ready( function() {
 </style>
 
 <style>
+body{
+	height:auto;
+}
  .oim_ul>li>a:hover {
    color: #fcbe03!important;
    text-decoration:none;
@@ -114,7 +117,7 @@ $( document ).ready( function() {
   width: 100%;
   height: 180px;
   background-color: gray;
-  /* min-height:100%; */
+ 
 }
 
 .footer_li {

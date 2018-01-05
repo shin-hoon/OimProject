@@ -6,8 +6,8 @@ nav#filter a {
 	color:#555;
 }
 nav#filter a:hover, nav#filter a.current {
-	background-color: #44BCDD;
-	color:#fff;
+	background-color: #fcbe03;
+	color:white;
 }
 
 /* ------- */

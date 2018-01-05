@@ -12,6 +12,26 @@
 <script type="text/javascript">
 /*caption안에 p태그의 글자수가 일정수치 이상되면 ...으로 표시하는 스크립트*/
 $(function(){
+   $('.mainf').show();
+   $('.study').css("display","none");
+    $('.hobby').css("display","none");
+    $('.messe').css("display","none");
+    $('.pro').css("display","none"); 
+    
+    $('.studyBtn').click(function(){
+       $('.study').show();
+    });
+    $('.hobbyBtn').click(function(){
+        $('.hobby').show();
+     });
+    $('.messeBtn').click(function(){
+        $('.messe').show();
+     });
+    $('.proBtn').click(function(){
+        $('.pro').show();
+     });
+
+   
     $('div.caption p').each(function(){
     
     var length=25; //글자 최대길이 25
@@ -30,35 +50,35 @@ $(function(){
     
     //메인 화면 슬라이드 이미지를 클릭하면 밑에 모임 제목이 뜬다
      $(".image").click(function(){
- 	   //alert("1");
- 	   
- 	   var no=$(this).attr("value");
- 	    $('#a'+6).text("${list8[5].meet_subject}");
- 	  	$('#a'+4).text("${list8[3].meet_subject}");
- 	 	$('#a'+2).text("${list8[1].meet_subject}");
- 		$('#a'+1).text("${list8[0].meet_subject}");
- 		$('#a'+3).text("${list8[2].meet_subject}");
- 		$('#a'+5).text("${list8[4].meet_subject}");
- 		$('#a'+7).text("${list8[6].meet_subject}");
- 		
- 		$('#l'+6).text("${list8[5].meet_like}");
- 	  	$('#l'+4).text("${list8[3].meet_like}");
- 	 	$('#l'+2).text("${list8[1].meet_like}");
- 		$('#l'+1).text("${list8[0].meet_like}");
- 		$('#l'+3).text("${list8[2].meet_like}");
- 		$('#l'+5).text("${list8[4].meet_like}");
- 		$('#l'+7).text("${list8[6].meet_like}");
- 		
+       //alert("1");
+       
+       var no=$(this).attr("value");
+        $('#a'+6).text("${list8[5].meet_subject}");
+         $('#a'+4).text("${list8[3].meet_subject}");
+        $('#a'+2).text("${list8[1].meet_subject}");
+       $('#a'+1).text("${list8[0].meet_subject}");
+       $('#a'+3).text("${list8[2].meet_subject}");
+       $('#a'+5).text("${list8[4].meet_subject}");
+       $('#a'+7).text("${list8[6].meet_subject}");
+       
+       $('#l'+6).text("${list8[5].meet_like}");
+         $('#l'+4).text("${list8[3].meet_like}");
+        $('#l'+2).text("${list8[1].meet_like}");
+       $('#l'+1).text("${list8[0].meet_like}");
+       $('#l'+3).text("${list8[2].meet_like}");
+       $('#l'+5).text("${list8[4].meet_like}");
+       $('#l'+7).text("${list8[6].meet_like}");
+       
  
- 		
- 	   for(i=1;i<=7;i++)
- 	   {
- 		   if(no!=i)
- 			{
- 			  $('#a'+i).text("");
- 			 $('#l'+i).text("");
- 			}
- 	   }
+       
+       for(i=1;i<=7;i++)
+       {
+          if(no!=i)
+          {
+            $('#a'+i).text("");
+           $('#l'+i).text("");
+          }
+       }
     });
    
     
@@ -66,14 +86,14 @@ $(function(){
 </script>
 
 <script>
-    	 $(document).ready(function() {
-			$("#content-slider").lightSlider({
+        $(document).ready(function() {
+         $("#content-slider").lightSlider({
                 loop:true,
-              	auto:true,
+                 auto:true,
                 keyPress:true,
                 interval: 1000
             });
-			
+         
             $('#image-gallery').lightSlider({
                 gallery:true,
                 item:1,
@@ -86,14 +106,36 @@ $(function(){
                     $('#image-gallery').removeClass('cS-hidden');
                 }  
             });
-		}); 
-    </script>
-    <style type="text/css">
-    .slider_text{
-    	margin:3%;
-    	font-color:red;
+      }); 
+</script>
+
+<style type="text/css">
+.slider_text{
+     margin:3%;
+     font-color:red;
     }
-    </style>
+section ul li:before{
+	font-family: "Open Sans",sans-serif;
+	color: #424242;
+}
+nav#filter a {
+	font-family: "Open Sans",sans-serif;
+	background-color: #EEE;
+	color:#555;
+	
+}
+nav#filter a:hover, nav#filter a.current {
+	background-color: #fcbe03;
+	color:white;
+	font-weight: bold;
+}
+.glyphicon{
+	float:left; 
+	padding-bottom:2%;
+}
+
+
+</style>
 <link rel="stylesheet" href="main/css/style.css">
 </head>
 <body>
@@ -102,86 +144,86 @@ $(function(){
     
 <!-- ====메인슬라이더=====-->
  <div id="carousel" style="background-color:#0A0A2A;" data-ride="carousel">
- 	
- 		
-	 <div class="hideLeft image" value="6">
-	 	<figure class="effect-bubba">
-			<img src="${list8[5].meet_poster }">
-				<figcaption>
-					<h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
-				</figcaption>
-		</figure>
-		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[5].meet_no}"><h4 id="a6" align="center"></h4></a>
-		</div>
-	 </div>
+    
+       
+    <div class="hideLeft image" value="6">
+       <figure class="effect-bubba">
+         <img src="${list8[5].meet_poster }">
+            <figcaption>
+               <h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+            </figcaption>
+      </figure>
+      <div class="silder_text">
+         <a href="meeting_detail.do?meet_no=${list8[5].meet_no}"><h4 id="a6" align="center"></h4></a>
+      </div>
+    </div>
     
     <div class="prevLeftSecond image" value="4">
-	    <figure class="effect-bubba">
-	    	<img src="${list8[3].meet_poster }">
-				<figcaption>
-					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
-				</figcaption>
-		</figure>
-		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[3].meet_no}"><h4 id="a4" align="center"></h4></a>
-		</div>
+       <figure class="effect-bubba">
+          <img src="${list8[3].meet_poster }">
+            <figcaption>
+               <br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+            </figcaption>
+      </figure>
+      <div class="silder_text">
+         <a href="meeting_detail.do?meet_no=${list8[3].meet_no}"><h4 id="a4" align="center"></h4></a>
+      </div>
     </div>
     
     <div class="prev image" value="2">
-    	<figure class="effect-bubba">
-    		<img src="${list8[1].meet_poster }">
-				<figcaption>
-					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
-				</figcaption>
-		</figure>
-		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[1].meet_no}"><h4 id="a2" align="center"></h4></a>
-		</div>
+       <figure class="effect-bubba">
+          <img src="${list8[1].meet_poster }">
+            <figcaption>
+               <br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+            </figcaption>
+      </figure>
+      <div class="silder_text">
+         <a href="meeting_detail.do?meet_no=${list8[1].meet_no}"><h4 id="a2" align="center"></h4></a>
+      </div>
     </div>
     <div class="selected image" value="1">
-    	<figure class="effect-bubba">
-    		<img src="${list8[0].meet_poster }">
-				<figcaption>
-					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
-				</figcaption>
-		</figure>
-		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[0].meet_no}"><h4 id="a1" align="center"></h4></a>
-		</div>
+       <figure class="effect-bubba">
+          <img src="${list8[0].meet_poster }">
+            <figcaption>
+               <br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+            </figcaption>
+      </figure>
+      <div class="silder_text">
+         <a href="meeting_detail.do?meet_no=${list8[0].meet_no}"><h4 id="a1" align="center"></h4></a>
+      </div>
     </div>
     <div class="next image" value="3">
-    	<figure class="effect-bubba">
-    		<img src="${list8[2].meet_poster }">
-				<figcaption>
-					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
-				</figcaption>
-		</figure>
-		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[2].meet_no}"><h4 id="a3" align="center"></h4></a>
-		</div>
+       <figure class="effect-bubba">
+          <img src="${list8[2].meet_poster }">
+            <figcaption>
+               <br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+            </figcaption>
+      </figure>
+      <div class="silder_text">
+         <a href="meeting_detail.do?meet_no=${list8[2].meet_no}"><h4 id="a3" align="center"></h4></a>
+      </div>
     </div>
     <div class="nextRightSecond image" value="5">
-    	<figure class="effect-bubba">
-    	<img src="${list8[4].meet_poster }">
-			<figcaption>
-				<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
-			</figcaption>
-		</figure>
-		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[4].meet_no}"><h4 id="a5" align="center"></h4></a>
-		</div>
+       <figure class="effect-bubba">
+       <img src="${list8[4].meet_poster }">
+         <figcaption>
+            <br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+         </figcaption>
+      </figure>
+      <div class="silder_text">
+         <a href="meeting_detail.do?meet_no=${list8[4].meet_no}"><h4 id="a5" align="center"></h4></a>
+      </div>
     </div>
     <div class="hideRight image" value="7">
-    	<figure class="effect-bubba">
-    		<img src="${list8[6].meet_poster }">
-				<figcaption>
-					<br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
-				</figcaption>
-		</figure>
-		<div class="silder_text">
-			<a href="meeting_detail.do?meet_no=${list8[6].meet_no}"><h4 id="a7" align="center"></h4></a>
-		</div>
+       <figure class="effect-bubba">
+          <img src="${list8[6].meet_poster }">
+            <figcaption>
+               <br><h2>더 보고싶으시다면?<br>아래 제목을 클릭하세요</h2>
+            </figcaption>
+      </figure>
+      <div class="silder_text">
+         <a href="meeting_detail.do?meet_no=${list8[6].meet_no}"><h4 id="a7" align="center"></h4></a>
+      </div>
     </div>
 </div>
 <%-- <center style="margin-top: 20px">
@@ -207,8 +249,8 @@ $(function(){
                   <c:forEach var="vo" items="${list }" begin="1" end="8">
                       <div class="col-sm-3">
                          <div class="thumbnail">
-                         	<div style="width:100%; height:230px;">
-                            	<a href="meeting_detail.do?meet_no=${vo.meet_no}"><img src="${vo.meet_poster }" alt="마감임박" style="width:100%; height:100%;"></a>
+                            <div style="width:100%; height:230px;">
+                               <a href="meeting_detail.do?meet_no=${vo.meet_no}"><img src="${vo.meet_poster }" alt="마감임박" style="width:100%; height:100%;"></a>
                             </div>
                              <div class="caption">
                                    <div>
@@ -249,7 +291,7 @@ $(function(){
                   <div class="col-md-3 text-center">
                      <div class="mz-module">
                         <div class="mz-module-about caption">
-                           <img src="${vo.meet_poster }" style="widht:100px; height:200px;">
+                           <img src="${vo.meet_poster }" style="width:100%; height:100%;">
                            <p class="p_add" style="font-size:10pt; margin:1%;"><b>${vo.meet_subject }</b></p>
                         </div>
                         <a href="meeting_detail.do?meet_no=${vo.meet_no}" class="mz-module-button">이벤트 보기</a>
@@ -283,58 +325,88 @@ $(function(){
                  <nav id="filter" class="col-md-12 text-center">
                    <ul>
                      <!-- <li><a href="#" class="current btn-theme btn-small" data-filter="*" >#ALL</a></li>  -->
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".study">#스터디</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".hobby">#취미</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".messe">#전시</a></li>
-                     <li><a href="#" class="btn-theme btn-small" data-filter=".pro">#IT</a></li>
+                     <li><a href="#" class="current btn-theme btn-small messeBtn" data-filter=".messe">#전시</a></li>
+                     <li><a href="#" class="btn-theme btn-small studyBtn" data-filter=".study">#스터디</a></li>
+                     <li><a href="#" class="btn-theme btn-small hobbyBtn" data-filter=".hobby">#취미</a></li>
+                     <li><a href="#" class="btn-theme btn-small proBtn" data-filter=".pro">#IT</a></li>
                    </ul>
                  </nav>
                  <div class="col-md-12">
                    <div class="row">
                      <div class="portfolio-items isotopeWrapper clearfix" id="3">
-                     
-         			  <c:forEach var="vo" items="${list3 }" begin="1" end="5">
-                       <article class="col-md-4 isotopeItem study">
-                         <div class="portfolio-item">
-                         	<a href="meeting_detail.do?meet_no=${vo.meet_no}">
-                           <img src="${vo.meet_poster }"/>
-                           </a>
-                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
-                         </div>
-                       </article>
+                        
+                        <div>
+                           <c:forEach var="vo" items="${list5 }" varStatus="s">
+                            <c:if test="${list5[s.index].meet_hit>'0' }">
+	                             <article class="col-md-4 isotopeItem mainf">
+	                               <div class="portfolio-item">
+	                               	  <span class="glyphicon glyphicon-thumbs-up">&nbsp;${vo.meet_hit }</span>
+	                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}">
+	                                 <img src="${vo.meet_poster }" style="width:100%; height:100%;">
+	                                 </a>
+	                                  <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
+	                               </div>
+	                             </article>
+                             </c:if>
+                            </c:forEach>
+                        </div>
+                        
+                        
+                   
+                    <c:forEach var="vo" items="${list3 }" varStatus="s">
+                    	 <c:if test="${list3[s.index].meet_hit>'0' }">
+	                       <article class="col-md-4 isotopeItem study">
+	                         <div class="portfolio-item">
+	                         	<span class="glyphicon glyphicon-thumbs-up">&nbsp;${vo.meet_hit }</span>
+	                            <a href="meeting_detail.do?meet_no=${vo.meet_no}">
+	                           <img src="${vo.meet_poster }" style="width:100%!important; height:100%!important;">
+	                           </a>
+	                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
+	                         </div>
+	                       </article>
+                       </c:if>
                       </c:forEach>
                       
-                      <c:forEach var="vo" items="${list4 }" begin="10" end="12">
-                       <article class="col-md-4 isotopeItem hobby">
-                         <div class="portfolio-item">
-                           <a href="meeting_detail.do?meet_no=${vo.meet_no}">
-                           <img src="${vo.meet_poster }"/>
-                           </a>
-                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
-                         </div>
-                       </article>
+                      <c:forEach var="vo" items="${list4 }" varStatus="s">
+                      	<c:if test="${list4[s.index].meet_hit>'0' }">
+	                       <article class="col-md-4 isotopeItem hobby">
+	                         <div class="portfolio-item">
+	                         	<span class="glyphicon glyphicon-thumbs-up">&nbsp;${vo.meet_hit }</span>
+	                           <a href="meeting_detail.do?meet_no=${vo.meet_no}">
+	                           <img src="${vo.meet_poster }" style="width:100%!important; height:100%!important;">
+	                           </a>
+	                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
+	                         </div>
+	                       </article>
+                       </c:if>
                       </c:forEach>
                       
-                      <c:forEach var="vo" items="${list5 }" begin="1" end="2">
-                       <article class="col-md-4 isotopeItem messe">
-                         <div class="portfolio-item">
-                           <a href="meeting_detail.do?meet_no=${vo.meet_no}">
-                           <img src="${vo.meet_poster }"/>
-                           </a>
-                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
-                         </div>
-                       </article>
+                      <c:forEach var="vo" items="${list5 }" varStatus="s">
+                       <c:if test="${list5[s.index].meet_hit>'0' }">
+	                       <article class="col-md-4 isotopeItem messe">
+	                         <div class="portfolio-item">
+	                         	<span class="glyphicon glyphicon-thumbs-up">&nbsp;${vo.meet_hit }</span>
+	                            <a href="meeting_detail.do?meet_no=${vo.meet_no}">
+	                            <img src="${vo.meet_poster }" style="width:100%!important; height:100%!important;">
+	                            </a>
+	                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
+	                         </div>
+	                       </article>
+                       </c:if>
                       </c:forEach>
                       
-                      <c:forEach var="vo" items="${list6 }" begin="3" end="4">
-                       <article class="col-md-4 isotopeItem pro">
-                         <div class="portfolio-item">
-                           <a href="meeting_detail.do?meet_no=${vo.meet_no}">
-                           <img src="${vo.meet_poster }"/>
-                           </a>
-                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
-                         </div>
-                       </article>
+                      <c:forEach var="vo" items="${list6 }" varStatus="s">
+                       <c:if test="${list6[s.index].meet_hit>'0' }">
+	                       <article class="col-md-4 isotopeItem pro">
+	                         <div class="portfolio-item">
+	                         	<span class="glyphicon glyphicon-thumbs-up">&nbsp;${vo.meet_hit }</span>
+	                            <a href="meeting_detail.do?meet_no=${vo.meet_no}">
+	                            <img src="${vo.meet_poster }" style="width:100%!important; height:100%!important;">
+	                            </a>
+	                            <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
+	                         </div>
+	                       </article>
+                       </c:if>
                       </c:forEach>
                      </div>
                    </div>
@@ -358,35 +430,35 @@ $(function(){
 <!--========== HOT모임 시작===========-->
 
           
-		<section id="portfolio" class="light-bg">
-			<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<div class="section-title">
-						<h2>HOT 모임</h2>
-						<p>사용자들이 가장 많이 클릭한 모임입니다</p>
-					</div>
-				</div>
-			</div>
-			<div class="row row-0-gutter">
-				<c:forEach var="vo" items="${list7 }" begin="0" end="5">
-				<div class="col-md-4 col-0-gutter">
-					<div class="ot-portfolio-item">
-						<figure class="effect-bubba">
-							<img src="${vo.meet_poster }" class="img-responsive" style="height:350px;"/>
-							<figcaption>
-								<h2 style="margin:13%;">${vo.meet_subject }</h2>
-								<p>클릭!!</p>
-								<a href="meeting_detail.do?meet_no=${vo.meet_no}">View more</a>
-							</figcaption>
-						</figure>
-					</div>
-				</div>
-				</c:forEach>
-				
-			</div>
-			</div><!-- end container -->
-		</section>
+      <section id="portfolio" class="light-bg">
+         <div class="container">
+         <div class="row">
+            <div class="col-lg-12 text-center">
+               <div class="section-title">
+                  <h2>HOT 모임</h2>
+                  <p>사용자들이 가장 많이 클릭한 모임입니다</p>
+               </div>
+            </div>
+         </div>
+         <div class="row row-0-gutter">
+            <c:forEach var="vo" items="${list7 }" begin="0" end="5">
+            <div class="col-md-4 col-0-gutter">
+               <div class="ot-portfolio-item">
+                  <figure class="effect-bubba">
+                     <img src="${vo.meet_poster }" class="img-responsive" style="height:350px;"/>
+                     <figcaption>
+                        <h2 style="margin:13%;">${vo.meet_subject }</h2>
+                        <p>클릭!!</p>
+                        <a href="meeting_detail.do?meet_no=${vo.meet_no}">View more</a>
+                     </figcaption>
+                  </figure>
+               </div>
+            </div>
+            </c:forEach>
+            
+         </div>
+         </div><!-- end container -->
+      </section>
 <!--======== HOT모임 끝============-->
 </div>
 
