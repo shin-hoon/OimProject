@@ -37,7 +37,7 @@ $(function(){ //삭제시 알림창 띄우기
 			<tr>
 				<td width=20% class="text-center">
 					<a href="meeting_detail.do?meet_no=${mvo.meet_no }">
-						<img src="${mvo.meet_poster }" style="width:60%; margin:0%; margin-right:0%;">
+						<img src="${mvo.meet_poster }" style="width:140px; height:140px; margin:0%; margin-right:0%;">
 					</a>
 				</td>
                 <td width=60% class="text-left" style="line-height:30px;">

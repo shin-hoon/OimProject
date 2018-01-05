@@ -494,7 +494,7 @@
 						</center>
 					</div>
 					<c:if test="${sessionScope.id!=null }">
-						<table class="table" width="100%">
+						<table class="table" width="100%" style="margin-bottom: 200px;">
 							<tr>
 								<td>
 									<form action="meet_reply_new_insert.do" method="post">
@@ -504,11 +504,21 @@
 										style="height: 53px; width: 12%; text-align: center;">
 									</form>
 								</td>
-
 							</tr>
 						</table>
 					</c:if>
-					               
+					<c:if test="${sessionScope.id==null }">
+						<table class="table" width="100%" style="margin-bottom: 200px;">
+							<tr>
+								<td>
+									<input type="text" class="form-control" style="height: 53px; float: left; width: 88%;" 
+									value="로그인 후 이용해주세요" disabled="disabled">
+									<input type="button" value="댓글달기" class="btn btn-primary" 
+									style="height: 53px; width: 12%; text-align: center;" disabled="disabled">
+								</td>
+							</tr>
+						</table>
+					</c:if>         
                 </div>
             </div>
         </div>

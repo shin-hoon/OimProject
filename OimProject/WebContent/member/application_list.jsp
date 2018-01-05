@@ -14,7 +14,7 @@
 		<tr>
 			<td width="20%">
 				<center>
-					<img src="${vo.meet_poster }" style="width:80%;">
+					<img src="${vo.meet_poster }" style="width:145px; height: 145px; margin-right: 15px">
 				</center>
 			</td>
 			<td width="80%" style="line-height: 30px">
