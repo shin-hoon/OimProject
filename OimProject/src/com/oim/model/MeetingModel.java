@@ -159,7 +159,7 @@ public class MeetingModel {
 						  }
 					}
 					totalpage=MeetingDAO.meetingFindTotalPage(map);
-							
+					System.out.println(totalpage);
 					
 					//jsp로 전송
 					if(first==true) //최초로 실행했을때는 session에 저장한다.
@@ -192,6 +192,7 @@ public class MeetingModel {
 							  }
 						}
 						totalpage=MeetingDAO.meetingFindTotalPage(map);
+						System.out.println(totalpage);
 					}
 					req.setAttribute("totalpage", totalpage);
 					req.setAttribute("curpage", curpage);
