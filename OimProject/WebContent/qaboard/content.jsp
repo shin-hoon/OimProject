@@ -40,30 +40,30 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<h3>상세내용</h3>
+			<h1 style="font-weight: 900">상세내용</h1>
 			<table class="table table-hover">
-			  <tr>
-			  	<th width="20%" class="text-center warning qna-td">번호</th>
+			  <tr class="active">
+			  	<th width="20%" class="text-center warning qna-td" style="font-size: 17px;">번호</th>
 			  	<td width="30%" class="text-center qna-td">${vo.qa_no}</td>
-			  	<th width="20%" class="text-center warning qna-td">작성일</th>
+			  	<th width="20%" class="text-center warning qna-td" style="font-size: 17px;">작성일</th>
 			  	<td width="30%" class="text-center qna-td">
 			  	<fmt:formatDate value="${vo.qa_regdate }" pattern="yyyy-MM-dd"/>
 			  	</td>
 			  </tr>
 			  
-			  <tr>
-			  	<th width="20%" class="text-center warning qna-td">아이디</th>
+			  <tr class="active">
+			  	<th width="20%" class="text-center warning qna-td" style="font-size: 17px;">아이디</th>
 			  	<td width="30%" class="text-center qna-td">${vo.om_id }</td>
-			  	<th width="20%" class="text-center warning qna-td">조회수</th>
+			  	<th width="20%" class="text-center warning qna-td" style="font-size: 17px;">조회수</th>
 			  	<td width="30%" class="text-center qna-td">${vo.qa_hit }</td>
 			  </tr>
 			  
-			  <tr>
-			  	<th width="20%" class="text-center warning qna-td">제목</th>
+			  <tr class="active">
+			  	<th width="20%" class="text-center warning qna-td" style="font-size: 17px;">제목</th>
 			  	<td colspan="3" class="text-left qna-td">${vo.qa_subject }</td>
 			  </tr>
 			  
-			  <tr>
+			  <tr class="active">
 			  	<td colspan="4" class="text-left qna-td" valign="top" height="200">
 			  	<pre>${vo.qa_content }</pre></td>
 			  	<!-- pre: 있는그대로를 출력해주는 역할 -->
@@ -72,6 +72,7 @@
 					<tr>
 						<td class="text-right">
 							<c:if test="${sessionScope.om_id != null}">
+							<a href="rreply.do?pno=${vo.qa_no }&page=${page }" class="btn btn-warning">답변</a>&nbsp;
 							<a href="uupdate.do?no=${vo.qa_no }&page=${page }" class="btn btn-warning">수정</a>&nbsp;							
 							<a href="ddelete.do?no=${vo.qa_no }&page=${page }" class="btn btn-warning" id="delBtn">삭제</a>&nbsp;
 							</c:if>

@@ -30,7 +30,7 @@
    <div class="container">
       <div class="row qnarow">
          <div style="height:70px"></div>
-         <h3>수정하기</h3>
+         <h1 style="font-weight: 900">수정하기</h1>
          <!-- 지금 인크루드 되어있기 때문에 메인위치이다. -->
          
          <form method="post" action="ntupdateok.do">
@@ -41,14 +41,14 @@
                   <input type="hidden" name="page" value="${strpage }">
                </td>
             </tr>
-            <tr>
-               <td width="20%" class="text-right qna-td">제목</td>
+            <tr class="active">
+               <th width="20%" class="text-right qna-td" style="font-size: 17px;">제목</th>
                <td width="80%" class="text-left qna-td">
                   <input type="text" name="nt_subject" size="50" id="nt_subject" value="${vo.nt_subject }">
                </td>
             </tr>
-            <tr>
-               <td width="20%" class="text-right qna-td" valign="top">내용</td>
+            <tr class="active">
+               <th width="20%" class="text-right qna-td" valign="top" style="font-size: 17px;">내용</th>
                <td width="80%" class="text-left qna-td">
                   <textarea rows="10" cols="55" name="nt_content" id="nt_content">${vo.nt_content }</textarea>
                </td>

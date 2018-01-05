@@ -48,17 +48,17 @@ $(function(){
 <center>
   <div class="container">
     <div class="row">
-     <h3>글쓰기</h3>
+     <h1 style="font-weight: 900">글쓰기</h1>
      <form method="post" action="ntinsertok.do" id=frm>
      <table class="table table-hover">
-      <tr>
-       <td width=15% class="text-right">제목</td>
+      <tr class="active"">
+       <td width=15% class="text-right" style="font-size: 17px;">제목</td>
        <td width=85% class="text-left">
         <input type=text class="input" size=45 name=nt_subject id="nt_subject">
        </td>
       </tr>
-      <tr>
-       <td width=15% class="text-right">내용</td>
+      <tr class="active">
+       <td width=15% class="text-right" style="font-size: 17px;">내용</td>
        <td width=85% class="text-left">
         <textarea rows="7" cols="50" name=nt_content id="nt_content"></textarea>
        </td>

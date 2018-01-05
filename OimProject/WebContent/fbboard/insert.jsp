@@ -48,29 +48,29 @@ $(function(){
 <center>
   <div class="container">
     <div class="row">
-     <h3>글쓰기</h3>
+     <h1 style="font-weight: 900">글쓰기</h1>
      <form method="post" action="fbinsertok.do" id=frm>
      <table class="table table-hover">
-      <tr>
-       <td width=10% class="text-right">아이디</td>
+      <tr class="active">
+       <th width=10% class="text-right" style="font-size: 17px;">아이디</th>
        <td width=90% class="text-left">
         <input type=text class="input" size=13 name=om_id id="om_id">
        </td>
       </tr>
-      <tr>
-       <td width=15% class="text-right">제목</td>
+      <tr class="active">
+       <th width=15% class="text-right" style="font-size: 17px;">제목</th>
        <td width=85% class="text-left">
         <input type=text class="input" size=45 name=subject id="subject">
        </td>
       </tr>
-      <tr>
-       <td width=15% class="text-right">내용</td>
+      <tr class="active">
+       <th width=15% class="text-right" style="font-size: 17px;">내용</th>
        <td width=85% class="text-left">
         <textarea rows="7" cols="50" name=content id="content"></textarea>
        </td>
       </tr>
-      <tr>
-       <td width=15% class="text-right">비밀번호</td>
+      <tr class="active">
+       <th width=15% class="text-right" style="font-size: 17px;">비밀번호</th>
        <td width=85% class="text-left">
         <input type="password" name=pwd size=10 id="pwd">
        </td>
