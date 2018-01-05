@@ -38,7 +38,7 @@
 			
 				$.ajax({
     				type:"POST",
-    				url:"like_delete.do",
+    				url:"like_delete.do?meet_no="+meet_no,
     				data:{"meet_no":meet_no},
     				success:function(res)
     				{

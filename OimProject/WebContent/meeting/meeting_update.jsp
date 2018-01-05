@@ -33,7 +33,9 @@ $(function(){
 		
 		if($('#poster').attr("src")=='${vo.meet_poster }'){ //사진 수정을 안할시 meet_poster를 공백으로 전송한다.
  			$('input:hidden[name="meet_poster"]').attr("value","");
+ 			alert($('#poster').attr("src"));
  		}
+		
 		
 		if(meet_cg.trim()==""){
 			alert("카테고리를 선택해주세요!");

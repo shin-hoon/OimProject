@@ -2,6 +2,7 @@ package com.oim.model;
 
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.oim.application.dao.ApplicationDAO;
 import com.oim.application.dao.ApplicationVO;
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
+import com.oim.meeting.dao.LikeVO;
 import com.oim.meeting.dao.MeetingDAO;
 import com.oim.meeting.dao.MeetingVO;
 import com.oim.member.dao.MemberDAO;
@@ -137,7 +139,18 @@ public class MemberModel {
 	
 		req.setAttribute("vo", vo);
 		
-	
+		//찜내역 보여주기
+		List<LikeVO> LikeList=MeetingDAO.likeListData(om_id);
+		List<MeetingVO> MeetList=new ArrayList<MeetingVO>();
+		
+		for(LikeVO lvo:LikeList) {
+			MeetingVO mvo=MeetingDAO.meetingDetailData(lvo.getMeet_no());
+			MeetList.add(mvo);
+		}
+		
+		req.setAttribute("MeetCount", MeetList.size());
+		req.setAttribute("LikeList", LikeList);
+		req.setAttribute("MeetList", MeetList);
 		
 		// 내가 신청한 모임 조회
 		List<ApplicationVO> Mylist = ApplicationDAO.ApplicationMyListData(om_id);

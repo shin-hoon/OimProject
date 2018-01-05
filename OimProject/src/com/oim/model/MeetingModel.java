@@ -620,11 +620,12 @@ public class MeetingModel {
     public String meeting_delete(HttpServletRequest req, HttpServletResponse res) {
     	
     	String meet_no=req.getParameter("meet_no");
+    	String page=req.getParameter("page");
     	MeetingVO vo=new MeetingVO();
     	vo=MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
     	MeetingDAO.meetingDelete(vo);
     	
-    	return "Oim_meetpage.do";
+    	return "Oim_meetpage.do?page="+page;
     }
     
     @RequestMapping("like_insert.do") //하트모양 클릭해서 찜 했을때
@@ -647,7 +648,9 @@ public class MeetingModel {
 		HttpSession session=req.getSession();
 		String om_id=(String)session.getAttribute("id");
 		List<LikeVO> list=MeetingDAO.likeListData(om_id);
+		
 		List<MeetingVO> mList=new ArrayList<MeetingVO>();
+		
 		for(LikeVO lvo:list) {
 			MeetingVO vo=MeetingDAO.meetingDetailData(lvo.getMeet_no());
 			mList.add(vo);

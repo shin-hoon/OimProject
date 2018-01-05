@@ -70,7 +70,7 @@ ul li {
 <!-- 카테고리 탭 -->
    <div class="container">
 	   	<!-- Mypage 검정 로고 네비 -->
-	   <nav class="mypage" style="background-color:#2E2E2E; height:50px;">
+	   <nav class="mypage" style="background-color:#2E2E2E; margin-top:50px; height:50px;">
 			<div class="container text-left">
 				<h3 style="color:#ffffff;"><b>마이페이지</b></h3>
 			</div>

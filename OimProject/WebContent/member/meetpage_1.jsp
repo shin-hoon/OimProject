@@ -61,7 +61,7 @@ $(function(){ //삭제시 알림창 띄우기
 					<c:if test="${mvo.meet_end > today }">
 						<h4><span class="label label-info">진행중</span></h4>
 					</c:if>
-					<a href="meeting_delete.do?meet_no=${mvo.meet_no }" class="btn btn-danger btn-sm" style="margin-top:5px">모임삭제</a>
+					<a href="meeting_delete.do?meet_no=${mvo.meet_no}&page=${curpage}" class="btn btn-danger btn-sm" style="margin-top:5px">모임삭제</a>
 				</td>
 			</tr>
 			</c:forEach>
