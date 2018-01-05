@@ -624,7 +624,6 @@ public class MeetingModel {
     	vo=MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
     	MeetingDAO.meetingDelete(vo);
     	
- 
     	return "Oim_meetpage.do";
     }
     
