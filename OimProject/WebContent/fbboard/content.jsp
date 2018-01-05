@@ -51,7 +51,7 @@ $(function(){
     <center>
        <h1 style="font-weight: 900">상세내용</h1>
        <table id="table_content" width=700 class="table table-hover">
-        <tr>
+        <tr class="active">
          <th width=20% class="text-center warning qna-td" style="font-size: 17px;">번호</th>
          <td width=30% align=center class="text-center qna-td">${vo.no }</td>
          <th width=20% class="text-center warning qna-td" style="font-size: 17px;">작성일</th>
@@ -59,17 +59,17 @@ $(function(){
            <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
          </td>
         </tr>
-        <tr>
+        <tr class="active">
          <th width=20% class="text-center warning qna-td" style="font-size: 17px;">아이디</th>
          <td width=30% align=center class="text-center qna-td">${vo.om_id }</td>
          <th width=20% class="text-center warning qna-td" style="font-size: 17px;">조회수</th>
          <td width=30% align=center class="text-center qna-td">${vo.hit }</td>
         </tr>
-        <tr>
+        <tr class="active">
          <th width=20% class="text-center warning qna-td" style="font-size: 17px;">제목</th>
          <td colspan="3" align=left class="text-center qna-td">${vo.subject }</td>
         </tr>
-        <tr>
+        <tr class="active">
           <td colspan="4" valign="top" class="text-left qna-td"
             height="200"><pre>${vo.content }</pre></td>
         </tr>

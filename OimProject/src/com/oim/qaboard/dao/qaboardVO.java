@@ -1,20 +1,7 @@
 package com.oim.qaboard.dao;
 
 import java.util.*;
-/*
- * qa_no NUMBER, --게시물번호
-	om_id VARCHAR2(50) CONSTRAINT qaboard_om_id_nn NOT NULL, --회원ID
-	qa_subject VARCHAR2(500) CONSTRAINT qaboard_qa_subject_nn NOT NULL, --제목
-	qa_content CLOB CONSTRAINT qaboard_qa_content_nn NOT NULL, --내용
-  	qa_pwd VARCHAR2(12) CONSTRAINT qaboard_qa_pwd_nn NOT NULL, --비밀번호
- 	qa_regdate DATE DEFAULT SYSDATE, --등록일
- 	qa_hit NUMBER DEFAULT 0, --조회수
- 	qa_group_id NUMBER, --그룹ID
-  	qa_group_step NUMBER DEFAULT 0, --그룹스텝
- 	qa_group_tab NUMBER DEFAULT 0, --그룹탭
-  	qa_root NUMBER DEFAULT 0, --부모글번호
- 	qa_depth NUMBER DEFAULT 0
- */
+
 public class qaboardVO {
 	private int qa_no; 
 	 private String om_id;

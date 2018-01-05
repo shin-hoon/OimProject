@@ -12,7 +12,7 @@
 <!-- 답변게시판 -->
 <div class="container">
    <div class="row">
-   <h1 style="font-weight: 900">문의 게시판Q&A</h1>
+   <h1 style="font-weight: 900">문의 게시판Q&A(!!!!!!답변기능 진행중!!!!!!)</h1>
    <table class="table table-hover">
    <c:if test="${sessionScope.om_id != null}">
      <tr>
@@ -34,7 +34,6 @@
       <tr class="active">
        <td width=10% class="text-center">${vo.qa_no }</td>
        <td width=45% class="text-left">
-        
       	 <a href="ccontent.do?no=${vo.qa_no }&page=${curpage}">${vo.qa_subject }</a>
       	 
        <c:if test="${today==vo.dbday}">
