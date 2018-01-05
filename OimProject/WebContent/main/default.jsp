@@ -296,8 +296,8 @@ nav#filter a:hover, nav#filter a:focus {
                   <div class="col-md-3 text-center">
                      <div class="mz-module">
                         <div class="mz-module-about caption">
-                           <img src="${vo.meet_poster }" style="width:100%; height:100%;">
-                           <p class="p_add" style="font-size:10pt; margin:1%;"><b>${vo.meet_subject }</b></p>
+                           <a href="meeting_detail.do?meet_no=${vo.meet_no}"><img src="${vo.meet_poster }" style="width:100%; height:100%;"></a>
+                           <p class="p_add" style="color:#1C1C1C; font-size:10pt; margin:1%; text-align:center;"><b>${vo.meet_subject }</b></p>
                         </div>
                         <a href="meeting_detail.do?meet_no=${vo.meet_no}" class="mz-module-button">이벤트 보기</a>
                      </div>
