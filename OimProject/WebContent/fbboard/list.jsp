@@ -6,13 +6,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Insert title here</title>
 </head>
 <body>
+
 <!-- 답변게시판 -->
 <div class="container">
    <div class="row">
-   <h3>자유 게시판(소통)</h3>
+   <h1 style="font-weight: 900">자유 게시판(소통)</h1>
    <table class="table table-hover">
    <c:if test="${sessionScope.id != null || sessionScope.id=='admin'}">
      <tr>
@@ -23,21 +25,24 @@
    </c:if>
    </table>
    <table class="table table-hover">
-     <tr class="success">
-      <th width=10% class="text-center">번호</th>
-      <th width=45% class="text-center">제목</th>
-      <th width=15% class="text-center">아이디</th>
-      <th width=20% class="text-center">작성일</th>
-      <th width=10% class="text-center">조회수</th>
+     <tr class="warning">
+      <th width=10% class="text-center" style="font-size: 17px;">번호</th>
+      <th width=45% class="text-center" style="font-size: 17px;">제목</th>
+      <th width=15% class="text-center" style="font-size: 17px;">아이디</th>
+      <th width=20% class="text-center" style="font-size: 17px;">작성일</th>
+      <th width=10% class="text-center" style="font-size: 17px;">조회수</th>
      </tr>
      <c:forEach var="vo" items="${list }">
-      <tr>
+      <tr class="active">
        <td width=10% class="text-center">${vo.no }</td>
        <td width=45% class="text-left">
        <a href="fbcontent.do?no=${vo.no }&page=${curpage}">${vo.subject }</a>
+       <c:if test="${vo.count!=0 }">
+              (${vo.count })
+       </c:if>
        	<c:if test="${today==vo.dbday}">
           <sup>
-           <img src="fbboard/image/new.gif" width=30 height=30>
+           <img src="fbboard/image/neww.gif" width=30 height=30>
           </sup>
 		</c:if>
        </td>

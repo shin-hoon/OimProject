@@ -30,33 +30,33 @@
    <div class="container">
       <div class="row qnarow">
          <div style="height:70px"></div>
-         <h3>수정하기</h3>
+         <h1 style="font-weight: 900">수정하기</h1>
          <!-- 지금 인크루드 되어있기 때문에 메인위치이다. -->
          
          <form method="post" action="fbupdateok.do">
          <table class="table table-hover">
-            <tr>
-               <td width="20%" class="text-right qna-td">이름</td>
+            <tr class="active">
+               <th width="20%" class="text-right qna-td" style="font-size: 17px;">이름</th>
                <td width="80%" class="text-left qna-td">
                   <input type="text" name="om_id" size="13" id="om_id" value="${vo.om_id }">
                   <input type="hidden" name="no" value="${vo.no }">
                   <input type="hidden" name="page" value="${strpage }">
                </td>
             </tr>
-            <tr>
-               <td width="20%" class="text-right qna-td">제목</td>
+            <tr class="active">
+               <th width="20%" class="text-right qna-td" style="font-size: 17px;">제목</th>
                <td width="80%" class="text-left qna-td">
                   <input type="text" name="subject" size="50" id="subject" value="${vo.subject }">
                </td>
             </tr>
-            <tr>
-               <td width="20%" class="text-right qna-td" valign="top">내용</td>
+            <tr class="active">
+               <th width="20%" class="text-right qna-td" valign="top" style="font-size: 17px;">내용</th>
                <td width="80%" class="text-left qna-td">
                   <textarea rows="10" cols="55" name="content" id="content">${vo.content }</textarea>
                </td>
             </tr>
-            <tr>
-               <td width="20%" class="text-right qna-td">비밀번호</td>
+            <tr class="active">
+               <th width="20%" class="text-right qna-td" style="font-size: 17px;">비밀번호</th>
                <td width="80%" class="text-left qna-td">
                   <input type="password" name="pwd" size="13" id="pwd">
                </td>

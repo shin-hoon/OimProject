@@ -12,7 +12,7 @@
 <!-- 답변게시판 -->
 <div class="container">
    <div class="row">
-   <h3>문의 게시판Q&A</h3>
+   <h1 style="font-weight: 900">문의 게시판Q&A</h1>
    <table class="table table-hover">
    <c:if test="${sessionScope.om_id != null}">
      <tr>
@@ -23,15 +23,15 @@
    </c:if>
    </table>
    <table class="table table-hover">
-     <tr class="success">
-      <th width=10% class="text-center">번호</th>
-      <th width=45% class="text-center">제목</th>
-      <th width=15% class="text-center">아이디</th>
-      <th width=20% class="text-center">작성일</th>
-      <th width=10% class="text-center">조회수</th>
+     <tr class="warning">
+      <th width=10% class="text-center" style="font-size: 17px;">번호</th>
+      <th width=45% class="text-center" style="font-size: 17px;">제목</th>
+      <th width=15% class="text-center" style="font-size: 17px;">아이디</th>
+      <th width=20% class="text-center" style="font-size: 17px;">작성일</th>
+      <th width=10% class="text-center" style="font-size: 17px;">조회수</th>
      </tr>
      <c:forEach var="vo" items="${list }">
-      <tr>
+      <tr class="active">
        <td width=10% class="text-center">${vo.qa_no }</td>
        <td width=45% class="text-left">
         

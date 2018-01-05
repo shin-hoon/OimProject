@@ -1,8 +1,7 @@
 package com.oim.model;
 
-import java.io.PrintWriter;
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +44,6 @@ public class qaboardModel{
         
         
 		List<qaboardVO> list=qaboardDAO.boardListData(map);
-		System.out.println("1");
 		int block=5;
 		int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
 	    int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝
@@ -168,5 +166,53 @@ public class qaboardModel{
 			  boolean bCheck=qaboardDAO.boardDelete(Integer.parseInt(qa_no), qa_pwd);
 			  req.setAttribute("bCheck", bCheck);
 			  return "qaboard/delete_ok.jsp";
+		  }
+		  @RequestMapping("rreply.do")
+		  public String reply_new_insert(HttpServletRequest req,HttpServletResponse res)
+		  {
+				String pno=req.getParameter("pno");
+				String page=req.getParameter("page");
+				
+				req.setAttribute("pno", pno);
+				req.setAttribute("page", page);
+			  	req.setAttribute("main_jsp","../qaboard/reply.jsp");
+				return "main/main.jsp";
+		  }
+		  @RequestMapping("rreplyok.do")
+		  public String reply_reply_insert(HttpServletRequest req,HttpServletResponse res)
+		  {
+			  try
+			  {
+				  req.setCharacterEncoding("UTF-8");
+			  }catch(Exception ex){}
+				  String pno=req.getParameter("pno");
+				  String page=req.getParameter("page");
+				  String qa_subject=req.getParameter("qa_subject");
+				  String qa_content=req.getParameter("qa_content");
+				  String qa_pwd=req.getParameter("get_pwd");
+				  HttpSession session=req.getSession();
+				  String om_id=(String)session.getAttribute("id");
+				  
+				  // DB연동 
+				  qaboardVO pvo=qaboardDAO.qareplyGetParentInfo(Integer.parseInt(pno));
+				  qaboardVO vo=new qaboardVO();
+				  vo.setOm_id(om_id);
+				  vo.setQa_subject(qa_subject);
+				  vo.setQa_content(qa_content);
+				  vo.setQa_pwd(qa_pwd);
+			
+				  vo.setQa_group_id(pvo.getQa_group_id());
+				  vo.setQa_group_step(pvo.getQa_group_step()+1);
+				  vo.setQa_group_tab(pvo.getQa_group_tab()+1);
+				  vo.setQa_root(Integer.parseInt(pno));
+				  // step증가
+				  qaboardDAO.qareplyStepIncrement(pvo);
+				  // insert
+				  qaboardDAO.qareplyRepyInsert(vo);
+				  // depth증가
+				  qaboardDAO.qareplyDepthIncrement(Integer.parseInt(pno));
+				  // 전송 
+				  //req.setAttribute("bno", bno);
+			  return "llist.do?no="+pno;
 		  }
 }

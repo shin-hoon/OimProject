@@ -11,6 +11,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 
 
+
+
 public class qaboardDAO {
 	private static SqlSessionFactory ssf;
 	
@@ -166,4 +168,78 @@ public class qaboardDAO {
 		   }
 		   return bCheck;
 	   }
+	// 댓글 상위 게시물의 데이터 읽기 (group_id,group_step,group_tab)
+	   public static qaboardVO qareplyGetParentInfo(int no)
+	   {
+		   qaboardVO vo=new qaboardVO();
+		   SqlSession session=ssf.openSession();
+		   try
+		   {
+			   vo=session.selectOne("qareplyGetParentInfo", no);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return vo;
+	   }
+	   // replyStepIncrement
+	   public static void qareplyStepIncrement(qaboardVO vo)
+	   {
+		   SqlSession session=ssf.openSession(true);
+		   try
+		   {
+			   session.update("qareplyStepIncrement",vo);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+	   }
+	   // replyRepyInsert
+	   public static void qareplyRepyInsert(qaboardVO vo)
+	   {
+		   SqlSession session=ssf.openSession(true);
+		   try
+		   {
+			  session.insert("qareplyRepyInsert",vo);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+	   }
+	   // replyDepthIncrement
+	   public static void qareplyDepthIncrement(int no)
+	   {
+		   SqlSession session=ssf.openSession(true);
+		   try
+		   {
+			   session.update("qareplyDepthIncrement",no);
+		   }catch(Exception ex)
+		   {
+			   System.out.println(ex.getMessage());
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+	   }
+	   
+	   
+	   
+	   
 }

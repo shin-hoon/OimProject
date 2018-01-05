@@ -49,24 +49,24 @@ $(function(){
 <body>
   <div id="news_area" class="container">
     <center>
-       <h3>상세내용</h1>
+       <h1 style="font-weight: 900">상세내용</h1>
        <table id="table_content" width=700 class="table table-hover">
         <tr>
-         <th width=20% class="text-center warning qna-td">번호</th>
+         <th width=20% class="text-center warning qna-td" style="font-size: 17px;">번호</th>
          <td width=30% align=center class="text-center qna-td">${vo.no }</td>
-         <th width=20% class="text-center warning qna-td">작성일</th>
+         <th width=20% class="text-center warning qna-td" style="font-size: 17px;">작성일</th>
          <td width=30% align=center class="text-center qna-td">
            <fmt:formatDate value="${vo.regdate }" pattern="yyyy-MM-dd"/>
          </td>
         </tr>
         <tr>
-         <th width=20% class="text-center warning qna-td">아이디</th>
+         <th width=20% class="text-center warning qna-td" style="font-size: 17px;">아이디</th>
          <td width=30% align=center class="text-center qna-td">${vo.om_id }</td>
-         <th width=20% class="text-center warning qna-td">조회수</th>
+         <th width=20% class="text-center warning qna-td" style="font-size: 17px;">조회수</th>
          <td width=30% align=center class="text-center qna-td">${vo.hit }</td>
         </tr>
         <tr>
-         <th width=20% class="text-center warning qna-td">제목</th>
+         <th width=20% class="text-center warning qna-td" style="font-size: 17px;">제목</th>
          <td colspan="3" align=left class="text-center qna-td">${vo.subject }</td>
         </tr>
         <tr>
@@ -102,7 +102,7 @@ $(function(){
              <img src="fbboard/image/icon.png" width=10 height=10>
              ${rvo.name}(${rvo.dbday })&nbsp;&nbsp;
               <c:if test="${rvo.dbday2==today }">
-                <sup><img src="fbboard/image/new.gif"></sup>
+                <sup><img src="fbboard/image/neww.gif" width=20 height=20></sup>
               </c:if>
              <br>
              <c:if test="${rvo.group_tab>0 }">

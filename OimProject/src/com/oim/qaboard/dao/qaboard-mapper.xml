@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT qa_no,qa_subject,om_id,TO_CHAR(qa_regdate,'YYYY-MM-DD') as dbday,qa_hit,qa_group_tab,num
 	FROM (SELECT qa_no,qa_subject,om_id,qa_regdate,qa_hit,qa_group_tab,rownum as num
 	FROM (SELECT qa_no,qa_subject,om_id,qa_regdate,qa_hit,qa_group_tab
-	FROM qaboard ORDER BY qa_group_id DESC, qa_group_step ASC))
+	FROM qaboard ORDER BY qa_no DESC, qa_no ASC))
 	WHERE num BETWEEN ${start} AND #{end}
 	</select>
 	<select id="boardTotalPage" resultType="int">
@@ -43,4 +43,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     DELETE FROM qaboard
     WHERE qa_no=#{qa_no}
   </delete>
+  <select id="qareplyGetParentInfo" resultType="qaboardVO" parameterType="int">
+    SELECT qa_group_id,qa_group_step,qa_group_tab
+    FROM qaboard
+    WHERE qa_no=#{qa_no}
+  </select>
+  <update id="qareplyStepIncrement" parameterType="qaboardVO">
+    UPDATE qaboard SET
+    qa_group_step=qa_group_step+1
+    WHERE qa_group_id=#{qa_group_id} AND qa_group_step>#{qa_group_step}
+  </update>
+  <insert id="qareplyRepyInsert" parameterType="qaboardVO">
+    <selectKey keyProperty="qa_no" resultType="int" order="BEFORE">
+      SELECT NVL(MAX(qa_group_id)+1,1) as qa_group_id FROM qaboard 
+    </selectKey>
+	INSERT INTO qaboard
+	VALUES(#{qa_no},#{om_id},#{qa_subject},
+	#{qa_content},#{qa_pwd},SYSDATE,0,#{qa_group_id},
+	#{qa_group_step},#{qa_group_tab},#{qa_root},0)
+  </insert>
+  <update id="qareplyDepthIncrement" parameterType="int">
+    UPDATE qaboard SET 
+    qa_depth=qa_depth+1
+    WHERE qa_no=#{qa_no}
+  </update>
 </mapper>
