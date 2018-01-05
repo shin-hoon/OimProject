@@ -620,7 +620,9 @@ public class MeetingModel {
     public String meeting_delete(HttpServletRequest req, HttpServletResponse res) {
     	
     	String meet_no=req.getParameter("meet_no");
-    	MeetingDAO.meetingDelete(Integer.parseInt(meet_no));
+    	MeetingVO vo=new MeetingVO();
+    	vo=MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
+    	MeetingDAO.meetingDelete(vo);
     	
  
     	return "Oim_meetpage.do";
