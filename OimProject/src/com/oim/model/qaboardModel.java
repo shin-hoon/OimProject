@@ -102,6 +102,7 @@ public class qaboardModel{
 			String page=req.getParameter("page");
 			HttpSession session= req.getSession();
 			qaboardVO vo=qaboardDAO.boardContentData(Integer.parseInt(qa_no));
+			
 			String om_id=(String)session.getAttribute("id");
 			session.setAttribute("om_id", om_id);
 			req.setAttribute("vo", vo);
@@ -165,6 +166,7 @@ public class qaboardModel{
 			  String qa_pwd=req.getParameter("qa_pwd");
 			  String om_id=(String)session.getAttribute("om_id");
 			  boolean bCheck=qaboardDAO.boardDelete(Integer.parseInt(qa_no), qa_pwd);
+			  /*qaboardDAO.qareplyDelete(Integer.parseInt(qa_no));*/
 			  req.setAttribute("bCheck", bCheck);
 			  return "qaboard/delete_ok.jsp";
 		  }

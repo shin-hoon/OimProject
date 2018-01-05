@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     qa_depth=qa_depth+1
     WHERE qa_no=#{qa_no}
   </update>
-<!--   <update id="qareplyDelete"  parameterType="int">
+ <!--  <update id="qareplyDelete"  parameterType="int">
     UPDATE qaBoard SET
 	qa_subject='관리자가 삭제한 게시물입니다.',qa_content='관리자가 삭제한 게시물입니다.'
 	WHERE qa_no=#{qa_no}

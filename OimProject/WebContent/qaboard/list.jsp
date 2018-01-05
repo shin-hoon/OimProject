@@ -12,7 +12,7 @@
 <!-- 답변게시판 -->
 <div class="container">
    <div class="row">
-   <h1 style="font-weight: 900">문의 게시판Q&A(!!!!!!답변기능 진행중!!!!!!)</h1>
+   <h1 style="font-weight: 900">문의 게시판Q&A</h1>
    <table class="table table-hover">
    <c:if test="${sessionScope.om_id != null}">
      <tr>
