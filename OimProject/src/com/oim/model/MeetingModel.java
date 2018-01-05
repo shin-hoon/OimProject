@@ -107,7 +107,7 @@ public class MeetingModel {
 				if(categoryTemp!=null) {
 					for(String s:categoryTemp) {
 						category.add(s);
-						System.out.print("카테고리: "+s+" ");
+//						System.out.print("카테고리: "+s+" ");
 						}
 						System.out.println();
 					}
@@ -115,7 +115,7 @@ public class MeetingModel {
 					if(locTemp!=null) {
 					for(String s:locTemp) {
 						loc.add(s);
-						System.out.print("지역: "+s+" ");
+//						System.out.print("지역: "+s+" ");
 					}
 						System.out.println();
 					}
@@ -123,7 +123,7 @@ public class MeetingModel {
 					if(weekTemp!=null) {
 					for(String s:weekTemp) {
 						week.add(s);
-						System.out.print("주중or주말?: "+s+" ");
+//						System.out.print("주중or주말?: "+s+" ");
 					}
 					System.out.println();
 					}
@@ -131,7 +131,7 @@ public class MeetingModel {
 					if(priceTemp!=null) {
 					for(String s:priceTemp) {
 						price.add(s);
-						System.out.print("참여비용: "+s+" ");
+//						System.out.print("참여비용: "+s+" ");
 					}
 					System.out.println();
 					}
