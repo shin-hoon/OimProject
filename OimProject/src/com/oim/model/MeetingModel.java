@@ -209,13 +209,19 @@ public class MeetingModel {
        int meet_no = Integer.parseInt(no);
        
        HttpSession session = req.getSession();
-       
+       String om_id = (String) session.getAttribute("id");
        
        MeetingVO vo = MeetingDAO.meetingDetailData(meet_no);
        
        List<MeetReplyVO> list = MeetReplyDAO.replyListData(meet_no);
        String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
        
+       LikeVO lvo = new LikeVO();
+       lvo.setMeet_no(meet_no);
+       lvo.setOm_id(om_id);
+       int count = MeetingDAO.likeCount(lvo);
+       
+       req.setAttribute("count", count);
        req.setAttribute("today", today);
        req.setAttribute("list", list);
        req.setAttribute("vo", vo);

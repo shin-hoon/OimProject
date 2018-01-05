@@ -53,7 +53,7 @@
 <script>
     $(function() {
         $(window).scroll(function() {
-            if ($(this).scrollTop() > 600) {
+            if ($(this).scrollTop() > 750) {
                 $('.smallnav').fadeIn();
             } else {
                 $('.smallnav').fadeOut();
@@ -170,10 +170,40 @@
 		});
 	});
 </script>
+<script>
+$(function(){
+       $('#injjim').click(function(){
+         var meet_no=$('#injjim').attr("value");
+         $.ajax({
+             type:"POST",
+             url:"like_insert.do?meet_no="+meet_no,
+             data:{"meet_no":meet_no},
+             success:function(res)
+             {
+                $('body').html(res);
+             }
+          });
+       });
+       
+      $('#dejjim').click(function(){   
+         var meet_no=$('#dejjim').attr("value");
+      
+         $.ajax({
+             type:"POST",
+             url:"like_delete.do?meet_no="+meet_no,
+             data:{"meet_no":meet_no},
+             success:function(res)
+             {
+                $('body').html(res);
+             }
+          });
+       });
+    });	
+</script>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-	<div style="height: 20px"></div>
+   <div style="height: 20px"></div>
    <div class="container" style="border: 1px solid #999; width: 60%" >
    	
         <div class="row">
@@ -193,7 +223,7 @@
             </div>
             <div class="left col-xs-3" style="border-right: 1px solid #999;">
                 <div class="left-detail">
-                    <img src="${vo.meet_poster }" style="height:180px; width:180px; border: 2px solid #999;">
+                    <img src="${vo.meet_poster }" style="height:150px; width:150px; border: 2px solid #999;">
                     <img src="meeting/image/facebook.png" style="height:25px; width:25px; margin: 3px;">
                     <img src="meeting/image/instagram.png" style="height:25px; width:25px; margin: 3px;">
                     <img src="meeting/image/twitter.png" style="height:25px; width:25px; margin: 3px;">
@@ -231,7 +261,14 @@
                 <hr>
                 <div class="right-pay">   
                <h2 class="price" id="price" style="text-align: right;">가격 : ${vo.meet_price } 원</h2>
-                    <a href="#" class="btn btn-large btn-danger jjim" id="jjim" style="float: right; height: 50px;">♡<br>1</a>
+               		<c:if test="${count==0 }">
+                    	<a href="#" class="btn btn-large btn-default" id="injjim" 
+                    	style="float: right; height: 50px;" value="${vo.meet_no }">♡<br>${vo.meet_like }</a>
+                    </c:if>
+                    <c:if test="${count==1 }">
+                    	<a href="#" class="btn btn-large btn-danger" id="dejjim" 
+                    	style="float: right; height: 50px;" value="${vo.meet_no }">♡<br>${vo.meet_like }</a>
+                    </c:if>
                     <c:if test="${vo.meet_limit!=0}">
                     	<a href="#" class="btn btn-large btn-primary apply" id="apply" style="float: right; height: 50px;">신청하기</a>
                     </c:if>
@@ -267,7 +304,7 @@
                 
                 <div class="detailMap" id="detailMap" style="margin-bottom: 100px;  padding-top: 20px;">
                   <h3 class="webFont">지도보기</h3>
-                   <div id="map" style="width:100%;height:600px; margin: 0 auto;"></div>
+                   <div id="map" style="width:100%;height:400px; margin: 0 auto;"></div>
                     
                        <script type="text/javascript">
                        var latLeng='${vo.meet_lat}'.length;
