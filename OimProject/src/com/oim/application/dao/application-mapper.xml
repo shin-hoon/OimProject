@@ -57,6 +57,10 @@
   		DELETE FROM application
   		WHERE ac_no = #{ac_no}
   	</delete>
+  	<delete id="MeetingApplicationDelete" parameterType="int">
+  		DELETE FROM application
+  		WHERE meet_no=#{meet_no}
+  	</delete>
   	<!-- 모암신청삭제 신청제한인원 증가 -->
 	<update id="ApplicationlimitDelete" parameterType="int">
 		UPDATE meeting SET

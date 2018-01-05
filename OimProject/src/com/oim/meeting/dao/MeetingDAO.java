@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.oim.application.dao.ApplicationDAO;
 import com.oim.member.dao.MemberVO;
 
 public class MeetingDAO {
@@ -231,8 +232,17 @@ public class MeetingDAO {
 		
 		SqlSession session=ssf.openSession();
 		try {
-			session.update("meetingDelete",vo);
+			//모든신청내역삭제
+			session.delete("MeetingApplicationDelete",vo.getMeet_no());
+			//모든찜내역삭제
+			session.delete("MeetinglikeDelete",vo.getMeet_no());
+			//모든댓글삭제
+			session.delete("MeetingreplyDelete",vo.getMeet_no());
+			//모든모임삭제
+			session.delete("meetingDelete",vo);
+			session.commit();
 		}catch(Exception ex) {
+			session.rollback();
 			System.out.println("meetingDelete: "+ex.getMessage());
 			ex.printStackTrace();
 		}finally {

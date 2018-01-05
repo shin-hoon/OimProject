@@ -66,6 +66,10 @@
 		DELETE FROM meeting_reply
 		WHERE reply_no=#{reply_no}
 	</delete>
+	<delete id="MeetingreplyDelete" parameterType="int">
+		DELETE FROM meeting_reply
+		WHERE meet_no=#{meet_no}
+	</delete>
 	<update id="replyDepthDecrement" parameterType="int">
 		UPDATE meeting_reply SET
 		reply_depth=reply_depth-1
