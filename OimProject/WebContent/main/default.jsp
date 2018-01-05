@@ -150,7 +150,6 @@ nav#filter a:hover, nav#filter a:focus {
 <!-- ====메인슬라이더=====-->
  <div id="carousel" style="background-color:#0A0A2A;" data-ride="carousel">
     
-       <!--  -->
     <div class="hideLeft image" value="6">
        <figure class="effect-bubba">
          <img src="${list8[5].meet_poster }">
