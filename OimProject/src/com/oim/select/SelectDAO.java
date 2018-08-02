@@ -9,7 +9,7 @@ import java.util.*;
 public class SelectDAO {
 	   private Connection conn;
 	   private PreparedStatement ps;
-	   private final String URL="jdbc:oracle:thin:@211.238.142.223:1521:ORCL";
+	   private final String URL="jdbc:oracle:thin:@localhost:1521:ORCL";
 	   static public int totalCount = 0;
 	   
 	   public SelectDAO()
@@ -26,7 +26,7 @@ public class SelectDAO {
 	   {
 		   try
 		   {
-			   conn=DriverManager.getConnection(URL,"scott","1234");
+			   conn=DriverManager.getConnection(URL,"oim","1234");
 		   }catch(Exception ex)
 		   {
 			   System.out.println(ex.getMessage());
