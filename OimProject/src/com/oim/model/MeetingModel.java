@@ -42,15 +42,26 @@ public class MeetingModel {
 		int rowSize=12;
 		int start= (rowSize*curpage)-(rowSize-1);
 		int end= rowSize*curpage; 
+		int total=0;
 		int totalpage=0;
 		
-		Map map=new HashMap();
+		int block=10;
+		int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
+	    int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝
+	    
+		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("start", start);
 		map.put("end", end);
 		HttpSession session=req.getSession();
 		String om_id=(String)session.getAttribute("id");
 		List<MeetingVO> list=MeetingDAO.meetingListData(map);
-		totalpage=MeetingDAO.meetingTotalPage();
+		List<Map<String,Object>> mlist=MeetingDAO.meetingTotalPage();
+		
+		total=(int)mlist.get(0).get("total");
+		totalpage=(int)mlist.get(0).get("totalpage");
+		
+		if(toPage>totalpage)
+			toPage=totalpage;
 		
 		for(MeetingVO vo:list) {
 			  if(om_id!=null) {
@@ -61,6 +72,10 @@ public class MeetingModel {
 			  }
 		}
 		//jsp로 전송
+		req.setAttribute("block", block);
+		req.setAttribute("fromPage", fromPage);
+		req.setAttribute("toPage", toPage);
+		req.setAttribute("total", total);
 		req.setAttribute("totalpage", totalpage);
 		req.setAttribute("curpage", curpage);
 		req.setAttribute("list", list);
@@ -86,19 +101,22 @@ public class MeetingModel {
 				int rowSize=12;
 				int start= (rowSize*curpage)-(rowSize-1);
 				int end= rowSize*curpage;
+				int total=0;
 				int totalpage=0;
-				
+				int block=10;
+				int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
+			    int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝
+			    
 				String categoryTemp[]= req.getParameterValues("category"); //카테고리
 				String locTemp[]= req.getParameterValues("loc"); //지역
 				String weekTemp[]= req.getParameterValues("week"); //주중or주말
 				String priceTemp[]= req.getParameterValues("price");//참여비용
 				
-				
+				List<Map<String,Object>> mlist=new ArrayList<Map<String,Object>>();//total과 totalpage를 담기위한 Map형태의 list
 				List<String> category= new ArrayList<String>();
 				List<String> loc= new ArrayList<String>();
 				List<String> week= new ArrayList<String>();
 				List<String> price= new ArrayList<String>();
-				
 				
 				String from=req.getParameter("from");//시작일 ~부터
 				String to=req.getParameter("to");//시작일 ~까지
@@ -136,10 +154,7 @@ public class MeetingModel {
 					System.out.println();
 					}
 					
-					System.out.println(from);
-					System.out.println(to);
-					
-					Map map=new HashMap();
+					Map<String,Object> map=new HashMap<String,Object>();
 					map.put("category", category);
 					map.put("loc", loc);
 					map.put("week", week);
@@ -158,12 +173,15 @@ public class MeetingModel {
 							  vo.setLikeCount(MeetingDAO.likeCount(lvo));
 						  }
 					}
-					totalpage=MeetingDAO.meetingFindTotalPage(map);
-					System.out.println(totalpage);
-					
+				    
 					//jsp로 전송
 					if(first==true) //최초로 실행했을때는 session에 저장한다.
 					{
+						mlist=MeetingDAO.meetingFindTotalPage(map);
+						total=(int)mlist.get(0).get("total");
+						totalpage=(int)mlist.get(0).get("totalpage");
+					    if(toPage>totalpage)
+							toPage=totalpage;
 						session.setAttribute("category", category);
 						session.setAttribute("loc", loc);
 						session.setAttribute("week", week);
@@ -173,7 +191,7 @@ public class MeetingModel {
 					}
 					else //페이지를 옮겨갈 경우에는 map에 메모리를 새로 할당해서 session에 저장된 검색결과를 넣는다.
 					{
-						map=new HashMap();
+						map=new HashMap<String,Object>();
 						map.put("category", session.getAttribute("category"));
 						map.put("loc", session.getAttribute("loc"));
 						map.put("week", session.getAttribute("week"));
@@ -191,10 +209,22 @@ public class MeetingModel {
 								  vo.setLikeCount(MeetingDAO.likeCount(lvo));
 							  }
 						}
-						totalpage=MeetingDAO.meetingFindTotalPage(map);
-						System.out.println(totalpage);
+						mlist=MeetingDAO.meetingFindTotalPage(map);
+						total=(int)mlist.get(0).get("total");
+						totalpage=(int)mlist.get(0).get("totalpage");
+					    if(toPage>totalpage)
+							toPage=totalpage;
+					    
 					}
+					for(String s:loc) {
+						System.out.println(s);
+					}
+					System.out.println();
+					req.setAttribute("block", block);
+					req.setAttribute("total", total);
 					req.setAttribute("totalpage", totalpage);
+					req.setAttribute("fromPage", fromPage);
+					req.setAttribute("toPage", toPage);
 					req.setAttribute("curpage", curpage);
 			     	req.setAttribute("list", list);
 					req.setAttribute("main_jsp", "../meeting/meeting_find.jsp");
@@ -216,12 +246,12 @@ public class MeetingModel {
        List<MeetReplyVO> list = MeetReplyDAO.replyListData(meet_no);
        String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
        
-       LikeVO lvo = new LikeVO();
-       lvo.setMeet_no(meet_no);
-       lvo.setOm_id(om_id);
-       int count = MeetingDAO.likeCount(lvo);
-       
-       req.setAttribute("count", count);
+       if(om_id!=null) {
+	       LikeVO lvo = new LikeVO();
+	       lvo.setMeet_no(meet_no);
+	       lvo.setOm_id(om_id);
+	       vo.setLikeCount(MeetingDAO.likeCount(lvo));
+       }
        req.setAttribute("today", today);
        req.setAttribute("list", list);
        req.setAttribute("vo", vo);
@@ -233,7 +263,10 @@ public class MeetingModel {
     @RequestMapping("meeting_payment.do")
     public String meeting_payment(HttpServletRequest req, HttpServletResponse res) {
     	String meet_no = req.getParameter("meet_no");
-    	String om_id = req.getParameter("om_id");
+    	
+    	HttpSession session = req.getSession();
+        String om_id = (String) session.getAttribute("id");
+    	
     	MeetingVO vo = MeetingDAO.meetingDetailData(Integer.parseInt(meet_no));
     	MemberVO vo2 = MeetingDAO.meetingDetailInfo(om_id);
     	
@@ -330,7 +363,7 @@ public class MeetingModel {
     	try {
     		req.setCharacterEncoding("UTF-8"); // 한글 파일명을 고려하여 setcharencoding을 설정해준다.
     		HttpSession session=req.getSession();
-			String path = "c:\\git\\OimWeb\\OimProject\\WebContent\\img\\meetImg"; // 경로명
+			String path = "c:\\git2\\OimProject\\WebContent\\img\\meetImg"; // 경로명
 			int size = 1024 * 1024 * 100; // 100MB까지 가능으로 설정
 			String enctype = "UTF-8";
 			// 파일 업로드하는 라이브러리 (defaultfilerenamepolicy는 안붙여도되지만 붙여주는게 좋다)
@@ -444,7 +477,7 @@ public class MeetingModel {
     	
     	try {
     		req.setCharacterEncoding("UTF-8"); // 한글 파일명을 고려하여 setcharencoding을 설정해준다.
-			String path = "c:\\git\\OimWeb\\OimProject\\WebContent\\img\\meetImg"; // 경로명
+			String path = "c:\\git2\\OimProject\\WebContent\\img\\meetImg"; // 경로명
 			int size = 1024 * 1024 * 100; // 100MB까지 가능으로 설정
 			String enctype = "UTF-8";
 			// 파일 업로드하는 라이브러리 (defaultfilerenamepolicy는 안붙여도되지만 붙여주는게 좋다)
@@ -568,11 +601,15 @@ public class MeetingModel {
 				int end= rowSize*curpage;
 				int total=0;
 				int totalpage=0;
-					Map map=new HashMap();
+				int block=10;
+				int fromPage = ((curpage-1)/block*block)+1;  //보여줄 페이지의 시작
+			    int toPage = ((curpage-1)/block*block)+block; //보여줄 페이지의 끝
+			    
+					Map<String,Object> map=new HashMap<String,Object>();
 					map.put("start", start);
 					map.put("end", end);
 					List<MeetingVO> list=new ArrayList<MeetingVO>();
-					List<Map> mlist=new ArrayList<Map>(); //모임전체갯수, 전체페이지수 구해오기 위한 HashMap
+					List<Map<String,Object>> mlist=new ArrayList<Map<String,Object>>(); //모임전체갯수, 전체페이지수 구해오기 위한 HashMap
 					
 					//jsp로 전송
 					HttpSession session=req.getSession();
@@ -593,10 +630,12 @@ public class MeetingModel {
 						mlist=MeetingDAO.meetingSearchTotalPage(searchText);
 						total=(int)mlist.get(0).get("total");
 						totalpage=(int)mlist.get(0).get("totalpage");
+						if(toPage>totalpage)
+							toPage=totalpage;
 					}
 					else //페이지를 옮겨갈 경우에는 map에 메모리를 새로 할당해서 session에 저장된 검색결과를 넣는다.
 					{
-						map=new HashMap();
+						map=new HashMap<String,Object>();
 						map.put("searchText", session.getAttribute("searchText"));
 						map.put("start", start);
 						map.put("end", end);
@@ -609,10 +648,15 @@ public class MeetingModel {
 								  vo.setLikeCount(MeetingDAO.likeCount(lvo));
 							  }
 						}
-						mlist=MeetingDAO.meetingSearchTotalPage(searchText);
+						mlist=MeetingDAO.meetingSearchTotalPage((String)session.getAttribute("searchText"));
 						total=(int)mlist.get(0).get("total");
 						totalpage=(int)mlist.get(0).get("totalpage");
+						if(toPage>totalpage)
+							toPage=totalpage;
 					}
+					req.setAttribute("block", block);
+					req.setAttribute("fromPage", fromPage);
+					req.setAttribute("toPage", toPage);
 					req.setAttribute("total", total);
 					req.setAttribute("totalpage", totalpage);
 					req.setAttribute("curpage", curpage);

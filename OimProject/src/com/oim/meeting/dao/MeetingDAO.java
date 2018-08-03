@@ -1,16 +1,11 @@
 package com.oim.meeting.dao;
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.util.*;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
-import com.oim.application.dao.ApplicationDAO;
 import com.oim.member.dao.MemberVO;
 
 public class MeetingDAO {
@@ -27,12 +22,12 @@ public class MeetingDAO {
 		}
 	}
 	
-	public static int meetingTotalPage() { //모임 총 페이지수 구하기
+	public static List<Map<String,Object>> meetingTotalPage() { //모임 총 페이지수 구하기
 		
-		int totalpage=0;
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
 		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
 		try {
-			totalpage=session.selectOne("meetingTotalPage");
+			list=session.selectList("meetingTotalPage");
 			
 		}catch(Exception ex) {
 			System.out.println("meetingTotalPage: "+ex.getMessage());
@@ -41,10 +36,10 @@ public class MeetingDAO {
 				session.close();
 			}
 		}
-		return totalpage;
+		return list;
 	}
 	
-	public static List<MeetingVO> meetingListData(Map map){ //모임리스트 뿌리기
+	public static List<MeetingVO> meetingListData(Map<String,Object> map){ //모임리스트 뿌리기
 		
 		List<MeetingVO> list=new ArrayList<MeetingVO>();
 		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
@@ -60,7 +55,7 @@ public class MeetingDAO {
 		return list;
 	}
 	
-	public static List<MeetingVO> meetingFindData(Map map){ //체크박스 검색결과 필터링해서 뿌리기
+	public static List<MeetingVO> meetingFindData(Map<String,Object> map){ //체크박스 검색결과 필터링해서 뿌리기
 		
 		List<MeetingVO> list=new ArrayList<MeetingVO>();
 		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
@@ -77,12 +72,12 @@ public class MeetingDAO {
 		return list;
 	}
 	
-	public static int meetingFindTotalPage(Map map) { //체크박스 검색결과 총 페이지수 구하기
+	public static List<Map<String,Object>> meetingFindTotalPage(Map<String,Object> map) { //체크박스 검색결과 총 페이지수 구하기
 		
-		int totalpage=0;
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
 		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
 		try {
-			totalpage=session.selectOne("meetingFindTotalPage",map);
+			list=session.selectList("meetingFindTotalPage",map);
 			
 		}catch(Exception ex) {
 			System.out.println("meetingFindTotalPage: "+ex.getMessage());
@@ -91,10 +86,10 @@ public class MeetingDAO {
 				session.close();
 			}
 		}
-		return totalpage;
+		return list;
 	}
 	
-	public static List<MeetingVO> meetingSearchData(Map map){ //검색어 검색결과 필터링해서 뿌리기
+	public static List<MeetingVO> meetingSearchData(Map<String,Object> map){ //검색어 검색결과 필터링해서 뿌리기
 		
 		List<MeetingVO> list=new ArrayList<MeetingVO>();
 		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
@@ -110,9 +105,9 @@ public class MeetingDAO {
 		return list;
 	}
 	
-	public static List<Map> meetingSearchTotalPage(String searchText){ //검색어 검색결과 총 페이지수 구하기
+	public static List<Map<String,Object>> meetingSearchTotalPage(String searchText){ //검색어 검색결과 총 페이지수 구하기
 		
-		List<Map> list=new ArrayList<Map>();
+		List<Map<String,Object>> list=new ArrayList<Map<String,Object>>();
 		SqlSession session=ssf.openSession(); //주소값을 얻어올때 사용한다.
 		try {
 			list=session.selectList("meetingSearchTotalPage", searchText);
@@ -314,6 +309,21 @@ public class MeetingDAO {
 			session.commit();
 		   }catch(Exception ex){
 			   session.rollback();
+			   System.out.println(ex.getMessage());
+			   
+		   }finally{
+			   if(session!=null) {
+				   session.close();
+			   }
+		   }
+	   }
+	   public static void DbInsert(MeetingVO vo) { //DBinsert
+		   
+		   SqlSession session=ssf.openSession(true);
+		   try{
+			session.insert("dbInsert",vo);
+			session.commit();
+		   }catch(Exception ex){
 			   System.out.println(ex.getMessage());
 			   
 		   }finally{

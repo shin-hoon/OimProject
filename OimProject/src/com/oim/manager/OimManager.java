@@ -15,11 +15,9 @@ import com.oim.meeting.dao.MeetingDAO;
 import com.oim.meeting.dao.MeetingVO;
 
 public class OimManager {
-	   
 	   public static void main(String[] args) {
 	      
 	      List<MeetingVO> list = new ArrayList<MeetingVO>();
-	      MeetingDAO dao = new MeetingDAO();
 	      OimManager oim = new OimManager();
 	      
 	      list = oim.meetingTop100(); //모임데이터 파싱해서  list에 추가하기
@@ -27,7 +25,7 @@ public class OimManager {
 	      System.out.println("저장 시작!");
 	      for(MeetingVO vo:list) { //파싱한 데이터 DB에 insert하기
 	    	  
-//	    	  dao.insertDetail(vo);
+	    	  MeetingDAO.DbInsert(vo);
 	    	  System.out.println(vo.getMeet_no()+": 저장 성공!");
 	    	  
 	      }
@@ -42,10 +40,11 @@ public class OimManager {
  		         int count=0;
  		         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-// 		        	for(int i=119001; i<=122000; i++) {
-// 		        for(int i=119001; i<=119010; i++) {
- 		        		for(int i=119680; i<=122000; i++) {
- 		            try {
+// 		        for(int i=124294; i<=124300; i++) { 3325
+// 		        for(int i=123405; i<=124293; i++) {
+ 		        for(int i=119680; i<=122000; i++) {
+ 		        	//for(int i=123258; i<=123500; i++) {
+ 		        	try {
  		                 Document doc=Jsoup.connect("https://onoffmix.com/event/"+String.valueOf(i)).get();
  		                 
  		                 //top
@@ -110,14 +109,7 @@ public class OimManager {
  		                 String endminute="";
  		                 String startdate="";
  		                 String enddate="";
- 		                 
- 		                 Date startFormat;
- 		                 Date endFormat;
- 		                
- 		                
- 		               java.sql.Timestamp startFormat2=null;
- 		               java.sql.Timestamp endFormat2=null;
- 		                
+ 		               
  		                 if(jjim.equals("찜")){
  		                    jjim="0";
  		                 }
@@ -147,22 +139,28 @@ public class OimManager {
  		                 }catch (Exception e) {
  		                   p = priceE.text();
  		                 }
- 		   
+ 		                
  		                 if(p.substring(0, 2).equals("외부")) {
+ 		                	 System.out.println(i+" 는 외부모임입니다.");
  		                    continue;
  		                 }
+ 		                
  		                 
- 		                 String a = p.replaceAll("[^0-9]",""); //10001
- 		                 String b = a.substring(0, a.length()-1); //1000
  		                 
+ 		                //System.out.println(a); 
+ 		                
+ 		                 
+ 		               
  		                 int price = 0;
-
+ 		               
  		                 if(p.substring(0,2).equals("무료")) {
  		                    price = 0;
  		                 }else {
+ 		                	String a = p.replaceAll("[^0-9]",""); //10001
+ 		                	String b = a.substring(0, a.length()-1); //1000
  		                    price = Integer.parseInt(b);
  		                 }
- 		                 
+ 		              
  		                 String datestr=date.text();
  		                 int yearcount=0;
  		                 int monthcount=0;
@@ -176,31 +174,37 @@ public class OimManager {
  		                		 monthcount++;
  		                	 }
  		                 }
- 		                 
+ 		                
 // 		                 System.out.println("모임번호 : "+i);
 // 		                 System.out.println("유료/무료 : "+charge.text()); 
 // 		                 System.out.println("카테고리 : "+category.text());
 // 		                 System.out.println("모임사진 : "+poster.attr("src"));
- 		                 //System.out.println("개설자 이름 : "+name);                 
- 		                 //System.out.println("개설자 이메일 : "+hostemail.text());
- 		                 //System.out.println("개설자 전화번호 : "+hosttel.text());
- 		                 //System.out.println("개설자 소속 : "+company);
+// 		                 System.out.println("개설자 이름 : "+name);                 
+// 		                 System.out.println("개설자 이메일 : "+hostemail.text());
+// 		                 System.out.println("개설자 전화번호 : "+hosttel.text());
+// 		                 System.out.println("개설자 소속 : "+company);
 // 		                 System.out.println("모임제목 : "+title.text());
 // 		                 System.out.println("진행날짜 : "+datestr); // 시작 날짜 //종료날짜 구분
  		                 
  		                 	if(monthcount==1) { //하루짜리 모임일때
- 		                	 
- 		                	 if(yearcount==0) { //년도 표시가 없을때 (2017년)
- 		                		 startyear="2017";
- 		                		 endyear="2017";
- 		                	 }else if(yearcount==1) { //년도 표시가 1개있을때(2018년)
+ 		                 		 
+ 		                	 if(yearcount==0) { //년도 표시가 없을때 (2018년)
  		                		 startyear="2018";
  		                		 endyear="2018";
+ 		                	 }else if(yearcount==1) { //년도 표시가 1개있을때(2017년)
+ 		                		 startyear="2017";
+ 		                		 endyear="2017";
  		                	 }
- 		                	 
- 		                	 startmonth=datestr.substring(datestr.indexOf('월')-2, datestr.indexOf('월'));
- 		                	 startmonth=startmonth.replace(" ", "0");
- 		                	 endmonth=startmonth; //시작월과 종료월이 같음
+ 		                	 if(startyear.equals("2018")){
+ 		                		 datestr=" "+datestr;
+	 		                	 startmonth=datestr.substring(datestr.indexOf('월')-2, datestr.indexOf('월'));
+	 		                	 startmonth=startmonth.replace(" ", "0");
+	 		                	 endmonth=startmonth; //시작월과 종료월이 같음
+ 		                	 }else {
+ 		                		 startmonth=datestr.substring(datestr.indexOf('월')-2, datestr.indexOf('월'));
+	 		                	 startmonth=startmonth.replace(" ", "0");
+	 		                	 endmonth=startmonth; //시작월과 종료월이 같음
+ 		                	 }
  		                	 
  		                	 startday=datestr.substring(datestr.indexOf('일')-2, datestr.indexOf('일'));
  		                	 startday=startday.replace(" ", "0");
@@ -217,10 +221,7 @@ public class OimManager {
  		                	 
  		                	 startdate=startyear+"-"+startmonth+"-"+startday+" "+starthour+":"+startminute;
  		                	 enddate=endyear+"-"+endmonth+"-"+endday+" "+endhour+":"+endminute;
- 		                	 
- 		                	 startFormat = sdf.parse(startdate);
- 		                	 endFormat = sdf.parse(enddate);
- 		                	 
+ 		                
 // 		                  	 startFormat2=java.sql.Date.valueOf(startyear+"-"+startmonth+"-"+startday);
 // 		                  	 endFormat2=java.sql.Date.valueOf(endyear+"-"+endmonth+"-"+endday);
 // 		                  	 startFormat2=java.sql.Timestamp.valueOf("2006-11-11 12:13:24");
@@ -230,22 +231,31 @@ public class OimManager {
 // 		                	 System.out.println("종료날짜:"+enddate);
 // 		                	 System.out.println("시작날짜 (date변환):"+sdf.format(startFormat).toString());
 // 		                	 System.out.println("종료날짜 (date변환):"+sdf.format(endFormat).toString());
- 		                	 
+ 			                
  		                 }else { //하루이상 모임일때     
  		                	 
  		                	 if(yearcount==0) { //년도 표시가 없을때 (2017년)
- 		                		 startyear="2017";
- 		                		 endyear="2017";
+ 		                		 startyear="2018";
+ 		                		 endyear="2018";
  		                	 }else if(yearcount==1) { //년도 표시가 1개있을때(2017년 시작, 2018년 종료)
  		                		 startyear="2017";
  		                		 endyear="2018";
- 		                	 }else { //년도 표시가 2개 이상 있을때(2018년)
- 		                		 startyear="2018";
- 		                		 endyear="2018";
+ 		                	 }else { //년도 표시가 2개 이상 있을때(2017년)
+ 		                		 startyear="2017";
+ 		                		 endyear="2017";
  		                	 }
  		                	 
- 		                	 startmonth=datestr.substring(datestr.indexOf('월')-2, datestr.indexOf('월'));
- 		                	 startmonth=startmonth.replace(" ", "0");
+ 		                	
+ 		                	if(startyear.equals("2018")){
+		                		 datestr=" "+datestr;
+	 		                	 startmonth=datestr.substring(datestr.indexOf('월')-2, datestr.indexOf('월'));
+	 		                	 startmonth=startmonth.replace(" ", "0");
+	 		       
+		                	 }else {
+		                		 startmonth=datestr.substring(datestr.indexOf('월')-2, datestr.indexOf('월'));
+	 		                	 startmonth=startmonth.replace(" ", "0");
+		                	 }
+ 		                	 
  		                	 endmonth=datestr.substring(datestr.lastIndexOf('월')-2, datestr.lastIndexOf('월'));
  		                	 endmonth=endmonth.replace(" ", "0");
  		                	 
@@ -267,8 +277,8 @@ public class OimManager {
  		                	 startdate=startyear+"-"+startmonth+"-"+startday+" "+starthour+":"+startminute;
  		                	 enddate=endyear+"-"+endmonth+"-"+endday+" "+endhour+":"+endminute;
  		                	 
- 		                	 startFormat = sdf.parse(startdate);
- 		                	 endFormat = sdf.parse(enddate);
+// 		                	 startFormat = sdf.parse(startdate);
+// 		                	 endFormat = sdf.parse(enddate);
  		                	
 // 		                  	 startFormat2=java.sql.Date.valueOf(startyear+"-"+startmonth+"-"+startday);
 // 		                  	 endFormat2=java.sql.Date.valueOf(endyear+"-"+endmonth+"-"+endday);
@@ -291,36 +301,35 @@ public class OimManager {
 
  		                
  		                MeetingVO vo = new MeetingVO();
- 		                
  		     			vo.setMeet_no(i);
-// 		    			vo.setCharge(charge.text());
-// 		    			vo.setCategory(category.text());
-// 		    			vo.setPoster(poster.attr("src"));
-// 		    			if(count<15){
-// 		    				vo.setId("lkk6201");
-// 		    			}else if(count<30){
-// 		    				vo.setId("jang");
-// 		    			}else if(count<45){
-// 		    				vo.setId("jeong");
-// 		    			}else if(count<60){
-// 		    				vo.setId("ko");
-// 		    			}else if(count<75) {
-// 		    				vo.setId("park");
-// 		    			}else {
-// 		    				vo.setId("yoo");
-// 		    			}
-// 		    			vo.setSubject(title.text());
-// 		    			vo.setStartDate(startdate);
-// 		    			vo.setEndDate(enddate);
-// 		    			vo.setLocation(place.text());
-// 		    			vo.setTotal(Integer.parseInt(tpeople));
-// 		    			vo.setLimit(Integer.parseInt(lpeople));
-// 		    			vo.setInfo(info.text());
-// 		    			vo.setPrice(price);
-// 		    			vo.setLike(Integer.parseInt(jjim));
+ 		    			vo.setMeet_charge(charge.text());
+ 		    			vo.setMeet_cg(category.text());
+ 		    			vo.setMeet_poster(poster.attr("src"));
+ 		    			if(count<=200){
+ 		    				vo.setOm_id("lkk6201");
+ 		    			}else if(count<=400){
+ 		    				vo.setOm_id("jang");
+ 		    			}else if(count<=600){
+ 		    				vo.setOm_id("jeong");
+ 		    			}else if(count<=800){
+ 		    				vo.setOm_id("ko");
+ 		    			}else if(count<=1000) {
+ 		    				vo.setOm_id("park");
+ 		    			}else {
+ 		    				vo.setOm_id("yoo");
+ 		    			}
+ 		    			vo.setMeet_subject(title.text());
+ 		    			vo.setMeet_start(startdate);
+ 		    			vo.setMeet_end(enddate);
+ 		    			vo.setMeet_loc(place.text());
+ 		    			vo.setMeet_total(Integer.parseInt(tpeople));
+ 		    			vo.setMeet_limit(Integer.parseInt(lpeople));
+ 		    			vo.setMeet_info(info.text());
+ 		    			vo.setMeet_price(price);
+ 		    			vo.setMeet_like(Integer.parseInt(jjim));
  		    			vo.setMeet_detail(detail.html());
-// 		    			vo.setLat(lat);
-// 		    			vo.setLng(lng);
+ 		    			vo.setMeet_lat(lat);
+ 		    			vo.setMeet_lng(lng);
  		    			
  		    			list.add(vo);
  		    			count++;

@@ -11,7 +11,9 @@
 	</select>
 	
 	<select id="meetingFindData" resultType="MeetingVO" parameterType="java.util.Map"> <!--검색결과 보여주기  -->
-		 SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start, TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
+		 SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit,
+		 TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start,
+		 TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
          FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as num
          FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like
          FROM meeting  
@@ -22,68 +24,61 @@
          			#{cg}
          		</foreach>
          	</if>
-         	
-         	
          	<if test="loc.size()!=0 and loc!=null">
          		AND
          		<foreach collection="loc" item="lc" open="(" close=")" separator="OR">
          			REGEXP_LIKE(meet_loc, #{lc})
-         		</foreach>
+         			<if test='lc.equals("기타지역")'>
+	         				OR NOT(regexp_like(meet_loc,'서울') OR REGEXP_LIKE(meet_loc,'부산|울산|경남') OR REGEXP_LIKE(meet_loc,'인천|경기')
+							OR REGEXP_LIKE(meet_loc,'대전|충청|세종') OR REGEXP_LIKE(meet_loc,'광주|전라')
+							OR REGEXP_LIKE(meet_loc,'강원') OR REGEXP_LIKE(meet_loc,'대구|경북') OR REGEXP_LIKE(meet_loc,'제주'))
+	         		</if>
+         		</foreach>		
          	</if>
-         	
+         
          	<if test="week.size()!=0 and week!=null">
          		AND 
          	<foreach collection="week" item="wk" open="(" close=")" separator="OR">
          		REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'D'),#{wk})
          		</foreach>
          	</if>
-         	
-         	
           	<if test="price.size()!=0 and price!=null">
          		AND
-         		<foreach collection="price" item="pr" index="index" open="" close="" separator="OR">
-         		<choose>
-         		          		
+         		<foreach collection="price" item="pr" index="index" open="(" close=")" separator="OR">
+         		<choose>   		
          			<when test='pr.equals("0")'>
          				meet_price = #{pr}  
          			</when>
-         			
          			<when test='pr.equals("10000")'>
          				meet_price <![CDATA[ <= ]]> #{pr}  
          			</when>
-         			
          			<when test='pr.equals("25000")'>
          				meet_price BETWEEN 10000 AND #{pr}  
          			</when>
-         			
          			<when test='pr.equals("40000")'>
          				meet_price BETWEEN 25000 AND #{pr}  
          			</when>
-         			
          			<when test='pr.equals("990001")'>
-         				meet_price BETWEEN 40000 AND #{pr}  
+         				meet_price BETWEEN 40000 AND 99000  
          			</when>
-         			
          			<when test='pr.equals("990002")'>
-         				meet_price <![CDATA[ >= ]]> #{pr} 
+         				meet_price <![CDATA[ >= ]]> 99000 
          			</when>
-         		
          			<otherwise>
          			</otherwise>
          		</choose>
          		</foreach>
          	</if>
-         	
          	<if test="(from!='' and to!='') and (from!=null and to!=null)">
          		AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
          	</if>
          	</where>
-         ORDER BY meet_start DESC))
-         WHERE num BETWEEN #{start} AND #{end}            	
+		         ORDER BY meet_start DESC))
+		         WHERE num BETWEEN #{start} AND #{end}            	
 	</select>
 	
-		<select id="meetingFindTotalPage" resultType="int" parameterType="java.util.Map"> <!--검색결과 총 페이지수 구하기  -->
-		SELECT CEIL(COUNT(*)/12) FROM meeting
+		<select id="meetingFindTotalPage" resultMap="pageMap" parameterType="java.util.Map"> <!--검색결과 총 페이지수 구하기  -->
+		SELECT COUNT(*) as total,CEIL(COUNT(*)/12) as totalpage FROM meeting
 		        <where>
          	<if test="category.size()!=0 and category!=null">
          		meet_cg IN
@@ -95,6 +90,11 @@
          		AND 
          		<foreach collection="loc" item="lc" open="(" close=")" separator="OR">
          			REGEXP_LIKE(meet_loc,#{lc})
+         			<if test='lc.equals("기타지역")'>
+	         				OR NOT(regexp_like(meet_loc,'서울') OR REGEXP_LIKE(meet_loc,'부산|울산|경남') OR REGEXP_LIKE(meet_loc,'인천|경기')
+							OR REGEXP_LIKE(meet_loc,'대전|충청|세종') OR REGEXP_LIKE(meet_loc,'광주|전라')
+							OR REGEXP_LIKE(meet_loc,'강원') OR REGEXP_LIKE(meet_loc,'대구|경북') OR REGEXP_LIKE(meet_loc,'제주'))
+	         		</if>
          		</foreach>
          	</if>
          	<if test="week.size()!=0 and week!=null">
@@ -105,30 +105,25 @@
          	</if>
           	<if test="price.size()!=0 and price!=null">
          		AND
-         		<foreach collection="price" item="pr" index="index" open="" close="" separator="OR">
+         		<foreach collection="price" item="pr" index="index" open="(" close=")" separator="OR">
          		<choose>      		
          			<when test='pr.equals("0")'>
          				meet_price = #{pr}  
          			</when>
-         			
          			<when test='pr.equals("10000")'>
          				meet_price <![CDATA[ <= ]]> #{pr}  
-         			</when>
-         			
+         			</when>   			
          			<when test='pr.equals("25000")'>
          				meet_price BETWEEN 10000 AND #{pr}  
-         			</when>
-         			
+         			</when>			
          			<when test='pr.equals("40000")'>
          				meet_price BETWEEN 25000 AND #{pr}  
-         			</when>
-         			
+         			</when>		
          			<when test='pr.equals("990001")'>
-         				meet_price BETWEEN 40000 AND #{pr}  
-         			</when>
-         			
+         				meet_price BETWEEN 40000 AND 99000
+         			</when>		
          			<when test='pr.equals("990002")'>
-         				meet_price <![CDATA[ >= ]]> #{pr} 
+         				meet_price <![CDATA[ >= ]]> 99000
          			</when>
          			<otherwise>
          			</otherwise>
@@ -178,8 +173,8 @@
    		WHERE meet_no = #{meet_no} 
    	</update>
    	
-	<select id="meetingTotalPage" resultType="int"> <!--총 페이지수 구하기  -->
-		SELECT CEIL(COUNT(*)/12) FROM meeting
+	<select id="meetingTotalPage" resultMap="pageMap"> <!--총 페이지수 구하기  -->
+		SELECT COUNT(*) as total,CEIL(COUNT(*)/12) totalpage FROM meeting
 	</select>
 	
 	<select id="getMeetingNumber" resultType="int"> <!--새로운 모임번호를 받아와서 이미지 파일명으로 사용하기위한 쿼리문  -->
@@ -229,13 +224,14 @@
 	<select id="likeListData" resultType="LikeVO" parameterType="String"><!--찜목록보기 -->
 		SELECT basket_no,meet_no FROM basket
 		WHERE om_id=#{om_id}
+		ORDER BY basket_no DESC
 	</select>
 	<delete id="likeDelete" parameterType="LikeVO"><!--찜삭제 -->
 		DELETE FROM basket
 		WHERE om_id=#{om_id}
 		AND meet_no=#{meet_no}
 	</delete>
-	<delete id="MeetinglikeDelete" parameterType="int"><!--찜삭제 -->
+	<delete id="MeetinglikeDelete" parameterType="int"><!--해당모임 찜 전체삭제 -->
 		DELETE FROM basket
 		WHERE meet_no=#{meet_no}
 	</delete>
@@ -250,4 +246,8 @@
 		meet_like=meet_like-1
 		WHERE meet_no=#{meet_no}
 	</update>
+	<insert id="dbInsert" parameterType="MeetingVO">
+		INSERT INTO meeting VALUES(#{meet_no}, #{meet_charge}, #{meet_cg}, #{meet_poster}, #{om_id}, #{meet_subject}, #{meet_start}, #{meet_end},
+		#{meet_loc}, #{meet_total}, #{meet_limit}, #{meet_info}, #{meet_price}, 0, #{meet_detail}, #{meet_lat}, #{meet_lng}, SYSDATE, 0)
+	</insert>
 </mapper>
