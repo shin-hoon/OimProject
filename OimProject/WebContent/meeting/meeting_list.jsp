@@ -382,7 +382,7 @@
             <div class="col-lg-12 text-left"> 
                   <ul class="thumbnails"><!-- 모임뿌려주기 div 시작 11-->
 
-                  <h2>모임</h2>
+                  <h2>총 ${total}개의 모임이 있습니다.</h2>
 					
  				<c:forEach var="vo" items="${list }" varStatus="status">
  				
@@ -394,6 +394,7 @@
                              <div class="caption">
                                 <div class="col-sm-12" style="padding:0px;">
                                 
+                                <ul>
                                 	<c:choose>
                                 		<c:when test="${vo.meet_charge eq '유료' }">
                                 		  <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">${vo.meet_charge }</span></li>
@@ -402,8 +403,9 @@
                                 		<li class="li_add"><span class="label label-success" style="font-size:13px; margin-right:5px;">${vo.meet_charge }</span></li>
                                 		</c:otherwise>
                                 	</c:choose>
-                                 
+                                 	
                                   <li class="li_add"><span class="label label-primary" style="font-size:13px;">${vo.meet_cg }</span></li>
+                                  </ul>
                                   <div class="col-sm-12" style="padding:0">
 	                                  <c:if test="${vo.meet_start eq vo.meet_end}">
 	                                    <h6>${vo.meet_start }</h6>
@@ -470,35 +472,36 @@
                     </ul>  <!-- 모임뿌려주기 div 끝 ---> 
                     
                      <div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
-					  <ul class="pagination">
-					    <li ><a href="meeting_list.do?page=${curpage<11?curpage:curpage-10 }">◀◀</a></li>
-					    <li ><a href="meeting_list.do?page=${curpage>1?curpage-1:curpage }">◀</a></li>
-					    
- 					  <fmt:parseNumber var="num" value="${curpage/10}" integerOnly="true"/>
- 					   <fmt:parseNumber var="num2" value="${curpage%10}" integerOnly="true"/>
- 					   
-			       		<c:set var="num" value="${num<=0?1:(num2==0?(num-1)*10+1:num*10+1)}"/>  
-			       		
-			       		<c:forEach var="i"  begin="${num}" end="${num+9}">
-			       			<c:choose>
-			       				<c:when test="${i>totalpage }">
-			       				</c:when>
-			       				<c:when test="${i==curpage}">
-				    				<li class="active"><a href="meeting_list.do?page=${i}">${i}</a></li>
-			       				</c:when>
-			       				<c:when test="${i <= totalpage}">
-			       					<li><a href="meeting_list.do?page=${i}">${i}</a></li>
-			       				</c:when>
-			       			</c:choose>
-			       		</c:forEach>
-       		
- 						 	<%-- <c:forEach var="curpage" begin="1"  end="${totalpage }">
-						    	<li ><a href="meeting_list.do?page=${curpage}">${curpage}</a></li>
-						    </c:forEach> --%>
-						    
-					    <li ><a href="meeting_list.do?page=${curpage<totalpage?curpage+1:curpage }">▶</a></li>
-					    <li ><a href="meeting_list.do?page=${curpage<=totalpage-10?curpage+10:curpage }">▶▶</a></li>
-					  </ul>
+							  <ul class="pagination">
+					       <c:choose>
+					        <c:when test="${curpage>block }">
+					          <li><a href="meeting_list.do?page=1">|◀</a></li>
+					          <li><a href="meeting_list.do?page=${fromPage-1 }">◀</a></li>
+					        </c:when>
+					        <c:otherwise>
+					          <li><span style="color:gray">|◀</span></li>   
+					          <li><span style="color:gray">◀</span></li>
+					        </c:otherwise>
+					       </c:choose>
+					       <c:forEach var="i" begin="${fromPage }" end="${toPage }">
+					        <c:if test="${i==curpage }">
+					          <li class="active"><a>${i}</a></li>
+					        </c:if>
+					        <c:if test="${i!=curpage }">
+					          <li><a href="meeting_list.do?page=${i}">${i}</a></li>
+					        </c:if>
+					       </c:forEach>
+					       <c:choose>
+					       <c:when test="${toPage<totalpage }">
+					          <li><a href="meeting_list.do?page=${toPage+1 }" >▶</a></li>
+					          <li><a href="meeting_list.do?page=${totalpage }" >▶|</a></li>
+					        </c:when>
+					        <c:otherwise>
+					          <li><span style="color:gray">▶</span></li>
+					          <li><span style="color:gray">▶|</span></li>
+					        </c:otherwise>
+					       </c:choose>
+					       </ul>
 					</div> <!-- 페이지수 뿌려주기 div 끝-->
                </div>
            </div>

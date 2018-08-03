@@ -10,13 +10,12 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
-/*caption안에 p태그의 글자수가 일정수치 이상되면 ...으로 표시하는 스크립트*/
 $(function(){
-   $('.mainf').show();
-   $('.study').css("display","none");
+	
+    $('.study').css("display","none");
     $('.hobby').css("display","none");
     $('.messe').css("display","none");
-    $('.pro').css("display","none"); 
+    $('.pro').css("display","none");
     
     $('.studyBtn').click(function(){
        $('.study').show();
@@ -35,24 +34,7 @@ $(function(){
     $('.proBtn').click(function(){
         $('.pro').show();
      });
-
    
-    $('div.caption p').each(function(){
-    
-    var length=25; //글자 최대길이 25
-    var minlength=16; //제목 글자가 한줄에 16정도됨
-   
-    $(this).each(function(){ //제목글자길이가 30을 넘는순간부터 ...으로 처리하라
-        if($(this).text().length >= length){
-            $(this).text($(this).text().substr(0,length)+'...');
-        }
-
-        if($(this).text().length <= minlength){ //제목이 1줄짜리 일때는 <br>태그를 줘서 2줄짜리랑 같은 크기로 만들어라 
-           $(this).html($(this).text()+'<br></br>');
-       }
-    });
-    }); 
-    
     //메인 화면 슬라이드 이미지를 클릭하면 밑에 모임 제목이 뜬다
      $(".image").click(function(){
        //alert("1");
@@ -85,12 +67,10 @@ $(function(){
           }
        }
     });
-   
-    
 });
 </script>
 
-<script>
+<script type="text/javascript">
         $(document).ready(function() {
          $("#content-slider").lightSlider({
                 loop:true,
@@ -248,30 +228,68 @@ nav#filter a:hover, nav#filter a:focus {
                <div class="section-title">
                   <h2>오늘의 모임</h2>
                   <p>오늘 올라온 핫한 모임을 추천해 드립니다</p>
-               </div>
+               	</div>
+              </div>
+               
+              
                   <ul class="thumbnails">
-                  <c:forEach var="vo" items="${list }" begin="1" end="8">
+                   <c:forEach var="vo" items="${list }" begin="1" end="8">
                       <div class="col-sm-3">
-                         <div class="thumbnail">
-                            <div style="width:100%; height:230px;">
-                               <a href="meeting_detail.do?meet_no=${vo.meet_no}"><img src="${vo.meet_poster }" alt="마감임박" style="width:100%; height:100%;"></a>
-                            </div>
+                         <div class="thumbnail col-sm-12">
+                         	<div style="height:230px;">
+                         <a href="meeting_detail.do?meet_no=${vo.meet_no}"><img src="${vo.meet_poster }" style="width:100%; height:100%"></a>
+            				</div>
                              <div class="caption">
-                                   <div>
-                                 <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">${vo.meet_charge }</span></li>
+                                <div class="col-sm-12" style="padding:0px;">
+                                
+                                <ul>
+                                	<c:choose>
+                                		<c:when test="${vo.meet_charge eq '유료' }">
+                                		  <li class="li_add"><span class="label label-danger" style="font-size:13px; margin-right:5px;">${vo.meet_charge }</span></li>
+                                		</c:when>
+                                		<c:otherwise>
+                                		<li class="li_add"><span class="label label-success" style="font-size:13px; margin-right:5px;">${vo.meet_charge }</span></li>
+                                		</c:otherwise>
+                                	</c:choose>
+                                 	
                                   <li class="li_add"><span class="label label-primary" style="font-size:13px;">${vo.meet_cg }</span></li>
-                                  <p style="text-align:right; font-size:9pt;"><b>~${vo.meet_end }</b></p>
+                                  </ul>
+                                  <div class="col-sm-12" style="padding:0">
+	                                  <c:if test="${vo.meet_start eq vo.meet_end}">
+	                                    <h6>${vo.meet_start }</h6>
+	                                  </c:if>
+                                  
+	                                  <c:if test="${vo.meet_start ne vo.meet_end}">
+	                                    <h6>${vo.meet_start } ~ ${vo.meet_end }</h6>
+	                                  </c:if>
+	                              	   <a href="meeting_detail.do?meet_no=${vo.meet_no}" style="margin-bottom:10px;"><p class="p_add">${vo.meet_subject }</p></a>
+	                              	   <center><p><a href="meeting_detail.do?meet_no=${vo.meet_no}" class="btn btn-primary">신청하기</a></p></center>
                                   </div>
-                                 
-                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}"><p class="p_add">${vo.meet_subject }</p></a>
-                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}" class="btn btn-primary" style="align:center;">모임 상세 보기</a>
+                                  <script type="text/javascript">
+									$(function(){
+									    $('div.caption p.p_add').each(function(){
+									        var length=30; //글자 최대길이 30
+									        var minlength=16; //제목 글자가 한줄에 16정도됨
+									        
+									        $(this).each(function(){ //제목글자길이가 30을 넘는순간부터 ...으로 처리하라
+									            if($(this).text().length >= length){
+									                $(this).text($(this).text().substr(0,length)+'...');
+									            }
+									
+									            if($(this).text().length <= minlength){ //제목이 1줄짜리 일때는 <br>태그를 줘서 2줄짜리랑 같은 크기로 만들어라 
+									               $(this).html($(this).text()+'<br></br>');
+									           }
+									        });
+									        }); 
+										});
+									</script>
+                                  </div>
                               </div>
+
                          </div>
                       </div>
-                      
-                    </c:forEach>
+                       </c:forEach>
                     </ul>   
-               </div>
            </div>
 <!--======== 마감임박 모임 끝============-->
 
@@ -328,7 +346,6 @@ nav#filter a:hover, nav#filter a:focus {
               <div class="row">
                  <nav id="filter" class="col-md-12 text-center">
                    <ul>
-                     <!-- <li><a href="#" class="current btn-theme btn-small" data-filter="*" >#ALL</a></li>  -->
                      <li><a href="#" class="current btn-theme btn-small messeBtn" data-filter=".messe">#전시</a></li>
                      <li><a href="#" class="btn-theme btn-small studyBtn" data-filter=".study">#스터디</a></li>
                      <li><a href="#" class="btn-theme btn-small hobbyBtn" data-filter=".hobby">#취미</a></li>
@@ -338,25 +355,7 @@ nav#filter a:hover, nav#filter a:focus {
                  <div class="col-md-12">
                    <div class="row">
                      <div class="portfolio-items isotopeWrapper clearfix" id="3">
-                        
-                        <div>
-                           <c:forEach var="vo" items="${list5 }" varStatus="s">
-                            <c:if test="${list5[s.index].meet_hit>'0' }">
-	                             <article class="col-md-4 isotopeItem mainf">
-	                               <div class="portfolio-item">
-	                               	  <span class="glyphicon glyphicon-thumbs-up">&nbsp;${vo.meet_hit }</span>
-	                                  <a href="meeting_detail.do?meet_no=${vo.meet_no}">
-	                                 <img src="${vo.meet_poster }" style="width:100%; height:100%;">
-	                                 </a>
-	                                  <p style="align:left">[${vo.meet_charge }]${vo.meet_subject }</p>
-	                               </div>
-	                             </article>
-                             </c:if>
-                            </c:forEach>
-                        </div>
-                        
-                        
-                   
+                       
                     <c:forEach var="vo" items="${list3 }" varStatus="s">
                     	 <c:if test="${list3[s.index].meet_hit>'0' }">
 	                       <article class="col-md-4 isotopeItem study">
@@ -425,6 +424,12 @@ nav#filter a:hover, nav#filter a:focus {
      <script src="js/jquery.js"></script>
      <script src="js/jquery.isotope.min.js"></script> 
      <script src="js/main.js"> </script>
+     <script type="text/javascript">
+     	$(function(){
+     		$('.messeBtn').trigger('click');
+     	});
+     </script>
+
    
 <!-- ==========tag별 모임 끝==========--->
 
@@ -446,7 +451,7 @@ nav#filter a:hover, nav#filter a:focus {
          </div>
          <div class="row row-0-gutter">
             <c:forEach var="vo" items="${list7 }" begin="0" end="5">
-            <div class="col-md-4 col-0-gutter">
+            <div class="col-md-4 col-0-gutter" style="margin-bottom:15px;">
                <div class="ot-portfolio-item">
                   <figure class="effect-bubba">
                      <img src="${vo.meet_poster }" class="img-responsive" style="height:350px;"/>
@@ -465,8 +470,5 @@ nav#filter a:hover, nav#filter a:focus {
       </section>
 <!--======== HOT모임 끝============-->
 </div>
-
-
-      
 </body>
 </html>

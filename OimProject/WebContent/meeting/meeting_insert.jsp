@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
     <!--DateTimePicker링크-->
-      <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
-      <script type="text/javascript" src="js/moment.js"></script>
-      <script type="text/javascript" src="js/daterangepicker.js"></script>
-      
+     <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
+     <script type="text/javascript" src="js/moment.js"></script>
+     <script type="text/javascript" src="js/daterangepicker.js"></script>
+    <!-- 네이버 스마트 에디터 -->  
+    <script type="text/javascript" src="se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
     <!-- 네이버 지도 -->
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&submodules=geocoder"></script>
-   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&callback=CALLBACK_FUNCTION"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&callback=CALLBACK_FUNCTION"></script>
    
     <style>
         .meetingRow{
@@ -23,9 +24,20 @@
             margin: 0 auto;
         }
     </style>
-<script type="text/javascript"> //모두 입력해야 모임을 개설할수있다.
-$(function(){
-	$('#submit').click(function(){
+   <script type="text/javascript"> //textarea에 스마트 에디터를 적용시키는 스크립트
+   $(function(){
+    var oEditors = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors,
+        elPlaceHolder: "meet_detail",
+        sSkinURI: "se2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2"
+    });
+
+	$('#submit').click(function(){ //모임개설 버튼 클릭 시
+		
+		oEditors.getById["meet_detail"].exec("UPDATE_CONTENTS_FIELD", []); //에디터의 내용값을 name이 meet_detail인 textarea의 값으로 대입
+		var meet_detail = $('textarea[name="meet_detail"]').val();
 		var meet_poster=$('input:file[name="upload"]').val();
 		var meet_cg=$('input.meet_cg').val();
 		var meet_subject=$('input:text[name="meet_subject"]').val();
@@ -33,7 +45,6 @@ $(function(){
 		var meet_total=$('input:text[name="meet_total"]').val();
 		var meet_price=$('input:text[name="meet_price"]').val();
 		var meet_info=$('textarea[name="meet_info"]').val();
-		var meet_detail=$('textarea[name="meet_detail"]').val();
 		
 		if(meet_poster.trim()==""){
 			alert("사진을 등록해주세요!");
@@ -68,13 +79,10 @@ $(function(){
 			$('textarea[name="meet_detail"]').focus();
 			return false;
 		}else if(confirm("개설하시겠습니까?")){
-			
 			return true;
 		}else{
-			
 			return false;
 		}			
-
 	});
 });
 
@@ -93,14 +101,12 @@ $(function(){
 				$('.searchArea').html(res);
 			}
 		});
-		
 	});
 });
 </script>
     
 </head>
 <body>	
-		
          <div class="container" style="margin-bottom: 50px;">
          <h2 style="width: 1100px; margin:20px auto">개설하기</h2>
 		<div class="row meetingRow" style="border: 1px solid #ddd">
@@ -111,7 +117,6 @@ $(function(){
 		        
 		           <img src="img/oim.png" style="width: 100%; height: 100%; border: 1px solid #ddd" id="poster"
 		            alt="모임프로필">
-
 		           
 		         <script type="text/javascript"> 
 		         	$(function(){ //사진변경 버튼 클릭했을때 file타입의 버튼 강제 클릭 이벤트 발생
@@ -126,7 +131,6 @@ $(function(){
 		        <input style="margin: 10px" type="button" class="btn btn-primary profile" value="사진변경">
 		        <input type="file" name="upload" id="upload" accept=".jpg, .jpeg, .png"
 		        style="display:none" onchange="document.getElementById('poster').src = window.URL.createObjectURL(this.files[0])">
-		        
 		        
 		      </div>
 		</div>
@@ -177,20 +181,19 @@ $(function(){
                     </div>
                     
                     	<input type="text" class="form-control" style="width: 460px; display:inline-block; " name="meet_subject" placeholder="모임명을 입력해주세요.">
-
                </td>  
            </tr>
            
-              <tr>
-            <td class="col-sm-2">
-                <h5>모임일시</h5>
-            </td>      
+            <tr>
+	            <td class="col-sm-2">
+	                <h5>모임일시</h5>
+            	</td>      
                
                <td class="col-sm-9" style="vertical-align: middle">
                       
                     <input type="text" class="form-control meet_date" name="meet_date"/>
 
-                    <script type="text/javascript">
+                    <script type="text/javascript"> //datepicker 플러그인
                     $(function() {
                         $('.meet_date').daterangepicker({ 
                             timePicker: true,
@@ -220,7 +223,6 @@ $(function(){
                    <div class="form group form-inline" style="position:relative; margin-bottom:15px; vertical-align: middle">
                        <input type="text" class="form-control" name="meet_loc" id="searchText" style="width:400px">
                        
-                       
                        <input type="button" class="btn btn-default" id="searchBtn" value="검색">
                        
                         <label style="font-weight: normal">&nbsp;
@@ -231,14 +233,14 @@ $(function(){
                           	$(function(){
                           	  $(".noplace").change(function(){ 
                           		 if($('.noplace').is(":checked")==true){ /*장소미정 체크했을때  */
-                          			$('.detailMap').css("display","none");
+                          			$('.detailMap').slideUp(200);
                           			$('#searchText').val('');
                           			$('input:text[name="meet_loc1"]').val('');
                           			$('input:text[name="meet_loc2"]').val('');
 									$('#searchText').attr("disabled",true);
 									$('#searchBtn').attr("disabled",true);
                           		}else{									/*장소미정 해제했을때 */
-                          			$('.detailMap').css("display","block");
+                          			$('.detailMap').slideDown(200);
                           			$('#searchText').attr("disabled",false);
 									$('#searchBtn').attr("disabled",false);
                           		} 
@@ -252,14 +254,13 @@ $(function(){
                         </div>
                    </div>
                    
-                   <div class="detailMap" id="detailMap">
-                   <div id="map" style="width:100%; height:300px; margin: 0 auto; z-index:10"></div>
+                   <div class="detailMap" id="detailMap"> <!-- 지도를 감싸는 부분  -->
+                   <div id="map" style="width:100%; height:300px; margin: 0 auto; z-index:10"> <!-- 실제 지도가 표시되는 부분  -->
+                   </div>
                     
-                         <script>
-
+                         <script type="text/javascript">
  						 var oimlocation = new naver.maps.Point(309944, 552085),
                          
- 						
                          map = new naver.maps.Map('map', {
                              center:oimlocation, //좌표 표시
                              zoom: 8, //지도의 초기 줌 레벨
@@ -291,7 +292,6 @@ $(function(){
                          
                         map.setOptions("mapTypeControl", true); //지도 유형 컨트롤의 표시 여부
 							
-
                          // 지도 인터랙션 옵션
                          $("#interaction").on("click", function(e) {
                              e.preventDefault();
@@ -375,10 +375,10 @@ $(function(){
                             <span class="glyphicon glyphicon-map-marker"></span> 
                            </div>
                            
-                           <input type="text" class="form-control" name="meet_loc1" value="" readonly="readonly"/>
+                           <input type="text" class="form-control" name="meet_loc1" value="" readonly="readonly"/> <!-- 본 주소 -->
                           </div>
                           
-                          <input type="text" class="form-control" name="meet_loc2" placeholder="나머지 주소를 입력해 주세요.">
+                          <input type="text" class="form-control" name="meet_loc2" placeholder="나머지 주소를 입력해 주세요."> <!-- 상세주소 -->
                 </div>      
                </td>  
            </tr>
@@ -461,7 +461,7 @@ $(function(){
             <tr>
                 <td colspan="3" class="col-sm-2">
                     <h5>상세 내용</h5>
-                    <textarea class="form-control" name="meet_detail" rows="10" cols="45" style="width: 100%"></textarea>
+                    <textarea id="meet_detail" name="meet_detail" rows="30" cols="100" style="width: 100%"></textarea>
                 </td>
             </tr>
             
@@ -490,7 +490,7 @@ $(function(){
                 </td>
             </tr>
         </table>
-          
+
       </div>
         </form>
 	</div>

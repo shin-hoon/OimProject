@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,15 +9,11 @@
       <!-- 기존 부트스트랩(항상가져오는 3줄)  -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-         <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> jquery 충돌나서 주석-->
-        <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> jquery 충돌나서 주석-->
         
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
       <!-- 템플릿 css -->
       <link href="css/owl.theme.default.min.css"  rel="stylesheet">
       <link href="css/style.css" rel="stylesheet">
-      <!-- <link href="css/owl.carousel.css" rel="stylesheet"> -->
-      <!-- <link href="css/animate.css" rel="stylesheet"> -->
       
       <!-- 우리가 추가한 css -->     
       <link href="css/oim_style.css" rel="stylesheet">
@@ -37,6 +31,14 @@
       
 
 <title>Insert title here</title>
+
+<script type="text/javascript">
+                      $(function () {
+                          $('#wordSearch').click(function(){
+								$('#searchSubmit').trigger('click');
+                          });
+                      });	
+                </script>    
 <script>
    $(document).ready(function(){
       $(".boardmenu>a").click(function(){
@@ -163,17 +165,17 @@ body{
    background-color: #fcbe03!important;
 }
 .oim_btn_yw{
-   background-color: #fcbe03;
+   background-color: #0A0A2A;
    font-family: "Open Sans",sans-serif;
    color:white;
    border: 0;
    outline:0;
 }
 .oim_btn_yw:hover{
-   background-color: #fcbe03;
+   background-color: #0A0A2A;
    font-family: "Open Sans",sans-serif;
    color:white;
-   border: 0.5px solid #fcbe03;
+   border: 0.5px solid #0A0A2A;
    outline:0;
 
 }
@@ -236,45 +238,16 @@ a#MOVE_TOP_BTN {
            <form method="get" action="meeting_search.do">
               <div class="input-group col-md-12">
                     <input type="text" class="form-control input-lg" name="searchText" placeholder="모임을 입력하세요" />
-
                     <span class="input-group-btn"> <!--돋보기 버튼 -->
-                        <button class="btn btn-info btn-lg" id="wordSearch" type="button">
+                        <button type="button" class="btn btn-info btn-sm" id="wordSearch">
                             <span class="glyphicon glyphicon-search"></span>
                         </button>
                     </span>
-                    
-                    <input type="submit" style="display:none" id="searchClick">
+                    <input type="submit" style="display:none" id="searchSubmit">
                 </div>
                 </form>
-                <script type="text/javascript"> //돋보기 눌렀을때 submit 버튼 클릭이벤트 발생
-                   $(function(){
-                      $('#wordSearch').click(function(){
-                         $('#searchClick').trigger('click');
-                      });
-                   });
-                      
-                      $(function () {
-                  		$('#sBtn').click(function(){
-                  			var cgLeng=$('input[name=category]:checkbox:checked').length;
-                  			var locLeng=$('input[name=loc]:checkbox:checked').length;
-                  			var wkLeng=$('input[name=week]:checkbox:checked').length;
-                  			var pcLeng=$('input[name=price]:checkbox:checked').length;
-                  			
-                  			var start= $("input:text[name='from']").val();
-                  			var end= $("input:text[name='to']").val();
-                  			
-                  			if(cgLeng==0 && locLeng==0 && wkLeng==0 && pcLeng==0 && (start=="" || end=="")){
-                  				alert("검색사항을 최소 1개이상 선택하세요!");
-                  				return false;
-                  			}else{
-                  				return true;
-                  			}
-                  		});
-                      });
-                  		
-                </script>
             </div>
-        </div>
+          </div>
    </div>
 <!-- 사이트 로고 끝 -->
    
@@ -350,7 +323,7 @@ a#MOVE_TOP_BTN {
                
    
 <!-- =======푸터 ========-->
-      <footer class="footer" style="position:relative; bottom:0;">
+      <footer class="footer" style="position:relative; margin-top:100px; bottom:0;">
       
           <div class="container text-center">
           	<ul class="oim_ul">

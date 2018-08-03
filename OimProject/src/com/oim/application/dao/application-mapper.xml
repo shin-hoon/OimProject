@@ -37,7 +37,10 @@
 	</select>
 	<!-- 모암신청 insert -->
 	<insert id="ApplicationInsertData" parameterType="ApplicationVO">
-		INSERT INTO application VALUES(application_no_seq.nextval,#{om_id},#{meet_no},SYSDATE)
+		<selectKey keyProperty="ac_no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(ac_no)+1,1) as ac_no FROM application
+		</selectKey>
+		INSERT INTO application VALUES(#{ac_no},#{om_id},#{meet_no},SYSDATE)
 	</insert>
 	<!-- 모암신청하면 신청제한인원 감소 -->
 	<update id="ApplicationlimitUpdate" parameterType="int">

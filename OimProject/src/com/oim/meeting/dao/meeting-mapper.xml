@@ -2,229 +2,291 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.oim.meeting.dao.meeting-mapper"> <!--모임목록 뿌리기 -->
-	<select id="meetingListData" resultType="MeetingVO" parameterType="java.util.Map">
-		 SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start, TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
-         FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as num
-         FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like
-         FROM meeting ORDER BY meet_start DESC))
-         WHERE num BETWEEN #{start} AND #{end}            	
+	<select id="meetingListData" resultType="MeetingVO"
+		parameterType="java.util.Map">
+		SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit,
+		TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as
+		meet_start, TO_CHAR(to_date(meet_end, 'YYYY-MM-DD
+		HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
+		FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total,
+		meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as
+		num
+		FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total,
+		meet_limit, meet_start, meet_end, meet_subject, meet_like
+		FROM meeting ORDER BY meet_start DESC))
+		WHERE num BETWEEN #{start} AND #{end}
 	</select>
-	
-	<select id="meetingFindData" resultType="MeetingVO" parameterType="java.util.Map"> <!--검색결과 보여주기  -->
-		 SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit,
-		 TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start,
-		 TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
-         FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as num
-         FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like
-         FROM meeting  
-         <where>
-         	<if test="category.size()!=0 and category!=null">
-         		meet_cg IN
-         		<foreach collection="category" item="cg" open="(" close=")" separator=",">
-         			#{cg}
-         		</foreach>
-         	</if>
-         	<if test="loc.size()!=0 and loc!=null">
-         		AND
-         		<foreach collection="loc" item="lc" open="(" close=")" separator="OR">
-         			REGEXP_LIKE(meet_loc, #{lc})
-         			<if test='lc.equals("기타지역")'>
-	         				OR NOT(regexp_like(meet_loc,'서울') OR REGEXP_LIKE(meet_loc,'부산|울산|경남') OR REGEXP_LIKE(meet_loc,'인천|경기')
-							OR REGEXP_LIKE(meet_loc,'대전|충청|세종') OR REGEXP_LIKE(meet_loc,'광주|전라')
-							OR REGEXP_LIKE(meet_loc,'강원') OR REGEXP_LIKE(meet_loc,'대구|경북') OR REGEXP_LIKE(meet_loc,'제주'))
-	         		</if>
-         		</foreach>		
-         	</if>
-         
-         	<if test="week.size()!=0 and week!=null">
-         		AND 
-         	<foreach collection="week" item="wk" open="(" close=")" separator="OR">
-         		REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'D'),#{wk})
-         		</foreach>
-         	</if>
-          	<if test="price.size()!=0 and price!=null">
-         		AND
-         		<foreach collection="price" item="pr" index="index" open="(" close=")" separator="OR">
-         		<choose>   		
-         			<when test='pr.equals("0")'>
-         				meet_price = #{pr}  
-         			</when>
-         			<when test='pr.equals("10000")'>
-         				meet_price <![CDATA[ <= ]]> #{pr}  
-         			</when>
-         			<when test='pr.equals("25000")'>
-         				meet_price BETWEEN 10000 AND #{pr}  
-         			</when>
-         			<when test='pr.equals("40000")'>
-         				meet_price BETWEEN 25000 AND #{pr}  
-         			</when>
-         			<when test='pr.equals("990001")'>
-         				meet_price BETWEEN 40000 AND 99000  
-         			</when>
-         			<when test='pr.equals("990002")'>
-         				meet_price <![CDATA[ >= ]]> 99000 
-         			</when>
-         			<otherwise>
-         			</otherwise>
-         		</choose>
-         		</foreach>
-         	</if>
-         	<if test="(from!='' and to!='') and (from!=null and to!=null)">
-         		AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
-         	</if>
-         	</where>
-		         ORDER BY meet_start DESC))
-		         WHERE num BETWEEN #{start} AND #{end}            	
-	</select>
-	
-		<select id="meetingFindTotalPage" resultMap="pageMap" parameterType="java.util.Map"> <!--검색결과 총 페이지수 구하기  -->
-		SELECT COUNT(*) as total,CEIL(COUNT(*)/12) as totalpage FROM meeting
-		        <where>
-         	<if test="category.size()!=0 and category!=null">
-         		meet_cg IN
-         		<foreach collection="category" item="cg" open="(" close=")" separator=",">
-         			#{cg}
-         		</foreach>
-         	</if>
-         	<if test="loc.size()!=0 and loc!=null">
-         		AND 
-         		<foreach collection="loc" item="lc" open="(" close=")" separator="OR">
-         			REGEXP_LIKE(meet_loc,#{lc})
-         			<if test='lc.equals("기타지역")'>
-	         				OR NOT(regexp_like(meet_loc,'서울') OR REGEXP_LIKE(meet_loc,'부산|울산|경남') OR REGEXP_LIKE(meet_loc,'인천|경기')
-							OR REGEXP_LIKE(meet_loc,'대전|충청|세종') OR REGEXP_LIKE(meet_loc,'광주|전라')
-							OR REGEXP_LIKE(meet_loc,'강원') OR REGEXP_LIKE(meet_loc,'대구|경북') OR REGEXP_LIKE(meet_loc,'제주'))
-	         		</if>
-         		</foreach>
-         	</if>
-         	<if test="week.size()!=0 and week!=null">
-         		AND 
-         	<foreach collection="week" item="wk" open="(" close=")" separator="OR">
-         		REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'D'),#{wk})
-         		</foreach>
-         	</if>
-          	<if test="price.size()!=0 and price!=null">
-         		AND
-         		<foreach collection="price" item="pr" index="index" open="(" close=")" separator="OR">
-         		<choose>      		
-         			<when test='pr.equals("0")'>
-         				meet_price = #{pr}  
-         			</when>
-         			<when test='pr.equals("10000")'>
-         				meet_price <![CDATA[ <= ]]> #{pr}  
-         			</when>   			
-         			<when test='pr.equals("25000")'>
-         				meet_price BETWEEN 10000 AND #{pr}  
-         			</when>			
-         			<when test='pr.equals("40000")'>
-         				meet_price BETWEEN 25000 AND #{pr}  
-         			</when>		
-         			<when test='pr.equals("990001")'>
-         				meet_price BETWEEN 40000 AND 99000
-         			</when>		
-         			<when test='pr.equals("990002")'>
-         				meet_price <![CDATA[ >= ]]> 99000
-         			</when>
-         			<otherwise>
-         			</otherwise>
-         		</choose>
-         		</foreach>
-         	</if>
-         	<if test="(from!='' and to!='') and (from!=null and to!=null)">
-         		AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
-         	</if>
-         	</where>
-	</select>
-	
-	<select id="meetingSearchData" parameterType="java.util.Map" resultType="MeetingVO"> <!-- 검색어 입력했을때의 모임결과 보여주기 -->
-		 SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start, TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject, meet_like, num
-         FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as num
-         FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total, meet_limit, meet_start, meet_end, meet_subject, meet_like
-         FROM meeting WHERE UPPER(meet_cg) LIKE '%'||UPPER(#{searchText})||'%'
-         OR UPPER(meet_subject) LIKE '%'||UPPER(#{searchText})||'%'
-         OR UPPER(meet_info) LIKE '%'||UPPER(#{searchText})||'%'
-         ORDER BY meet_start DESC))
-         WHERE num BETWEEN #{start} AND #{end}
-	</select>
-	
-    <resultMap id="pageMap" type="java.util.Map">
-        <result javaType="java.lang.Integer" column="total" property="total"/>
-		<result javaType="java.lang.Integer" column="totalpage" property="totalpage"/>
-	</resultMap> 
 
-	<select id="meetingSearchTotalPage" parameterType="String" resultMap="pageMap"> <!-- 검색어 입력했을때의 모임결과 보여주기 -->
-		 SELECT COUNT(*) as total,CEIL(COUNT(*)/12) as totalpage FROM meeting
-         WHERE UPPER(meet_cg) LIKE '%'||UPPER(#{searchText})||'%'
-         OR UPPER(meet_subject) LIKE '%'||UPPER(#{searchText})||'%'
-         OR UPPER(meet_info) LIKE '%'||UPPER(#{searchText})||'%'
+	<select id="meetingFindData" resultType="MeetingVO"
+		parameterType="java.util.Map"> <!--검색결과 보여주기 -->
+		SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total,
+		meet_limit,
+		TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start,
+		TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as
+		meet_end, meet_subject, meet_like, num
+		FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total,
+		meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as
+		num
+		FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total,
+		meet_limit, meet_start, meet_end, meet_subject, meet_like
+		FROM meeting
+		<where>
+			<if test="category.size()!=0 and category!=null">
+				meet_cg IN
+				<foreach collection="category" item="cg" open="(" close=")"
+					separator=",">
+					#{cg}
+				</foreach>
+			</if>
+			<if test="loc.size()!=0 and loc!=null">
+				AND
+				<foreach collection="loc" item="lc" open="(" close=")"
+					separator="OR">
+					REGEXP_LIKE(meet_loc, #{lc})
+					<if test='lc.equals("기타지역")'>
+						OR NOT(regexp_like(meet_loc,'서울') OR
+						REGEXP_LIKE(meet_loc,'부산|울산|경남') OR REGEXP_LIKE(meet_loc,'인천|경기')
+						OR REGEXP_LIKE(meet_loc,'대전|충청|세종') OR
+						REGEXP_LIKE(meet_loc,'광주|전라')
+						OR REGEXP_LIKE(meet_loc,'강원') OR REGEXP_LIKE(meet_loc,'대구|경북') OR
+						REGEXP_LIKE(meet_loc,'제주'))
+					</if>
+				</foreach>
+			</if>
+
+			<if test="week.size()!=0 and week!=null">
+				AND
+				<foreach collection="week" item="wk" open="(" close=")"
+					separator="OR">
+					REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'D'),#{wk})
+				</foreach>
+			</if>
+			<if test="price.size()!=0 and price!=null">
+				AND
+				<foreach collection="price" item="pr" index="index" open="("
+					close=")" separator="OR">
+					<choose>
+						<when test='pr.equals("0")'>
+							meet_price = #{pr}
+						</when>
+						<when test='pr.equals("10000")'>
+							meet_price <![CDATA[ <= ]]>
+							#{pr}
+						</when>
+						<when test='pr.equals("25000")'>
+							meet_price BETWEEN 10000 AND #{pr}
+						</when>
+						<when test='pr.equals("40000")'>
+							meet_price BETWEEN 25000 AND #{pr}
+						</when>
+						<when test='pr.equals("990001")'>
+							meet_price BETWEEN 40000 AND 99000
+						</when>
+						<when test='pr.equals("990002")'>
+							meet_price <![CDATA[ >= ]]>
+							99000
+						</when>
+						<otherwise>
+						</otherwise>
+					</choose>
+				</foreach>
+			</if>
+			<if test="(from!='' and to!='') and (from!=null and to!=null)">
+				AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN
+				TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
+			</if>
+		</where>
+		ORDER BY meet_start DESC))
+		WHERE num BETWEEN #{start} AND #{end}
 	</select>
-	
-	<select id="meetingDetailData" resultType="MeetingVO" parameterType="int">
-      SELECT m.meet_no,m.meet_cg,m.meet_poster,o.om_name,o.om_id,o.om_tel,o.om_company,m.meet_subject,TO_CHAR(to_date(m.meet_start, 'YYYY-MM-DD HH24:MI'),'YYYY"년"MM"월"DD"일"  HH24"시"MI"분"') as meet_start,
-      TO_CHAR(to_date(m.meet_end, 'YYYY-MM-DD HH24:MI'),'YYYY"년"MM"월"DD"일" HH24"시"MI"분"') as meet_end,
-      m.meet_loc, m.meet_total, m.meet_limit, m.meet_info, m.meet_price, m.meet_like, m.meet_hit, m.meet_detail, m.meet_lat, m.meet_lng
-      FROM meeting m , oim_member o
-      WHERE o.om_id=m.om_id AND m.meet_no=#{meet_no}              
-   	</select>
-   	
-   	<update id="meetingHitIncrement" parameterType="int">
-   		UPDATE meeting SET
-   		meet_hit=meet_hit+1
-   		WHERE meet_no = #{meet_no} 
-   	</update>
-   	
-	<select id="meetingTotalPage" resultMap="pageMap"> <!--총 페이지수 구하기  -->
+
+	<select id="meetingFindTotalPage" resultMap="pageMap"
+		parameterType="java.util.Map"> <!--검색결과 총 페이지수 구하기 -->
+		SELECT COUNT(*) as total,CEIL(COUNT(*)/12) as totalpage FROM meeting
+		<where>
+			<if test="category.size()!=0 and category!=null">
+				meet_cg IN
+				<foreach collection="category" item="cg" open="(" close=")"
+					separator=",">
+					#{cg}
+				</foreach>
+			</if>
+			<if test="loc.size()!=0 and loc!=null">
+				AND
+				<foreach collection="loc" item="lc" open="(" close=")"
+					separator="OR">
+					REGEXP_LIKE(meet_loc,#{lc})
+					<if test='lc.equals("기타지역")'>
+						OR NOT(regexp_like(meet_loc,'서울') OR
+						REGEXP_LIKE(meet_loc,'부산|울산|경남') OR REGEXP_LIKE(meet_loc,'인천|경기')
+						OR REGEXP_LIKE(meet_loc,'대전|충청|세종') OR
+						REGEXP_LIKE(meet_loc,'광주|전라')
+						OR REGEXP_LIKE(meet_loc,'강원') OR REGEXP_LIKE(meet_loc,'대구|경북') OR
+						REGEXP_LIKE(meet_loc,'제주'))
+					</if>
+				</foreach>
+			</if>
+			<if test="week.size()!=0 and week!=null">
+				AND
+				<foreach collection="week" item="wk" open="(" close=")"
+					separator="OR">
+					REGEXP_LIKE(TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'D'),#{wk})
+				</foreach>
+			</if>
+			<if test="price.size()!=0 and price!=null">
+				AND
+				<foreach collection="price" item="pr" index="index" open="("
+					close=")" separator="OR">
+					<choose>
+						<when test='pr.equals("0")'>
+							meet_price = #{pr}
+						</when>
+						<when test='pr.equals("10000")'>
+							meet_price <![CDATA[ <= ]]>
+							#{pr}
+						</when>
+						<when test='pr.equals("25000")'>
+							meet_price BETWEEN 10000 AND #{pr}
+						</when>
+						<when test='pr.equals("40000")'>
+							meet_price BETWEEN 25000 AND #{pr}
+						</when>
+						<when test='pr.equals("990001")'>
+							meet_price BETWEEN 40000 AND 99000
+						</when>
+						<when test='pr.equals("990002")'>
+							meet_price <![CDATA[ >= ]]>
+							99000
+						</when>
+						<otherwise>
+						</otherwise>
+					</choose>
+				</foreach>
+			</if>
+			<if test="(from!='' and to!='') and (from!=null and to!=null)">
+				AND to_date(meet_start, 'YYYY-MM-DD HH24:MI') BETWEEN
+				TO_DATE(#{from},'YYYY-MM-DD') AND TO_DATE(#{to},'YYYY-MM-DD')
+			</if>
+		</where>
+	</select>
+
+	<select id="meetingSearchData" parameterType="java.util.Map"
+		resultType="MeetingVO"> <!-- 검색어 입력했을때의 모임결과 보여주기 -->
+		SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total,
+		meet_limit, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD
+		HH24:MI'),'YY-MM-DD') as meet_start, TO_CHAR(to_date(meet_end,
+		'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end, meet_subject,
+		meet_like, num
+		FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total,
+		meet_limit, meet_start, meet_end, meet_subject, meet_like, rownum as
+		num
+		FROM (SELECT meet_no, meet_poster, meet_charge, meet_cg, meet_total,
+		meet_limit, meet_start, meet_end, meet_subject, meet_like
+		FROM meeting WHERE UPPER(meet_cg) LIKE '%'||UPPER(#{searchText})||'%'
+		OR UPPER(meet_subject) LIKE '%'||UPPER(#{searchText})||'%'
+		OR UPPER(meet_info) LIKE '%'||UPPER(#{searchText})||'%'
+		ORDER BY meet_start DESC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+
+	<resultMap id="pageMap" type="java.util.Map">
+		<result javaType="java.lang.Integer" column="total"
+			property="total" />
+		<result javaType="java.lang.Integer" column="totalpage"
+			property="totalpage" />
+	</resultMap>
+
+	<select id="meetingSearchTotalPage" parameterType="String"
+		resultMap="pageMap"> <!-- 검색어 입력했을때의 모임결과 보여주기 -->
+		SELECT COUNT(*) as total,CEIL(COUNT(*)/12) as totalpage FROM meeting
+		WHERE UPPER(meet_cg) LIKE '%'||UPPER(#{searchText})||'%'
+		OR UPPER(meet_subject) LIKE '%'||UPPER(#{searchText})||'%'
+		OR UPPER(meet_info) LIKE '%'||UPPER(#{searchText})||'%'
+	</select>
+
+	<select id="meetingDetailData" resultType="MeetingVO"
+		parameterType="int">
+		SELECT
+		m.meet_no,m.meet_cg,m.meet_poster,o.om_name,o.om_id,o.om_tel,o.om_company,m.meet_subject,TO_CHAR(to_date(m.meet_start,
+		'YYYY-MM-DD HH24:MI'),'YYYY"년"MM"월"DD"일" HH24"시"MI"분"') as meet_start,
+		TO_CHAR(to_date(m.meet_end, 'YYYY-MM-DD HH24:MI'),'YYYY"년"MM"월"DD"일"
+		HH24"시"MI"분"') as meet_end,
+		m.meet_loc, m.meet_total, m.meet_limit, m.meet_info, m.meet_price, m.meet_like,
+		m.meet_hit, m.meet_detail, m.meet_lat, m.meet_lng
+		FROM meeting m , oim_member o
+		WHERE o.om_id=m.om_id AND m.meet_no=#{meet_no}
+	</select>
+
+	<update id="meetingHitIncrement" parameterType="int">
+		UPDATE meeting SET
+		meet_hit=meet_hit+1
+		WHERE meet_no = #{meet_no}
+	</update>
+
+	<select id="meetingTotalPage" resultMap="pageMap"> <!--총 페이지수 구하기 -->
 		SELECT COUNT(*) as total,CEIL(COUNT(*)/12) totalpage FROM meeting
 	</select>
-	
-	<select id="getMeetingNumber" resultType="int"> <!--새로운 모임번호를 받아와서 이미지 파일명으로 사용하기위한 쿼리문  -->
+
+	<select id="getMeetingNumber" resultType="int"> <!--새로운 모임번호를 받아와서 이미지 파일명으로 사용하기위한 쿼리문 -->
 		SELECT NVL(MAX(meet_no)+1,1) as mno FROM meeting
 	</select>
-	
-	<insert id="meetingInsert" parameterType="MeetingVO"> <!--모임개설 완료 insert하기-->
-		INSERT INTO meeting VALUES(#{meet_no}, #{meet_charge}, #{meet_cg}, #{meet_poster}, #{om_id}, #{meet_subject}, #{meet_start}, #{meet_end},
-		#{meet_loc}, #{meet_total}, #{meet_limit}, #{meet_info}, #{meet_price}, 0, #{meet_detail}, #{meet_lat}, #{meet_lng}, SYSDATE, 0)
+
+	<insert id="meetingInsert" parameterType="MeetingVO"> <!--모임개설 완료 insert하기 -->
+		INSERT INTO meeting VALUES(#{meet_no}, #{meet_charge}, #{meet_cg},
+		#{meet_poster}, #{om_id}, #{meet_subject}, #{meet_start}, #{meet_end},
+		#{meet_loc}, #{meet_total}, #{meet_limit}, #{meet_info},
+		#{meet_price}, 0, #{meet_detail}, #{meet_lat}, #{meet_lng}, SYSDATE,
+		0)
 	</insert>
-	
-	<select id="meetingDetailInfo" resultType="com.oim.member.dao.MemberVO" parameterType="String"> <!-- 모임신청 인원정보 불러오기 -->
-		SELECT om_tel, om_company 
+
+	<select id="meetingDetailInfo"
+		resultType="com.oim.member.dao.MemberVO" parameterType="String"> <!-- 모임신청 인원정보 불러오기 -->
+		SELECT om_tel, om_company
 		FROM oim_member
-		WHERE om_id=#{om_id} 
+		WHERE om_id=#{om_id}
 	</select>
-	
-	<select id="meetingUpdateData" resultType="MeetingVO" parameterType="int">
-      SELECT m.meet_no,m.meet_cg,m.meet_charge,m.meet_limit,m.meet_poster,o.om_tel,m.meet_subject,TO_CHAR(to_date(m.meet_start, 'YYYY-MM-DD HH24:MI'),'YYYY-MM-DD HH24:MI') as meet_start,
-      TO_CHAR(to_date(m.meet_end, 'YYYY-MM-DD HH24:MI'),'YYYY-MM-DD HH24:MI') as meet_end,
-      m.meet_loc, m.meet_total, m.meet_limit, m.meet_info, m.meet_price, m.meet_detail, m.meet_lat, m.meet_lng
-      FROM meeting m , oim_member o
-      WHERE o.om_id=m.om_id AND m.meet_no=#{meet_no}              
-   	</select>
-   	
-   	<update id="meetingUpdate" parameterType="MeetingVO">
-   		UPDATE meeting SET
-   		meet_cg=#{meet_cg},meet_charge=#{meet_charge},meet_poster=#{meet_poster},meet_subject=#{meet_subject},
-   		meet_start=#{meet_start},meet_end=#{meet_end},meet_loc=#{meet_loc},meet_total=#{meet_total},
-   		meet_limit=#{meet_limit},meet_info=#{meet_info},meet_detail=#{meet_detail},meet_lat=#{meet_lat},meet_lng=#{meet_lng}
-   		WHERE meet_no=#{meet_no}
-   	</update>
-   	
-   	<delete id="meetingDelete" parameterType="MeetingVO">
-   		DELETE FROM meeting
-   		WHERE meet_no=#{meet_no}
-   	</delete>
-   	<insert id="likeInsert" parameterType="LikeVO"><!--찜하기-->
-   		INSERT INTO basket VALUES(
+
+	<select id="meetingUpdateData" resultType="MeetingVO"
+		parameterType="int">
+		SELECT
+		m.meet_no,m.meet_cg,m.meet_charge,m.meet_limit,m.meet_poster,o.om_tel,m.meet_subject,TO_CHAR(to_date(m.meet_start,
+		'YYYY-MM-DD HH24:MI'),'YYYY-MM-DD HH24:MI') as meet_start,
+		TO_CHAR(to_date(m.meet_end, 'YYYY-MM-DD HH24:MI'),'YYYY-MM-DD
+		HH24:MI') as meet_end,
+		m.meet_loc, m.meet_total, m.meet_limit, m.meet_info, m.meet_price, m.meet_detail,
+		m.meet_lat, m.meet_lng
+		FROM meeting m , oim_member o
+		WHERE o.om_id=m.om_id AND m.meet_no=#{meet_no}
+	</select>
+
+	<update id="meetingUpdate" parameterType="MeetingVO">
+		UPDATE meeting SET
+		meet_cg=#{meet_cg},meet_charge=#{meet_charge},meet_poster=#{meet_poster},meet_subject=#{meet_subject},
+		meet_start=#{meet_start},meet_end=#{meet_end},meet_loc=#{meet_loc},meet_total=#{meet_total},
+		meet_limit=#{meet_limit},meet_info=#{meet_info},meet_detail=#{meet_detail},meet_lat=#{meet_lat},meet_lng=#{meet_lng}
+		WHERE meet_no=#{meet_no}
+	</update>
+
+	<delete id="meetingDelete" parameterType="MeetingVO">
+		DELETE FROM meeting
+		WHERE meet_no=#{meet_no}
+	</delete>
+	<insert id="likeInsert" parameterType="LikeVO"><!--찜하기 -->
+		INSERT INTO basket VALUES(
 		(SELECT NVL(MAX(basket_no)+1,1)
-		FROM basket),#{om_id},#{meet_no})
-   	</insert>
+		FROM
+		basket),#{om_id},#{meet_no})
+	</insert>
 	<select id="likeCount" resultType="int" parameterType="LikeVO"><!--찜저장 -->
 		SELECT COUNT(*) FROM basket
 		WHERE om_id=#{om_id} AND meet_no=#{meet_no}
 	</select>
-	<select id="likeListData" resultType="LikeVO" parameterType="String"><!--찜목록보기 -->
+	<select id="likeListData" resultType="LikeVO"
+		parameterType="String"><!--찜목록보기 -->
 		SELECT basket_no,meet_no FROM basket
 		WHERE om_id=#{om_id}
-		ORDER BY basket_no DESC
+		ORDER BY
+		basket_no DESC
 	</select>
 	<delete id="likeDelete" parameterType="LikeVO"><!--찜삭제 -->
 		DELETE FROM basket
@@ -235,19 +297,23 @@
 		DELETE FROM basket
 		WHERE meet_no=#{meet_no}
 	</delete>
-	
-	<update id="likeIncrement" parameterType="int"><!--해당모임 찜 횟수 증가-->
+
+	<update id="likeIncrement" parameterType="int"><!--해당모임 찜 횟수 증가 -->
 		UPDATE meeting SET
 		meet_like=meet_like+1
 		WHERE meet_no=#{meet_no}
 	</update>
-	<update id="likeDecrement" parameterType="int"><!--해당모임 찜 횟수 감소-->
+	<update id="likeDecrement" parameterType="int"><!--해당모임 찜 횟수 감소 -->
 		UPDATE meeting SET
 		meet_like=meet_like-1
 		WHERE meet_no=#{meet_no}
 	</update>
 	<insert id="dbInsert" parameterType="MeetingVO">
-		INSERT INTO meeting VALUES(#{meet_no}, #{meet_charge}, #{meet_cg}, #{meet_poster}, #{om_id}, #{meet_subject}, #{meet_start}, #{meet_end},
-		#{meet_loc}, #{meet_total}, #{meet_limit}, #{meet_info}, #{meet_price}, 0, #{meet_detail}, #{meet_lat}, #{meet_lng}, SYSDATE, 0)
+		INSERT INTO meeting
+		VALUES(#{meet_no}, #{meet_charge}, #{meet_cg}, #{meet_poster},
+		#{om_id}, #{meet_subject}, #{meet_start}, #{meet_end},
+		#{meet_loc},
+		#{meet_total}, #{meet_limit}, #{meet_info}, #{meet_price}, 0,
+		#{meet_detail}, #{meet_lat}, #{meet_lng}, SYSDATE, 0)
 	</insert>
 </mapper>

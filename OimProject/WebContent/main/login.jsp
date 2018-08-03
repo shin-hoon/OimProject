@@ -75,25 +75,7 @@ $(function(){
          url:'Oim_Login.do',
          data:{"id":login_id,"pwd":login_pwd},
          success:function(response){
-            var count=response.trim();
-            if(count==1)
-            {
-               $('#result').text("아이디가 존재하지 않습니다.");
-               $('#login_id').val("");
-               $('#login_pwd').val("");
-               $('#login_id').focus();
-            }
-            else if(count==2)
-            {
-               $('#result').text("비밀번호가 틀립니다.");
-               $('#login_pwd').val("");
-               $('#login_pwd').focus();
-            }
-            else
-            {
-               //location.href="main.do";
-               history.go(0);
-            }
+        	  $('#loginResult').html(response);
          }
       });
    }); 
@@ -238,7 +220,7 @@ $(function(){
 <body>
 <!-- 노랭색 네비바 -->
    <c:if test="${sessionScope.id==null }">  <!-- 세션에 id가 null값이면 보여지는 네비바 -->
-   <div class="add_section" >
+   <div class="add_section" style="background-color: #0A0A2A;">
          <div class="container" style="line-height:30px;">
          <ul>
                <li class="section-li" style="margin-left:10px; margin-top:-5px;">
@@ -253,14 +235,14 @@ $(function(){
    </c:if>
    
    <c:if test="${sessionScope.id!=null }"> <!-- 세션에 id가 저장되어있으면 보여지는 네비바 -->
-   <div class="add_section" >
+   <div class="add_section" style="background-color: #0A0A2A;">
        <form method="post" action="Oim_Logout.do">
          <div class="container" style="line-height:30px;">
          <ul>
                <li class="section-li" style="margin-left:10px; margin-top:-6px;">
-               <input type=submit class="oim_btn_yw" value="로그아웃" id="logoutBtn">
+               <input type=submit class="oim_btn_yw" value="로그아웃" id="logoutBtn">&nbsp;&nbsp;&nbsp;
                 </li>
-                   &nbsp;&nbsp;&nbsp;
+                  
                <li class="section-li" style="margin-right:10px; margin-top:-5px;">
                <div class="form-group" style="color:white">
                   ${sessionScope.name }님 안녕하세요!
@@ -274,6 +256,8 @@ $(function(){
    
    <!-- 로그인 모달 팝업 -->
    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+   <div id="loginResult" style="display:none">
+   </div>
      <div class="modal-dialog">
        <div class="modal-content">
          <div class="modal-header oim_modal">
@@ -400,6 +384,7 @@ $(function(){
                   </td>
                </tr>
                </table>
+               </form>
             </div>
          </div>
          </div>

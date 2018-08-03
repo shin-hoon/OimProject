@@ -1,13 +1,9 @@
 package com.oim.model;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.oim.application.dao.ApplicationDAO;
 import com.oim.controller.Controller;
 import com.oim.controller.RequestMapping;
 import com.oim.meeting.dao.MeetingVO;

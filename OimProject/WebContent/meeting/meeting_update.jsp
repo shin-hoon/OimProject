@@ -9,13 +9,26 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
     <!--DateTimePicker링크-->
-      <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
-      <script type="text/javascript" src="js/moment.js"></script>
-      <script type="text/javascript" src="js/daterangepicker.js"></script>
-      
+     <link rel="stylesheet" type="text/css" media="all" href="css/daterangepicker.css" />
+     <script type="text/javascript" src="js/moment.js"></script>
+     <script type="text/javascript" src="js/daterangepicker.js"></script>
+    <!-- 네이버 스마트 에디터 -->  
+     <script type="text/javascript" src="se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
     <!-- 네이버 지도 -->
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&submodules=geocoder"></script>
-   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&callback=CALLBACK_FUNCTION"></script>
+     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&submodules=geocoder"></script>
+     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=_meOdew7lewhDIHb1HpK&callback=CALLBACK_FUNCTION"></script>
+   
+   <script type="text/javascript"> //textarea에 스마트 에디터를 적용시키는 스크립트
+   $(function(){
+    var oEditors = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors,
+        elPlaceHolder: "meet_detail",
+        sSkinURI: "se2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2"
+    });
+   });
+   </script>
    
 <script type="text/javascript"> //모두 입력해야 모임을 개설할수있다.
 $(function(){
@@ -485,11 +498,9 @@ $(function(){
             <tr>
                 <td colspan="3" class="col-sm-2">
                     <h5>상세 내용</h5>
-                    <textarea class="form-control" name="meet_detail" rows="10" cols="45" style="width: 100%">${vo.meet_detail }
-                    </textarea>
+ 					<textarea id="meet_detail" name="meet_detail" rows="30" cols="100" style="width: 100%">${vo.meet_detail}</textarea>
                 </td>
             </tr>
-            
             <tr>
                 <td class="col-sm-2">
                     <h5>신청 문의 연락처</h5>

@@ -14,8 +14,6 @@
 <link rel="stylesheet" type = "text/css" href="meeting/shadow/css/shadowbox.css">
 <script type="text/javascript" src="meeting/shadow/js/shadowbox.js"></script>
 
-
-
 <!--메뉴클릭시 화면 스크롤-->
 <script type="text/javascript">
     $(document).ready(function() {
@@ -71,12 +69,13 @@
           $('#apply').click(function(){
         	 
         	 var meet_no = $('#meet_no').attr("value");
-        	 var om_id2 = $('#om_id2').attr("value");
-        	 if(om_id2.trim()==""){
-        		 alert("로그인 후 이용해주세요.")
+        	 var om_id = '${sessionScope.id}';
+        	 
+        	 if(om_id.trim()==""){
+        		 alert("로그인 후 이용해주세요.");
         	 }else{
         		 Shadowbox.open({
-                     content:"meeting_payment.do?meet_no="+meet_no+"&om_id="+om_id2,		
+                     content:"meeting_payment.do?meet_no="+meet_no,	
                      player:'iframe',
                      title:'신청내역확인',
                      width:1200,
@@ -114,7 +113,7 @@
     }
     .smallnav{
         position: fixed;
-        right: 5.5%;
+        right: 12.5%;
         top: 100px;
         display: none;
         z-index: 999;
@@ -208,7 +207,6 @@ $(function(){
    	
         <div class="row">
         <input type="hidden" id="meet_no" name="meet_no" value="${vo.meet_no }"/>
-        <input type="hidden" id="om_id2" name="om_id2" value="${sessionScope.id}"/>
             <div class="top col-xs-12" style="vertical-align: middle;">
                <c:if test="${vo.meet_price==0 }">
                   <span class="label label-success" style="font-size:13px; margin-right:5px;">무료</span>
@@ -223,15 +221,15 @@ $(function(){
             </div>
             <div class="left col-xs-3" style="border-right: 1px solid #999;">
                 <div class="left-detail">
-                    <img src="${vo.meet_poster }" style="height:150px; width:150px; border: 2px solid #999;">
+                    <img src="${vo.meet_poster }" style="height:190px; width:190px; border: 2px solid #999;">
                     <img src="meeting/image/facebook.png" style="height:25px; width:25px; margin: 3px;">
                     <img src="meeting/image/instagram.png" style="height:25px; width:25px; margin: 3px;">
                     <img src="meeting/image/twitter.png" style="height:25px; width:25px; margin: 3px;">
                     <h4 class="list-group-item">개설자 정보</h4>
-                    <b class="list-group-item" name="om_name"><img src="meeting/image/man.png" style="height: 10px; width: 10px;">&emsp;${vo.om_name }</b>
-                    <b class="list-group-item" name="om_tel"><img src="meeting/image/tel.png" style="height: 10px; width: 10px;">&emsp;${vo.om_tel }</b>
-                    <b class="list-group-item" name="om_id"><img src="meeting/image/email.png" style="height: 10px; width: 10px;">&emsp;${vo.om_id }</b>
-                    <b class="list-group-item" name="om_company"><img src="meeting/image/company.png" style="height: 10px; width: 10px;">&emsp;${vo.om_company }</b>
+                    <b class="list-group-item"><img src="meeting/image/man.png" style="height: 10px; width: 10px;">&emsp;${vo.om_name }</b>
+                    <b class="list-group-item"><img src="meeting/image/tel.png" style="height: 10px; width: 10px;">&emsp;${vo.om_tel }</b>
+                    <b class="list-group-item"><img src="meeting/image/email.png" style="height: 10px; width: 10px;">&emsp;${vo.om_id }</b>
+                    <b class="list-group-item"><img src="meeting/image/company.png" style="height: 10px; width: 10px;">&emsp;${vo.om_company }</b>
             </div>
             </div>
             
@@ -261,14 +259,23 @@ $(function(){
                 <hr>
                 <div class="right-pay">   
                <h2 class="price" id="price" style="text-align: right;">가격 : ${vo.meet_price } 원</h2>
-               		<c:if test="${count==0 }">
-                    	<a href="#" class="btn btn-large btn-default" id="injjim" 
+               
+               <c:choose>
+               	<c:when test="${sessionScope.id!=null && vo.likeCount==0 }">
+               	    	<a href="#" class="btn btn-large btn-default" id="injjim" 
                     	style="float: right; height: 50px;" value="${vo.meet_no }">♡<br>${vo.meet_like }</a>
-                    </c:if>
-                    <c:if test="${count==1 }">
-                    	<a href="#" class="btn btn-large btn-danger" id="dejjim" 
+               	</c:when>
+               	
+               	<c:when test="${sessionScope.id!=null && vo.likeCount==1 }">
+               			<a href="#" class="btn btn-large btn-danger" id="dejjim" 
                     	style="float: right; height: 50px;" value="${vo.meet_no }">♡<br>${vo.meet_like }</a>
-                    </c:if>
+               	</c:when>
+               	<c:otherwise>
+               			<a href="#" type="button" class="btn btn-large btn-default" style="float: right; height: 50px;" onclick="alert('로그인 후 이용해주세요.');" />♡<br>${vo.meet_like }</a> 
+               	</c:otherwise>
+               </c:choose>
+
+                    
                     <c:if test="${vo.meet_limit!=0}">
                     	<a href="#" class="btn btn-large btn-primary apply" id="apply" style="float: right; height: 50px;">신청하기</a>
                     </c:if>

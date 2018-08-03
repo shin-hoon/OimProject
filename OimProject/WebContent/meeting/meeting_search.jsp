@@ -475,7 +475,7 @@ $(function(){
                       
                     </ul>  <!-- 모임뿌려주기 div 끝 ---> 
                     
-                     <div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
+                    <%--  <div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
 					  <ul class="pagination">
 					    <li ><a href="meeting_search.do?searchText=${sessionScope.searchText}&page=${curpage<11?curpage:curpage-10 }">◀◀</a></li>
 					    <li ><a href="meeting_search.do?searchText=${sessionScope.searchText}&page=${curpage>1?curpage-1:curpage }">◀</a></li>
@@ -502,6 +502,39 @@ $(function(){
 					    <li ><a href="meeting_search.do?searchText=${sessionScope.searchText}&page=${curpage<=totalpage-10?curpage+10:curpage }">▶▶</a></li>
 					   
 					  </ul>
+					</div> <!-- 페이지수 뿌려주기 div 끝--> --%>
+					
+					<div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
+							  <ul class="pagination">
+					       <c:choose>
+					        <c:when test="${curpage>block }">
+					          <li><a href="meeting_search.do?searchText=${sessionScope.searchText}&page=1">|◀</a></li>
+					          <li><a href="meeting_search.do?searchText=${sessionScope.searchText}&page=${fromPage-1 }">◀</a></li>
+					        </c:when>
+					        <c:otherwise>
+					          <li><span style="color:gray">|◀</span></li>   
+					          <li><span style="color:gray">◀</span></li>
+					        </c:otherwise>
+					       </c:choose>
+					       <c:forEach var="i" begin="${fromPage }" end="${toPage }">
+					        <c:if test="${i==curpage }">
+					          <li class="active"><a>${i}</a></li>
+					        </c:if>
+					        <c:if test="${i!=curpage }">
+					          <li><a href="meeting_search.do?searchText=${sessionScope.searchText}&page=${i}">${i}</a></li>
+					        </c:if>
+					       </c:forEach>
+					       <c:choose>
+					       <c:when test="${toPage<totalpage }">
+					          <li><a href="meeting_search.do?searchText=${sessionScope.searchText}&page=${toPage+1 }" >▶</a></li>
+					          <li><a href="meeting_search.do?searchText=${sessionScope.searchText}&page=${totalpage }" >▶|</a></li>
+					        </c:when>
+					        <c:otherwise>
+					          <li><span style="color:gray">▶</span></li>
+					          <li><span style="color:gray">▶|</span></li>
+					        </c:otherwise>
+					       </c:choose>
+					       </ul>
 					</div> <!-- 페이지수 뿌려주기 div 끝-->
                </div>
            </div>

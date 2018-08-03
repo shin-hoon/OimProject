@@ -72,26 +72,25 @@ $(function(){
     
     /*체크박스 이벤트 스크립트*/
     $(function () {
-    
-		<c:forEach var="cg" items="${sessionScope.category}" varStatus="listidx"> //체크된것을 유지하기 위해 jstl과 jquery를 혼용함
+		<c:forEach var="cg" items="${sessionScope.category}" varStatus="listidx"> //모임 카테고리
 			$("input:checkbox[name='category']:checkbox[value='${cg}']").prop('checked', true);
 		</c:forEach>
 		
-		<c:forEach var="lc" items="${sessionScope.loc}" varStatus="listidx">
+		<c:forEach var="lc" items="${sessionScope.loc}" varStatus="listidx"> //모임 지역
 			$("input:checkbox[name='loc']:checkbox[value='${lc}']").prop('checked', true);
 		</c:forEach>
 	
-		<c:forEach var="wk" items="${sessionScope.week}" varStatus="listidx">
+		<c:forEach var="wk" items="${sessionScope.week}" varStatus="listidx"> //주중or주말
 			$("input:checkbox[name='week']:checkbox[value='${wk}']").prop('checked', true);
 		</c:forEach>
 
-		<c:forEach var="pc" items="${sessionScope.price}" varStatus="listidx">
+		<c:forEach var="pc" items="${sessionScope.price}" varStatus="listidx"> //참여비용
 			$("input:checkbox[name='price']:checkbox[value='${pc}']").prop('checked', true);
 		</c:forEach>
 		
-		$("input:text[name='from']").val('${sessionScope.from}');
-		$("input:text[name='to']").val('${sessionScope.to}');
-			
+		$("input:text[name='from']").val('${sessionScope.from}'); //모임 시작일 from
+		$("input:text[name='to']").val('${sessionScope.to}'); //모임 시작일 to		
+    
     $('.button-checkbox').each(function () {
         // Settings
         var $widget = $(this),
@@ -401,7 +400,7 @@ $(function(){
             <div class="col-lg-12 text-left"> 
                   <ul class="thumbnails"><!-- 모임뿌려주기 div 시작 11-->
 
-                  <h2>모임</h2>
+                  <h2>검색결과: 총 ${total}개</h2>
 					
  				<c:forEach var="vo" items="${list }">
  				
@@ -489,34 +488,39 @@ $(function(){
                       
                     </ul>  <!-- 모임뿌려주기 div 끝 ---> 
                     
-                     <div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
-					  <ul class="pagination">
-					    <li ><a href="meeting_find.do?page=${curpage<11?curpage:curpage-10 }">◀◀</a></li>
-					    <li ><a href="meeting_find.do?page=${curpage>1?curpage-1:curpage }">◀</a></li>
-					    
- 					  <fmt:parseNumber var="num" value="${curpage/10}" integerOnly="true"/>
- 					   <fmt:parseNumber var="num2" value="${curpage%10}" integerOnly="true"/>
- 					   
-			       		<c:set var="num" value="${num<=0?1:(num2==0?(num-1)*10+1:num*10+1)}"/>  
-			       		
-			       		<c:forEach var="i"  begin="${num}" end="${num+9}">
-			       			<c:choose>
-			       				<c:when test="${i>totalpage }">
-			       				</c:when>
-			       				<c:when test="${i==curpage}">
-				    				<li class="active"><a href="meeting_find.do?page=${i}">${i}</a></li>
-			       				</c:when>
-			       				<c:when test="${i <= totalpage}">
-			       					<li><a href="meeting_find.do?page=${i}">${i}</a></li>
-			       				</c:when>
-			       			</c:choose>
-			       		</c:forEach>
-
-					    <li ><a href="meeting_find.do?page=${curpage<totalpage?curpage+1:curpage }">▶</a></li>
-					    <li ><a href="meeting_find.do?page=${curpage<=totalpage-10?curpage+10:curpage }">▶▶</a></li>
-					   
-					  </ul>
+					  <div class="col-sm-12 text-center"> <!-- 페이지수 뿌려주기 div -->
+							  <ul class="pagination">
+					       <c:choose>
+					        <c:when test="${curpage>block }">
+					          <li><a href="meeting_find.do?page=1">|◀</a></li>
+					          <li><a href="meeting_find.do?page=${fromPage-1 }">◀</a></li>
+					        </c:when>
+					        <c:otherwise>
+					          <li><span style="color:gray">|◀</span></li>   
+					          <li><span style="color:gray">◀</span></li>
+					        </c:otherwise>
+					       </c:choose>
+					       <c:forEach var="i" begin="${fromPage }" end="${toPage }">
+					        <c:if test="${i==curpage }">
+					          <li class="active"><a>${i}</a></li>
+					        </c:if>
+					        <c:if test="${i!=curpage }">
+					          <li><a href="meeting_find.do?page=${i}">${i}</a></li>
+					        </c:if>
+					       </c:forEach>
+					       <c:choose>
+					       <c:when test="${toPage<totalpage }">
+					          <li><a href="meeting_find.do?page=${toPage+1 }" >▶</a></li>
+					          <li><a href="meeting_find.do?page=${totalpage }" >▶|</a></li>
+					        </c:when>
+					        <c:otherwise>
+					          <li><span style="color:gray">▶</span></li>
+					          <li><span style="color:gray">▶|</span></li>
+					        </c:otherwise>
+					       </c:choose>
+					       </ul>
 					</div> <!-- 페이지수 뿌려주기 div 끝-->
+					
                </div>
            </div>
 

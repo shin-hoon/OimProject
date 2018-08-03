@@ -36,7 +36,7 @@
 	ORDER BY meet_like DESC
 </select>
 <select id="TodayMeeting" resultType="MeetingVO"><!-- 오늘의 모임 -->
-	SELECT meet_no, meet_poster, meet_charge,meet_subject,meet_cg,TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end
+	SELECT meet_no, meet_poster, meet_charge,meet_subject, meet_cg, TO_CHAR(to_date(meet_start, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_start, TO_CHAR(to_date(meet_end, 'YYYY-MM-DD HH24:MI'),'YY-MM-DD') as meet_end
 	FROM meeting	
 	ORDER BY meet_regdate DESC                     	
 </select>
@@ -49,24 +49,28 @@
 	SELECT meet_no, meet_poster,meet_charge,meet_subject,meet_hit
 	FROM meeting
 	WHERE meet_subject LIKE '%'||'스터디'||'%'
+	OR meet_info LIKE '%'||'스터디'||'%'
 	ORDER BY meet_hit DESC
 </select>
 <select id="HobbyTagMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_charge,meet_subject,meet_hit
 	FROM meeting
 	WHERE meet_subject LIKE '%'||'취미'||'%'
+	OR meet_info LIKE '%'||'취미'||'%'
 	ORDER BY meet_hit DESC
 </select>
 <select id="MuTagMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_charge,meet_subject,meet_hit
 	FROM meeting
 	WHERE meet_cg LIKE '%'||'전시'||'%'
+	OR meet_info LIKE '%'||'전시'||'%'
 	ORDER BY meet_hit DESC
 </select>
 <select id="ProTagMeeting" resultType="MeetingVO">
 	SELECT meet_no, meet_poster,meet_charge,meet_subject,meet_hit
 	FROM meeting
 	WHERE UPPER(meet_subject) LIKE '%'||UPPER('it')||'%'
+	OR meet_info LIKE '%'||'it'||'%'
 	ORDER BY meet_hit DESC
 </select>
 <select id="HotMeeting" resultType="MeetingVO"><!-- 핫모임 -->
