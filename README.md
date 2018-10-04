@@ -6,6 +6,9 @@
 ### 참여인원: 5명 
 
 ### 담당분야 : 맞춤모임 페이지
++ Java : src > com.oim.model > SelectSaveModel.java
++ Java : src > com.oim.select > *
++ JSP : WebContent > selectsave > *
 
 ### 개발 기술
 + OS : Window 10
