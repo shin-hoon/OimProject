@@ -16,4 +16,4 @@
 + Server : Apache Tomcat 8.5
 + IDE : Eclipse Oxygen Release 4.7.0
 + DB : Oracle 11g
-+ 기타 : Mybatis 3.1.1, springframework 4.2.5, jquery 3.3.1, bootstrap 3.3.7, Git Hub, naver smartEditor 2.0, HTML5, CSS3, JAVA, JSP
++ 기타 : jquery 3.3.1, bootstrap 3.3.7, Git Hub, naver smartEditor 2.0, HTML5, CSS3, JAVA, JSP
